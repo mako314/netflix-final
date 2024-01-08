@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Route, Routes } from 'react-router-dom';
+import MovieCard from './Movies/MovieCard';
 import './App.css';
 
 function App() {
