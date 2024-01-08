@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -90,7 +91,12 @@ function App() {
 
   return (
     <div className="App">
-      Test West
+    <h1 class="text-3xl font-bold underline">
+    Home Page!
+    </h1>
+      <Routes>
+        {/* <Route path='/movies' element={} /> */}
+      </Routes>
     </div>
   )
 }
