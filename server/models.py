@@ -68,6 +68,7 @@ class Movie(db.Model, SerializerMixin):
     year_of_release = db.Column(db.String)
     motion_picture_rating = db.Column(db.String)
     run_time = db.Column(db.String)
+    thumbnail = db.Column(db.String)
 
     # either a summary or a description
     summary = db.Column(db.String)

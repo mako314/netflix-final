@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Route, Routes } from 'react-router-dom';
-import MovieCard from './Movies/MovieCard';
+import MovieCollection from './Movies/MovieCollection';
 import './App.css';
 
 function App() {
@@ -93,10 +93,10 @@ function App() {
   return (
     <div className="App">
     <h1 class="text-3xl font-bold underline">
-    Home Page!
+    Navbar
     </h1>
       <Routes>
-        {/* <Route path='/movies' element={} /> */}
+        <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
       </Routes>
     </div>
   )
