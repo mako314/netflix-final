@@ -1,8 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, Route, Routes } from 'react-router-dom';
-import MovieCollection from './Movies/MovieCollection';
 import './App.css';
+import { useState, useEffect } from 'react';
+import {Route, Routes } from 'react-router-dom';
 
+// ----- Movie Imports -----
+import MovieCollection from './Movies/MovieCollection';
+import MovieDisplay from './Movies/MovieDisplay';
+
+
+// useNavigate
 function App() {
 
   const [moviesData, setMoviesData] = useState([])
@@ -92,11 +97,12 @@ function App() {
 
   return (
     <div className="App">
-    <h1 class="text-3xl font-bold underline">
-    Navbar
-    </h1>
+  <h1 className="text-3xl font-bold underline">
+    NAV
+  </h1>
       <Routes>
         <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
+        <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>}/>
       </Routes>
     </div>
   )

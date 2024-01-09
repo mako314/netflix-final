@@ -1,30 +1,47 @@
 import React from "react"
+import { useNavigate} from 'react-router-dom';
 
-function MovieCard() {
-    
+function MovieCard({thumbnail, title, director, year_of_release, run_time, movieId, fullMovie}) {
+  
+  const navigate = useNavigate()
+
+  // const handleMovieNav = () => {
+  //   navigate(`/movie/${movieId}`)
+  // }
+
+  const handleMovieNav = (e) => {
+    navigate(`/movie/${movieId}`, { state: { fullMovie } })
+  }
+
   return (
     <>
-      {/*<!-- Component: Basic image card --> */}
-      <div className="overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200">
+    {/*<!-- Component: Basic image card --> */}
+    {/* MT TOP BOTTOM */}
+
+  <div 
+  className="overflow-hidden rounded bg-gray-400 text-slate-500 shadow-xl shadow-slate-200 mt-4 ml-4"
+  onClick={handleMovieNav}
+  >
         {/*  <!--  Image --> */}
-        <figure>
-          <img
-            src="https://picsum.photos/id/69/800/600"
-            alt="card image"
-            className="aspect-video w-full"
-          />
-        </figure>
-        {/*  <!-- Body--> */}
-        <div className="p-6">
-          <header className="">
-            <h3 className="text-xl font-medium text-slate-700">
-              Memories of the past
-            </h3>
-            <p className="text-sm text-slate-400"> By George, jun 3 2023</p>
-          </header>
-        </div>
+      <figure>
+        <img
+          src={thumbnail}
+          alt="card image"
+          className="h-48 w-full object-contain" 
+        />
+      </figure>
+      {/*  <!-- Body--> */}
+      <div className="p-6">
+        <header className="">
+          <h3 className="text-xl font-medium text-black">
+            {title}
+          </h3>
+          <p className="text-sm text-black">By {director}, {year_of_release}, {run_time}</p>
+        </header>
       </div>
-      {/*<!-- End Basic image card --> */}
+    </div>
+
+    {/*<!-- End Basic image card --> */}
     </>
   )
 }
