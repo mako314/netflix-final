@@ -100,6 +100,7 @@ function App() {
   <h1 className="text-3xl font-bold underline">
     NAV
   </h1>
+  <MovieCollection moviesData={moviesData}/>
       <Routes>
         <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>}/>
