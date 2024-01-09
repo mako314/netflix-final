@@ -68,6 +68,7 @@ class Movie(db.Model, SerializerMixin):
     year_of_release = db.Column(db.String)
     motion_picture_rating = db.Column(db.String)
     run_time = db.Column(db.String)
+    thumbnail = db.Column(db.String)
 
     # either a summary or a description
     summary = db.Column(db.String)
@@ -106,6 +107,57 @@ class Movie(db.Model, SerializerMixin):
 
     # Properties
 
+class TelevisionSeries(db.Model, SerializerMixin):
+    __tablename__ = 'tv_series'
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String)
+    director = db.Column(db.String)
+    writer = db.Column(db.String)
+    year_of_release = db.Column(db.String)
+    thumbnail = db.Column(db.String)
+    motion_picture_rating = db.Column(db.String)
+    # Not hosting our own video files so not sure if we'd need a video element / file
+    trailer = db.Column(db.String)
+    
+    seasons = db.Column(db.String)
+    episode_count = db.Column(db.String)
+    average_episode_time = db.Column(db.String)
+    is_airing = db.Column(db.String)
+    # either a summary or a description
+    summary = db.Column(db.String)
+
+    # Number 0-10
+    rating = db.Column(db.Integer)
+
+    # Write a property that check and see whether the other rows and take into account the rating, release date, etc
+    # Strings ? Most popular? 
+    # Numbers 1 least popular, array -1 if array starts at [1,2,3,...,100] in the array index -1=100
+    popularity = db.Column(db.Integer)
+
+    # of clicks to help gauge interest / popularity
+    num_of_clicks = db.Column(db.Integer, default=0)
+
+    # Major stars of the film
+    stars = db.Column(db.String)
+    # Lighting ,etc credits
+    all_cast_and_crew = db.Column(db.String)
+
+    # Self explanatory, genres,
+    genres = db.Column(db.String)
+
+
+    # Foreign Keys
+
+    # Relationships
+    favorites = db.relationship('Favorite', back_populates='tv_series')
+
+    # Serialization Rules
+    serialize_rules = ('-favorites.tv_series',)
+
+
+    # Properties
+
 class Favorite(db.Model, SerializerMixin):
     __tablename__ = 'favorites'
 
@@ -114,14 +166,16 @@ class Favorite(db.Model, SerializerMixin):
     # Foreign Keys
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    tv_series_id = db.Column(db.Integer, db.ForeignKey('tv_series.id'))
 
     # Relationship
     # If there's an issue with the back_populates being favorites we'll get to that bridge when we get there
     movie = db.relationship('Movie', back_populates = 'favorites')
     user = db.relationship('User', back_populates = 'favorites')
+    tv_series= db.relationship('TelevisionSeries', back_populates='favorites')
 
     # Serialization Rules
-    serialize_rules=('-movie.favorites', '-user.favorites')
+    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites')
 
 
 

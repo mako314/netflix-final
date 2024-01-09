@@ -1,3 +1,6 @@
+//------------------------------------------
+//------Server----
+
 Models : 
 
 
@@ -14,3 +17,16 @@ Forum Message
 
 Friends List <->
 
+
+
+//------------------------------------------
+//------React Front End ----
+
+Bare Bones:
+Movie Collection (Mapping over Cards)
+Movie Card
+Movie Display
+
+Routes done :
+Movie Collection 
+Movie Display
