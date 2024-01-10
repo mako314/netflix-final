@@ -151,39 +151,39 @@ api.add_resource(MoviesByGenre, '/movies/<string:movie_genre>/genres')
 
 class MoviesByUserRating(Resource):
     def get(self):
-         movie_list = [movie.to_dict(rules=(not_needed_data)) for movie in Movie.query.all()]
+        movie_list = [movie.to_dict(rules=(not_needed_data)) for movie in Movie.query.all()]
 
-         movie_list_by_user_rating = sorted(movie_list, key=lambda movie: movie['rating'], reverse=True)
+        movie_list_by_user_rating = sorted(movie_list, key=lambda movie: movie['rating'], reverse=True)
 
-         if not movie_list_by_user_rating:
-             response = make_response({
-                 'error': 'Movies not found'
-             }, 404)
-             
-             return response
-         
-         response = make_response(movie_list_by_user_rating, 200)
+        if not movie_list_by_user_rating:
+            response = make_response({
+                'error': 'Movies not found'
+            }, 404)
+            
+            return response
+        
+        response = make_response(movie_list_by_user_rating, 200)
 
-         return response
+        return response
     
 api.add_resource(MoviesByUserRating, '/movies/user-rating')
 
 class MoviesByPopularity(Resource):
     def get(self):
-         movie_list = [movie.to_dict(rules=(not_needed_data)) for movie in Movie.query.all()]
+        movie_list = [movie.to_dict(rules=(not_needed_data)) for movie in Movie.query.all()]
 
-         if not movie_list:
-             response = make_response({
-                 'error': 'Movies not found'
-             }, 404)
-             
-             return response
+        if not movie_list:
+            response = make_response({
+                'error': 'Movies not found'
+            }, 404)
+            
+            return response
 
-         movie_list_by_popularity = sorted(movie_list, key=lambda movie: movie['popularity'], reverse=True)
-         
-         response = make_response(movie_list_by_popularity, 200)
+        movie_list_by_popularity = sorted(movie_list, key=lambda movie: movie['popularity'], reverse=True)
+        
+        response = make_response(movie_list_by_popularity, 200)
 
-         return response
+        return response
     
 api.add_resource(MoviesByPopularity, '/movies/popular') 
 
@@ -307,6 +307,22 @@ class TVSeriesByGenre(Resource):
 
 api.add_resource(TVSeriesByGenre, '/tv-series/<string:tv_series_genre>/genres')
 
+class TVSeriesByUserRating(Resource):
+    def get(self):
+        tv_series_list = [tv_series.to_dict(rules=(not_needed_data)) for tv_series in TelevisionSeries.query.all()]
+
+        tv_series_list_by_user_rating = sorted(tv_series_list, key=lambda tv_series: tv_series['rating'], reverse=True)
+
+        if tv_series_list_by_user_rating:
+            response = make_response(tv_series_list_by_user_rating, 200)
+        else:
+            response = make_response({
+                'error': 'tv_seriess not found'
+            }, 404)
+             
+        return response
+          
+api.add_resource(TVSeriesByUserRating, '/tv-series/user-rating')
 
 class Favorites(Resource):
     def get(self):
