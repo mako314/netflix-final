@@ -1,6 +1,6 @@
 from config import app, db
 
-from models import User, Movie, Favorite
+from models import User, Movie, Favorite, TelevisionSeries
 from datetime import datetime
 
 if __name__ == '__main__':
@@ -10,6 +10,7 @@ if __name__ == '__main__':
         User.query.delete()
         Movie.query.delete()
         Favorite.query.delete()
+        TelevisionSeries.query.delete()
 
 #-------------------------------User Seeding-------------------------------
 
@@ -101,6 +102,53 @@ if __name__ == '__main__':
         db.session.add_all(movie_list)
         db.session.commit()
 
+#-------------------------------TV Series Seeding-------------------------------
+        
+        print("Generating TV Series list....")
+
+        tv_series_list = [
+            TelevisionSeries(
+                title="Stranger Things",
+                director="Matt Duffer, Ross Duffer",
+                writer="Matt Duffer, Ross Duffer",
+                year_of_release="2016",
+                thumbnail="https://upload.wikimedia.org/wikipedia/commons/3/38/Stranger_Things_logo.png",
+                motion_picture_rating="TV-14",
+                trailer="[Link to Stranger Things trailer]",
+                seasons="4",
+                episode_count="34",
+                is_airing="True",
+                summary="When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.",
+                rating=8.7,
+                popularity=77,
+                num_of_clicks=0,
+                stars="Millie Bobby Brown, Finn Wolfhard, Winona Ryder, David Harbour",
+                all_cast_and_crew="[Complete list of cast and crew]",
+                genres="Drama, Fantasy, Horror, Mystery, Sci-Fi, Thriller",
+            ),
+            TelevisionSeries(
+                title="House",
+                director="David Shore",
+                writer="David Shore",
+                year_of_release="2004",
+                thumbnail="https://wallpapers.com/images/hd/house-md-lollipop-evzr2ufxppqcnc6t.jpg",
+                motion_picture_rating="TV-14",
+                trailer="[Link to House trailer]",
+                seasons="8",
+                episode_count="177",
+                is_airing="False",
+                summary="Using a crack team of doctors and his wits, an antisocial maverick doctor specializing in diagnostic medicine does whatever it takes to solve puzzling cases that come his way.",
+                rating=8.7,
+                popularity=84,
+                num_of_clicks=0,
+                stars="Hugh Laurie, Omar Epps, Robert Sean Leonard, Jesse Spencer, Lisa Edelstein",
+                all_cast_and_crew="[Complete list of cast and crew]",
+                genres="Drama, Mystery",
+            ),
+        ]
+        db.session.add_all(tv_series_list)
+        db.session.commit()
+     
 #-------------------------------Favorite Seeding-------------------------------
 
         print("Generating Favorite List...")
@@ -123,7 +171,3 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("!!FINISHED SEEDING!!")
-
-
-
-

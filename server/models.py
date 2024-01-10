@@ -39,7 +39,7 @@ class User(db.Model, SerializerMixin):
     favorites = db.relationship('Favorite', back_populates='user')
 
     # Serialization Rules
-    serialize_rules = ('-favorites.user', '-_password_hash')
+    serialize_rules = ('-favorites.user', '-_password_hash',)
 
 
     # Properties
@@ -175,7 +175,7 @@ class Favorite(db.Model, SerializerMixin):
     tv_series= db.relationship('TelevisionSeries', back_populates='favorites')
 
     # Serialization Rules
-    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites')
+    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites',)
 
 
 
