@@ -77,15 +77,15 @@ class MovieByActor(Resource):
         
         return response
     
-api.add_resource(MovieByActor, '/movies/<string:actor>')
+api.add_resource(MovieByActor, '/movies/<string:actor>/actors')
 
-class MovieByActor(Resource):
-    def get(self, actor):
+class MovieByDirector(Resource):
+    def get(self, director):
         array_of_movies = []
-        # actor = 'Robert Downey Jr.'
         all_movies = Movie.query.all()
+
         for movie in all_movies:
-            if actor.lower() in movie.stars.lower():
+            if director.lower() in movie.director.lower():
                 array_of_movies.append(movie)
 
         # movies = Movie.query.filter(Movie.director == director).all()
@@ -102,7 +102,7 @@ class MovieByActor(Resource):
         
         return response
     
-api.add_resource(MovieByActor, '/movies/<string:actor>')
+api.add_resource(MovieByDirector, '/movies/<string:director>/directors')
 
 class MoviesByMotionPictureRating(Resource):
     def get(self, movie_rating):
@@ -126,7 +126,7 @@ class MoviesByMotionPictureRating(Resource):
 
         return response
 
-api.add_resource(MoviesByMotionPictureRating, '/movies/movie-rating/<string:movie_rating>')
+api.add_resource(MoviesByMotionPictureRating, '/movies/<string:movie_rating>/movie-rating')
 
 class MoviesByGenre(Resource):
     def get(self, movie_genre):
@@ -147,20 +147,20 @@ class MoviesByGenre(Resource):
 
         return response
 
-api.add_resource(MoviesByGenre, '/movies/genre/<string:movie_genre>')
+api.add_resource(MoviesByGenre, '/movies/<string:movie_genre>/genres')
 
 class MoviesByUserRating(Resource):
     def get(self):
          movie_list = [movie.to_dict(rules=(not_needed_data)) for movie in Movie.query.all()]
 
-         if not movie_list:
+         movie_list_by_user_rating = sorted(movie_list, key=lambda movie: movie['rating'], reverse=True)
+
+         if not movie_list_by_user_rating:
              response = make_response({
                  'error': 'Movies not found'
              }, 404)
              
              return response
-
-         movie_list_by_user_rating = sorted(movie_list, key=lambda movie: movie['rating'], reverse=True)
          
          response = make_response(movie_list_by_user_rating, 200)
 
