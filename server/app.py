@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from models import User, Movie, Favorite
+from models import User, Movie, Favorite, TelevisionSeries
 
 from flask import Flask, request, make_response, jsonify, session
 from config import db, app, api
@@ -187,6 +187,35 @@ class MoviesByPopularity(Resource):
     
 api.add_resource(MoviesByPopularity, '/movies/popular') 
 
+class TVSeries(Resource):
+    def get(self):
+        tv_series_list = [tv_series.to_dict(rules=(not_needed_data)) for tv_series in TelevisionSeries.query.all()]
+
+        if tv_series_list:
+            response = make_response(tv_series_list, 200)
+        else:
+            response = make_response({
+                'error': 'TV Series data not found'
+            }, 404)
+
+        return response
+    
+api.add_resource(TVSeries, '/tv-series')
+
+class TVSeriesById(Resource):
+    def get(self, id):
+        tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first().to_dict()
+
+        if tv_series:
+            response = make_response(tv_series, 200)
+        else:
+            response = make_response({
+                "error": f"TV Series with an id of {id} not found"
+            }, 404)
+        
+        return response
+
+api.add_resource(TVSeriesById, '/tv-series/<int:id>')
 
 class Favorites(Resource):
     def get(self):
