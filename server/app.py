@@ -124,6 +124,24 @@ class MoviesByGenre(Resource):
 
 api.add_resource(MoviesByGenre, '/movies/genre/<string:movie_genre>')
 
+class MoviesByUserRating(Resource):
+    def get(self):
+         movie_list = [movie.to_dict(rules=(not_needed_data)) for movie in Movie.query.all()]
+
+         if not movie_list:
+             response = make_response({
+                 'error': 'Movies not found'
+             }, 404)
+             
+             return response
+
+         movie_list_by_user_rating = sorted(movie_list, key=lambda movie: movie['rating'], reverse=True)
+         
+         response = make_response(movie_list_by_user_rating, 200)
+
+         return response
+    
+api.add_resource(MoviesByUserRating, '/movies/user-rating') 
 
 class Favorites(Resource):
     def get(self):
