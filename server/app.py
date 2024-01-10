@@ -317,12 +317,30 @@ class TVSeriesByUserRating(Resource):
             response = make_response(tv_series_list_by_user_rating, 200)
         else:
             response = make_response({
-                'error': 'tv_seriess not found'
+                'error': 'TV Series not found'
             }, 404)
              
         return response
           
 api.add_resource(TVSeriesByUserRating, '/tv-series/user-rating')
+
+class TVSeriesByPopularity(Resource):
+    def get(self):
+        tv_series_list = [tv_series.to_dict(rules=(not_needed_data)) for tv_series in TelevisionSeries.query.all()]
+
+        tv_series_list_by_popularity = sorted(tv_series_list, key=lambda tv_series: tv_series['popularity'], reverse=True)
+
+        if tv_series_list_by_popularity:
+            response = make_response(tv_series_list_by_popularity, 200)
+
+        else:
+            response = make_response({
+                'error': 'TV Series not found'
+            }, 404)
+        
+        return response
+    
+api.add_resource(TVSeriesByPopularity, '/tv-series/popular')
 
 class Favorites(Resource):
     def get(self):
