@@ -262,6 +262,31 @@ class TVSeriesByDirector(Resource):
     
 api.add_resource(TVSeriesByDirector, '/tv-series/<string:director>/directors')
 
+class TVSeriesByMotionPictureRating(Resource):
+    def get(self, tv_series_rating):
+        array_of_tv_series = []
+
+        all_tv_series = TelevisionSeries.query.all()
+
+        for tv_series in all_tv_series:
+            if tv_series_rating.lower() == tv_series.motion_picture_rating.lower():
+                array_of_tv_series.append(tv_series)
+        
+        tv_series_by_rating = [tv_series.to_dict(rules=(not_needed_data)) for tv_series in array_of_tv_series]
+
+        if not tv_series_by_rating:
+            response = make_response({
+                "error": f"A TV Series with a rating of {tv_series_rating} was not found"
+            }, 404)
+            return response
+        
+        response = make_response(tv_series_by_rating, 200)
+
+        return response
+
+api.add_resource(TVSeriesByMotionPictureRating, '/tv-series/<string:tv_series_rating>/tv-series-rating')
+
+
 class Favorites(Resource):
     def get(self):
         favorites = [favorite.to_dict() for favorite in Favorite.query.all()]
