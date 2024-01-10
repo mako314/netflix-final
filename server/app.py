@@ -141,7 +141,27 @@ class MoviesByUserRating(Resource):
 
          return response
     
-api.add_resource(MoviesByUserRating, '/movies/user-rating') 
+api.add_resource(MoviesByUserRating, '/movies/user-rating')
+
+class MoviesByPopularity(Resource):
+    def get(self):
+         movie_list = [movie.to_dict(rules=(not_needed_data)) for movie in Movie.query.all()]
+
+         if not movie_list:
+             response = make_response({
+                 'error': 'Movies not found'
+             }, 404)
+             
+             return response
+
+         movie_list_by_popularity = sorted(movie_list, key=lambda movie: movie['popularity'], reverse=True)
+         
+         response = make_response(movie_list_by_popularity, 200)
+
+         return response
+    
+api.add_resource(MoviesByPopularity, '/movies/popular') 
+
 
 class Favorites(Resource):
     def get(self):
