@@ -54,7 +54,7 @@ class MovieById(Resource):
 api.add_resource(MovieById, '/movies/<int:id>')
 
 
-class MovieByDirector(Resource):
+class MovieByActor(Resource):
     def get(self, actor):
         array_of_movies = []
         # actor = 'Robert Downey Jr.'
@@ -77,7 +77,32 @@ class MovieByDirector(Resource):
         
         return response
     
-api.add_resource(MovieByDirector, '/movies/<string:actor>')
+api.add_resource(MovieByActor, '/movies/<string:actor>')
+
+class MovieByActor(Resource):
+    def get(self, actor):
+        array_of_movies = []
+        # actor = 'Robert Downey Jr.'
+        all_movies = Movie.query.all()
+        for movie in all_movies:
+            if actor.lower() in movie.stars.lower():
+                array_of_movies.append(movie)
+
+        # movies = Movie.query.filter(Movie.director == director).all()
+
+        # movies_to_send = [movie.to_dict(rules=(not_needed_data)) for movie in movies]
+        movies_to_send = [movie.to_dict(rules=(not_needed_data)) for movie in array_of_movies]
+
+        if movies_to_send:
+            response = make_response(movies_to_send, 200)
+        else:
+            response = make_response({
+                "error": "Movie not found"
+            }, 404)
+        
+        return response
+    
+api.add_resource(MovieByActor, '/movies/<string:actor>')
 
 class MoviesByMotionPictureRating(Resource):
     def get(self, movie_rating):
