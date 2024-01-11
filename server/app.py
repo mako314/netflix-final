@@ -50,6 +50,29 @@ class MovieById(Resource):
             }, 404)
         
         return response
+
+    def delete(self, id):
+        movie = Movie.query.filter(Movie.id == id).first()
+
+        if movie:
+            # I need to check if this actually works... and ask Mako his opinion
+            # UPDATE: checked code and it seemed to work? 
+            for user_favorite in movie.favorites:
+                if user_favorite.movie_id == id:
+                    db.session.delete(user_favorite)
+            
+            db.session.delete(movie)
+            db.session.commit()
+
+            response = make_response({
+                "message": f"Movie with id of: {id} was successfully deleted"
+            }, 204)
+        else:
+            response = make_response({
+                "error": f"Movie with id of: {id} was not found"
+            }, 404)
+        
+        return response
     
 api.add_resource(MovieById, '/movies/<int:id>')
 
