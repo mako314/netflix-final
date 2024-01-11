@@ -242,8 +242,6 @@ class TVSeriesById(Resource):
         tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first()
 
         if tv_series:
-            # I need to check if this actually works... and ask Mako his opinion
-            # UPDATE: checked code and it seemed to work? 
             for user_favorite in tv_series.favorites:
                 if user_favorite.tv_series_id == id:
                     db.session.delete(user_favorite)
@@ -403,6 +401,35 @@ class Favorites(Resource):
     
 api.add_resource(Favorites, '/favorites')
 
+class FavoritesByID(Resource):
+    def get(self, id):
+        favorites = Favorite.query.filter(Favorite.id == id).first().to_dict()
+
+        if favorites:
+            return make_response(favorites, 200)
+        
+        else:
+            return make_response({
+                "error": f"Favorites record with id of {id} not found"
+            }, 404)
+    
+    def delete(self, id):
+        favorites = Favorite.query.filter(Favorite.id == id).first()
+
+        if favorites:
+            db.session.delete(favorites)
+            db.session.commit()
+
+            return make_response({
+                "message": f"Favorites record with id of: {id} was successfully deleted"
+            }, 204)
+        else:
+            return make_response({
+                "error": f"Favorites with id of: {id} was not found"
+            }, 404)
+    
+api.add_resource(FavoritesByID, '/favorites/<int:id>')
+
 class FavoritesByUserID(Resource):
     def get(self, id):
         favorites = [favorite.to_dict() for favorite in Favorite.query.all()]
@@ -423,7 +450,7 @@ class FavoritesByUserID(Resource):
 
         return response
 
-api.add_resource(FavoritesByUserID, "/favorites/<int:id>")
+api.add_resource(FavoritesByUserID, "/favorites/<int:id>/users")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
