@@ -227,13 +227,36 @@ api.add_resource(TVSeries, '/tv-series')
 
 class TVSeriesById(Resource):
     def get(self, id):
-        tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first().to_dict()
+        tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first()
 
         if tv_series:
             response = make_response(tv_series, 200)
         else:
             response = make_response({
                 "error": f"TV Series with an id of {id} not found"
+            }, 404)
+        
+        return response
+
+    def delete(self, id):
+        tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first()
+
+        if tv_series:
+            # I need to check if this actually works... and ask Mako his opinion
+            # UPDATE: checked code and it seemed to work? 
+            for user_favorite in tv_series.favorites:
+                if user_favorite.tv_series_id == id:
+                    db.session.delete(user_favorite)
+            
+            db.session.delete(tv_series)
+            db.session.commit()
+
+            response = make_response({
+                "message": f"TV Series with id of: {id} was successfully deleted"
+            }, 204)
+        else:
+            response = make_response({
+                "error": f"TV Series with id of: {id} was not found"
             }, 404)
         
         return response
