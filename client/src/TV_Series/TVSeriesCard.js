@@ -1,15 +1,12 @@
 import React from "react"
 import { useNavigate } from 'react-router-dom';
 
-function TVSeriesCard({thumbnail, title, director, year_of_release, run_time, movieId, fullMovie}) {
+
+function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, seasons, episode_count, fullTVSeries}) {
   
     const navigate = useNavigate()
-  
-    // const handleMovieNav = () => {
-    //   navigate(`/movie/${movieId}`)
-    // }
-  
-    const handleMovieNav = (e) => {
+    
+    const handleTVSeriesNav = (e) => {
       navigate(`/tv-series/${tvSeriesID}`, { state: { fullTVSeries } })
     }
   
@@ -20,7 +17,7 @@ function TVSeriesCard({thumbnail, title, director, year_of_release, run_time, mo
     
         <div 
         className="overflow-hidden rounded bg-gray-400 text-slate-500 shadow-xl shadow-slate-200 mt-4 ml-4"
-        onClick={handleMovieNav}
+        onClick={handleTVSeriesNav}
         >
             {/*  <!--  Image --> */}
             <figure>
@@ -34,9 +31,10 @@ function TVSeriesCard({thumbnail, title, director, year_of_release, run_time, mo
             <div className="p-6">
             <header className="">
                 <h3 className="text-xl font-medium text-black">
-                {title}
+                    {title}
                 </h3>
                 <p className="text-sm text-black">By {director}, {year_of_release}, {run_time}</p>
+                <p className="text-sm text-black">Number of seasons: {seasons}, Number of episodes: {episode_count}</p>
             </header>
             </div>
         </div>
