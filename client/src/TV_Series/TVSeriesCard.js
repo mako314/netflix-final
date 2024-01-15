@@ -33,7 +33,7 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
                 <h3 className="text-xl font-medium text-black">
                     {title}
                 </h3>
-                <p className="text-sm text-black">By {director}, {year_of_release}, {run_time}</p>
+                <p className="text-sm text-black">By {director}, {year_of_release}</p>
                 <p className="text-sm text-black">Number of seasons: {seasons}, Number of episodes: {episode_count}</p>
             </header>
             </div>
