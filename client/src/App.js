@@ -6,6 +6,9 @@ import {Route, Routes } from 'react-router-dom';
 import MovieCollection from './Movies/MovieCollection';
 import MovieDisplay from './Movies/MovieDisplay';
 
+// ----- TVSeries Imports -----
+import TVSeriesCollection from './TV_Series/TVSeriesCollection';
+import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
 
 // useNavigate
 function App() {
