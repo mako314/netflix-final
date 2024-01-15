@@ -1,36 +1,37 @@
 import React from "react";
 import TVSeriesCard from "./TVSeriesCard";
 
-function MovieCollection ({moviesData}){
+function TVSeriesCollection ({tvSeriesData}){
 
-    console.log("the data:", moviesData)
+    console.log("The data:", tvSeriesData)
 
-    const mappedMovieCards = moviesData?.map((movie) => {
+    const mappedTVSeriesCards = tvSeriesData?.map((tvSeries) => {
         return (
-        <div key={movie.id} className="p-2 md:w-1/4"> {/* Each item takes up 1/4th of the width */} 
-        <MovieCard
-        movieId={movie.id}
-        thumbnail={movie.thumbnail}
-        title={movie.title}
-        director={movie.director}
-        year_of_release={movie.year_of_release}
-        run_time={movie.run_time}
-        fullMovie={movie}
-        />
+        <div key={tvSeries.id} className="p-2 md:w-1/4"> {/* Each item takes up 1/4th of the width */} 
+            <TVSeriesCard
+                tvSeriesID={tvSeries.id}
+                thumbnail={tvSeries.thumbnail}
+                title={tvSeries.title}
+                director={tvSeries.director}
+                year_of_release={tvSeries.year_of_release}
+                seasons={tvSeries.seasons}
+                episode_count={tvSeries.episode_count}
+                fullTVSeries={tvSeries}
+            />
         </div>
         )
     })
 
     return(
         <div>
-    <h1 className="text-3xl font-bold underline">
-    Movie Collection Page
-    </h1>
-    <div className="flex flex-wrap -m-2"> 
-    {mappedMovieCards}
-    </div>
+            <h1 className="text-3xl font-bold underline">
+                TV Series Collection Page
+            </h1>
+            <div className="flex flex-wrap -m-2"> 
+                {mappedTVSeriesCards}
+            </div>
         </div>
     )
 }
 
-export default MovieCollection
+export default TVSeriesCollection
