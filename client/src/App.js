@@ -123,11 +123,14 @@ function App() {
 
   return (
     <div className="App">
-  <h1 className="text-3xl font-bold underline">
-    NAV
-  </h1>
-  <MovieCollection moviesData={moviesData} />
-  <TVSeriesCollection tvSeriesData={tvSeriesData} />
+      <h1 className="text-3xl font-bold underline">
+        NAV
+      </h1>
+      <h2 className="text-2xl font-bold">
+        The current user's data: 
+      </h2>
+      <MovieCollection moviesData={moviesData} />
+      <TVSeriesCollection tvSeriesData={tvSeriesData} />
       <Routes>
         <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />

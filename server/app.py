@@ -54,13 +54,7 @@ class MovieById(Resource):
     def delete(self, id):
         movie = Movie.query.filter(Movie.id == id).first()
 
-        if movie:
-            # I need to check if this actually works... and ask Mako his opinion
-            # UPDATE: checked code and it seemed to work? 
-            for user_favorite in movie.favorites:
-                if user_favorite.movie_id == id:
-                    db.session.delete(user_favorite)
-            
+        if movie: 
             db.session.delete(movie)
             db.session.commit()
 
@@ -242,10 +236,6 @@ class TVSeriesById(Resource):
         tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first()
 
         if tv_series:
-            for user_favorite in tv_series.favorites:
-                if user_favorite.tv_series_id == id:
-                    db.session.delete(user_favorite)
-            
             db.session.delete(tv_series)
             db.session.commit()
 
