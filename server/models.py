@@ -36,10 +36,10 @@ class User(db.Model, SerializerMixin):
     # Foreign Keys
 
     # Relationships
-    favorites = db.relationship('Favorite', back_populates='user')
+    favorites = db.relationship('Favorite', back_populates='user', cascade="all, delete")
 
     # Serialization Rules
-    serialize_rules = ('-favorites.user', '-_password_hash')
+    serialize_rules = ('-favorites.user', '-_password_hash',)
 
 
     # Properties
@@ -99,7 +99,7 @@ class Movie(db.Model, SerializerMixin):
     # Foreign Keys
 
     # Relationships
-    favorites = db.relationship('Favorite', back_populates='movie')
+    favorites = db.relationship('Favorite', back_populates='movie', cascade="all, delete")
 
     # Serialization Rules
     serialize_rules = ('-favorites.movie',)
@@ -150,7 +150,7 @@ class TelevisionSeries(db.Model, SerializerMixin):
     # Foreign Keys
 
     # Relationships
-    favorites = db.relationship('Favorite', back_populates='tv_series')
+    favorites = db.relationship('Favorite', back_populates='tv_series', cascade="all, delete")
 
     # Serialization Rules
     serialize_rules = ('-favorites.tv_series',)
@@ -175,7 +175,7 @@ class Favorite(db.Model, SerializerMixin):
     tv_series= db.relationship('TelevisionSeries', back_populates='favorites')
 
     # Serialization Rules
-    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites')
+    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites',)
 
 
 
