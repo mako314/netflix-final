@@ -167,6 +167,10 @@ if __name__ == '__main__':
             ),
         ]
 
+        print("What you'd expect to be an ID of 1:", movie_list[0].id)
+        print("What you'd expect to be an ID of 1:",  user_list[1].id)
+
+
         db.session.add_all(favorite_list)
         db.session.commit()
 
