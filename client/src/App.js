@@ -29,7 +29,7 @@ function App() {
   // let ignore = false
   //------------------------------------- Fetch for Movies ----------------
 
-    fetch(`http://127.0.0.1:5555/movies`, {
+    fetch(`https://netflix-final.onrender.com/movies`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

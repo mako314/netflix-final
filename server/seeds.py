@@ -7,9 +7,9 @@ if __name__ == '__main__':
     with app.app_context():
         
         print("Clearing db...")
+        Favorite.query.delete()
         User.query.delete()
         Movie.query.delete()
-        Favorite.query.delete()
         TelevisionSeries.query.delete()
 
 #-------------------------------User Seeding-------------------------------
@@ -100,6 +100,7 @@ if __name__ == '__main__':
         ]
 
         db.session.add_all(movie_list)
+        print(movie_list)
         db.session.commit()
 
 #-------------------------------TV Series Seeding-------------------------------
