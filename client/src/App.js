@@ -132,9 +132,10 @@ function App() {
 
 
     <div className="App">
-              <div className='flex'>
+      <div className='flex'>
             <Navbar />
-            <div className='flex-grow p-4'>
+      </div>
+      <div className='flex-grow p-4'>
       <h2 className="text-2xl font-bold">
         The current user's data: 
       </h2>
@@ -146,6 +147,7 @@ function App() {
         <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
       </Routes>
+    </div>
     </div>
 
   )
