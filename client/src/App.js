@@ -2,13 +2,20 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import {Route, Routes } from 'react-router-dom';
 
+// ----- HomePage Imports -----
+import HomePage from './HomePage/HomePage';
+
 // ----- Movie Imports -----
 import MovieCollection from './Movies/MovieCollection';
 import MovieDisplay from './Movies/MovieDisplay';
 
+
+// ----- Nabar / Footer Imports -----
+import Navbar from './NavbarAndFooter/Navbar';
 // ----- TVSeries Imports -----
 import TVSeriesCollection from './TV_Series/TVSeriesCollection';
 import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
+
 
 // useNavigate
 function App() {
@@ -122,10 +129,12 @@ function App() {
   console.log("THE TV SERIES DATA STATE:", tvSeriesData)
 
   return (
+
+
     <div className="App">
-      <h1 className="text-3xl font-bold underline">
-        NAV
-      </h1>
+              <div className='flex'>
+            <Navbar />
+            <div className='flex-grow p-4'>
       <h2 className="text-2xl font-bold">
         The current user's data: 
       </h2>
@@ -138,6 +147,7 @@ function App() {
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
       </Routes>
     </div>
+
   )
 }
 
