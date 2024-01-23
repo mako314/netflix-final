@@ -2,10 +2,15 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import {Route, Routes } from 'react-router-dom';
 
+// ----- HomePage Imports -----
+import HomePage from './HomePage/HomePage';
+
 // ----- Movie Imports -----
 import MovieCollection from './Movies/MovieCollection';
 import MovieDisplay from './Movies/MovieDisplay';
 
+// ----- Nabar / Footer Imports -----
+import Navbar from './NavbarAndFooter/Navbar';
 
 // useNavigate
 function App() {
@@ -96,16 +101,19 @@ function App() {
   console.log("THE FAVORITE DATA STATE:", favoritesData)
 
   return (
-    <div className="App">
-  <h1 className="text-3xl font-bold underline">
-    NAV
-  </h1>
-  <MovieCollection moviesData={moviesData}/>
-      <Routes>
-        <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
-        <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>}/>
-      </Routes>
-    </div>
+    <>
+        <div className='flex'>
+            <Navbar />
+            <div className='flex-grow p-4'>
+            
+                <Routes>
+                    <Route path='/' element={<HomePage moviesData={moviesData}/>} />
+                    <Route path='/movies' element={<MovieCollection moviesData={moviesData} />} />
+                    <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData} />} />
+                </Routes>
+            </div>
+        </div>
+    </>
   )
 }
 
