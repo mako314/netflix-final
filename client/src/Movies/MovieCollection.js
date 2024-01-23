@@ -4,6 +4,7 @@ import MovieCard from "./MovieCard";
 function MovieCollection ({moviesData}){
 
     console.log("the data:", moviesData)
+    console.log("MOVIE COLLECTIONS PAGE")
 
     const mappedMovieCards = moviesData?.map((movie) => {
         return (
@@ -22,14 +23,14 @@ function MovieCollection ({moviesData}){
     })
 
     return(
-        <div>
+    <div>
     <h1 className="text-3xl font-bold underline">
     Movie Collection Page
     </h1>
     <div className="flex flex-wrap -m-2"> 
     {mappedMovieCards}
     </div>
-        </div>
+    </div>
     )
 }
 

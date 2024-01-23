@@ -29,7 +29,7 @@ function App() {
   // let ignore = false
   //------------------------------------- Fetch for Movies ----------------
 
-    fetch(`https://netflix-final.onrender.com/movies`, {
+    fetch(`http://127.0.0.1:5555/movies`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -129,26 +129,29 @@ function App() {
   console.log("THE TV SERIES DATA STATE:", tvSeriesData)
 
   return (
-
-
-    <div className="App">
-      <div className='flex'>
-            <Navbar />
-      </div>
-      <div className='flex-grow p-4'>
+    <> 
+    <Navbar />
+    <div class="flex">
+    
+    <div className='flex-grow p-4'>
       <h2 className="text-2xl font-bold">
         The current user's data: 
       </h2>
-      <MovieCollection moviesData={moviesData} />
-      <TVSeriesCollection tvSeriesData={tvSeriesData} />
+      {/* <MovieCollection moviesData={moviesData} /> */}
+      {/* <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
+      </div>
+    </div>
+      
+      
       <Routes>
+      <Route path='/' element={<HomePage moviesData={moviesData}/>} />
         <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
       </Routes>
-    </div>
-    </div>
+
+    </>
 
   )
 }
