@@ -60,7 +60,7 @@ function App() {
     })
 
 //------------------------------------- Fetch for Users ----------------
-    fetch(`http://127.0.0.1:5555/users`, {
+    fetch(`${apiUrl}users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ function App() {
 
   //----------------------FETCH FOR FAVORITES-----------------------------
 
-  fetch(`http://127.0.0.1:5555/favorites`, {
+  fetch(`${apiUrl}favorites`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -109,7 +109,7 @@ function App() {
     })
 
     //----------------------FETCH FOR TV SERIES-----------------------------
-    fetch(`http://127.0.0.1:5555/tv-series`, {
+    fetch(`${apiUrl}tv-series`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
