@@ -37,6 +37,17 @@ class Login(Resource):
 
 api.add_resource(Login, '/login')
 
+class Logout(Resource):
+    def delete(self):
+        session.clear()
+        response = make_response({"message": "Logout successful"}, 200)
+        unset_jwt_cookies(response)
+
+        return response
+
+api.add_resource(Logout, '/logout')
+
+
 
 class Users(Resource):
     def get(self):
