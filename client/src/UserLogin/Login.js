@@ -42,6 +42,18 @@ function Login(){
         })
     }
 
+    function handleLogout() {
+        fetch(`${apiUrl}logout`, {
+            method: "DELETE"
+        }).then(setCurrentUser(null))
+    }
+
+    return (
+        <div>
+            Hello World!
+        </div>
+    )
+
 }
 
 export default Login;
