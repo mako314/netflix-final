@@ -3,6 +3,7 @@ import React, { useState } from "react"
 function Login(){
 
     const [currentUser, setCurrentUser] = useState([]);
+    const [userFavorites, setUserFavorites] = useState([]);
     const [loginError, setLoginError] = useState({
         error: false,
         message: ""
@@ -32,6 +33,7 @@ function Login(){
                         console.log("A user has logged in successfully");
                         
                         setCurrentUser(data.user);
+                        setUserFavorites(data.user.favorites);
 
                         setLoginError({
                             error: false,
@@ -92,13 +94,13 @@ function Login(){
                     </p>
                 }
 
-                { currentUser &&
+                { currentUser.id &&
                     <>
                         <h1>
                             {`Welcome ${currentUser.first_name} ${currentUser.last_name}!`}
                         </h1>
                         <h1>
-                            {`Your favorites: ${currentUser.favorites[0].movie.title} and ${currentUser.favorites[1].movie.title}`}
+                            {`Your favorites: ${userFavorites[0].movie.title} and ${userFavorites[1].movie.title}`}
                         </h1>
                     </>
                 }
