@@ -50,7 +50,23 @@ function Login(){
 
     return (
         <div>
-            Hello World!
+            <form onSubmit={handleLogin}>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input type="text" name="email" id="email" placeholder="Enter your email:"></input>
+                </div>
+
+                <br />
+
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password:"></input>
+                </div>
+
+                <br />
+
+                <button type="submit">Sign in</button>
+            </form>
         </div>
     )
 
