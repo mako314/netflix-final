@@ -10,6 +10,9 @@ import os
 
 # load_dotenv('../.env.local')
 
+# export JWT_SECRET_KEY=
+# export DATABASE_URI=sqlite:///app.db
+
 app = Flask(__name__)
 
 # app.secret_key = os.getenv('FLASK_SECRET_KEY') # signature for Flask session

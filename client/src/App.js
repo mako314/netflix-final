@@ -60,7 +60,7 @@ function App() {
     })
 
 //------------------------------------- Fetch for Users ----------------
-    fetch(`http://127.0.0.1:5555/users`, {
+    fetch(`${apiUrl}users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ function App() {
 
   //----------------------FETCH FOR FAVORITES-----------------------------
 
-  fetch(`http://127.0.0.1:5555/favorites`, {
+  fetch(`${apiUrl}favorites`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -109,7 +109,7 @@ function App() {
     })
 
     //----------------------FETCH FOR TV SERIES-----------------------------
-    fetch(`http://127.0.0.1:5555/tv-series`, {
+    fetch(`${apiUrl}tv-series`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -135,6 +135,24 @@ function App() {
   console.log("THE FAVORITE DATA STATE:", favoritesData)
   console.log("THE TV SERIES DATA STATE:", tvSeriesData)
 
+  const handleDeleteAsync = (movieID) => {
+    const movieToBeDeleted = moviesData.filter(item => item.id !== movieID)
+
+    console.log("THE MOVE THATS GOING TO BE DELETED", movieToBeDeleted)
+
+    setMoviesData(movieToBeDeleted)
+  }
+
+  // function handleDeleteFilter(movieID) {
+  //   const newMovieArray = moviesData.map(item => item.filter((item) => item.id !== movieID))
+
+  //   console.log("The new movies:", newMovieArray)
+
+  //   // const data = moviesData.filter((item) => item.id == movieID).map((item) => item);
+  //   // console.log(data);
+
+  // }
+
   return (
     <ApiProvider> 
     <> 
@@ -153,7 +171,7 @@ function App() {
       
       <Routes>
       <Route path='/' element={<HomePage moviesData={moviesData}/>} />
-        <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
+        <Route path='/movies' element={<MovieCollection moviesData={moviesData} handleDeleteAsync={handleDeleteAsync}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
