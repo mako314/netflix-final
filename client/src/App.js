@@ -19,6 +19,8 @@ import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
 
 import {ApiProvider} from './Api';
 
+import Login from './UserLogin/Login'
+
 
 // useNavigate
 function App() {
@@ -147,6 +149,7 @@ function App() {
       </h2>
       {/* <MovieCollection moviesData={moviesData} /> */}
       {/* <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
+      { <Login />}
       </div>
     </div>
       
@@ -157,6 +160,7 @@ function App() {
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
 
     </>
