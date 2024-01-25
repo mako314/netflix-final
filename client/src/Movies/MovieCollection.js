@@ -1,10 +1,12 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieCollection ({moviesData}){
+function MovieCollection ({moviesData, handleDeleteAsync}){
 
     console.log("the data:", moviesData)
-    console.log("MOVIE COLLECTIONS PAGE")
+    console.log("the data type:", typeof(moviesData))
+    // console.log("MOVIE COLLECTIONS PAGE")
+    console.log("INSIDE MOVIE COLLECTION:", handleDeleteAsync)
 
     const mappedMovieCards = moviesData?.map((movie) => {
         return (
@@ -17,6 +19,7 @@ function MovieCollection ({moviesData}){
         year_of_release={movie.year_of_release}
         run_time={movie.run_time}
         fullMovie={movie}
+        handleDeleteAsync={handleDeleteAsync}
         />
         </div>
         )
