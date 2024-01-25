@@ -77,14 +77,14 @@ class CheckSession(Resource):
             user = User.query.get(identity_id)
 
             if user:
-                return {
+                return make_response({
                     'role': identity_role,
                     'details': user.to_dict(rules=('-password_hash',))
-                }, 200
+                }, 200)
             else:
-                return {'message': 'User not found'}, 404
+                return make_response({'message': 'User not found'}, 404)
             
-        return {'message': 'Invalid session or role'}, 401
+        return make_response({'message': 'Invalid session or role'}, 401)
 
 api.add_resource(CheckSession, '/check_session')
 
