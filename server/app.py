@@ -62,8 +62,31 @@ def refresh_expiring_jwts(response):
         return response
 
     except(RuntimeError, KeyError):
-        
+
         return response
+
+class CheckSession(Resource):
+    @jwt_required()
+    def get(self):
+        identity = get_jwt_identity()
+
+        identity_id = identity['id']
+        identity_role = identity['role']
+
+        if identity_role == 'user':
+            user = User.query.get(identity_id)
+
+            if user:
+                return {
+                    'role': identity_role,
+                    'details': user.to_dict(rules=('-password_hash',))
+                }, 200
+            else:
+                return {'message': 'User not found'}, 404
+            
+        return {'message': 'Invalid session or role'}, 401
+
+api.add_resource(CheckSession, '/check_session')
 
 class Users(Resource):
     def get(self):
