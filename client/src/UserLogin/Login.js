@@ -3,6 +3,11 @@ import React, { useState } from "react"
 function Login(){
 
     const [currentUser, setCurrentUser] = useState([]);
+    const [loginError, setLoginError] = useState({
+        error: false,
+        message: ""
+    });
+
     const apiUrl = process.env.REACT_APP_API_URL;
 
     function handleLogin(e) {
@@ -27,13 +32,24 @@ function Login(){
                         console.log("A user has logged in successfully");
                         
                         setCurrentUser(data.user);
+
+                        setLoginError({
+                            error: false,
+                            message: ""
+                        })
                     }
                 })
             } 
             else {
 
                 resp.json().then((errorData) => {
-                    console.error('Error Response:', errorData)
+                    console.error('Error Response:', errorData);
+                    
+                    setLoginError({
+                        error: true,
+                        message: errorData.error
+                    })
+
                 })
             }
         }).catch((error) => {
@@ -66,8 +82,16 @@ function Login(){
                 <br />
 
                 <button type="submit">Sign in</button>
+
+                <br />
+                {loginError.error && 
+                    <p className="font-bold text-black">
+                        {JSON.stringify(loginError.message)}
+                    </p>
+                }
             </form>
         </div>
+
     )
 
 }
