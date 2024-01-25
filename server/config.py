@@ -44,4 +44,4 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
 
 jwt = JWTManager(app)
 
-CORS(app)
+CORS(app, supports_credentials=True)
