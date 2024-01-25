@@ -5,7 +5,38 @@ from models import User, Movie, Favorite, TelevisionSeries
 from flask import Flask, request, make_response, jsonify, session
 from config import db, app, api
 
+from flask_jwt_extended import create_access_token, set_access_cookies, jwt_required, get_jwt_identity, unset_jwt_cookies, create_refresh_token, get_jwt
+
 not_needed_data = '-favorites.user.postal_code',  '-favorites.user.country', '-favorites.user.state', '-favorites.user.address_line_1', '-favorites.user.address_line_2', '-favorites.user.city'
+
+class Login(Resource):
+    def post(self):
+        data = request.get_json()
+
+        # maybe we should have the option to log in using username?
+        email = data['email']
+        password = data['password']
+
+        user = User.query.filter(User.email == email).first()
+
+        if user and user.authenticate(password):
+            access_token = create_access_token(identity={'id': user.id, 'role': 'user'})
+            user_data = user.to_dict(rules=('-_password_hash',))
+
+            response = make_response((jsonify({
+                "msg": "User login successful", 
+                "user": user_data,
+                "role": "user"
+            })))
+
+            set_access_cookies(response, access_token)
+
+            return response
+        
+        return make_response({"error": "Invalid login credentials provided"}, 401)
+
+api.add_resource(Login, '/login')
+
 
 class Users(Resource):
     def get(self):
