@@ -37,6 +37,8 @@ function Login(){
                             error: false,
                             message: ""
                         })
+
+                        console.log(data.user);
                     }
                 })
             } 
@@ -69,25 +71,36 @@ function Login(){
             <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input type="text" name="email" id="email" placeholder="Enter your email:"></input>
+                    <input type="text" name="email" id="email" className="mx-4 bg-slate-200 rounded-md" placeholder="Enter your email:"></input>
                 </div>
 
                 <br />
 
                 <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Enter your password:"></input>
+                    <input type="password" name="password" id="password" className="mx-4 bg-slate-200 rounded-md" placeholder="Enter your password:"></input>
                 </div>
 
                 <br />
 
-                <button type="submit">Sign in</button>
+                <button type="submit" className="bg-red-600 text-white" >Sign in</button>
 
                 <br />
-                {loginError.error && 
+                { loginError.error && 
                     <p className="font-bold text-black">
                         {JSON.stringify(loginError.message)}
                     </p>
+                }
+
+                { currentUser &&
+                    <>
+                        <h1>
+                            {`Welcome ${currentUser.first_name} ${currentUser.last_name}!`}
+                        </h1>
+                        <h1>
+                            {`Your favorites: ${currentUser.favorites[0].movie.title} and ${currentUser.favorites[1].movie.title}`}
+                        </h1>
+                    </>
                 }
             </form>
         </div>
