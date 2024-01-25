@@ -20,7 +20,7 @@ if __name__ == '__main__':
             User(
             first_name = 'Jane',
             last_name = 'Doe',
-            email = '',
+            email = 'makindoe@hotmail.com',
             phone = '',
             _password_hash = '123',
             date_of_birth = datetime(2024 - 32, 1, 15),
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         User(
             first_name = 'Bob',
             last_name = 'Jones',
-            email = '',
+            email = 'billybobjones@gmail.com',
             phone = '',
             _password_hash = '123',
             date_of_birth = datetime(2024 - 32, 1, 15),
