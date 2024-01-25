@@ -6,6 +6,7 @@ from flask import Flask, request, make_response, jsonify, session
 from config import db, app, api
 
 from flask_jwt_extended import create_access_token, set_access_cookies, jwt_required, get_jwt_identity, unset_jwt_cookies, create_refresh_token, get_jwt
+from datetime import datetime, timezone, timedelta
 
 not_needed_data = '-favorites.user.postal_code',  '-favorites.user.country', '-favorites.user.state', '-favorites.user.address_line_1', '-favorites.user.address_line_2', '-favorites.user.city'
 
@@ -47,7 +48,22 @@ class Logout(Resource):
 
 api.add_resource(Logout, '/logout')
 
+@app.after_request
+def refresh_expiring_jwts(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
 
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            set_access_cookies(response, access_token)
+
+        return response
+
+    except(RuntimeError, KeyError):
+        
+        return response
 
 class Users(Resource):
     def get(self):
