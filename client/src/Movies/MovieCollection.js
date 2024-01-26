@@ -5,6 +5,8 @@ function MovieCollection ({moviesData}){
 
     console.log("the data:", moviesData)
 
+    // Consider image sizing, try to stick with 000x000 or whatever is decided
+
     const mappedMovieCards = moviesData?.map((movie) => {
         return (
         <div key={movie.id} className="p-2 md:w-1/4"> {/* Each item takes up 1/4th of the width */} 

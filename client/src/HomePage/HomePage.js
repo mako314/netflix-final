@@ -13,7 +13,7 @@ function HomePage({moviesData, tvSeriesData}){
     // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Music</span>
 
     let dramaMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("drama")))
-    // let actionMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
+    let actionMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("action")))
     // let musicMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
     // console.log(moviesData)
 
@@ -109,13 +109,22 @@ function HomePage({moviesData, tvSeriesData}){
                     </div>
                 </div>
 
+                <div className="flex flex-col gap-3 mt-6">
+                    <div>
+                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Action</span>
+                    </div>
+                    <div>
+                        <MovieCollection moviesData={actionMoviesFiltered}/>
+                    </div>
+                </div>
+
             </div>
 
 
-            <div>
+            {/* <div>
             <button fontFamily="Arial" type="submit" className="hover:bg-indigo-500 bg-indigo-600 rounded-lg shadow-lg text-white
                 font-bold py-3 px-4 sm:px-8 md:px-10 lg:px-12 xl:px-16">Start Your Free Trial</button>
-            </div>
+            </div> */}
 
 
         </div>

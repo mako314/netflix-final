@@ -14,19 +14,19 @@ function Navbar(){
                 <li className="px-5 py-3 hover:bg-red-800">
                     <Link to={'/movies'} className="flex items-center">
                         Movie with Link
-                        <img src="https://placehold.co/20" className="inline-block ml-2"/>
+                        {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
                     </Link>
                 </li>
                 <li className="px-5 py-3 hover:bg-red-800">
-                    <a href="/movies" className="flex items-center">
-                        Movie with A tag
-                        <img src="https://placehold.co/20" className="inline-block ml-2"/>
+                    <a href="/tv-series" className="flex items-center">
+                        Television Series
+                        {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
                     </a>
                 </li>
                 <li className="px-5 py-3 hover:bg-red-800">
                     <a href="#" className="flex items-center">
                         Menu 3
-                        <img src="https://placehold.co/20" className="inline-block ml-2"/>
+                        {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
                     </a>
                 </li>
             </ul>

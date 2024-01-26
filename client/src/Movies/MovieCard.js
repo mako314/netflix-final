@@ -14,12 +14,15 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
   }
 
   return (
-    <>
+    <div className="group">
+
+   <button class="hidden group-hover:block">Child</button>
     {/*<!-- Component: Basic image card --> */}
     {/* MT TOP BOTTOM */}
 
+    {/* w-2/3 hover:w-full */}
   <div 
-  className="overflow-hidden rounded text-slate-500 mt-4 ml-4 cursor-pointer"
+  className="overflow-hidden rounded text-slate-500 mt-4 ml-4 cursor-pointer hover:h-180"
   onClick={handleMovieNav}
   >
         {/*  <!--  Image --> */}
@@ -27,7 +30,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
         <img
           src={thumbnail}
           alt="card image"
-          className="h-48 w-full object-contain" 
+          className="h-48 w-full object-contain group-hover:hidden" 
         />
       </figure>
       {/*  <!-- Body--> */}
@@ -41,8 +44,10 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
       </div>
     </div>
 
+    
+
     {/*<!-- End Basic image card --> */}
-    </>
+    </div>
   )
 }
 
