@@ -8,7 +8,13 @@ function HomePage({moviesData, tvSeriesData}){
 
 
     let comedyMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
+    // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Drama</span>
+    // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Action</span>
+    // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Music</span>
 
+    let dramaMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("drama")))
+    // let actionMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
+    // let musicMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
     // console.log(moviesData)
 
     console.log("The Filtered Comedy Movies:", comedyMoviesFiltered)
@@ -85,20 +91,33 @@ function HomePage({moviesData, tvSeriesData}){
             </div> */}
 
             <div className="mb-6 px-4 rounded-lg">
-                <div className="flex flex-wrap gap-3">
-                    <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Comedy</span>
-                    <MovieCollection moviesData={comedyMoviesFiltered}/>
-                    <span className="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase">Drama</span>
-                    <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase">Action</span>
+                <div className="flex flex-col gap-3">
+                    <div>
+                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Comedy</span>
+                    </div>
+                    <div>
+                        <MovieCollection moviesData={comedyMoviesFiltered}/>
+                    </div>
                 </div>
+
+                <div className="flex flex-col gap-3 mt-6">
+                    <div>
+                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Drama</span>
+                    </div>
+                    <div>
+                        <MovieCollection moviesData={dramaMoviesFiltered}/>
+                    </div>
+                </div>
+
             </div>
+
 
             <div>
             <button fontFamily="Arial" type="submit" className="hover:bg-indigo-500 bg-indigo-600 rounded-lg shadow-lg text-white
                 font-bold py-3 px-4 sm:px-8 md:px-10 lg:px-12 xl:px-16">Start Your Free Trial</button>
             </div>
 
-            
+
         </div>
         </div>
 
