@@ -19,7 +19,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
     {/* MT TOP BOTTOM */}
 
   <div 
-  className="overflow-hidden rounded bg-gray-400 text-slate-500 shadow-xl shadow-slate-200 mt-4 ml-4"
+  className="overflow-hidden rounded text-slate-500 mt-4 ml-4 cursor-pointer"
   onClick={handleMovieNav}
   >
         {/*  <!--  Image --> */}

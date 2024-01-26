@@ -23,9 +23,9 @@ function MovieCollection ({moviesData}){
 
     return(
         <div>
-    <h1 className="text-3xl font-bold underline ml-4">
-    Movie Collection Page
-    </h1>
+    {/* <h1 className="text-3xl font-bold underline ml-4">
+    Movies
+    </h1> */}
     <div className="flex flex-wrap -m-2"> 
     {mappedMovieCards}
     </div>

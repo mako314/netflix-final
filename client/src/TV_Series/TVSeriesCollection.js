@@ -24,8 +24,8 @@ function TVSeriesCollection ({tvSeriesData}){
 
     return(
         <div>
-            <h1 className="text-3xl font-bold underline">
-                TV Series Collection Page
+            <h1 className="text-3xl font-bold underline ml-4">
+                TV Series
             </h1>
             <div className="flex flex-wrap -m-2"> 
                 {mappedTVSeriesCards}

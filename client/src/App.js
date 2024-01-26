@@ -139,7 +139,7 @@ function App() {
       <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
 
       <Routes>
-      <Route path='/' element={<HomePage moviesData={moviesData}/>} />
+      <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
         <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />

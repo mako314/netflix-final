@@ -6,9 +6,9 @@ function Navbar(){
     const navigate = useNavigate();
 
     return(
-        <nav className="w-56 h-screen bg-gray-900 text-white flex flex-col">
+        <nav className="w-56 min-h-screen bg-gray-900 text-white flex flex-col">
         <div className="w-56 h-full flex flex-col">
-            <a href="/" className="text-center py-3 text-red-800 text-lg font-bold">Netflix</a>
+            <a href="/" className="text-center py-3 text-red-800 text-lg font-bold">Definitely Not Netflix</a>
 
             <ul className="mt-2">
                 <li className="px-5 py-3 hover:bg-red-800">
