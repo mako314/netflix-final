@@ -23,7 +23,7 @@ function MovieCollection ({moviesData}){
 
     return(
         <div>
-    <h1 className="text-3xl font-bold underline">
+    <h1 className="text-3xl font-bold underline ml-4">
     Movie Collection Page
     </h1>
     <div className="flex flex-wrap -m-2"> 

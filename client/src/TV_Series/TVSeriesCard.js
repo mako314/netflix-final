@@ -23,7 +23,7 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
             <figure>
             <img
                 src={thumbnail}
-                alt="card image"
+                alt={title}
                 className="h-48 w-full object-contain" 
             />
             </figure>
