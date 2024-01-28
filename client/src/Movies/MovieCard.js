@@ -14,7 +14,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
   }
 
   return (
-    <div className="group">
+    <div className="">
 
    <button class="hidden group-hover:block">Child</button>
     {/*<!-- Component: Basic image card --> */}
@@ -34,7 +34,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
         />
       </figure>
       {/*  <!-- Body--> */}
-      <div className="p-6">
+      <div className="p-6 group-hover:hidden">
         <header className="">
           <h3 className="text-xl font-medium text-black">
             {title}

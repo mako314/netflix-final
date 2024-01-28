@@ -9,7 +9,7 @@ function MovieCollection ({moviesData}){
 
     const mappedMovieCards = moviesData?.map((movie) => {
         return (
-        <div key={movie.id} className="p-2 md:w-1/4"> {/* Each item takes up 1/4th of the width */} 
+        <div key={movie.id} className="p-2 md:w-1/4 group"> {/* Each item takes up 1/4th of the width */} 
         <MovieCard
         movieId={movie.id}
         thumbnail={movie.thumbnail}

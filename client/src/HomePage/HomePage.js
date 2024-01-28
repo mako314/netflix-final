@@ -14,6 +14,7 @@ function HomePage({moviesData, tvSeriesData}){
 
     let dramaMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("drama")))
     let actionMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("action")))
+    let musicalMoviesFiltered  = moviesData.filter((item => item.genres.toLowerCase().includes("music")))
     // let musicMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
     // console.log(moviesData)
 
@@ -117,6 +118,18 @@ function HomePage({moviesData, tvSeriesData}){
                         <MovieCollection moviesData={actionMoviesFiltered}/>
                     </div>
                 </div>
+
+                <div className="flex flex-col gap-3 mt-6">
+                    <div>
+                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Musicals</span>
+                    </div>
+                    <div>
+                        <MovieCollection moviesData={musicalMoviesFiltered}/>
+                    </div>
+                </div>
+
+
+                
 
             </div>
 
