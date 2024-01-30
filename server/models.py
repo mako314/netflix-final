@@ -210,15 +210,17 @@ class Favorite(db.Model, SerializerMixin):
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     tv_series_id = db.Column(db.Integer, db.ForeignKey('tv_series.id'))
+    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
 
     # Relationship
     # If there's an issue with the back_populates being favorites we'll get to that bridge when we get there
     movie = db.relationship('Movie', back_populates = 'favorites')
     user = db.relationship('User', back_populates = 'favorites')
     tv_series= db.relationship('TelevisionSeries', back_populates='favorites')
+    admin = db.relationship('Admin', back_populates='favorites')
 
     # Serialization Rules
-    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites',)
+    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites', '-admin.favorites',)
 
 
 

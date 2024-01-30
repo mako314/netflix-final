@@ -11,7 +11,6 @@ if __name__ == '__main__':
         User.query.delete()
         Movie.query.delete()
         TelevisionSeries.query.delete()
-        Admin.query.delete()
 
 #-------------------------------User Seeding-------------------------------
 
@@ -24,7 +23,6 @@ if __name__ == '__main__':
             email = 'admin@flickforge.com',
             phone = '',
             _password_hash = 'P@ssword123',
-            date_of_birth = datetime(2024 - 24, 11, 15),
             profile_image = '',
             movie_preferences = '',
             country = '',
