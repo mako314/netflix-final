@@ -1,6 +1,6 @@
 from config import app, db
 
-from models import User, Movie, Favorite, TelevisionSeries
+from models import User, Movie, Favorite, TelevisionSeries, Admin
 from datetime import datetime
 
 if __name__ == '__main__':
@@ -11,6 +11,38 @@ if __name__ == '__main__':
         User.query.delete()
         Movie.query.delete()
         TelevisionSeries.query.delete()
+        Admin.query.delete()
+
+#-------------------------------User Seeding-------------------------------
+
+        print("Seed Admins...")
+
+        admin_list = [
+            Admin(
+            first_name = 'Admin',
+            last_name = 'Istrator',
+            email = 'admin@flickforge.com',
+            phone = '',
+            _password_hash = 'P@ssword123',
+            date_of_birth = datetime(2024 - 24, 11, 15),
+            profile_image = '',
+            movie_preferences = '',
+            country = '',
+            state = '',
+            city = '',
+            address_line_1 = '',
+            address_line_2 = '',
+            postal_code = '',
+        )]
+
+        db.session.add_all(admin_list)
+
+        for admin in admin_list:
+            password = admin._password_hash
+            admin.password_hash = password
+            print(admin._password_hash)
+
+        db.session.commit()
 
 #-------------------------------User Seeding-------------------------------
 
