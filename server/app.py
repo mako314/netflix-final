@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from models import User, Movie, Favorite, TelevisionSeries
+from models import User, Movie, Favorite, TelevisionSeries, Admin
 
 from flask import Flask, request, make_response, jsonify, session
 from config import db, app, api
@@ -19,6 +19,7 @@ class Login(Resource):
         password = data['password']
 
         user = User.query.filter(User.email == email).first()
+        admin = Admin.query.filter(Admin.email == email).first()
 
         if user and user.authenticate(password):
             access_token = create_access_token(identity={'id': user.id, 'role': 'user'})
@@ -28,6 +29,20 @@ class Login(Resource):
                 "msg": "User login successful", 
                 "user": user_data,
                 "role": "user"
+            })))
+
+            set_access_cookies(response, access_token)
+
+            return response
+        
+        elif admin and admin.authenticate(password):
+            access_token = create_access_token(identity={'id': admin.id, 'role': 'admin'})
+            admin_data = admin.to_dict(rules=('-password_hash',))
+
+            response = make_response((jsonify({
+                'msg': 'Admin login successful',
+                'admin': admin_data,
+                'role': 'admin'
             })))
 
             set_access_cookies(response, access_token)
