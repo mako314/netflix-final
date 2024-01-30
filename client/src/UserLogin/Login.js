@@ -42,6 +42,19 @@ function Login(){
 
                         console.log(data.user);
                     }
+                    else if (data.role === 'admin') {
+                        console.log("An admin has logged in successfully");
+
+                        setCurrentUser(data.admin);
+                        setUserFavorites(data.admin.favorites);
+
+                        setLoginError({
+                            error: false,
+                            message: ""
+                        });
+
+                        console.log(data.admin);
+                    }
                 })
             } 
             else {
@@ -99,6 +112,11 @@ function Login(){
                         <h1>
                             {`Welcome ${currentUser.first_name} ${currentUser.last_name}!`}
                         </h1>
+                    </>
+                }
+                {
+                    userFavorites.movie &&
+                    <>
                         <h1>
                             {`Your favorites: ${userFavorites[0].movie.title} and ${userFavorites[1].movie.title}`}
                         </h1>
