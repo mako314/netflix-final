@@ -99,6 +99,18 @@ class CheckSession(Resource):
             else:
                 return make_response({'message': 'User not found'}, 404)
             
+        elif identity_role == 'admin':
+            admin = Admin.query.get(identity_id)
+
+            if admin:
+                return make_response({
+                    'role': identity_role,
+                    'details': admin.to_dict(rules=('-password_hash',))
+                }, 200)
+            else:
+                return make_response({'message': 'Admin not found'}, 404)
+        
+            
         return make_response({'message': 'Invalid session or role'}, 401)
 
 api.add_resource(CheckSession, '/check_session')
