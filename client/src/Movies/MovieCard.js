@@ -46,24 +46,27 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
   }
 
   return (
-    <>
+    <div className="">
+
+   <button class="hidden group-hover:block">Child</button>
     {/*<!-- Component: Basic image card --> */}
     {/* MT TOP BOTTOM */}
-      <> 
-      <div 
-      className="overflow-hidden rounded bg-gray-400 text-slate-500 shadow-xl shadow-slate-200 mt-4 ml-4"
-      onClick={handleMovieNav}
-      >
+
+    {/* w-2/3 hover:w-full */}
+  <div 
+  className="overflow-hidden rounded text-slate-500 mt-4 ml-4 cursor-pointer hover:h-180"
+  onClick={handleMovieNav}
+  >
         {/*  <!--  Image --> */}
       <figure>
         <img
           src={thumbnail}
           alt="card image"
-          className="h-48 w-full object-contain" 
+          className="h-48 w-full object-contain group-hover:hidden" 
         />
       </figure>
       {/*  <!-- Body--> */}
-      <div className="p-6">
+      <div className="p-6 group-hover:hidden">
         <header className="">
           <h3 className="text-xl font-medium text-black">
             {title}
@@ -73,17 +76,11 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
 
       </div>
     </div>
-    <button 
-        className="py-4 px-4 border-2 border-red-600 border-b-gray-300"
-        onClick={handleMovieDelete}
-        >
-        DELETE
-  </button>
 
-    </>
+    
 
     {/*<!-- End Basic image card --> */}
-    </>
+    </div>
   )
 }
 

@@ -154,32 +154,24 @@ function App() {
   // }
 
   return (
-    <ApiProvider> 
-    <> 
-    <Navbar />
+
+
     <div className="flex">
+      <Navbar />
     
-    <div className='flex-grow p-4'>
-      <h2 className="text-2xl font-bold">
-        The current user's data: 
-      </h2>
-      {/* <MovieCollection moviesData={moviesData} /> */}
-      {/* <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
-      </div>
-    </div>
-      
-      
+
+      {/* <MovieCollection moviesData={moviesData} />
+      <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
+
       <Routes>
-      <Route path='/' element={<HomePage moviesData={moviesData}/>} />
-        <Route path='/movies' element={<MovieCollection moviesData={moviesData} handleDeleteAsync={handleDeleteAsync}/>} />
+      <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
+        <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
       </Routes>
 
-    </>
-
-    </ApiProvider>
+    </div>
 
   )
 }
