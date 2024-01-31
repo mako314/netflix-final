@@ -6,15 +6,12 @@ import MovieCollection from "../Movies/MovieCollection";
 function HomePage({moviesData}){
 
     return(
-        <>
-        <p> Home Page</p>
-        <div> 
+        <div className='flex-grow p-4'>
+        <p> Home Page </p>
+        <div className='flex-grow p-4'> 
         <MovieCollection moviesData={moviesData}/>
-        <div>
-            hold tv series
         </div>
         </div>
-        </>
     )
 }
 
