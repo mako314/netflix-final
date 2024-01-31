@@ -1,14 +1,18 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieCollection ({moviesData}){
+function MovieCollection ({moviesData, handleDeleteAsync}){
 
     console.log("the data:", moviesData)
-    console.log("MOVIE COLLECTIONS PAGE")
+    console.log("the data type:", typeof(moviesData))
+    // console.log("MOVIE COLLECTIONS PAGE")
+    console.log("INSIDE MOVIE COLLECTION:", handleDeleteAsync)
+
+    // Consider image sizing, try to stick with 000x000 or whatever is decided
 
     const mappedMovieCards = moviesData?.map((movie) => {
         return (
-        <div key={movie.id} className="p-2 md:w-1/4"> {/* Each item takes up 1/4th of the width */} 
+        <div key={movie.id} className="p-2 md:w-1/4 group"> {/* Each item takes up 1/4th of the width */} 
         <MovieCard
         movieId={movie.id}
         thumbnail={movie.thumbnail}
@@ -17,16 +21,17 @@ function MovieCollection ({moviesData}){
         year_of_release={movie.year_of_release}
         run_time={movie.run_time}
         fullMovie={movie}
+        handleDeleteAsync={handleDeleteAsync}
         />
         </div>
         )
     })
 
     return(
-    <div>
-    <h1 className="text-3xl font-bold underline">
-    Movie Collection Page
-    </h1>
+        <div>
+    {/* <h1 className="text-3xl font-bold underline ml-4">
+    Movies
+    </h1> */}
     <div className="flex flex-wrap -m-2"> 
     {mappedMovieCards}
     </div>

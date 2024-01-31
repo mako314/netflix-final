@@ -137,25 +137,36 @@ function App() {
   console.log("THE FAVORITE DATA STATE:", favoritesData)
   console.log("THE TV SERIES DATA STATE:", tvSeriesData)
 
+  const handleDeleteAsync = (movieID) => {
+    const movieToBeDeleted = moviesData.filter(item => item.id !== movieID)
+
+    console.log("THE MOVE THATS GOING TO BE DELETED", movieToBeDeleted)
+
+    setMoviesData(movieToBeDeleted)
+  }
+
+  // function handleDeleteFilter(movieID) {
+  //   const newMovieArray = moviesData.map(item => item.filter((item) => item.id !== movieID))
+
+  //   console.log("The new movies:", newMovieArray)
+
+  //   // const data = moviesData.filter((item) => item.id == movieID).map((item) => item);
+  //   // console.log(data);
+
+  // }
+
   return (
-    <ApiProvider> 
-    <> 
-    <Navbar />
+
+
     <div className="flex">
+      <Navbar />
     
-    <div className='flex-grow p-4'>
-      <h2 className="text-2xl font-bold">
-        The current user's data: 
-      </h2>
-      {/* <MovieCollection moviesData={moviesData} /> */}
-      {/* <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
-      { <Login />}
-      </div>
-    </div>
-      
-      
+
+      {/* <MovieCollection moviesData={moviesData} />
+      <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
+
       <Routes>
-      <Route path='/' element={<HomePage moviesData={moviesData}/>} />
+      <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
         <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
@@ -163,9 +174,7 @@ function App() {
         <Route path='/login' element={<Login />} />
       </Routes>
 
-    </>
-
-    </ApiProvider>
+    </div>
 
   )
 }
