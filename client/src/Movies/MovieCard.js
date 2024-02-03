@@ -3,11 +3,13 @@ import { useNavigate} from 'react-router-dom';
 import YoutubeEmbed from "../YouTubeEmbedds/YouTubeEmbedd";
 import ApiUrlContext from "../Api";
 
-function MovieCard({thumbnail, title, director, year_of_release, run_time, movieId, fullMovie, handleDeleteAsync}) {
+function MovieCard({thumbnail, title, director, year_of_release, run_time, movieId, trailerLink, fullMovie, handleDeleteAsync}) {
   
   const navigate = useNavigate()
   const apiUrl = useContext(ApiUrlContext)
   const [isHovered, setIsHovered] = useState(false);
+
+  console.log("TRAILER LINK:", trailerLink)
 
   console.log("INSIDE OF THE MOVIE CARD:", handleDeleteAsync)
   // const handleMovieNav = () => {
@@ -58,7 +60,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
       className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg ${isHovered ? hoverWidth : baseWidth}`}
       onClick={handleMovieNav}
     >
-      {isHovered ? <YoutubeEmbed embedId={"5xH0HfJHsaY?si=dqoHoN23KAHuz3ef"}/> :
+      {isHovered ? <YoutubeEmbed embedId={trailerLink}/> :
       <> 
       <figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
         <img

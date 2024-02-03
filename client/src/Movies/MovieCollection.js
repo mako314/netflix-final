@@ -14,6 +14,7 @@ function MovieCollection({ moviesData, handleDeleteAsync }) {
           director={movie.director}
           year_of_release={movie.year_of_release}
           run_time={movie.run_time}
+          trailerLink={movie.trailer}
           fullMovie={movie}
           handleDeleteAsync={handleDeleteAsync}
         />
