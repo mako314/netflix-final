@@ -6,9 +6,10 @@ export const CurrentUserContext = () => useContext(UserContext);
 
 export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState([]);
+    const [currentUserRole, setCurrentUserRole]= useState("");
 
     return (
-        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <UserContext.Provider value={{ currentUser, setCurrentUser, currentUserRole, setCurrentUserRole }}>
             {children}
         </UserContext.Provider>
     )
