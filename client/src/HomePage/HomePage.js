@@ -54,11 +54,6 @@ function HomePage({moviesData, tvSeriesData}){
                 </div>
             </div>
 
-            {/* <div className="mt-3 mx-auto sm:max-w-lg lg:max-w-none lg:w-96 lg:ml-10 xl:ml-16 max-w-md">
-                <img src="https://placehold.co/500x500" alt="Placeholder image showing streaming interface displayed on tablet."
-                    className="object-cover w-full h-full"/>
-            </div> */}
-
             </div>
 
             <div className="bg-white items-center justify-center text-gray-800 flex flex-col mt-8"> 
@@ -102,7 +97,7 @@ function HomePage({moviesData, tvSeriesData}){
                     return (
                         <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
-                        <MovieCollection moviesData={filteredMovies}/>
+                        <MovieCollection moviesData={filteredMovies} marginLeft={0}/>
                         </div>
                     )
                     })}
