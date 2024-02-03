@@ -1,6 +1,6 @@
 import './App.css';
-import { useState, useEffect } from 'react';
-import {Route, Routes } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 // ----- HomePage Imports -----
 import HomePage from './HomePage/HomePage';
@@ -17,7 +17,8 @@ import Navbar from './NavbarAndFooter/Navbar';
 import TVSeriesCollection from './TV_Series/TVSeriesCollection';
 import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
 
-import {ApiProvider} from './Api';
+import { ApiProvider } from './Api';
+import { CurrentUserProvider } from './UserLogin/UserContext';
 
 import Login from './UserLogin/Login'
 
@@ -157,24 +158,24 @@ function App() {
 
   return (
 
+    <CurrentUserProvider>
+        <div className="flex">
+        <Navbar />
+      
+        {/* <MovieCollection moviesData={moviesData} />
+        <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
 
-    <div className="flex">
-      <Navbar />
-    
+        <Routes>
+        <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
+          <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
+          <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
+          <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
+          <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
 
-      {/* <MovieCollection moviesData={moviesData} />
-      <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
-
-      <Routes>
-      <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
-        <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
-        <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
-        <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
-        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
-        <Route path='/login' element={<Login />} />
-      </Routes>
-
-    </div>
+      </div>
+    </CurrentUserProvider>
 
   )
 }

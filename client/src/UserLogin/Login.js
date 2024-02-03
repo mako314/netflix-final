@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react";
+import { CurrentUserContext } from './UserContext';
 
 function Login(){
 
-    const [currentUser, setCurrentUser] = useState([]);
+    const { currentUser, setCurrentUser } = CurrentUserContext(); 
     const [userFavorites, setUserFavorites] = useState([]);
+    
     const [loginError, setLoginError] = useState({
         error: false,
         message: ""
@@ -114,6 +116,7 @@ function Login(){
                         </h1>
                     </>
                 }
+             
                 {
                     userFavorites.movie &&
                     <>
