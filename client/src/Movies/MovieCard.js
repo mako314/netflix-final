@@ -1,18 +1,20 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { useNavigate} from 'react-router-dom';
+import YoutubeEmbed from "../YouTubeEmbedds/YouTubeEmbedd";
 import ApiUrlContext from "../Api";
 
 function MovieCard({thumbnail, title, director, year_of_release, run_time, movieId, fullMovie, handleDeleteAsync}) {
   
   const navigate = useNavigate()
   const apiUrl = useContext(ApiUrlContext)
-
+  const [isHovered, setIsHovered] = useState(false);
 
   console.log("INSIDE OF THE MOVIE CARD:", handleDeleteAsync)
   // const handleMovieNav = () => {
   //   navigate(`/movie/${movieId}`)
   // }
 
+  // 5xH0HfJHsaY?si=dqoHoN23KAHuz3ef
 
   const handleMovieDelete = () => {
     fetch(`${apiUrl}movies/${movieId}`, {
@@ -45,43 +47,37 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
     navigate(`/movie/${movieId}`, { state: { fullMovie } })
   }
 
+  // Define a base width for the card, adjust this as needed
+  const baseWidth = "w-1/4"; // Starting at 1/4 of the width of the flex container
+  const hoverWidth = "w-1/3"; // Expanding to 1/3 of the width of the flex container on hover
+
   return (
-    <div className="">
-
-   <button class="hidden group-hover:block">Child</button>
-    {/*<!-- Component: Basic image card --> */}
-    {/* MT TOP BOTTOM */}
-
-    {/* w-2/3 hover:w-full */}
-  <div 
-  className="overflow-hidden rounded text-slate-500 mt-4 ml-4 cursor-pointer hover:h-180"
-  onClick={handleMovieNav}
-  >
-        {/*  <!--  Image --> */}
-      <figure>
+    <div 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg ${isHovered ? hoverWidth : baseWidth}`}
+      onClick={handleMovieNav}
+    >
+      {isHovered ? <YoutubeEmbed embedId={"5xH0HfJHsaY?si=dqoHoN23KAHuz3ef"}/> :
+      <> 
+      <figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
         <img
           src={thumbnail}
           alt="card image"
-          className="h-48 w-full object-contain group-hover:hidden" 
+          className="w-full h-full object-cover group-hover:opacity-90"
         />
       </figure>
-      {/*  <!-- Body--> */}
-      <div className="p-6 group-hover:hidden">
-        <header className="">
-          <h3 className="text-xl font-medium text-black">
-            {title}
-          </h3>
-          <p className="text-sm text-black">By {director}, {year_of_release}, {run_time}</p>
-        </header>
-
+      <div className="p-4">
+        <h3 className="text-xl font-medium text-black truncate">
+          {title}
+        </h3>
+        <p className="text-sm text-black">
+          By {director}, {year_of_release}, {run_time}
+        </p>
       </div>
+      </>}
     </div>
-
-    
-
-    {/*<!-- End Basic image card --> */}
-    </div>
-  )
+  );
 }
 
 export default MovieCard;

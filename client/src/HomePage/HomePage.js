@@ -7,18 +7,21 @@ import TVSeriesCollection from "../TV_Series/TVSeriesCollection";
 function HomePage({moviesData, tvSeriesData}){
 
 
-    let comedyMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
+    // let comedyMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
     // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Drama</span>
     // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Action</span>
     // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Music</span>
-
-    let dramaMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("drama")))
-    let actionMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("action")))
-    let musicalMoviesFiltered  = moviesData.filter((item => item.genres.toLowerCase().includes("music")))
+    // let dramaMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("drama")))
+    // let actionMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("action")))
+    // let musicalMoviesFiltered  = moviesData.filter((item => item.genres.toLowerCase().includes("music")))
     // let musicMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
     // console.log(moviesData)
 
-    console.log("The Filtered Comedy Movies:", comedyMoviesFiltered)
+
+
+    // console.log("The Filtered Comedy Movies:", comedyMoviesFiltered)
+
+    const genres = ['comedy', 'drama', 'action', 'music']
 
 
 
@@ -92,40 +95,17 @@ function HomePage({moviesData, tvSeriesData}){
             </div> */}
 
             <div className="mb-6 px-4 rounded-lg">
-                <div className="flex flex-col gap-3">
-                    <div>
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Comedy</span>
-                    </div>
-                    <div>
-                        <MovieCollection moviesData={comedyMoviesFiltered}/>
-                    </div>
-                </div>
 
-                <div className="flex flex-col gap-3 mt-6">
-                    <div>
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Drama</span>
-                    </div>
-                    <div>
-                        <MovieCollection moviesData={dramaMoviesFiltered}/>
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-3 mt-6">
-                    <div>
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Action</span>
-                    </div>
-                    <div>
-                        <MovieCollection moviesData={actionMoviesFiltered}/>
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-3 mt-6">
-                    <div>
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Musicals</span>
-                    </div>
-                    <div>
-                        <MovieCollection moviesData={musicalMoviesFiltered}/>
-                    </div>
+            <div className="">
+                    {genres.map(genre => {
+                    const filteredMovies = moviesData.filter(movie => movie.genres.toLowerCase().includes(genre));
+                    return (
+                        <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
+                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
+                        <MovieCollection moviesData={filteredMovies}/>
+                        </div>
+                    )
+                    })}
                 </div>
 
 
