@@ -71,3 +71,5 @@ export default TVSeriesDisplay;
     </div>
   </div>
 </div> */}
+
+// Next just have to work on display pages and really that's it. Will be researching this sunday best way to view video content on ract similar to netflix / paramount / hulu
