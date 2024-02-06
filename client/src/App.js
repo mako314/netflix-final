@@ -20,8 +20,12 @@ import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
 import { ApiProvider } from './Api';
 import { CurrentUserProvider } from './UserLogin/UserContext';
 
+// ----- Login Page Imports -----
+
 import Login from './UserLogin/Login'
 
+// ----- Admin Imports -----
+import AdminDashboard from './Admin/AdminDashboard';
 
 // useNavigate
 function App() {
