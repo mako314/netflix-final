@@ -66,7 +66,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
         <img
           src={thumbnail}
           alt="card image"
-          className="w-full h-full object-cover group-hover:opacity-90"
+          className="w-full h-full object-contain group-hover:opacity-90"
         />
       </figure>
       <div className="p-4">

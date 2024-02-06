@@ -1,10 +1,10 @@
 import React from "react";
 import TVSeriesCard from "./TVSeriesCard";
 
-function TVSeriesCollection ({tvSeriesData}){
-
+function TVSeriesCollection ({tvSeriesData, marginLeft}){
+    const mainDivStyle = marginLeft === 0 ? "flex flex-wrap gap-8 justify-start mt-4" :"flex flex-wrap gap-8 justify-start mt-4 ml-8"
     return (
-        <div className="flex flex-wrap gap-8 justify-start mt-4">
+        <div className={mainDivStyle}>
             {tvSeriesData.map((tvSeries) => (
             <TVSeriesCard
                 key={tvSeries.id}

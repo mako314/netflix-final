@@ -13,18 +13,22 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
 
     
     // Define a base width for the card, adjust this as needed
-    const baseWidth = "w-1/4"; // Starting at 1/4 of the width of the flex container
-    const hoverWidth = "w-1/3"; // Expanding to 1/3 of the width of the flex container on hover
+    const baseWidth = "w-1/4" // starting width
+    const hoverWidth = "w-1/3" // Width on hover
+    const minHeight = "h-64" // Minimum height to prevent shrinking too much
   
     return (
       <div 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg ${isHovered ? hoverWidth : baseWidth}`}
-      // onClick={handleMovieNav}
-    >
-      {isHovered ? <YoutubeEmbed embedId={trailerLink}/> :
-      <> 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 ${isHovered ? hoverWidth : baseWidth} ${minHeight}`}
+      >
+      {isHovered && (
+        <div className="youtube-embed-container" style={{ width: '100%', height: '0', paddingBottom: '56.25%' }}>
+          <YoutubeEmbed embedId={trailerLink} />
+        </div>
+      )}
+      <div onClick={handleTVSeriesNav}> 
       <figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
         <img
           src={thumbnail}
@@ -40,7 +44,7 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
           By {director}, {year_of_release}, Number of seasons: {seasons}, Number of episodes: {episode_count}
         </p>
       </div>
-      </>}
+      </div>
     </div>
     )
   }

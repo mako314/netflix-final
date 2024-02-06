@@ -38,3 +38,5 @@ api = Api(app)
 bcrypt = Bcrypt(app) # allows for encryption/hashing
 
 CORS(app)
+
+# export DATABASE_URI=sqlite:///app.db
