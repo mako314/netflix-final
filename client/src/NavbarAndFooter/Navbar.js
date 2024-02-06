@@ -1,7 +1,11 @@
 import React from "react";
 import { Link, useNavigate} from 'react-router-dom';
+import { CurrentUserContext } from '../UserLogin/UserContext'
+
 
 function Navbar(){
+
+    const { currentUser, currentUserRole } = CurrentUserContext(); 
 
     const navigate = useNavigate();
 
@@ -29,6 +33,14 @@ function Navbar(){
                         {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
                     </a>
                 </li>
+
+                { currentUserRole === 'admin' &&
+                    <li className="px-5 py-3 hover:bg-red-800">
+                        <Link to={'/admin'} className="flex items-center">
+                            Admin Dashboard
+                        </Link>
+                    </li>
+                }
             </ul>
         </div>
     </nav>
