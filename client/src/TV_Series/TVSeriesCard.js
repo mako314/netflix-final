@@ -25,7 +25,7 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       >
       {isHovered && (
         <div className="youtube-embed-container" style={{ width: '100%', height: '0', paddingBottom: '56.25%' }}>
-          <YoutubeEmbed embedId={trailerLink} />
+          <YoutubeEmbed embedId={trailerLink} whereRendered={"TVSeries"}/>
         </div>
       )}
       <div onClick={handleTVSeriesNav}> 
