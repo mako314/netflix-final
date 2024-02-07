@@ -55,7 +55,7 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
           </>
         )}
       </div>
-    );
+    )
   }
   
   export default TVSeriesCard;

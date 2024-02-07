@@ -115,10 +115,7 @@ function HomePage({moviesData, tvSeriesData}){
                     })}
             </div>
 
-
-
-                
-
+            
             </div>
 
 

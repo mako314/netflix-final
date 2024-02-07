@@ -1,5 +1,6 @@
 import React from "react";
 import TVSeriesCard from "./TVSeriesCard";
+import TVSeriesCarousel from "./TVSeriesCarousel";
 
 function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
@@ -29,12 +30,12 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
     // Self explanatory, for user actions.
     // Buttons for admin also? 
 
+  
+    const mainDivStyle = marginLeft === 0 ? "flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4" :"flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4 ml-8"
 
-
-    const mainDivStyle = marginLeft === 0 ? "flex flex-wrap gap-8 justify-start mt-4" :"flex flex-wrap gap-8 justify-start mt-4 ml-8"
     return (
         <div className={mainDivStyle}>
-            {tvSeriesData.map((tvSeries) => (
+            {tvSeriesData?.map((tvSeries) => (
             <TVSeriesCard
                 key={tvSeries.id}
                 tvSeriesID={tvSeries.id}
