@@ -3,6 +3,8 @@ import TVSeriesCard from "./TVSeriesCard";
 
 function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
+    // Would collection be thrown into the carousel? and multiple carousels for a collection in a sense?
+
     // Few things to implement for tomorrow: 
     // Break this down even further, currently we have TVSeriesCollection map over for TVSeriesCard
     // TV Series Card should have Lazy Loading,
