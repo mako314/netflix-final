@@ -17,9 +17,9 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
     // const hoverWidth = "w-1/3" // Width on hover
     // const minHeight = "h-64" // Minimum height to prevent shrinking too much
 
-    const baseWidth = "w-1/6"; // Base width for 6 cards per row
+    const baseWidth = "w-1/8"; // Adjust this to fit 8 cards per row
+    const minHeight = "h-64"; // Minimum height to prevent shrinking too much
     const hoverWidth = "lg:w-1/4"; // Larger width on hover for large screens
-    const minHeight = "h-64"; // Minimum height
       
     return (
       <div
@@ -29,7 +29,7 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       >
         {isHovered ? (
           // Show this div only when hovered
-          <div className="youtube-embed-container" style={{ width: '100%', height: '0', paddingBottom: '56.25%' }}>
+          <div className="youtube-embed-container" style={{ width: '500%', height: '0', paddingBottom: '56.25%' }}>
             <YoutubeEmbed embedId={trailerLink} whereRendered={"TVSeries"}/>
           </div>
         ) : (

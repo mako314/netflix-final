@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useRef} from "react";
 import TVSeriesCard from "./TVSeriesCard";
 import TVSeriesCarousel from "./TVSeriesCarousel";
 
 function TVSeriesCollection ({tvSeriesData, marginLeft}){
+
+    //https://react.dev/reference/react/useRef
+
+    const collectionRef  = useRef(null)
 
     // Would collection be thrown into the carousel? and multiple carousels for a collection in a sense?
 
@@ -30,12 +34,42 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
     // Self explanatory, for user actions.
     // Buttons for admin also? 
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
   
-    const mainDivStyle = marginLeft === 0 ? "flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4" :"flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4 ml-8"
+    // const mainDivStyle = marginLeft === 0 ? "flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4" :"flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4 ml-8"
+
+    const cardContainerStyle  = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4" : "justify-start mt-4 ml-8 gap-4"}`;
+
+
+    // // Function to scroll the carousel 
+    const scroll = (direction) => {
+        // Assume each card has a fixed width, here it's an example value in pixels
+        const scrollDistance = 200; 
+
+        if (collectionRef.current) {
+            const currentScroll = collectionRef.current.scrollLeft;
+            const newScroll = direction === 'left' ? currentScroll - scrollDistance : currentScroll + scrollDistance;
+            collectionRef.current.scrollLeft = newScroll;
+        }
+    }
+
+
+    
 
     return (
-        <div className={mainDivStyle}>
+        <div className="relative overflow-hidden">
+
+           <button
+            onClick={() => scroll('left')}
+            className="absolute left-0 z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 p-4" // Adjust padding to change size
+            style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
+            >
+            {"<"}
+            </button>
+
+            <div ref={collectionRef} className={cardContainerStyle}> 
             {tvSeriesData?.map((tvSeries) => (
+            
             <TVSeriesCard
                 key={tvSeries.id}
                 tvSeriesID={tvSeries.id}
@@ -48,7 +82,23 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 trailerLink={tvSeries.trailer}
                 fullTVSeries={tvSeries}
             />
+            
         ))}
+        </div>
+            <button
+            onClick={() => scroll('right')}
+            className="absolute right-0 z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 p-4" // Adjust padding to change size
+            style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
+            >
+            {">"}
+            </button>
+            <style>
+                {`
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                `}
+            </style>
         </div>
         
 )
