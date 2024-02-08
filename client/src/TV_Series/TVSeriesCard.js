@@ -11,13 +11,20 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       navigate(`/tv-series/${tvSeriesID}`, { state: { fullTVSeries } })
     }
 
+    const gapWidth = 16; // The gap between cards in pixels
+    const totalGapWidth = gapWidth * 6; // Total gaps width
+    // const cardWidth = `calc((100vw - ${totalGapWidth}px) / 7)`; // Subtract the total gaps width from the viewport width and divide by 7
+
+    const cardWidth = `calc((100vw - (7 * ${gapWidth}px)) / 6)`;
+
+
 
     return (
       <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className={`transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto mx-2`}
-            style={{ width: 'calc(100% / 12)' }} // Adjusting for 7 cards worth of space to account for margin
+            style={{ width: cardWidth }} // Updated width calculation
             onClick={handleTVSeriesNav}
         >
           {isHovered ? (

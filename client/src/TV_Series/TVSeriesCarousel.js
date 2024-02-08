@@ -27,7 +27,7 @@ function TVSeriesCarousel({ tvSeriesData }) {
                 const filteredMovies = tvSeriesData.filter(movie => movie.genres.toLowerCase().includes(genre));
                 return (
                     <div key={genre}>
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">
+                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4 ml-4">
                             {genre.toUpperCase()}
                         </span>
                         <TVSeriesCollection

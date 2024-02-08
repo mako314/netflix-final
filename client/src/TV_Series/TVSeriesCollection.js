@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import TVSeriesCard from "./TVSeriesCard";
 import TVSeriesCarousel from "./TVSeriesCarousel";
 
@@ -7,6 +7,24 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
     //https://react.dev/reference/react/useRef
 
     const collectionRef  = useRef(null)
+
+    // const [showRightArrow, setShowRightArrow] = useState(true)
+
+    // useEffect(() => {
+    //     const checkIfArrowNeeded = () => {
+    //     if (collectionRef.current) {
+    //         const { scrollWidth, clientWidth } = collectionRef.current
+    //         // Show the arrow only if there is enough content to scroll
+    //         setShowRightArrow(scrollWidth > clientWidth)
+    //     }
+    //     };
+
+    //     // Call it on mount and window resize
+    //     window.addEventListener('resize', checkIfArrowNeeded)
+    //     checkIfArrowNeeded()
+
+    //     return () => window.removeEventListener('resize', checkIfArrowNeeded)
+    // }, [])
 
 
     const cardContainerStyle  = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4" : "justify-start mt-4 ml-8 gap-4"}`;
@@ -24,13 +42,19 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
         }
     }
 
-// Calculate the total width of 8 cards, including the gap between them
-const cardWidth = 195; // The width of one card
-const gapWidth = 16; // The gap between cards
-const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth; // Total width of 8 cards and 7 gaps
+    // Calculate the total width of 8 cards, including the gap between them
+    const cardWidth = 198; // The width of one card
+    const gapWidth = 16; // The gap between cards
+    const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth; // Total width of 8 cards and 7 gaps
+
+    const containerStyle = {
+        width: '100vw', // Or '100%' if it's based on the parent's width
+        overflowX: 'hidden', // Hide the horizontal scrollbar
+        margin: '0 8px',
+    }
 
     return (
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden" style={containerStyle}>
 
            <button
             onClick={() => scroll('left')}
@@ -60,7 +84,7 @@ const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth; // Total 
         </div>
         <button
         onClick={() => scroll('right')}
-        className="absolute z-30 cursor-pointer bg-black text-white hover:bg-opacity-80"
+        className="absolute z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 mr-4"
             style={{
                 top: '50%',
                 transform: 'translateY(-50%) translateX(-100%)', // This adjusts for the size of the button itself
