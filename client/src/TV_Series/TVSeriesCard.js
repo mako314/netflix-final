@@ -11,11 +11,17 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       navigate(`/tv-series/${tvSeriesID}`, { state: { fullTVSeries } })
     }
 
-    const gapWidth = 16; // The gap between cards in pixels
-    const totalGapWidth = gapWidth * 6; // Total gaps width
-    // const cardWidth = `calc((100vw - ${totalGapWidth}px) / 7)`; // Subtract the total gaps width from the viewport width and divide by 7
+    // const gapWidth = 16; // The gap between cards in pixels
+    // const totalGapWidth = gapWidth * 6; // Total gaps width
+    // // const cardWidth = `calc((100vw - ${totalGapWidth}px) / 7)`; // Subtract the total gaps width from the viewport width and divide by 7
 
-    const cardWidth = `calc((100vw - (7 * ${gapWidth}px)) / 6)`;
+    // const cardWidth = `calc((100vw - (7 * ${gapWidth}px)) / 6)`;
+
+    const viewportWidth = window.innerWidth; // or a fixed width if your container has one
+    const numberOfCards = 7;
+    const gapBetweenCards = 16; // Adjust the gap width as needed
+    const totalGapSpace = gapBetweenCards * (numberOfCards - 1);
+    const cardWidth = (viewportWidth - totalGapSpace) / numberOfCards;
 
 
 

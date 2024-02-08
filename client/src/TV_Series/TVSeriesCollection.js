@@ -27,13 +27,14 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
     // }, [])
 
 
-    const cardContainerStyle  = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4" : "justify-start mt-4 ml-8 gap-4"}`;
+    // const cardContainerStyle  = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4" : "justify-start mt-4 ml-8 gap-4"}`;
 
+    const cardContainerStyle = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4 pr-[calc(198px+16px)]" : "justify-start mt-4 ml-8 pr-[calc(198px+16px)] gap-4"}`;
 
     // // Function to scroll the carousel 
     const scroll = (direction) => {
         // Assume each card has a fixed width, here it's an example value in pixels
-        const scrollDistance = 200; 
+        const scrollDistance = 600; 
 
         if (collectionRef.current) {
             const currentScroll = collectionRef.current.scrollLeft;
@@ -58,7 +59,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
            <button
             onClick={() => scroll('left')}
-            className="absolute left-0 z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 p-4" // Adjust padding to change size
+            className="absolute left-0 top-1/2 z-30 cursor-pointer bg-black bg-opacity-50 text-white p-2 -translate-y-1/2 hover:bg-opacity-70" // Adjust padding to change size
             style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
             >
             {"<"}
@@ -84,12 +85,10 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
         </div>
         <button
         onClick={() => scroll('right')}
-        className="absolute z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 mr-4"
+        className="absolute left-0 top-1/2 z-30 cursor-pointer bg-black bg-opacity-50 text-white p-2 -translate-y-1/2 hover:bg-opacity-70"
             style={{
                 top: '50%',
                 transform: 'translateY(-50%) translateX(-100%)', // This adjusts for the size of the button itself
-                width: '50px', // Set a fixed width for the arrow button
-                height: '50px', // Set a fixed height for the arrow button
                 left: `${totalWidthOfVisibleArea}px`, // Position it at the end of the visible area
             }}
         >
