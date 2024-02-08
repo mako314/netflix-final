@@ -22,7 +22,7 @@ function TVSeriesCarousel({ tvSeriesData }) {
     };
 
     return (
-        <div className="flex flex-wrap gap-8 justify-start mt-4">
+        <div className="relative max-w-full mx-auto overflow-hidden flex flex-wrap gap-8 justify-start mt-4">
             {genres.map(genre => {
                 const filteredMovies = tvSeriesData.filter(movie => movie.genres.toLowerCase().includes(genre));
                 return (

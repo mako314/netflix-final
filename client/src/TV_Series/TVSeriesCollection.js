@@ -8,6 +8,87 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
     const collectionRef  = useRef(null)
 
+
+    const cardContainerStyle  = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4" : "justify-start mt-4 ml-8 gap-4"}`;
+
+
+    // // Function to scroll the carousel 
+    const scroll = (direction) => {
+        // Assume each card has a fixed width, here it's an example value in pixels
+        const scrollDistance = 200; 
+
+        if (collectionRef.current) {
+            const currentScroll = collectionRef.current.scrollLeft;
+            const newScroll = direction === 'left' ? currentScroll - scrollDistance : currentScroll + scrollDistance;
+            collectionRef.current.scrollLeft = newScroll;
+        }
+    }
+
+// Calculate the total width of 8 cards, including the gap between them
+const cardWidth = 195; // The width of one card
+const gapWidth = 16; // The gap between cards
+const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth; // Total width of 8 cards and 7 gaps
+
+    return (
+        <div className="relative overflow-hidden">
+
+           <button
+            onClick={() => scroll('left')}
+            className="absolute left-0 z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 p-4" // Adjust padding to change size
+            style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
+            >
+            {"<"}
+            </button>
+
+            <div ref={collectionRef} className={cardContainerStyle}> 
+            {tvSeriesData?.map((tvSeries) => (
+            
+            <TVSeriesCard
+                key={tvSeries.id}
+                tvSeriesID={tvSeries.id}
+                thumbnail={tvSeries.thumbnail}
+                title={tvSeries.title}
+                director={tvSeries.director}
+                year_of_release={tvSeries.year_of_release}
+                seasons={tvSeries.seasons}
+                episode_count={tvSeries.episode_count}
+                trailerLink={tvSeries.trailer}
+                fullTVSeries={tvSeries}
+            />
+            
+        ))}
+        </div>
+        <button
+        onClick={() => scroll('right')}
+        className="absolute z-30 cursor-pointer bg-black text-white hover:bg-opacity-80"
+            style={{
+                top: '50%',
+                transform: 'translateY(-50%) translateX(-100%)', // This adjusts for the size of the button itself
+                width: '50px', // Set a fixed width for the arrow button
+                height: '50px', // Set a fixed height for the arrow button
+                left: `${totalWidthOfVisibleArea}px`, // Position it at the end of the visible area
+            }}
+        >
+            {">"}
+        </button>
+            <style>
+                {`
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                `}
+            </style>
+        </div>
+        
+)
+}
+
+export default TVSeriesCollection
+
+
+
+
+
     // Would collection be thrown into the carousel? and multiple carousels for a collection in a sense?
 
     // Few things to implement for tomorrow: 
@@ -37,67 +118,3 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
     //------------------------------------------------------------------------------------------------------------------------------------------------------------
   
     // const mainDivStyle = marginLeft === 0 ? "flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4" :"flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4 ml-8"
-
-    const cardContainerStyle  = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4" : "justify-start mt-4 ml-8 gap-4"}`;
-
-
-    // // Function to scroll the carousel 
-    const scroll = (direction) => {
-        // Assume each card has a fixed width, here it's an example value in pixels
-        const scrollDistance = 200; 
-
-        if (collectionRef.current) {
-            const currentScroll = collectionRef.current.scrollLeft;
-            const newScroll = direction === 'left' ? currentScroll - scrollDistance : currentScroll + scrollDistance;
-            collectionRef.current.scrollLeft = newScroll;
-        }
-    }
-
-
-    
-
-    return (
-        <div className="relative overflow-hidden">
-
-           <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 p-4" // Adjust padding to change size
-            style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
-            >
-            {"<"}
-            </button>
-
-            <div ref={collectionRef} className={cardContainerStyle}> 
-            {tvSeriesData?.map((tvSeries) => (
-            <TVSeriesCard
-                key={tvSeries.id}
-                tvSeriesID={tvSeries.id}
-                thumbnail={tvSeries.thumbnail}
-                title={tvSeries.title}
-                director={tvSeries.director}
-                year_of_release={tvSeries.year_of_release}
-                seasons={tvSeries.seasons}
-                episode_count={tvSeries.episode_count}
-                trailerLink={tvSeries.trailer}
-                fullTVSeries={tvSeries}
-            />
-        ))}
-        </div>
-            <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 z-30 cursor-pointer bg-black text-white hover:bg-opacity-80 p-4" // Adjust padding to change size
-            style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
-            >
-            {">"}
-            </button>
-            <style>
-                {`
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-                `}
-            </style>
-        </div>)
-}
-
-export default TVSeriesCollection
