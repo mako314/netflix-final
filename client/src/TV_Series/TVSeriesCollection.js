@@ -69,7 +69,6 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
             <div ref={collectionRef} className={cardContainerStyle}> 
             {tvSeriesData?.map((tvSeries) => (
-            
             <TVSeriesCard
                 key={tvSeries.id}
                 tvSeriesID={tvSeries.id}
@@ -82,7 +81,6 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 trailerLink={tvSeries.trailer}
                 fullTVSeries={tvSeries}
             />
-            
         ))}
         </div>
             <button
@@ -99,9 +97,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 }
                 `}
             </style>
-        </div>
-        
-)
+        </div>)
 }
 
 export default TVSeriesCollection

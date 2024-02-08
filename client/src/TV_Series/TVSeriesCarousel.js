@@ -2,50 +2,44 @@ import React, {useRef} from "react";
 import TVSeriesCollection from "./TVSeriesCollection";
 
 
-function TVSeriesCarousel({tvSeriesData, marginLeft}){
+function TVSeriesCarousel({ tvSeriesData }) {
+    // useRef is used here to reference the scrolling container of cards
+    const collectionRef = useRef(null);
 
-    // const [selectedIndex, setSelectedIndex] = useState(0);
-    const mainDivStyle = marginLeft === 0 ? "flex flex-wrap gap-8 justify-start mt-4" :"flex flex-wrap gap-8 justify-start mt-4 ml-8"
-
-    // console.log(selectedIndex)
-    // const images = [
-    // ]
-
-    // const projectDisplayComponents = [
-    //   EquipMeHomePage,
-    //   EquipMeMessagingDisplay,
-    //   EquipMeMessagingUserToOwner,
-    //   EquipMeMessagingOwnerToUser,
-    //   EquipMeOwnerDash
-    // ]
-
-    // const scrollCarouselPrevious = () => {
-    //     setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : projectDisplayComponents.length - 1));
-    // }
+    const genres = ['comedy', 'drama', 'action', 'music'];
     
-    //   const scrollCarouselNext = () => {
-    //     setSelectedIndex((prevIndex) => (prevIndex + 1) % projectDisplayComponents.length);
-    // }
+    // Function to handle the scrolling
+    const scroll = (ref, direction) => {
+        const containerWidth = ref.current.clientWidth; // Width of the visible area of the carousel
+        const cardWidth = containerWidth / 8; // Calculate the width of each card based on 8 cards fitting exactly into the container
+        const scrollDistance = cardWidth * 8; // Set the scroll distance to the width of 8 cards
 
-    // const SelectedComponent = projectDisplayComponents[selectedIndex]
+        if (direction === 'left') {
+            ref.current.scrollLeft -= scrollDistance;
+        } else {
+            ref.current.scrollLeft += scrollDistance;
+        }
+    };
 
-    const genres = ['comedy', 'drama', 'action', 'music']
-
-    
-    
-    return( 
-        <div className={mainDivStyle}>
-        {genres.map(genre => {
-        const filteredMovies = tvSeriesData.filter(movie => movie.genres.toLowerCase().includes(genre));
-        return (
-            <div key={genre} className="">
-            <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
-            <TVSeriesCollection tvSeriesData={filteredMovies} marginLeft={0}/>
-            </div>
-        )
-        })}
+    return (
+        <div className="flex flex-wrap gap-8 justify-start mt-4">
+            {genres.map(genre => {
+                const filteredMovies = tvSeriesData.filter(movie => movie.genres.toLowerCase().includes(genre));
+                return (
+                    <div key={genre}>
+                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">
+                            {genre.toUpperCase()}
+                        </span>
+                        <TVSeriesCollection
+                            tvSeriesData={filteredMovies}
+                            scroll={scroll}
+                            collectionRef={collectionRef} // Passing the reference to the child component
+                        />
+                    </div>
+                );
+            })}
         </div>
-    )
+    );
 }
 
-export default TVSeriesCarousel
+export default TVSeriesCarousel;

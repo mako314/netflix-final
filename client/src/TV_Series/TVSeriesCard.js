@@ -11,51 +11,40 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       navigate(`/tv-series/${tvSeriesID}`, { state: { fullTVSeries } })
     }
 
-    
-    // Define a base width for the card, adjust this as needed
-    // const baseWidth = "w-1/4" // starting width
-    // const hoverWidth = "w-1/3" // Width on hover
-    // const minHeight = "h-64" // Minimum height to prevent shrinking too much
 
-    const baseWidth = "w-1/8"; // Adjust this to fit 8 cards per row
-    const minHeight = "h-64"; // Minimum height to prevent shrinking too much
-    const hoverWidth = "lg:w-1/4"; // Larger width on hover for large screens
-      
     return (
       <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 ${isHovered ? hoverWidth : baseWidth} ${minHeight}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className={`transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto`} 
+          style={{ width: 'calc(100% / 6)' }}
+          onClick={handleTVSeriesNav}
       >
-        {isHovered ? (
-          // Show this div only when hovered
-          <div className="youtube-embed-container" style={{ width: '500%', height: '0', paddingBottom: '56.25%' }}>
-            <YoutubeEmbed embedId={trailerLink} whereRendered={"TVSeries"}/>
-          </div>
-        ) : (
-          // Show the rest of the card content when not hovered
-          <>
-            <div onClick={handleTVSeriesNav}>
-              <figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
-                <img
-                  src={thumbnail}
-                  alt="card image"
-                  className="w-full h-full object-cover"
-                />
-              </figure>
-              <div className="p-4">
-                <h3 className="text-xl font-medium text-black truncate">
-                  {title}
-                </h3>
-                <p className="text-sm text-black">
-                  By {director}, {year_of_release}, Number of seasons: {seasons}, Number of episodes: {episode_count}
-                </p>
+          {isHovered ? (
+              <div className="relative w-full pt-[56.25%]">
+                  <YoutubeEmbed embedId={trailerLink} whereRendered={"TVSeries"}/>
               </div>
-            </div>
-          </>
-        )}
+          ) : (
+              <>
+                  <figure className="w-full h-48 md:h-64 overflow-hidden">
+                      <img
+                          src={thumbnail}
+                          alt={`Thumbnail of ${title}`}
+                          className="w-full h-full object-cover"
+                      />
+                  </figure>
+                  <div className="p-4">
+                      <h3 className="text-xl font-medium text-black truncate">
+                          {title}
+                      </h3>
+                      <p className="text-sm text-black">
+                          Directed by {director}, {year_of_release}. Seasons: {seasons}, Episodes: {episode_count}.
+                      </p>
+                  </div>
+              </>
+          )}
       </div>
-    )
+  );
   }
   
   export default TVSeriesCard;
