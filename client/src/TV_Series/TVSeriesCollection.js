@@ -44,9 +44,9 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
     }
 
     // Calculate the total width of 8 cards, including the gap between them
-    const cardWidth = 198; // The width of one card
-    const gapWidth = 16; // The gap between cards
-    const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth; // Total width of 8 cards and 7 gaps
+    const cardWidth = 195 // The width of one card
+    const gapWidth = 16 // The gap between cards
+    const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth // Total width of 8 cards and 7 gaps
 
     const containerStyle = {
         width: '100vw', // Or '100%' if it's based on the parent's width
