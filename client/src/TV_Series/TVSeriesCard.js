@@ -23,14 +23,14 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto mx-2`}
-            style={{ width: '150px' }} // Updated width calculation
+            className={`relative w-full transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto mx-2`}
+            style={{ width: isHovered ? '250px': '150px' }} // Updated width calculation
             onClick={handleTVSeriesNav}
         >
           {isHovered ? (
-              <div className="relative w-full pt-[56.25%]">
+              <>
                   <YoutubeEmbed embedId={trailerLink} whereRendered={"TVSeries"}/>
-              </div>
+              </>
           ) : (
               <>
                 <figure className="h-auto w-full overflow-hidden mx-auto">
