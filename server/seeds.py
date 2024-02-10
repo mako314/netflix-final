@@ -61,6 +61,8 @@ if __name__ == '__main__':
         db.session.commit()
 
 #-------------------------------Movie Seeding-------------------------------
+        
+        # NEED TO CHANGE ALL IMAGES TO BE LIKE THE COVER PHOTO FOR THE MOVIE / SERIES. OR else the styling is dang near impossible because of the aspect ratio
         print("Generating Movie List...")
         movie_list = [
         Movie(
