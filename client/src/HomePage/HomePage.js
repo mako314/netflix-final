@@ -21,6 +21,8 @@ function HomePage({moviesData, tvSeriesData}){
 
     // console.log("The Filtered Comedy Movies:", comedyMoviesFiltered)
 
+    // Clean this up a smidge or 3, This is a rough draft, should be done by Sunday
+
     const genres = ['comedy', 'drama', 'action', 'music']
 
 
