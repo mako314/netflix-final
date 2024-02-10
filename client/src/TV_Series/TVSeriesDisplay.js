@@ -8,6 +8,12 @@ function TVSeriesDisplay({tvSeriesData}){
 
     console.log("IN TV SERIES DISPLAY:", fullTVSeries)
 
+    // I need to find out how to do video content here, I likely need to change this to map over all the episodes first, then from there one can click the episode and it can appear at the top, 
+
+    // This is going to be interesting! 
+
+    // But for movie, all I have to do is make a display, since a movie is a single entity,
+
     return(
 
       <> 
