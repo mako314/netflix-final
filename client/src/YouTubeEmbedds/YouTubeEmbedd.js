@@ -5,7 +5,7 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
 
   const frameStyling = whereRendered === "Movies" ? "absolute top-0 left-0 w-full h-full" : "absolute top-0 w-full h-full"
 
-  console.log("THE EPISODE COUNT:", episode_count)
+  console.log("THE EPISODE COUNT:",)
 
 return(
 <div className="overflow-hidden" style={{ paddingBottom: '56.25%' }}>

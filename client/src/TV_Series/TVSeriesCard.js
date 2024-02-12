@@ -25,8 +25,8 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`relative w-full transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto mx-2`}
-            style={{ width: isHovered ? '250px': '150px' }} // Updated width calculation
+            className={`w-full transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto mx-2`}
+            style={{ width: isHovered ? '300px': '150px' }} // Updated width calculation
             onClick={handleTVSeriesNav}
         >
           {isHovered ? (
