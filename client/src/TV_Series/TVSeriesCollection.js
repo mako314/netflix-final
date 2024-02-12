@@ -80,9 +80,9 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 trailerLink={tvSeries.trailer}
                 fullTVSeries={tvSeries}
             />
-            
         ))}
         </div>
+
         <button
         onClick={() => scroll('right')}
         className="absolute left-0 top-1/2 z-30 cursor-pointer bg-black bg-opacity-50 text-white p-2 -translate-y-1/2 hover:bg-opacity-70"
@@ -94,6 +94,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
         >
             {">"}
         </button>
+
             <style>
                 {`
                 .scrollbar-hide::-webkit-scrollbar {
@@ -101,6 +102,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 }
                 `}
             </style>
+            
         </div>
         
 )

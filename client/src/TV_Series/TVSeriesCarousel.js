@@ -30,6 +30,7 @@ function TVSeriesCarousel({ tvSeriesData }) {
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4 ml-4">
                             {genre.toUpperCase()}
                         </span>
+                    
                         <TVSeriesCollection
                             tvSeriesData={filteredMovies}
                             scroll={scroll}

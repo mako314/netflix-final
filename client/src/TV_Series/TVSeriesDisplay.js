@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import video from "../Videos/Arthur Episode 1 Arthur's Eyes; Francine's Bad Hair Day.mp4"
 
 function TVSeriesDisplay({tvSeriesData}){
  
@@ -26,7 +27,10 @@ function TVSeriesDisplay({tvSeriesData}){
         <div class="mx-auto container p-10">
           <div class="w-full lg:w-3/4 mx-auto">
             <div class="shadow-md rounded-lg overflow-hidden">
-              <img src="https://placehold.co/1280x720" alt="tv series cover image" class="object-cover w-full h-64 lg:h-96"/>
+            <video width="750" height="500" controls >
+              <source src={video} type="video/mp4"/>
+            </video>
+              {/* <img src="https://placehold.co/1280x720" alt="tv series cover image" class="object-cover w-full h-64 lg:h-96"/> */}
             </div>
           </div>
           <div class="mt-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 grid grid-cols-2 gap-6">
