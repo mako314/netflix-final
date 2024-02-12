@@ -17,6 +17,8 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
     const totalGapSpace = gapBetweenCards * (numberOfCards - 1);
     const cardWidth = (viewportWidth - totalGapSpace) / numberOfCards;
 
+    console.log(episode_count)
+
 
 
     return (
@@ -29,7 +31,15 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
         >
           {isHovered ? (
               <>
-                  <YoutubeEmbed embedId={trailerLink} whereRendered={"TVSeries"}/>
+                  <YoutubeEmbed 
+                  embedId={trailerLink} 
+                  whereRendered={"TVSeries"}
+                  title={title}
+                  director={director} 
+                  year_of_release={year_of_release} 
+                  seasons={seasons} 
+                  episode_count={episode_count}
+                  />
               </>
           ) : (
               <>
