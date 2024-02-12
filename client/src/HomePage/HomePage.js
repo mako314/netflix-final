@@ -23,6 +23,10 @@ function HomePage({moviesData, tvSeriesData}){
 
     // Clean this up a smidge or 3, This is a rough draft, should be done by Sunday
 
+    // Sunday was a sick day, going to do this all monday morning :_)
+
+    
+
     const genres = ['comedy', 'drama', 'action', 'music']
 
 
