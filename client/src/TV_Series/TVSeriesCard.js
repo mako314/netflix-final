@@ -29,9 +29,11 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
             style={{ width: isHovered ? '300px': '150px' }} // Updated width calculation
             onClick={handleTVSeriesNav}
         >
+        
           {isHovered ? (
-              <>
+              <div className="absolute"> 
                   <YoutubeEmbed 
+                  key={`${title}-${year_of_release}-S${seasons}`}
                   embedId={trailerLink} 
                   whereRendered={"TVSeries"}
                   title={title}
@@ -40,23 +42,14 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
                   seasons={seasons} 
                   episode_count={episode_count}
                   />
-              </>
+                  </div>
           ) : (
               <>
-                <figure className="h-auto w-full overflow-hidden mx-auto">
                 <img
                     src={thumbnail}
                     alt={`Thumbnail of ${title}`}
-                    className="block w-full h-auto object-fill"                />
-                </figure>
-                  {/* <div className="p-4">
-                      <h3 className="text-xl font-medium text-black truncate">
-                          {title}
-                      </h3>
-                      <p className="text-sm text-black">
-                          Directed by {director}, {year_of_release}. Seasons: {seasons}, Episodes: {episode_count}.
-                      </p>
-                  </div> */}
+                    className="h-auto w-full overflow-hidden mx-auto"/>
+         
               </>
           )}
       </div>
