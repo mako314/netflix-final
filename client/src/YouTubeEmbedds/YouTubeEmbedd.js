@@ -8,7 +8,7 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
   console.log("THE EPISODE COUNT:",)
 
 return(
-<div className="overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+<div className="overflow-hidden" style={{ paddingBottom: '34.25%' }}>
   
     <iframe
       className="w-full"
@@ -19,7 +19,7 @@ return(
       title="Embedded youtube"
     />
   {whereRendered === "TVSeries" && 
-        <div className="absolute bottom-0 p-6 w-full bg-white">
+        <div className="absolute bottom-0 px-2 py-4 w-full bg-white">
             <h3 className="text-xl font-medium text-black truncate">
                 {title}
             </h3>
