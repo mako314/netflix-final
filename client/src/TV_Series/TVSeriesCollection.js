@@ -118,7 +118,3 @@ export default TVSeriesCollection
     // Exists outside of both movie / tv collection and cards
     // Self explanatory, for user actions.
     // Buttons for admin also? 
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------
-  
-    // const mainDivStyle = marginLeft === 0 ? "flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4" :"flex flex-nowrap overflow-y-hidden overflow-x-auto gap-8 justify-start mt-4 ml-8"
