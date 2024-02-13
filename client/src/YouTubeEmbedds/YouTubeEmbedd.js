@@ -9,8 +9,8 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
 
   // style={{ paddingBottom: '34.25%' }}
   return (
-    <div className="flex flex-col h-full">
-      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}> {/* Maintained for 16:9 aspect ratio */}
+    <div className="flex flex-col">
+      <div className="relative" style={{ paddingBottom: '50.25%' }}>
         <iframe
           className="absolute top-0 left-0 w-full h-full"
           loading="lazy"
@@ -21,7 +21,8 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
         />
       </div>
       {whereRendered === "TVSeries" && (
-        <div className="p-4 bg-white text-black w-full">
+        // Adjusted the styling here for better visibility
+        <div className="bg-white text-black w-full h-full">
           <h3 className="text-xl font-medium truncate">{title}</h3>
           <p className="text-sm">
             Directed by {director}, {year_of_release}. Seasons: {seasons}, Episodes: {episode_count}.
