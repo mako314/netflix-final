@@ -1,6 +1,6 @@
 from config import app, db
 
-from models import User, Movie, Favorite, TelevisionSeries
+from models import User, Movie, Favorite, TelevisionSeries, Admin
 from datetime import datetime
 
 if __name__ == '__main__':
@@ -14,13 +14,43 @@ if __name__ == '__main__':
 
 #-------------------------------User Seeding-------------------------------
 
+        print("Seed Admins...")
+
+        admin_list = [
+            Admin(
+            first_name = 'Admin',
+            last_name = 'Istrator',
+            email = 'admin@flickforge.com',
+            phone = '',
+            _password_hash = 'P@ssword123',
+            profile_image = '',
+            movie_preferences = '',
+            country = '',
+            state = '',
+            city = '',
+            address_line_1 = '',
+            address_line_2 = '',
+            postal_code = '',
+        )]
+
+        db.session.add_all(admin_list)
+
+        for admin in admin_list:
+            password = admin._password_hash
+            admin.password_hash = password
+            print(admin._password_hash)
+
+        db.session.commit()
+
+#-------------------------------User Seeding-------------------------------
+
         print("Seed Users...")
 
         user_list = [
             User(
             first_name = 'Jane',
             last_name = 'Doe',
-            email = '',
+            email = 'makindoe@hotmail.com',
             phone = '',
             _password_hash = '123',
             date_of_birth = datetime(2024 - 32, 1, 15),
@@ -36,7 +66,7 @@ if __name__ == '__main__':
         User(
             first_name = 'Bob',
             last_name = 'Jones',
-            email = '',
+            email = 'billybobjones@gmail.com',
             phone = '',
             _password_hash = '123',
             date_of_birth = datetime(2024 - 32, 1, 15),

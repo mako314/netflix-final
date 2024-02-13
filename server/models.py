@@ -58,6 +58,49 @@ class User(db.Model, SerializerMixin):
         return bcrypt.check_password_hash(
             self._password_hash, password.encode('utf-8'))
     
+class Admin(db.Model, SerializerMixin):
+    __tablename__ = 'admins'
+
+    id = db.Column(db.Integer, primary_key = True)
+    first_name = db.Column(db.String)
+    last_name = db.Column(db.String)
+    email = db.Column(db.String)
+    phone = db.Column(db.String)
+    _password_hash = db.Column(db.String, nullable = False)
+    profile_image = db.Column(db.String)
+
+    movie_preferences = db.Column(db.String)
+
+    country = db.Column(db.String)
+    state = db.Column(db.String)
+    city = db.Column(db.String)
+    address_line_1 = db.Column(db.String)
+    address_line_2 = db.Column(db.String)
+    postal_code = db.Column(db.String)
+
+    # Relationships
+    favorites = db.relationship('Favorite', back_populates='admin', cascade="all, delete")
+
+    # Serialization Rules
+    serialize_rules = ('-favorites.admin', '-_password_hash',)
+
+    # Properties
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+
+    @password_hash.setter
+    def password_hash(self, password):
+        # utf-8 encoding and decoding is required in python 3
+        password_hash = bcrypt.generate_password_hash(
+            password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(
+            self._password_hash, password.encode('utf-8'))
+
+    
 class Movie(db.Model, SerializerMixin):
     __tablename__ = 'movies'
 
@@ -167,15 +210,17 @@ class Favorite(db.Model, SerializerMixin):
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     tv_series_id = db.Column(db.Integer, db.ForeignKey('tv_series.id'))
+    admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
 
     # Relationship
     # If there's an issue with the back_populates being favorites we'll get to that bridge when we get there
     movie = db.relationship('Movie', back_populates = 'favorites')
     user = db.relationship('User', back_populates = 'favorites')
     tv_series= db.relationship('TelevisionSeries', back_populates='favorites')
+    admin = db.relationship('Admin', back_populates='favorites')
 
     # Serialization Rules
-    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites',)
+    serialize_rules=('-movie.favorites', '-user.favorites', '-tv_series.favorites', '-admin.favorites',)
 
 
 
