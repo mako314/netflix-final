@@ -40,17 +40,13 @@ api = Api(app)
 
 bcrypt = Bcrypt(app) # allows for encryption/hashing
 
-<<<<<<< HEAD
 CORS(app)
 
 # export DATABASE_URI=sqlite:///app.db
-=======
+
 app.config['JWT_COOKIE_SECURE'] = True
 app.config['JWT_SECURE_KEY'] = os.getenv('JWT_SECRET_KEY')
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
-
 jwt = JWTManager(app)
-
 CORS(app, supports_credentials=True)
->>>>>>> main
