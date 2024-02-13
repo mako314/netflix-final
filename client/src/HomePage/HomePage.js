@@ -21,6 +21,12 @@ function HomePage({moviesData, tvSeriesData}){
 
     // console.log("The Filtered Comedy Movies:", comedyMoviesFiltered)
 
+    // Clean this up a smidge or 3, This is a rough draft, should be done by Sunday
+
+    // Sunday was a sick day, going to do this all monday morning :_)
+
+    
+
     const genres = ['comedy', 'drama', 'action', 'music']
 
 
@@ -109,16 +115,13 @@ function HomePage({moviesData, tvSeriesData}){
                     return (
                         <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
-                        <TVSeriesCollection tvSeriesData={filteredTvSeries}/>
+                        <TVSeriesCollection tvSeriesData={filteredTvSeries} marginLeft={0}/>
                         </div>
                     )
                     })}
             </div>
 
-
-
-                
-
+            
             </div>
 
 

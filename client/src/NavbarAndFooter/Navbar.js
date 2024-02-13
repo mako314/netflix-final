@@ -5,6 +5,8 @@ function Navbar(){
 
     const navigate = useNavigate();
 
+    // A tags cause refresh
+
     return(
         <nav className="w-56 min-h-screen bg-gray-900 text-white flex flex-col">
         <div className="w-56 h-full flex flex-col">
@@ -18,10 +20,11 @@ function Navbar(){
                     </Link>
                 </li>
                 <li className="px-5 py-3 hover:bg-red-800">
-                    <a href="/tv-series" className="flex items-center">
+                <Link to={'/tv-series'} className="flex items-center">
                         Television Series
                         {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
-                    </a>
+                </Link>
+                    
                 </li>
                 <li className="px-5 py-3 hover:bg-red-800">
                     <a href="#" className="flex items-center">

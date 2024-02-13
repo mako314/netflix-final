@@ -11,40 +11,44 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       navigate(`/tv-series/${tvSeriesID}`, { state: { fullTVSeries } })
     }
 
-    
-    // Define a base width for the card, adjust this as needed
-    const baseWidth = "w-1/4"; // Starting at 1/4 of the width of the flex container
-    const hoverWidth = "w-1/3"; // Expanding to 1/3 of the width of the flex container on hover
-  
+    const viewportWidth = window.innerWidth; // or a fixed width if your container has one
+    const numberOfCards = 6;
+    const gapBetweenCards = 16; // Adjust the gap width as needed
+    const totalGapSpace = gapBetweenCards * (numberOfCards - 1);
+    const cardWidth = (viewportWidth - totalGapSpace) / numberOfCards;
+
+    console.log(episode_count)
+
     return (
-      <div 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg ${isHovered ? hoverWidth : baseWidth}`}
-      // onClick={handleMovieNav}
-    >
-      {isHovered ? <YoutubeEmbed embedId={trailerLink}/> :
-      <> 
-      <figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
-        <img
-          src={thumbnail}
-          alt="card image"
-          className="w-full h-full object-cover group-hover:opacity-90"
-        />
-      </figure>
-      <div className="p-4">
-        <h3 className="text-xl font-medium text-black truncate">
-          {title}
-        </h3>
-        <p className="text-sm text-black">
-          By {director}, {year_of_release}, Number of seasons: {seasons}, Number of episodes: {episode_count}
-        </p>
-      </div>
-      </>}
-    </div>
-    )
+        <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="relative shadow-md cursor-pointer rounded-lg mb-4 flex-shrink-0"
+            style={{ width: '150px', height: '225px' }}
+            onClick={handleTVSeriesNav}
+        >
+            <img
+                src={thumbnail}
+                alt={`Thumbnail of ${title}`}
+                className="h-full w-full rounded-lg object-cover"
+            />
+            {isHovered && (
+                <div className="absolute inset-0 flex justify-center items-center bg-opacity-75 bg-black rounded-lg z-10 p-4">
+                    <div className="flex flex-col items-center justify-center w-full h-full">
+                        <YoutubeEmbed
+                            embedId={trailerLink}
+                            whereRendered={"TVSeries"}
+                            title={title}
+                            director={director}
+                            year_of_release={year_of_release}
+                            seasons={seasons}
+                            episode_count={episode_count}
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
+    );
   }
   
   export default TVSeriesCard;
-
-  // <p className="text-sm text-black"></p>

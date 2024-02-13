@@ -60,13 +60,13 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
       className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg ${isHovered ? hoverWidth : baseWidth}`}
       onClick={handleMovieNav}
     >
-      {isHovered ? <YoutubeEmbed embedId={trailerLink}/> :
+      {isHovered ? <YoutubeEmbed embedId={trailerLink} whereRendered={"Movies"}/> :
       <> 
       <figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
         <img
           src={thumbnail}
           alt="card image"
-          className="w-full h-full object-cover group-hover:opacity-90"
+          className="w-full h-full object-contain group-hover:opacity-90"
         />
       </figure>
       <div className="p-4">
