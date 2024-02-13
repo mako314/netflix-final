@@ -5,7 +5,7 @@ import { CurrentUserContext } from "../UserLogin/UserContext";
 function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
     const { currentUser } = CurrentUserContext();
 
-    console.log(usersData);
+    console.log(tvSeriesData);
 
     return (
         <div>
@@ -27,7 +27,7 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                             <th>Date of Birth</th>
                         </tr>
                     {
-                        usersData.map((user, i) =>
+                        usersData.map((user) =>
                         <tr>
                             <td>{user.id}</td>
                             <td>{user.first_name}</td>
@@ -46,8 +46,28 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
 
             <div className="m-6">
                 <p>TV Series Div</p>
+                <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Thumbnail</th>
+                            <th>Popularity</th>
+                            <th>Click Count</th>
+                        </tr>
+                    {
+                        tvSeriesData.map((tvSeries) =>
+                        <tr>
+                            <td>{tvSeries.id}</td>
+                            <td>{tvSeries.title}</td>
+                            <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
+                            <td>{tvSeries.popularity}</td>
+                            <td>{tvSeries.num_of_clicks}</td>
+                        </tr>
+                        )
+                    }
+                </tbody>
             </div>
-            
+
         </div>
     )
 }
