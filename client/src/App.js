@@ -176,7 +176,7 @@ function App() {
           <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
           <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/admin' element={<AdminDashboard />} />
+          <Route path='/admin' element={<AdminDashboard usersData={usersData} moviesData={moviesData} tvSeriesData={tvSeriesData} />} />
         </Routes>
 
       </div>
