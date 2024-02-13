@@ -5,7 +5,10 @@ import { CurrentUserContext } from "../UserLogin/UserContext";
 function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
     const { currentUser } = CurrentUserContext();
 
-    console.log(moviesData);
+    function deleteUser() {
+        console.log(moviesData);
+
+    }
 
     return (
         <div>
@@ -34,6 +37,11 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                             <td>{user.last_name}</td>
                             <td>{user.email}</td>
                             <td>{user.date_of_birth}</td>
+                            <td>
+                                <button className="bg-red-600" type="button" onClick={deleteUser}>
+                                    &#128465;&#65039;
+                                </button>
+                            </td>
                         </tr>
                         )
                     }
@@ -59,6 +67,11 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                             <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
                             <td>{movie.popularity}</td>
                             <td>{movie.num_of_clicks}</td>
+                            <td>
+                                <button className="bg-red-600" type="button">
+                                    &#128465;&#65039;
+                                </button>
+                            </td>
                         </tr>
                         )
                     }
@@ -83,6 +96,11 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                             <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
                             <td>{tvSeries.popularity}</td>
                             <td>{tvSeries.num_of_clicks}</td>
+                            <td>
+                                <button className="bg-red-600" type="button">
+                                    &#128465;&#65039;
+                                </button>
+                            </td>
                         </tr>
                         )
                     }
