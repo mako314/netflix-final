@@ -3,12 +3,11 @@ import TVSeriesCard from "./TVSeriesCard";
 
 function TVSeriesCollection ({tvSeriesData}){
 
-    console.log("The data:", tvSeriesData)
-
-    const mappedTVSeriesCards = tvSeriesData?.map((tvSeries) => {
-        return (
-        <div key={tvSeries.id} className="p-2 md:w-1/4"> {/* Each item takes up 1/4th of the width */} 
+    return (
+        <div className="flex flex-wrap gap-8 justify-start mt-4">
+            {tvSeriesData.map((tvSeries) => (
             <TVSeriesCard
+                key={tvSeries.id}
                 tvSeriesID={tvSeries.id}
                 thumbnail={tvSeries.thumbnail}
                 title={tvSeries.title}
@@ -16,22 +15,13 @@ function TVSeriesCollection ({tvSeriesData}){
                 year_of_release={tvSeries.year_of_release}
                 seasons={tvSeries.seasons}
                 episode_count={tvSeries.episode_count}
+                trailerLink={tvSeries.trailer}
                 fullTVSeries={tvSeries}
             />
+        ))}
         </div>
-        )
-    })
-
-    return(
-        <div>
-            <h1 className="text-3xl font-bold underline ml-4">
-                TV Series
-            </h1>
-            <div className="flex flex-wrap -m-2"> 
-                {mappedTVSeriesCards}
-            </div>
-        </div>
-    )
+        
+)
 }
 
 export default TVSeriesCollection

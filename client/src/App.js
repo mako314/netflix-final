@@ -156,8 +156,8 @@ function App() {
   // }
 
   return (
-
-
+    // UseContext gets called here
+    <ApiProvider> 
     <div className="flex">
       <Navbar />
     
@@ -175,6 +175,7 @@ function App() {
       </Routes>
 
     </div>
+    </ApiProvider>
 
   )
 }
