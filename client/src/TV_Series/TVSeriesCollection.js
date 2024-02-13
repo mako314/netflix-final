@@ -7,28 +7,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
     //https://react.dev/reference/react/useRef
 
     const collectionRef  = useRef(null)
-
-    // const [showRightArrow, setShowRightArrow] = useState(true)
-
-    // useEffect(() => {
-    //     const checkIfArrowNeeded = () => {
-    //     if (collectionRef.current) {
-    //         const { scrollWidth, clientWidth } = collectionRef.current
-    //         // Show the arrow only if there is enough content to scroll
-    //         setShowRightArrow(scrollWidth > clientWidth)
-    //     }
-    //     };
-
-    //     // Call it on mount and window resize
-    //     window.addEventListener('resize', checkIfArrowNeeded)
-    //     checkIfArrowNeeded()
-
-    //     return () => window.removeEventListener('resize', checkIfArrowNeeded)
-    // }, [])
-
-
-    // const cardContainerStyle  = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4" : "justify-start mt-4 ml-8 gap-4"}`;
-
+    
     const cardContainerStyle = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4 pr-[calc(198px+16px)]" : "justify-start mt-4 ml-8 pr-[calc(198px+16px)] gap-4"}`;
 
     // // Function to scroll the carousel 
@@ -81,7 +60,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 fullTVSeries={tvSeries}
             />
         ))}
-        </div>
+            </div>
 
         <button
         onClick={() => scroll('right')}
@@ -102,7 +81,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 }
                 `}
             </style>
-            
+
         </div>
         
 )
