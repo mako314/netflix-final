@@ -1,11 +1,119 @@
 from flask_restful import Resource
 
-from models import User, Movie, Favorite, TelevisionSeries
+from models import User, Movie, Favorite, TelevisionSeries, Admin
 
 from flask import Flask, request, make_response, jsonify, session
 from config import db, app, api
 
+from flask_jwt_extended import create_access_token, set_access_cookies, jwt_required, get_jwt_identity, unset_jwt_cookies, create_refresh_token, get_jwt
+from datetime import datetime, timezone, timedelta
+
 not_needed_data = '-favorites.user.postal_code',  '-favorites.user.country', '-favorites.user.state', '-favorites.user.address_line_1', '-favorites.user.address_line_2', '-favorites.user.city'
+
+class Login(Resource):
+    def post(self):
+        data = request.get_json()
+
+        # maybe we should have the option to log in using username?
+        email = data['email']
+        password = data['password']
+
+        user = User.query.filter(User.email == email).first()
+        admin = Admin.query.filter(Admin.email == email).first()
+
+        if user and user.authenticate(password):
+            access_token = create_access_token(identity={'id': user.id, 'role': 'user'})
+            user_data = user.to_dict(rules=('-_password_hash',))
+
+            response = make_response((jsonify({
+                "msg": "User login successful", 
+                "user": user_data,
+                "role": "user"
+            })))
+
+            set_access_cookies(response, access_token)
+
+            return response
+        
+        elif admin and admin.authenticate(password):
+            access_token = create_access_token(identity={'id': admin.id, 'role': 'admin'})
+            admin_data = admin.to_dict(rules=('-password_hash',))
+
+            response = make_response((jsonify({
+                'msg': 'Admin login successful',
+                'admin': admin_data,
+                'role': 'admin'
+            })))
+
+            set_access_cookies(response, access_token)
+
+            return response
+        
+        return make_response({"error": "Invalid login credentials provided"}, 401)
+
+api.add_resource(Login, '/login')
+
+class Logout(Resource):
+    def delete(self):
+        session.clear()
+        response = make_response({"message": "Logout successful"}, 200)
+        unset_jwt_cookies(response)
+
+        return response
+
+api.add_resource(Logout, '/logout')
+
+@app.after_request
+def refresh_expiring_jwts(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            set_access_cookies(response, access_token)
+
+        return response
+
+    except(RuntimeError, KeyError):
+
+        return response
+
+class CheckSession(Resource):
+    @jwt_required()
+    def get(self):
+        identity = get_jwt_identity()
+
+        identity_id = identity['id']
+        identity_role = identity['role']
+
+        if identity_role == 'user':
+            user = User.query.get(identity_id)
+
+            if user:
+                return make_response({
+                    'role': identity_role,
+                    'details': user.to_dict(rules=('-password_hash',))
+                }, 200)
+            else:
+                return make_response({'message': 'User not found'}, 404)
+            
+        elif identity_role == 'admin':
+            admin = Admin.query.get(identity_id)
+
+            if admin:
+                return make_response({
+                    'role': identity_role,
+                    'details': admin.to_dict(rules=('-password_hash',))
+                }, 200)
+            else:
+                return make_response({'message': 'Admin not found'}, 404)
+        
+            
+        return make_response({'message': 'Invalid session or role'}, 401)
+
+api.add_resource(CheckSession, '/check_session')
 
 class Users(Resource):
     def get(self):
