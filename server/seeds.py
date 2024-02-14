@@ -564,7 +564,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur gets glasses and learns to accept them.",
@@ -573,9 +573,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Michael Caloz, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="../Videos/001 - Arthur's Eyes; Francine's Bad Hair Day.mp4",
+                video_path="/Videos/001ArthurEyes.mp4",
                 season_id = arthur_season_1.id
-
             ),
             TvEpisode(
                 episode_number="2",
@@ -583,7 +582,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Francine is embarrassed by her hair at school picture day.",
@@ -592,8 +591,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                video_path="/Videos/002ArthuSpellingTrubble.mp4",
                 season_id = arthur_season_1.id,
-                video_path="../Videos/002 - Arthur and the Real Mr. Ratburn; Arthur's Spelling Trubble.mp4"
             ),
             TvEpisode(
                 episode_number="3",
@@ -601,7 +600,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur and his friends fear the worst when they hear Mr. Ratburn is a vampire.",
@@ -610,8 +609,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Arthur Holden, Bruce Dinsmore",
                 all_cast_and_crew="",
+                video_path="/Videos/003BustersDinoDilemma.mp4",
                 season_id = arthur_season_1.id,
-                video_path="../Videos/003 - D.W. All Wet; Buster's Dino Dilemma.mp4"
             ),
             TvEpisode(
                 episode_number="4",
@@ -619,7 +618,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur struggles in a spelling bee.",
@@ -628,15 +627,16 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                video_path="/Videos/004ArthursLostLibraryBook.mp4",
                 season_id = arthur_season_1.id,
-                video_path="../Videos/004 - D.W.'s Imaginary Friend; Arthur's Lost Library Book.mp4"
-            ), TvEpisode(
+            ), 
+            TvEpisode(
                 episode_number="5",
                 episode_name="Arthur's Pet Business",
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur starts his own pet business to prove he can be responsible.",
@@ -645,8 +645,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/005 - Arthur's Pet Business; D.W. the Copycat.mp4"
+                video_path="/Videos/005ArthursPetBusiness.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="6",
@@ -654,7 +654,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="D.W. copies her brother's every move, much to Arthur's chagrin.",
@@ -663,8 +663,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/006 - Locked in the Library!; Arthur Accused!.mp4"
+                video_path="/Videos/006ArthurAccused.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="7",
@@ -672,7 +672,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur and Francine are locked in the library after everyone else has gone home.",
@@ -681,8 +681,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/007 - Arthur Goes to Camp; Buster Makes the Grade.mp4"
+                video_path="/Videos/007ArthurGoesToCamp.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="8",
@@ -690,7 +690,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur is accused of losing the class's pet hamster.",
@@ -699,8 +699,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/008 - Arthur 's New Puppy; Arthur Bounces Back.mp4"
+                video_path="/Videos/008ArthurNewPuppy.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="9",
@@ -708,7 +708,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur and his friends go to summer camp.",
@@ -717,8 +717,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/009 - Arthur Babysits; Arthur's Cousin Catastrophe.mp4"
+                video_path="/Videos/009ArthurBabysits.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="10",
@@ -726,7 +726,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur's birthday party is threatened when Muffy schedules her party for the same day.",
@@ -735,8 +735,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/010 - Arthur's Birthday; Francine Frensky, Superstar.mp4"
+                video_path="/Videos/010ArthurBirthday.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="11",
@@ -744,7 +744,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Francine plans to have no friends after she becomes a superstar.",
@@ -753,8 +753,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/011 - Arthur's Baby; D.W.'s Baby.mp4"
+                video_path="/Videos/011ArthurBaby.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="12",
@@ -762,7 +762,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur deals with the news that he's going to have a new baby sister.",
@@ -771,8 +771,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/012 - Arthur Writes a Story; Arthur's Lost Dog.mp4"
+                video_path="/Videos/012ArthurWritesStory.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="13",
@@ -780,7 +780,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="D.W. realizes that having a little sister might not be as bad as she thought.",
@@ -789,8 +789,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/013 - So Long, Spanky; Buster's New Friend.mp4"
+                video_path="/Videos/013SoLongSpanky.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="14",
@@ -798,7 +798,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur learns that everyone has different ideas about what makes a good story.",
@@ -807,15 +807,15 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/014 - Arthur the Wrecker; Arthur and the True Francine.mp4"
+                video_path="/Videos/014ArthurTheWrecker.mp4",
+                season_id = arthur_season_1.id
             ),TvEpisode(
                 episode_number="15",
                 episode_name="Arthur's Lost Dog",
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur spends a day searching for Pal, who has gone missing.",
@@ -824,8 +824,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/015 - Arthur's Family Vacation; Grandpa Dave's Old Country Farm.mp4"
+                video_path="/Videos/015ArthurFamilyVacation.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="16",
@@ -833,7 +833,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="D.W. learns about loss when her pet bird dies.",
@@ -842,8 +842,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/016 - Arthur and the Crunch Cereal Contest; D.W. Flips.mp4"
+                video_path="/Videos/016ArthurAndTheCrunch.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="17",
@@ -851,7 +851,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur feels left out when Buster makes a new friend.",
@@ -860,8 +860,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/017 - Meek for a Week; Arthur, World 's Greatest Gleeper.mp4"
+                video_path="/Videos/017MeekForAWeek.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="18",
@@ -869,7 +869,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur becomes addicted to a computer game.",
@@ -878,8 +878,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/018 - Arthur's Chicken Pox; Sick as a Dog.mp4"
+                video_path="/Videos/018ArthurChickenPox.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="19",
@@ -887,7 +887,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Muffy and Francine were best friends since second grade, when Muffy was a new student.",
@@ -896,8 +896,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/019 - D.W. Rides Again; Arthur Makes the Team.mp4"
+                video_path="/Videos/019RidesAgain.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="20",
@@ -905,7 +905,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur finds fun on a snow day.",
@@ -914,8 +914,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/020 - Arthur's Almost Boring Day; The Half-Baked Sale.mp4"
+                video_path="/Videos/020ArthurAlmostBoring.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="21",
@@ -923,7 +923,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur and D.W. bake cookies for a school fundraiser.",
@@ -932,8 +932,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/021 - Sue Ellen Moves In; The Perfect Brother.mp4"
+                video_path="/Videos/021SueEllenMoves.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="22",
@@ -941,7 +941,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="The gang learns not to jump to conclusions about new neighbors.",
@@ -950,8 +950,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/022 - D.W.'s Snow Mystery; Team Trouble.mp4"
+                video_path="/Videos/022TeamTrouble.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="23",
@@ -959,7 +959,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur gets a glimpse of life with a perfect sibling.",
@@ -968,8 +968,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/023 - Bully for Binky; Misfortune Teller.mp4"
+                video_path="/Videos/023BullyForBinky.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="24",
@@ -977,7 +977,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="D.W.'s snowball goes missing, and she starts a detective agency to find it.",
@@ -986,8 +986,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/024 -  Arthur's Tooth; D.W. Gets Lost .mp4"
+                video_path="/Videos/024ArthurTooth.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="25",
@@ -995,7 +995,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur, Francine, and Buster have to work together on a school project.",
@@ -1004,8 +1004,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/025 - D.W. Thinks Big; Arthur Cleans Up.mp4"
+                video_path="/Videos/025ThinksBigArthur.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="26",
@@ -1013,7 +1013,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Binky Barnes learns a lesson about bullying.",
@@ -1022,8 +1022,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/026 - My Dad, the Garbage Man; Poor Muffy.mp4"
+                video_path="/Videos/026MyDadTheGarbageMan.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="27",
@@ -1031,7 +1031,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Prunella's fortune telling creates havoc among her friends.",
@@ -1040,8 +1040,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/027 - D.W.'s Blankie; Arthur's Substitute Teacher Trouble.mp4"
+                video_path="/Videos/027Blankie.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="28",
@@ -1049,7 +1049,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur is the last in his class to lose a baby tooth.",
@@ -1058,8 +1058,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/028 - I'm a Poet; The Scare-Your-Pants-Off Club.mp4"
+                video_path="/Videos/028TheScareYourPantsOff.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="29",
@@ -1067,7 +1067,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Arthur is inspired to start a campaign to clean up the local park.",
@@ -1076,8 +1076,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/029 - My Club Rules; Stolen Bike.mp4"
+                video_path="/Videos/029MyClubRules.mp4",
+                season_id = arthur_season_1.id
             ),
             TvEpisode(
                 episode_number="30",
@@ -1085,7 +1085,7 @@ if __name__ == '__main__':
                 director="Greg Bailey",
                 writer="Marc Brown",
                 year_of_release="1996",
-                thumbnail="",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
                 motion_picture_rating="TV-Y",
                 episode_time="11",
                 summary="Francine is embarrassed by her father's job as a garbage man.",
@@ -1094,8 +1094,8 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                season_id = arthur_season_1.id,
-                video_path="../Videos/030 - Arthur's First Sleepover; Arthur's New Year's Eve.mp4"
+                video_path="/Videos/030 ArthurFirstSleepover.mp4",
+                season_id = arthur_season_1.id
             )
         ]
 
