@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import video from "../Videos/Arthur Episode 1 Arthur's Eyes; Francine's Bad Hair Day.mp4"
-
+// import video from "../Videos/Arthur Episode 1 Arthur's Eyes; Francine's Bad Hair Day.mp4"
+// video
 function TVSeriesDisplay({tvSeriesData}){
  
     const location = useLocation()
@@ -28,7 +28,7 @@ function TVSeriesDisplay({tvSeriesData}){
           <div class="w-full lg:w-3/4 mx-auto">
             <div class="shadow-md rounded-lg overflow-hidden">
             <video width="750" height="500" controls >
-              <source src={video} type="video/mp4"/>
+              <source src={""} type="video/mp4"/>
             </video>
               {/* <img src="https://placehold.co/1280x720" alt="tv series cover image" class="object-cover w-full h-64 lg:h-96"/> */}
             </div>

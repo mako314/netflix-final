@@ -230,6 +230,9 @@ class TvSeason(db.Model, SerializerMixin):
     # Lighting ,etc credits
     all_cast_and_crew = db.Column(db.String)
 
+    tv_series_id = db.Column(db.Integer, db.ForeignKey('tv_series.id'))
+
+
     # Relationships
     tv_series = db.relationship('TelevisionSeries', back_populates='show_season', cascade="all, delete")
     episode = db.relationship('TvEpisode', back_populates='show_season', cascade="all, delete")
@@ -264,11 +267,12 @@ class TvEpisode(db.Model, SerializerMixin):
     stars = db.Column(db.String)
     # Lighting ,etc credits
     all_cast_and_crew = db.Column(db.String)
-
     video_path = db.Column(db.String)
 
+    season_id = db.Column(db.Integer, db.ForeignKey('tv_seasons.id'))
+
     # Relationships
-    show_season = db.relationship('TelevisionSeries', back_populates='episode', cascade="all, delete")
+    show_season = db.relationship('TvSeason', back_populates='episode', cascade="all, delete")
 
     # Serialization Rules
     serialize_rules = ('-show_season.episode',)
