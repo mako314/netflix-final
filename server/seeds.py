@@ -481,6 +481,25 @@ if __name__ == '__main__':
                 stars="Amy Poehler, Rashida Jones, Aziz Ansari, Nick Offerman, Aubrey Plaza",
                 all_cast_and_crew="https://www.imdb.com/title/tt1266020/fullcredits",
                 genres="Comedy",
+            ),
+            TelevisionSeries(
+                title="Arthur",
+                director="Greg Bailey",
+                writer="Marc Brown (original books), Kathy Waugh, Peter K. Hirsch, and others",
+                year_of_release="1996",
+                thumbnail="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotyG477gnl_xuU8RFTbpvys1E2ptod6gYXEzSZLbG69Eu8OiB",
+                motion_picture_rating="TV-Y",
+                trailer="Not readily available due to the show's age and target audience",
+                seasons="25",
+                episode_count="253",
+                is_airing="False",
+                summary="Based on the books by Marc Brown, 'Arthur' follows the life and adventures of 8-year-old Arthur Read, an aardvark, his family, and friends as they navigate through the challenges of childhood and learn valuable lessons about friendship, empathy, and community.",
+                rating=7.3,
+                popularity="High among children and families",
+                num_of_clicks=0,
+                stars="Michael Yarmush, Melissa Altro, Arthur Holden, Daniel Brochu, Jodie Resther",
+                all_cast_and_crew="https://www.imdb.com/title/tt0169414/fullcredits",
+                genres="Animation, Family, Comedy",
             )
                     
         ]
@@ -529,7 +548,8 @@ if __name__ == '__main__':
             popularity=80,  # An example popularity score
             num_of_clicks=0,  # Initial value for clicks
             stars="Michael Yarmush, Melissa Altro, Arthur Holden",  # Examples of main voice actors
-            all_cast_and_crew=""  # Detailed cast and crew info could be added here
+            all_cast_and_crew="",  # Detailed cast and crew info could be added here
+            tv_series_id = tv_series_list[14].id
         )
 
         db.session.add(arthur_season_1)
@@ -553,7 +573,9 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Michael Caloz, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="../Videos/001 - Arthur's Eyes; Francine's Bad Hair Day.mp4"
+                video_path="../Videos/001 - Arthur's Eyes; Francine's Bad Hair Day.mp4",
+                season_id = arthur_season_1.id
+
             ),
             TvEpisode(
                 episode_number="2",
@@ -570,6 +592,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/002 - Arthur and the Real Mr. Ratburn; Arthur's Spelling Trubble.mp4"
             ),
             TvEpisode(
@@ -587,6 +610,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Arthur Holden, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/003 - D.W. All Wet; Buster's Dino Dilemma.mp4"
             ),
             TvEpisode(
@@ -604,6 +628,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/004 - D.W.'s Imaginary Friend; Arthur's Lost Library Book.mp4"
             ), TvEpisode(
                 episode_number="5",
@@ -620,6 +645,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/005 - Arthur's Pet Business; D.W. the Copycat.mp4"
             ),
             TvEpisode(
@@ -637,6 +663,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/006 - Locked in the Library!; Arthur Accused!.mp4"
             ),
             TvEpisode(
@@ -654,6 +681,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/007 - Arthur Goes to Camp; Buster Makes the Grade.mp4"
             ),
             TvEpisode(
@@ -671,6 +699,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/008 - Arthur 's New Puppy; Arthur Bounces Back.mp4"
             ),
             TvEpisode(
@@ -688,6 +717,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/009 - Arthur Babysits; Arthur's Cousin Catastrophe.mp4"
             ),
             TvEpisode(
@@ -705,6 +735,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/010 - Arthur's Birthday; Francine Frensky, Superstar.mp4"
             ),
             TvEpisode(
@@ -722,6 +753,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/011 - Arthur's Baby; D.W.'s Baby.mp4"
             ),
             TvEpisode(
@@ -739,6 +771,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/012 - Arthur Writes a Story; Arthur's Lost Dog.mp4"
             ),
             TvEpisode(
@@ -756,6 +789,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/013 - So Long, Spanky; Buster's New Friend.mp4"
             ),
             TvEpisode(
@@ -773,6 +807,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/014 - Arthur the Wrecker; Arthur and the True Francine.mp4"
             ),TvEpisode(
                 episode_number="15",
@@ -789,6 +824,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/015 - Arthur's Family Vacation; Grandpa Dave's Old Country Farm.mp4"
             ),
             TvEpisode(
@@ -806,6 +842,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/016 - Arthur and the Crunch Cereal Contest; D.W. Flips.mp4"
             ),
             TvEpisode(
@@ -823,6 +860,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/017 - Meek for a Week; Arthur, World 's Greatest Gleeper.mp4"
             ),
             TvEpisode(
@@ -840,6 +878,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/018 - Arthur's Chicken Pox; Sick as a Dog.mp4"
             ),
             TvEpisode(
@@ -857,6 +896,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/019 - D.W. Rides Again; Arthur Makes the Team.mp4"
             ),
             TvEpisode(
@@ -874,6 +914,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/020 - Arthur's Almost Boring Day; The Half-Baked Sale.mp4"
             ),
             TvEpisode(
@@ -891,6 +932,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/021 - Sue Ellen Moves In; The Perfect Brother.mp4"
             ),
             TvEpisode(
@@ -908,6 +950,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/022 - D.W.'s Snow Mystery; Team Trouble.mp4"
             ),
             TvEpisode(
@@ -925,6 +968,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/023 - Bully for Binky; Misfortune Teller.mp4"
             ),
             TvEpisode(
@@ -942,6 +986,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/024 -  Arthur's Tooth; D.W. Gets Lost .mp4"
             ),
             TvEpisode(
@@ -959,6 +1004,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/025 - D.W. Thinks Big; Arthur Cleans Up.mp4"
             ),
             TvEpisode(
@@ -976,6 +1022,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/026 - My Dad, the Garbage Man; Poor Muffy.mp4"
             ),
             TvEpisode(
@@ -993,6 +1040,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/027 - D.W.'s Blankie; Arthur's Substitute Teacher Trouble.mp4"
             ),
             TvEpisode(
@@ -1010,6 +1058,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/028 - I'm a Poet; The Scare-Your-Pants-Off Club.mp4"
             ),
             TvEpisode(
@@ -1027,6 +1076,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/029 - My Club Rules; Stolen Bike.mp4"
             ),
             TvEpisode(
@@ -1044,6 +1094,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
+                season_id = arthur_season_1.id,
                 video_path="../Videos/030 - Arthur's First Sleepover; Arthur's New Year's Eve.mp4"
             )
         ]

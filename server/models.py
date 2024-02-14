@@ -238,7 +238,7 @@ class TvSeason(db.Model, SerializerMixin):
     episode = db.relationship('TvEpisode', back_populates='show_season', cascade="all, delete")
 
     # Serialization Rules
-    serialize_rules = ('-tv_series.show_season',"episode,show_season")
+    serialize_rules = ('-tv_series.show_season',"episode.show_season")
 
 class TvEpisode(db.Model, SerializerMixin):
     __tablename__ = 'episodes'
