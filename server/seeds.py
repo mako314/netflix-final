@@ -534,7 +534,7 @@ if __name__ == '__main__':
         
         arthur_season_1 = TvSeason(
             season_number="1",
-            season_name="Arthur Season 1",
+            series_name="Arthur",
             director="",  # Since multiple directors may be involved, leaving this blank or consider a general value like "Various"
             writer="",  # Similar to director, many writers contribute to a season
             year_of_release="1996",

@@ -4,6 +4,12 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 // video
 function TVSeriesDisplay({tvSeriesData}){
     const [videoLocation, setVideoLocation] = useState("")
+    const [episodeInformation, setEpisodeInformation] = useState({
+      episodeNumber: 1,
+      episodeTitle: 'Default Title',
+      episodeSeason: 'Season',
+      showTitle:"Show"
+    })
  
     const location = useLocation()
     const { fullTVSeries } = location.state || {}
@@ -22,8 +28,12 @@ function TVSeriesDisplay({tvSeriesData}){
       className="shadow-md rounded-lg overflow-hidden" 
       key={`${episode.id} ${episode.episode_number}`} 
       onClick={() => {
-        console.log(episode.video_path)
+        console.log("The Episode:", episode)
         setVideoLocation(episode.video_path)
+        // setEpisodeInformation(
+        //   ...episodeInformation,
+        //   episodeNumber
+        // )
       }}>
         <img src={episode.thumbnail} alt="Episode thumbnail" className="object-cover w-full h-40" />
         <div className="p-4">

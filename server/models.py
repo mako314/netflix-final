@@ -206,7 +206,7 @@ class TvSeason(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     season_number = db.Column(db.String)
-    season_name = db.Column(db.String)
+    series_name = db.Column(db.String)
 
     director = db.Column(db.String)
     writer = db.Column(db.String)
