@@ -7,6 +7,34 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
+    function deleteUser(userID) {
+        console.log(usersData);
+
+        fetch(`${apiUrl}users/${userID}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: userID,
+            }),
+          }).then((response) => {
+            if (response.ok) {
+              console.log(`User of id of ${userID} has been successfully deleted`)
+              /*response.json().then((data) => {
+                setTVSeriesData(data)
+              }) */
+            }
+            else {
+              response.json().then((errorData) => {
+                console.error('Error Response:', errorData)
+              })
+            }
+          }).catch((error) => {
+            console.error('Fetch Error:', error)
+        })
+    }
+
     function deleteMovie(movieID) {
         console.log(moviesData);
         
@@ -32,7 +60,7 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
             }
           }).catch((error) => {
             console.error('Fetch Error:', error)
-          })
+        })
     }
 
     function deleteTVSeries(tvSeriesID) {
@@ -60,7 +88,7 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
             }
           }).catch((error) => {
             console.error('Fetch Error:', error)
-          })
+        })
     }
 
     return (
@@ -84,14 +112,14 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                         </tr>
                     {
                         usersData.map((user) =>
-                        <tr>
+                        <tr key={user.id}>
                             <td>{user.id}</td>
                             <td>{user.first_name}</td>
                             <td>{user.last_name}</td>
                             <td>{user.email}</td>
                             <td>{user.date_of_birth}</td>
                             <td>
-                                <button className="bg-red-600" type="button">
+                                <button className="bg-red-600" type="button" onClick={() => deleteUser(user.id)}>
                                     &#128465;&#65039;
                                 </button>
                             </td>
