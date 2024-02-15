@@ -30,10 +30,13 @@ function TVSeriesDisplay({tvSeriesData}){
       onClick={() => {
         console.log("The Episode:", episode)
         setVideoLocation(episode.video_path)
-        // setEpisodeInformation(
-        //   ...episodeInformation,
-        //   episodeNumber
-        // )
+        setEpisodeInformation({
+          ...episodeInformation,
+          episodeNumber: episode.episode_number,
+          episodeTitle: episode.episode_name,
+          episodeSeason: episode.show_season.season_number,
+          showTitle: episode.show_season.series_name
+      })
       }}>
         <img src={episode.thumbnail} alt="Episode thumbnail" className="object-cover w-full h-40" />
         <div className="p-4">
@@ -49,15 +52,27 @@ function TVSeriesDisplay({tvSeriesData}){
       <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="p-10">
 
-      <div className="w-full max-w-6xl mx-auto">
-          {videoLocation && (
-            <div className="aspect-w-16 aspect-h-9">
-              <video controls key={videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} className="w-full h-auto">
-                <source src={videoLocation} type="video/mp4" />
-              </video>
+      <div className="w-full max-w-4xl mx-auto">
+      {videoLocation && (
+        <div className="bg-gray-800 rounded-lg overflow-hidden shadow-xl">
+
+          <div className="px-4 py-3 bg-gray-800 rounded-lg overflow-hidden shadow-xl">
+            <div className="flex items-center justify-center gap-2">
+              <p className="text-lg md:text-xl font-semibold text-white text-shadow">
+                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.episodeSeason}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
+              </p>
             </div>
-          )}
+          </div>
+          
+          <div className="aspect-w-16 aspect-h-9">
+            <video controls key={videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} className="w-full h-auto">
+              <source src={videoLocation} type="video/mp4" />
+            </video>
+          </div>
+
         </div>
+      )}
+    </div>
       
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full lg:w-3/4 mx-auto">
           {mappedTvSeasons}
