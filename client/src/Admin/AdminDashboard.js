@@ -5,9 +5,34 @@ import { CurrentUserContext } from "../UserLogin/UserContext";
 function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
     const { currentUser } = CurrentUserContext();
 
-    function deleteUser() {
-        console.log(moviesData);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
+    function deleteMovie(movieID) {
+        console.log(moviesData);
+        
+        fetch(`${apiUrl}movies/${movieID}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: movieID,
+            }),
+          }).then((response) => {
+            if (response.ok) {
+              console.log(`Movie of id of ${movieID} has been successfully deleted`)
+              /*response.json().then((data) => {
+                setTVSeriesData(data)
+              }) */
+            }
+            else {
+              response.json().then((errorData) => {
+                console.error('Error Response:', errorData)
+              })
+            }
+          }).catch((error) => {
+            console.error('Fetch Error:', error)
+          })
     }
 
     return (
@@ -38,7 +63,7 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                             <td>{user.email}</td>
                             <td>{user.date_of_birth}</td>
                             <td>
-                                <button className="bg-red-600" type="button" onClick={deleteUser}>
+                                <button className="bg-red-600" type="button">
                                     &#128465;&#65039;
                                 </button>
                             </td>
@@ -61,14 +86,14 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                         </tr>
                     {
                         moviesData.map((movie) =>
-                        <tr>
+                        <tr key={movie.id}>
                             <td>{movie.id}</td>
                             <td>{movie.title}</td>
                             <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
                             <td>{movie.popularity}</td>
                             <td>{movie.num_of_clicks}</td>
                             <td>
-                                <button className="bg-red-600" type="button">
+                                <button className="bg-red-600" type="button" onClick={() => deleteMovie(movie.id)}>
                                     &#128465;&#65039;
                                 </button>
                             </td>
