@@ -35,6 +35,34 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
           })
     }
 
+    function deleteTVSeries(tvSeriesID) {
+        console.log(tvSeriesData);
+        
+        fetch(`${apiUrl}tv-series/${tvSeriesID}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: tvSeriesID,
+            }),
+          }).then((response) => {
+            if (response.ok) {
+              console.log(`TV series with id of ${tvSeriesID} has been successfully deleted`)
+              /*response.json().then((data) => {
+                setTVSeriesData(data)
+              }) */
+            }
+            else {
+              response.json().then((errorData) => {
+                console.error('Error Response:', errorData)
+              })
+            }
+          }).catch((error) => {
+            console.error('Fetch Error:', error)
+          })
+    }
+
     return (
         <div>
             <p>Hi {currentUser.first_name}</p>
@@ -115,14 +143,14 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                         </tr>
                     {
                         tvSeriesData.map((tvSeries) =>
-                        <tr>
+                        <tr key={tvSeries.id}>
                             <td>{tvSeries.id}</td>
                             <td>{tvSeries.title}</td>
                             <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
                             <td>{tvSeries.popularity}</td>
                             <td>{tvSeries.num_of_clicks}</td>
                             <td>
-                                <button className="bg-red-600" type="button">
+                                <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
                                     &#128465;&#65039;
                                 </button>
                             </td>
