@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Accordion from "./TvSeriesAccordion";
 
-function TVSeriesDisplay({tvSeriesData}){
-    const [videoLocation, setVideoLocation] = useState("")
+function TVSeriesDisplay(){
     const [episodeInformation, setEpisodeInformation] = useState({
+      videoLocation: null,
       episodeNumber: 1,
       episodeTitle: 'Default Title',
       episodeSeason: 'Season',
@@ -12,20 +12,21 @@ function TVSeriesDisplay({tvSeriesData}){
       all_season_test: {},
     })
 
-    const [accordionInfo, setAccordionInfo] = useState([{
-      seasonInfo: {},
-      episodeInfo: [],
-    }])
- 
     const location = useLocation()
     const { fullTVSeries } = location.state || {}
 
-    return(
-      <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="p-10">
+    console.log("Full selected TV Series Data:",fullTVSeries )
 
-      <div className="w-full max-w-4xl mx-auto">
-      {videoLocation && (
+
+    return(
+      // Do flex grow before doing flex-column so it grows and takes up most of the space
+      <div className="flex flex-grow">
+      <div className="flex flex-col items-center w-full">
+      <div className="p-5 w-full max-w-4xl mx-auto">
+
+
+      {/* Ternary for video location (path) to exist and then display the video, otherwise display a placeholder */}
+      {episodeInformation.videoLocation ? (
         <div className="bg-gray-800 rounded-lg overflow-hidden shadow-xl">
 
           <div className="px-4 py-3 bg-gray-800 rounded-lg overflow-hidden shadow-xl">
@@ -37,21 +38,38 @@ function TVSeriesDisplay({tvSeriesData}){
           </div>
 
           <div className="aspect-w-16 aspect-h-9">
-            <video controls key={videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} className="w-full h-auto">
-              <source src={videoLocation} type="video/mp4" />
+            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} className="w-full h-auto">
+              <source src={episodeInformation.videoLocation} type="video/mp4" />
             </video>
           </div>
 
         </div>
-      )}
-    </div>
-      
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full lg:w-3/4 mx-auto">
-          {/* {mappedTvSeasons} */}
+      ) : (
+        // Placeholder when no video is selected
+        <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto">
+        {/* Title at the top */}
+        <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}</h2>
+        
+        {/* Image Placeholder Centered */}
+        <div className="self-center w-full">
+          <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <img src={fullTVSeries.thumbnail} alt="Placeholder" style={{ width: '450px', height: '300px' }} className="w-full h-auto object-contain"/>
+          </div>
         </div>
-        {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} setVideoLocation={setVideoLocation}/>
+        
+        {/* Other Information */}
+        <div className="text-black mt-4">
+          <p className="text-sm">Writer: {fullTVSeries.writer}</p> <br/>
+          <p className="text-sm">Stars: {fullTVSeries.stars}</p> <br/>
+          <p className="text-sm">Summary: {fullTVSeries.summary}</p>
+        </div>
       </div>
+      )}
+
+    </div>
+        {/* mappedTvSeasons={mappedTvSeasons} */}
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation}/>
+    </div>
     </div>
     )
 }

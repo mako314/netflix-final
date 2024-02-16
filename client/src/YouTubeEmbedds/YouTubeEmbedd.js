@@ -10,7 +10,7 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
   // style={{ paddingBottom: '34.25%' }}
   return (
     <div className="flex flex-col">
-      <div className="relative" style={{ paddingBottom: '48.25%' }}>
+      <div className="relative" style={{ paddingBottom: '40.25%' }}>
         <iframe
           className="absolute top-0 left-0 w-full h-full"
           loading="lazy"
@@ -22,11 +22,12 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
       </div>
       {whereRendered === "TVSeries" && (
        <div className="bg-gray-200 text-black w-full h-full">
+        <h3 className="text-xl font-medium truncate text-center mt-2">{title}</h3>
        <div className="mb-2">
          <p className="text-sm font-semibold text-center">Directed by {director}</p>
          <p className="text-sm text-center">{year_of_release}, Seasons: {seasons}, Episodes: {episode_count}</p>
        </div>
-       <h3 className="text-xl font-medium truncate text-center">{title}</h3>
+       
      </div>
       )}
     </div>
