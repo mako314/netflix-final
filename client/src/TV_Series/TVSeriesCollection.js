@@ -33,6 +33,11 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
         margin: '0 8px',
     }
 
+    // To do:
+
+    // Figure out why the cards are still being cutoff, it's likely due to the container width/ card with.
+    // It's like caused by this mess of mathematics above,
+
     return (
         <div className="relative overflow-hidden" style={containerStyle}>
 

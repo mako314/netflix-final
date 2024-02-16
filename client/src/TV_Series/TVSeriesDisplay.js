@@ -57,7 +57,7 @@ function TVSeriesDisplay(){
         </div>
       ) : (
         // Placeholder when no video is selected
-        <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto bg-white rounded-lg">
+        <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
         {/* Title at the top */}
         <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}, {fullTVSeries.year_of_release} </h2>
         
@@ -69,18 +69,20 @@ function TVSeriesDisplay(){
         </div>
         
         {/* Other Information */}
-        <div className="text-black mt-4">
-          <p className="text-sm">Writer: {fullTVSeries.writer}</p> <br/>
-          <p className="text-sm">Stars: {fullTVSeries.stars}</p> <br/>
-          <p className="text-sm">Summary: {fullTVSeries.summary}</p> <br/>
-          <p className="text-sm">Motion Picture Rating: {fullTVSeries.motion_picture_rating}</p>
-          <p className="text-sm">IMDB Rating: {fullTVSeries.rating}</p><br/>
-
-          <p className="text-sm">Seasons: {fullTVSeries.seasons}</p>
-          <p className="text-sm">Episodes: {fullTVSeries.episode_count}</p>
-
-          
+        <div className="w-full">
+        <h3 className="text-lg font-semibold mb-2 mt-2">Details</h3>
+        <div className="space-y-2">
+          <p className="text-sm"><span className="font-semibold">Writer:</span> {fullTVSeries.writer}</p>
+          <p className="text-sm"><span className="font-semibold">Stars:</span> {fullTVSeries.stars}</p>
+          <p className="text-sm"><span className="font-semibold">Summary:</span> {fullTVSeries.summary}</p>
+            <span className="font-semibold">Motion Picture Rating:</span> {fullTVSeries.motion_picture_rating}
+          <p className={`text-sm ${fullTVSeries.rating >= 7 ? 'text-green-500' : fullTVSeries.rating > 5 ? 'text-yellow-500' : 'text-red-500'}`}>
+            <span className="font-semibold">IMDB Rating:</span> {fullTVSeries.rating}
+          </p>
+          <p className="text-sm"><span className="font-semibold">Seasons:</span> {fullTVSeries.seasons}</p>
+          <p className="text-sm"><span className="font-semibold">Episodes:</span> {fullTVSeries.episode_count}</p>
         </div>
+      </div>
       </div>
       )}
 

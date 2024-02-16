@@ -41,7 +41,7 @@ function HomePage({moviesData, tvSeriesData}){
                 max-w-7xl"
                 style={{ backgroundImage: "url(https://wallpapers.com/images/hd/all-superhero-of-avengers-8umq9c3bffyuqmpb.jpg)",
                          backgroundPosition: "top",
-                         backgroundSize: "cover"
+                         backgroundSize: "contain"
                         }}
                 >
             {/* need a better height adjustment */}
@@ -53,12 +53,15 @@ function HomePage({moviesData, tvSeriesData}){
                     commercials. No annual contracts.</p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start xl:mt-10">
                 <div className="rounded-md shadow">
-                    <button fontFamily="Arial" type="submit" className="flex border border-transparent hover:bg-indigo-500 w-full
+
+                </div>
+                
+                </div>
+                
+            </div>
+            <button fontFamily="Arial" type="submit" className="flex border border-transparent hover:bg-indigo-500 w-full
                         items-center justify-center px-8 py-3 text-base font-medium text-white bg-indigo-600 rounded-md md:py-4
                         md:text-lg md:px-10 xl:text-xl xl:px-12">Sign up</button>
-                </div>
-                </div>
-            </div>
 
             </div>
 

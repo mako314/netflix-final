@@ -21,6 +21,12 @@ function TVSeriesCarousel({ tvSeriesData }) {
         }
     };
 
+
+    // To do:
+
+    // Figure out why the cards are still being cutoff, it's likely due to the container width/ card with.
+    
+
     return (
         <div className="max-w-full mx-auto overflow-hidden flex flex-wrap gap-8 justify-start mt-4">
             {genres.map(genre => {
