@@ -31,6 +31,11 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, set
                 showTitle: episode.show_season.series_name,
                 all_season_test:season
             })
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            })
             }}>
               <img src={episode.thumbnail} alt="Episode thumbnail" className="object-cover w-full h-40" />
               <div className="p-4">
