@@ -143,7 +143,19 @@ class UserByID(Resource):
 
         return response
     
+    @jwt_required()
     def delete(self, id):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
         user = User.query.filter(User.id == id).first()
 
         if user:
