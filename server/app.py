@@ -202,7 +202,19 @@ class MovieById(Resource):
         
         return response
 
+    @jwt_required()
     def delete(self, id):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
         movie = Movie.query.filter(Movie.id == id).first()
 
         if movie: 
@@ -383,7 +395,19 @@ class TVSeriesById(Resource):
         
         return response
 
+    @jwt_required()
     def delete(self, id):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+        
         tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first()
 
         if tv_series:
