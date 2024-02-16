@@ -6,7 +6,7 @@ function TVSeriesCarousel({ tvSeriesData }) {
     // useRef is used here to reference the scrolling container of cards
     const collectionRef = useRef(null);
 
-    const genres = ['comedy', 'drama', 'action', 'music'];
+    const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
     
     // Function to handle the scrolling
     const scroll = (ref, direction) => {
@@ -24,20 +24,21 @@ function TVSeriesCarousel({ tvSeriesData }) {
     return (
         <div className="max-w-full mx-auto overflow-hidden flex flex-wrap gap-8 justify-start mt-4">
             {genres.map(genre => {
-                const filteredMovies = tvSeriesData.filter(movie => movie.genres.toLowerCase().includes(genre));
+                const filteredMovies = tvSeriesData.filter(movie => movie.genres.toLowerCase().includes(genre))
                 return (
+                    filteredMovies.length > 0 && (
                     <div key={genre}>
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4 ml-4">
                             {genre.toUpperCase()}
                         </span>
-                    
+                        
                         <TVSeriesCollection
                             tvSeriesData={filteredMovies}
                             scroll={scroll}
                             collectionRef={collectionRef} // Passing the reference to the child component
                         />
                     </div>
-                );
+                ));
             })}
         </div>
     );

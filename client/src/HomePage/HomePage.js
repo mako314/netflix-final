@@ -73,8 +73,6 @@ function HomePage({moviesData, tvSeriesData}){
 
         <div className="bg-white text-gray-800 flex flex-col min-h-screen">
 
-            {/* Add a divider */}
-            {/* <img src="https://placehold.co/200x50" alt="Logo of the streaming service" className="mb-8 h-12"/> */}
 
 
             <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center font-bold mb-8 px-4">Introducing Next Level
@@ -82,18 +80,6 @@ function HomePage({moviesData, tvSeriesData}){
             <p className="text-lg mb-10 px-4 text-center">Stream your favourite TV Shows, Movies, Live Sports and much more at your
                 comfort. Join the streaming revolution.</p>
         
-            {/* <img src="https://placehold.co/800x500" alt="Placeholder image featuring screenshots of various movies and TV
-            shows available on the streaming service." className="object-cover rounded-lg shadow-xl"/> */}
-
-            {/* <div className="mb-6 px-4">
-
-                <MovieCollection moviesData={moviesData}/>
-
-                
-                <TVSeriesCollection tvSeriesData={tvSeriesData}/>
-
-
-            </div> */}
 
             <div className="mb-6 px-4 rounded-lg">
 
@@ -101,10 +87,11 @@ function HomePage({moviesData, tvSeriesData}){
                     {genres.map(genre => {
                     const filteredMovies = moviesData.filter(movie => movie.genres.toLowerCase().includes(genre));
                     return (
+                        filteredMovies.length > 0 && (
                         <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
                         <MovieCollection moviesData={filteredMovies} marginLeft={0}/>
-                        </div>
+                        </div>)
                     )
                     })}
             </div>
@@ -113,10 +100,11 @@ function HomePage({moviesData, tvSeriesData}){
                     {genres.map(genre => {
                     const filteredTvSeries = tvSeriesData.filter(tvSeries => tvSeries.genres.toLowerCase().includes(genre));
                     return (
+                        filteredTvSeries.length > 0 && (
                         <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
                         <TVSeriesCollection tvSeriesData={filteredTvSeries} marginLeft={0}/>
-                        </div>
+                        </div>)
                     )
                     })}
             </div>

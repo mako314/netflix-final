@@ -17,10 +17,21 @@ function TVSeriesDisplay(){
 
     console.log("Full selected TV Series Data:",fullTVSeries )
 
+    // Once a user pauses / clicks item added to watch history. After pausing and navigating away from a page, a users watch time is then logged, so when they come back to the episode it starts at that time.
+
+    // continue where I left off, restart, etc
+
+
 
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
-      <div className="flex flex-grow">
+      <div className="flex flex-grow" 
+      // style={{ 
+      //   backgroundImage: "url(https://wallpapercave.com/wp/wp2581370.jpg)",
+      //   backgroundPosition: "top",
+      //   backgroundSize: "cover"
+      // }}
+      >
       <div className="flex flex-col items-center w-full">
       <div className="p-5 w-full max-w-4xl mx-auto">
 
@@ -46,9 +57,9 @@ function TVSeriesDisplay(){
         </div>
       ) : (
         // Placeholder when no video is selected
-        <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto">
+        <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto bg-white rounded-lg">
         {/* Title at the top */}
-        <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}</h2>
+        <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}, {fullTVSeries.year_of_release} </h2>
         
         {/* Image Placeholder Centered */}
         <div className="self-center w-full">
@@ -61,7 +72,14 @@ function TVSeriesDisplay(){
         <div className="text-black mt-4">
           <p className="text-sm">Writer: {fullTVSeries.writer}</p> <br/>
           <p className="text-sm">Stars: {fullTVSeries.stars}</p> <br/>
-          <p className="text-sm">Summary: {fullTVSeries.summary}</p>
+          <p className="text-sm">Summary: {fullTVSeries.summary}</p> <br/>
+          <p className="text-sm">Motion Picture Rating: {fullTVSeries.motion_picture_rating}</p>
+          <p className="text-sm">IMDB Rating: {fullTVSeries.rating}</p><br/>
+
+          <p className="text-sm">Seasons: {fullTVSeries.seasons}</p>
+          <p className="text-sm">Episodes: {fullTVSeries.episode_count}</p>
+
+          
         </div>
       </div>
       )}

@@ -17,7 +17,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, set
         title: `${season.series_name} - Season ${season.season_number}`,
         content: season.episode.map((episode) => (
             <div 
-            className="shadow-md rounded-lg overflow-hidden" 
+            className="shadow-md rounded-lg overflow-hidden cursor-pointer" 
             key={`${episode.id} ${episode.episode_number}`} 
             onClick={() => {
               console.log("The Episode:", episode)
