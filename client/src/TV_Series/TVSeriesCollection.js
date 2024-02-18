@@ -5,7 +5,7 @@ import TVSeriesCarousel from "./TVSeriesCarousel";
 function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
     return (
-        <div className="flex flex-wrap -mx-2">
+        <div className="flex flex-wrap">
           {tvSeriesData.map((tvSeries, index) => (
             <div key={index} className="w-1/6 px-2 mb-4">
               <TVSeriesCard

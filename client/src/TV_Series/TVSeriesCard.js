@@ -11,16 +11,6 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
       navigate(`/tv-series/${tvSeriesID}`, { state: { fullTVSeries } })
     }
 
-    const viewportWidth = window.innerWidth; // or a fixed width if your container has one
-    const numberOfCards = 6;
-    const gapBetweenCards = 16; // Adjust the gap width as needed
-    const totalGapSpace = gapBetweenCards * (numberOfCards - 1);
-    const cardWidth = (viewportWidth - totalGapSpace) / numberOfCards;
-
-    console.log(episode_count)
-
-
-
     return (
       <div
             onMouseEnter={() => setIsHovered(true)}
@@ -52,7 +42,7 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
               </>
           )}
       </div>
-  );
+  )
   }
   
   export default TVSeriesCard;

@@ -1,17 +1,16 @@
 import React, {useRef} from "react";
-import TVSeriesCollection from "./TVSeriesCollection";
+import MovieCollection from "./MovieCollection";
 
-
-function TVSeriesCarousel({ tvSeriesData }) {
+function AllMoviesWithGenre({ moviesData }) {
     const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
             {genres.map((genre) => {
-                const filteredTvSeries = tvSeriesData.filter(tvSeries => 
+                const filteredMovieSeries = moviesData.filter(tvSeries => 
                     tvSeries.genres.toLowerCase().includes(genre)
                 )
 
-                if (filteredTvSeries.length === 0) {
+                if (filteredMovieSeries.length === 0) {
                     return null // Skip rendering if no TV series match the genre
                 }
 
@@ -21,10 +20,10 @@ function TVSeriesCarousel({ tvSeriesData }) {
                             {genre.toUpperCase()}
                         </h2>
                         <div className="flex flex-nowrap gap-4 overflow-x-auto">
-                            {filteredTvSeries.map(tvSeries => (
-                                <TVSeriesCollection
-                                    key={tvSeries.id}
-                                    tvSeriesData={[tvSeries]} // Assuming TVSeriesCollection can handle an array of one
+                            {filteredMovieSeries.map((movies, index) => (
+                                <MovieCollection
+                                    key={index}
+                                    filteredMovieData={[movies]} // Assuming TVSeriesCollection can handle an array of one
                                 />
                             ))}
                         </div>
@@ -35,4 +34,4 @@ function TVSeriesCarousel({ tvSeriesData }) {
     )
 }
 
-export default TVSeriesCarousel;
+export default AllMoviesWithGenre;
