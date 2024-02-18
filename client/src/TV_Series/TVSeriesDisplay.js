@@ -57,6 +57,7 @@ function TVSeriesDisplay(){
         </div>
       ) : (
         // Placeholder when no video is selected
+        fullTVSeries &&
         <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
         {/* Title at the top */}
         <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}, {fullTVSeries.year_of_release} </h2>
@@ -84,6 +85,7 @@ function TVSeriesDisplay(){
         </div>
       </div>
       </div>
+      
       )}
 
     </div>

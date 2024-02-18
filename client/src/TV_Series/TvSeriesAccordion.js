@@ -49,7 +49,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, set
 
 	return (
 		<div className="container mx-auto">
-			{accordionData.map((item, index) => (
+			{accordionData?.map((item, index) => (
 				<div
 					className="border-gray-300 mb-4 rounded border"
 					key={index}
