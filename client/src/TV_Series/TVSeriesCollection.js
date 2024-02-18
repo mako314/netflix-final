@@ -33,27 +33,19 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
         margin: '0 8px',
     }
 
+    const totalCarouselWidth = tvSeriesData.length * (cardWidth + gapWidth) - gapWidth; // Adjust based on actual card and gap measurements
+
+
     // To do:
 
     // Figure out why the cards are still being cutoff, it's likely due to the container width/ card with.
     // It's like caused by this mess of mathematics above,
 
     return (
-        <div className="relative overflow-hidden" style={containerStyle}>
-
-           <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 z-30 cursor-pointer bg-black bg-opacity-50 text-white p-2 -translate-y-1/2 hover:bg-opacity-70" // Adjust padding to change size
-            style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
-            >
-            {"<"}
-            </button>
-
-            <div ref={collectionRef} className={cardContainerStyle}> 
-            {tvSeriesData?.map((tvSeries) => (
-            
-            <TVSeriesCard
-                key={tvSeries.id}
+        <div className="flex flex-wrap -mx-2">
+          {tvSeriesData.map((tvSeries, index) => (
+            <div key={index} className="w-1/6 px-2 mb-4">
+              <TVSeriesCard
                 tvSeriesID={tvSeries.id}
                 thumbnail={tvSeries.thumbnail}
                 title={tvSeries.title}
@@ -62,34 +54,11 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 seasons={tvSeries.seasons}
                 episode_count={tvSeries.episode_count}
                 trailerLink={tvSeries.trailer}
-                fullTVSeries={tvSeries}
-            />
-        ))}
+              />
             </div>
-
-        <button
-        onClick={() => scroll('right')}
-        className="absolute left-0 top-1/2 z-30 cursor-pointer bg-black bg-opacity-50 text-white p-2 -translate-y-1/2 hover:bg-opacity-70"
-            style={{
-                top: '50%',
-                transform: 'translateY(-50%) translateX(-100%)', // This adjusts for the size of the button itself
-                left: `${totalWidthOfVisibleArea}px`, // Position it at the end of the visible area
-            }}
-        >
-            {">"}
-        </button>
-
-            <style>
-                {`
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-                `}
-            </style>
-
+          ))}
         </div>
-        
-)
+      )
 }
 
 export default TVSeriesCollection

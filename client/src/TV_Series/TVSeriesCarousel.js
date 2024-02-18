@@ -3,48 +3,33 @@ import TVSeriesCollection from "./TVSeriesCollection";
 
 
 function TVSeriesCarousel({ tvSeriesData }) {
-    // useRef is used here to reference the scrolling container of cards
-    const collectionRef = useRef(null);
-
     const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
-    
-    // Function to handle the scrolling
-    const scroll = (ref, direction) => {
-        const containerWidth = ref.current.clientWidth; // Width of the visible area of the carousel
-        const cardWidth = containerWidth / 8; // Calculate the width of each card based on 8 cards fitting exactly into the container
-        const scrollDistance = cardWidth * 8; // Set the scroll distance to the width of 8 cards
-
-        if (direction === 'left') {
-            ref.current.scrollLeft -= scrollDistance;
-        } else {
-            ref.current.scrollLeft += scrollDistance;
-        }
-    };
-
-
-    // To do:
-
-    // Figure out why the cards are still being cutoff, it's likely due to the container width/ card with.
-    
-
     return (
-        <div className="max-w-full mx-auto overflow-hidden flex flex-wrap gap-8 justify-start mt-4">
-            {genres.map(genre => {
-                const filteredMovies = tvSeriesData.filter(movie => movie.genres.toLowerCase().includes(genre))
+        <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
+            {genres.map((genre) => {
+                const filteredTvSeries = tvSeriesData.filter(tvSeries => 
+                    tvSeries.genres.toLowerCase().includes(genre)
+                )
+
+                if (filteredTvSeries.length === 0) {
+                    return null; // Skip rendering if no TV series match the genre
+                }
+
                 return (
-                    filteredMovies.length > 0 && (
-                    <div key={genre}>
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4 ml-4">
+                    <div key={genre} className="mb-8">
+                        <h2 className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mb-4 inline-block mx-auto">
                             {genre.toUpperCase()}
-                        </span>
-                        
-                        <TVSeriesCollection
-                            tvSeriesData={filteredMovies}
-                            scroll={scroll}
-                            collectionRef={collectionRef} // Passing the reference to the child component
-                        />
+                        </h2>
+                        <div className="flex flex-nowrap gap-4 overflow-x-auto">
+                            {filteredTvSeries.map(tvSeries => (
+                                <TVSeriesCollection
+                                    key={tvSeries.id}
+                                    tvSeriesData={[tvSeries]} // Assuming TVSeriesCollection can handle an array of one
+                                />
+                            ))}
+                        </div>
                     </div>
-                ));
+                );
             })}
         </div>
     );
