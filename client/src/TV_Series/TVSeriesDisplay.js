@@ -21,6 +21,8 @@ function TVSeriesDisplay(){
 
     // continue where I left off, restart, etc
 
+    console.log("The video episode URL, looking for AWS:", episodeInformation.videoLocation)
+
 
 
     return(

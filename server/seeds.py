@@ -573,7 +573,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Michael Caloz, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="https://tutorial-netflix-final.s3.us-east-2.amazonaws.com/arthur/001-ArthurEyes.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBsaCXVzLWVhc3QtMiJGMEQCIADLCpM4rWhlDq%2FWzHT%2F1jKY%2FnMPJpMgr%2F%2BEr4BWhZ9nAiAeSgVt8ykgecPFrvTOQ2HzBM%2FalUCK3o3DqZ1cP7HobyrxAgj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDg1NjMzNTc4NzgzMiIMfs8fxeyivp1fdSkiKsUCs9E%2BjRYHlXzhzGsnOI%2FvMZF%2BTAPo%2FCrMRgnsp%2BG9pauHDQs11pkSMjMt6w23mU2Y3sQBNGldRtVGAb%2BRKRXHQDbbQDilmsdJvGQTGB5gLQrfrbuQpcvckr%2BRdIe9dvJAfh6JS7bywCCUxu6Yz2%2BsBskehPWsTxJ9Y0lPAYPKHLroLG8o8aDnWKM5MbvTMsvZNv7Ntde4iN%2BoJzijvHTUpkpd4FHGMbgzB1Uo8w77Ur6uy6cB9qklbujVOIZpvDYKaeTsuzDCvLQMmQZZDF2k6BvdC2gGJ5LrK08OISeHpoYVLIfDdf%2FogIpW9fHDOJrUGbwO0QjsaQQwuHHPjiSK7J7XPqeaUbKybKOC6OqQ170FmTNPbdB00HkrABr14AU3i2RXYeHS%2BSH1Jm7MPRK9ksni5gC37OxtMr7TF90ig7MTQkZZ2TDqncmuBjq0AnzO3cUw5fTmJcBmGKXQwGmI188nAfE12%2FQi4hk0aT%2Fu6%2B8%2F0tIoInO%2BMVtp2QulWQ8aJq1Hz84ljGqi%2Fchhj79kTIHKg4%2Be6J3sex38lZUA89jzDzSIRsXbuR2hUR4pCpHhO7knjlSPmJ2XfB06L06zoOmUodTK2IfULWal1V7axODpL6MrESOVtnpaYjyQtpODFfZb%2BSfNUKN0A21IdrySUyUmaIwzjt0GACJmCzQXoyzHFAqpCMHAZJjpKkxj0%2BWuMQ4gXZdGzuOHRrUy8yJBbSutep3RLIfunZE7jsXZXWcRqCMm2C454MX1xKsVzzJnZWW%2FLA%2B9ZxzUrhhsUP5RfKbJ%2Fv98I6HZhwB7eT6KPW7MyEMNxxkad0qhGQ8c4BRIoQaZ4xe37YNqc8F1to31DFhC&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240218T204103Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIA4OYMXE44JYO5BCV5%2F20240218%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=386d1b21cafe59548ccf334e171dd4ecc277b75301a9a72530ecec6c4527dc8e",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/001-ArthurEyes.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -591,7 +591,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/002ArthuSpellingTrubble.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/002-ArthurtheReal%20Mr.Ratburn.mp4",
                 season_id = arthur_season_1.id,
             ),
             TvEpisode(
@@ -609,7 +609,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Arthur Holden, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/003BustersDinoDilemma.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/003-All%20WetBuster.mp4",
                 season_id = arthur_season_1.id,
             ),
             TvEpisode(
@@ -627,7 +627,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/004ArthursLostLibraryBook.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/004-Imaginary%20FriendArthur.mp4",
                 season_id = arthur_season_1.id,
             ), 
             TvEpisode(
@@ -645,7 +645,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/005ArthursPetBusiness.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/005-ArthurPetBusiness.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -663,7 +663,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/006ArthurAccused.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/006-Lockedinthe%20Library.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -681,7 +681,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/007ArthurGoesToCamp.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/007-ArthurGoestoCamp.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -699,7 +699,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/008ArthurNewPuppy.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/008-ArthurNewPuppy.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -717,7 +717,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/009ArthurBabysits.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/009-ArthurBabysits.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -735,7 +735,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/010ArthurBirthday.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/010-ArthurBirthday.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -753,7 +753,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/011ArthurBaby.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/011-ArthurBaby.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -771,7 +771,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/012ArthurWritesStory.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/012-ArthurWritesStory.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -789,7 +789,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/013SoLongSpanky.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/013-SoLongSpanky.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -807,7 +807,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/014ArthurTheWrecker.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/014-ArthurtheWrecker.mp4",
                 season_id = arthur_season_1.id
             ),TvEpisode(
                 episode_number="15",
@@ -824,7 +824,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/015ArthurFamilyVacation.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/015-ArthurFamilyVacation.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -842,7 +842,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/016ArthurAndTheCrunch.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/016-ArthurCrunch.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -860,7 +860,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/017MeekForAWeek.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/017-MeekWeek.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -878,7 +878,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/018ArthurChickenPox.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/018-ArthurChickenPox.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -896,7 +896,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/019RidesAgain.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/019-RidesAgain.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -914,7 +914,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/020ArthurAlmostBoring.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/020-ArthurAlmost%20Boring.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -932,7 +932,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/021SueEllenMoves.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/021-SueEllenMoves.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -950,7 +950,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/022TeamTrouble.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/022-SnowMystery.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -968,7 +968,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/023BullyForBinky.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/023-BullyBinky.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -986,7 +986,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/024ArthurTooth.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/024-ArthurTooth.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -1004,7 +1004,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/025ThinksBigArthur.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/025-ThinksBig.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -1022,7 +1022,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/026MyDadTheGarbageMan.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/026-%20MyDadGarbageMan.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -1040,7 +1040,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/027Blankie.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/027-BlankieArthur.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -1058,7 +1058,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/028TheScareYourPantsOff.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/028-PoetTheScare.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -1076,7 +1076,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Bruce Dinsmore, Sonja Ball",
                 all_cast_and_crew="",
-                video_path="/Videos/029MyClubRules.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/029-MyClubRules.mp4",
                 season_id = arthur_season_1.id
             ),
             TvEpisode(
@@ -1094,7 +1094,7 @@ if __name__ == '__main__':
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Bruce Dinsmore",
                 all_cast_and_crew="",
-                video_path="/Videos/030 ArthurFirstSleepover.mp4",
+                video_path="https://d3th70t1rge79u.cloudfront.net/arthur/030-ArthurFirstSleepover.mp4",
                 season_id = arthur_season_1.id
             )
         ]
