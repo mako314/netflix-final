@@ -3,7 +3,6 @@ import MovieCard from "./MovieCard";
 
 function MovieCollection({ filteredMovieData, handleDeleteAsync, marginLeft }) {
   // Adjusting the padding and margin to give more space
-  const mainDivStyle = marginLeft === 0 ? "flex flex-wrap gap-8 justify-start mt-4" :"flex flex-wrap gap-8 justify-start mt-4 ml-8"
   return (
     <div className="flex flex-wrap">
     {filteredMovieData.map((movie, index) => (

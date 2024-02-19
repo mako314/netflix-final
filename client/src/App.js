@@ -9,6 +9,7 @@ import HomePage from './HomePage/HomePage';
 import MovieCollection from './Movies/MovieCollection';
 import MovieDisplay from './Movies/MovieDisplay';
 import AllMoviesWithGenre from './Movies/AllMoviesWithGenre';
+import MovieByGenre from './Movies/MovieByGenre';
 
 // ----- Nabar / Footer Imports -----
 import Navbar from './NavbarAndFooter/Navbar';
@@ -173,6 +174,7 @@ function App() {
         <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/movie/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
       </Routes>
 
     </div>

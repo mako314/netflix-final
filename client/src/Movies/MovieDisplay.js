@@ -6,6 +6,8 @@ import MovieTrailerModal from "../Modals/MovieTrailerModal";
 function MovieDisplay({moviesData}){
     // const { id } = useParams()
     // const movieIndexValue = id - 1
+    const navigate = useNavigate()
+
 
     const [showModal, setShowModal] = useState(false)
     const [showVideo, setShowVideo] = useState(false)
@@ -18,6 +20,10 @@ function MovieDisplay({moviesData}){
 
     const toggleVideo = () => {
         setShowVideo(!showVideo)
+    }
+
+    const handleMovieGenreNav = (movieGenre) => {
+        navigate(`/movie/${movieGenre}`)
     }
 
 

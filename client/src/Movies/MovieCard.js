@@ -39,7 +39,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
   })
   }
 
-  const handleMovieNav = (e) => {
+  const handleMovieNav = () => {
     navigate(`/movie/${movieId}`, { state: { fullMovie } })
   }
 
