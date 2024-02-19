@@ -1,10 +1,13 @@
 import React, {useState} from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { createPortal } from 'react-dom';
+import MovieTrailerModal from "../Modals/MovieTrailerModal";
 
 function MovieDisplay({moviesData}){
     // const { id } = useParams()
     // const movieIndexValue = id - 1
 
+    const [showModal, setShowModal] = useState(false)
     const [showVideo, setShowVideo] = useState(false)
     const location = useLocation()
     const { fullMovie } = location.state || {}
@@ -35,8 +38,9 @@ function MovieDisplay({moviesData}){
                         </video>
                     </div>
                 ) : (
-                    <div className="flex justify-center" onClick={toggleVideo}> 
-                        <img 
+                    <div className="flex justify-center"> 
+                        <img
+                        onClick={toggleVideo}
                         src={fullMovie.thumbnail} 
                         alt={`Watch ${fullMovie.title}`} 
                         className="w-full h-full object-cover cursor-pointer" 
@@ -65,10 +69,14 @@ function MovieDisplay({moviesData}){
                         <button
                             type="button"
                             className="rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 px-4 py-2 bg-indigo-500 text-white text-lg transition duration-150 ease-in-out"
+                            onClick={() => setShowModal(true)}
                         >
                             Watch Trailer
-                            Need button / modal
                         </button>
+                        {showModal && createPortal(
+                            <MovieTrailerModal trailerLink={fullMovie.trailer} onClose={() => setShowModal(false)} />,
+                            document.body
+                        )}
                     </div>
                 )}
             </div>
