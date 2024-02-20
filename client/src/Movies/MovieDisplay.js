@@ -26,6 +26,18 @@ function MovieDisplay({moviesData}){
         navigate(`/movie/${movieGenre}`)
     }
 
+    // <p className="mt-4 text-indigo-500 font-semibold">{fullMovie.genres}</p>
+
+    // https://blog.stackademic.com/power-of-the-split-function-in-react-js-cc10ced421bc
+
+    const splitGenres = fullMovie?.genres.split(', ')
+    console.log(splitGenres)
+
+    // const mappedGenres = splitGenres.map((genre) => {
+    //     return(
+    //         <p className="text-indigo-500 font-semibold">{genre}</p>
+    //     )
+    // })
 
     return (
         <div className="flex flex-grow items-center justify-center bg-white min-h-screen">
@@ -66,7 +78,13 @@ function MovieDisplay({moviesData}){
                     <p className="text-gray-700 font-bold">Run time: {fullMovie.run_time}</p>
                     <p>Writer: {fullMovie.writer}</p>
                     <p>Stars: {fullMovie.stars}</p>
-                    <p className="mt-4 text-indigo-500 font-semibold">{fullMovie.genres}</p>
+                    <div className="flex flex-wrap">
+                    {splitGenres?.map((genre, index) => (
+                        <p key={index} className="text-indigo-500 font-semibold mr-2" onClick={() => handleMovieGenreNav(genre)}>
+                        {genre},
+                        </p>
+                    ))}
+                    </div>
                 </div>
     
                 {/* Toggle Button for Video */}

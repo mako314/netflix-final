@@ -6,6 +6,10 @@ function MovieByGenre({moviesData}) {
   // Adjusting the padding and margin to give more space
   // const { genre } = useParams()
 
+//   const filteredTvSeries = tvSeriesData.filter(tvSeries => 
+//     tvSeries.genres.toLowerCase().includes(genre)
+// )
+
   return (
     <div className="flex flex-wrap">
     {moviesData.map((movie, index) => (
