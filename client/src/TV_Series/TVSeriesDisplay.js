@@ -1,91 +1,100 @@
-import React from "react";
+import React, {useState} from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import video from "../Videos/Arthur Episode 1 Arthur's Eyes; Francine's Bad Hair Day.mp4"
+import Accordion from "./TvSeriesAccordion";
 
-function TVSeriesDisplay({tvSeriesData}){
- 
+function TVSeriesDisplay(){
+    const [episodeInformation, setEpisodeInformation] = useState({
+      videoLocation: null,
+      episodeNumber: 1,
+      episodeTitle: 'Default Title',
+      episodeSeason: 'Season',
+      showTitle:"Show",
+      all_season_test: {},
+    })
+
     const location = useLocation()
     const { fullTVSeries } = location.state || {}
 
-    console.log("IN TV SERIES DISPLAY:", fullTVSeries)
+    console.log("Full selected TV Series Data:",fullTVSeries )
 
-    // I need to find out how to do video content here, I likely need to change this to map over all the episodes first, then from there one can click the episode and it can appear at the top, 
+    // Once a user pauses / clicks item added to watch history. After pausing and navigating away from a page, a users watch time is then logged, so when they come back to the episode it starts at that time.
 
-    // This is going to be interesting! 
+    // continue where I left off, restart, etc
 
-    // But for movie, all I have to do is make a display, since a movie is a single entity,
+    console.log("The video episode URL, looking for AWS:", episodeInformation.videoLocation)
+
+
 
     return(
+      // Do flex grow before doing flex-column so it grows and takes up most of the space
+      <div className="flex flex-grow" 
+      // style={{ 
+      //   backgroundImage: "url(https://wallpapercave.com/wp/wp2581370.jpg)",
+      //   backgroundPosition: "top",
+      //   backgroundSize: "cover"
+      // }}
+      >
+      <div className="flex flex-col items-center w-full">
+      <div className="p-5 w-full max-w-4xl mx-auto">
 
-      <> 
-      <div>
-        <div class="bg-white flex flex-wrap">
-          <div class="w-full sm:w-full md:w-full lg:w-2/3 xl:w-2/3"></div>
+
+      {/* Ternary for video location (path) to exist and then display the video, otherwise display a placeholder */}
+      {episodeInformation.videoLocation ? (
+        <div className="bg-gray-800 rounded-lg overflow-hidden shadow-xl">
+
+          <div className="px-4 py-3 bg-gray-800 rounded-lg overflow-hidden shadow-xl">
+            <div className="flex items-center justify-center gap-2">
+              <p className="text-lg md:text-xl font-semibold text-white text-shadow">
+                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.episodeSeason}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
+              </p>
+            </div>
+          </div>
+
+          <div className="aspect-w-16 aspect-h-9">
+            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} className="w-full h-auto">
+              <source src={episodeInformation.videoLocation} type="video/mp4" />
+            </video>
+          </div>
+
+        </div>
+      ) : (
+        // Placeholder when no video is selected
+        fullTVSeries &&
+        <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
+        {/* Title at the top */}
+        <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}, {fullTVSeries.year_of_release} </h2>
+        
+        {/* Image Placeholder Centered */}
+        <div className="self-center w-full">
+          <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <img src={fullTVSeries.thumbnail} alt="Placeholder" style={{ width: '450px', height: '300px' }} className="w-full h-auto object-contain"/>
+          </div>
+        </div>
+        
+        {/* Other Information */}
+        <div className="w-full">
+        <h3 className="text-lg font-semibold mb-2 mt-2">Details</h3>
+        <div className="space-y-2">
+          <p className="text-sm"><span className="font-semibold">Writer:</span> {fullTVSeries.writer}</p>
+          <p className="text-sm"><span className="font-semibold">Stars:</span> {fullTVSeries.stars}</p>
+          <p className="text-sm"><span className="font-semibold">Summary:</span> {fullTVSeries.summary}</p>
+            <span className="font-semibold">Motion Picture Rating:</span> {fullTVSeries.motion_picture_rating}
+          <p className={`text-sm ${fullTVSeries.rating >= 7 ? 'text-green-500' : fullTVSeries.rating > 5 ? 'text-yellow-500' : 'text-red-500'}`}>
+            <span className="font-semibold">IMDB Rating:</span> {fullTVSeries.rating}
+          </p>
+          <p className="text-sm"><span className="font-semibold">Seasons:</span> {fullTVSeries.seasons}</p>
+          <p className="text-sm"><span className="font-semibold">Episodes:</span> {fullTVSeries.episode_count}</p>
         </div>
       </div>
-      <div>
-        <div class="mx-auto container p-10">
-          <div class="w-full lg:w-3/4 mx-auto">
-            <div class="shadow-md rounded-lg overflow-hidden">
-            <video width="750" height="500" controls >
-              <source src={video} type="video/mp4"/>
-            </video>
-              {/* <img src="https://placehold.co/1280x720" alt="tv series cover image" class="object-cover w-full h-64 lg:h-96"/> */}
-            </div>
-          </div>
-          <div class="mt-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 grid grid-cols-2 gap-6">
-            <div class="shadow-md rounded-lg overflow-hidden">
-              <img src="https://placehold.co/600x600" alt="Episode thumbnail image" class="object-cover w-full h-40"/>
-              <div class="p-4">
-                <p class="text-indigo-500 text-sm font-medium">Episode 1</p>
-                <p class="text-gray-600 text-xs">Some brief description about the episode.</p>
-              </div>
-            </div>
-            <div class="shadow-md rounded-lg overflow-hidden">
-              <img src="https://placehold.co/600x600" alt="Episode thumbnail image" class="object-cover w-full h-40"/>
-              <div class="p-4">
-                <p class="text-indigo-500 text-sm font-medium">Episode 2</p>
-                <p class="text-gray-600 text-xs">Some brief description about the episode.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+      
+      )}
+
     </div>
-    </>
-        
+        {/* mappedTvSeasons={mappedTvSeasons} */}
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation}/>
+    </div>
+    </div>
     )
 }
-
-{/* <div>
-            {fullTVSeries?.director}
-            <br/>
-
-            {fullTVSeries?.title}
-            <br/>
-
-            <img
-                src={fullTVSeries?.thumbnail}
-            />  
-            <br/>
-
-            {fullTVSeries?.genres}
-            <br/>
-
-            {fullTVSeries?.motion_picture_rating}
-            <br/>
-
-            {fullTVSeries?.summary}
-            <br/>
-
-            {fullTVSeries?.stars}
-            <br/>
-
-        </div> */}
-
 export default TVSeriesDisplay;
-
-
-// Styling for this div, need to edit with multiple episodes to see how preview would work
-{/*  */}
-
-// Next just have to work on display pages and really that's it. Will be researching this sunday best way to view video content on ract similar to netflix / paramount / hulu

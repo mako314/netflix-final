@@ -8,7 +8,8 @@ import HomePage from './HomePage/HomePage';
 // ----- Movie Imports -----
 import MovieCollection from './Movies/MovieCollection';
 import MovieDisplay from './Movies/MovieDisplay';
-
+import AllMoviesWithGenre from './Movies/AllMoviesWithGenre';
+import MovieByGenre from './Movies/MovieByGenre';
 
 // ----- Nabar / Footer Imports -----
 import Navbar from './NavbarAndFooter/Navbar';
@@ -168,11 +169,12 @@ function App() {
 
       <Routes>
       <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
-        <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
+        <Route path='/movies' element={<AllMoviesWithGenre moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/movie/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
       </Routes>
 
     </div>

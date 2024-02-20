@@ -4,51 +4,11 @@ import TVSeriesCarousel from "./TVSeriesCarousel";
 
 function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
-    //https://react.dev/reference/react/useRef
-
-    const collectionRef  = useRef(null)
-    
-    const cardContainerStyle = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4 pr-[calc(198px+16px)]" : "justify-start mt-4 ml-8 pr-[calc(198px+16px)] gap-4"}`;
-
-    // // Function to scroll the carousel 
-    const scroll = (direction) => {
-        // Assume each card has a fixed width, here it's an example value in pixels
-        const scrollDistance = 600; 
-
-        if (collectionRef.current) {
-            const currentScroll = collectionRef.current.scrollLeft;
-            const newScroll = direction === 'left' ? currentScroll - scrollDistance : currentScroll + scrollDistance;
-            collectionRef.current.scrollLeft = newScroll;
-        }
-    }
-
-    // Calculate the total width of 8 cards, including the gap between them
-    const cardWidth = 195 // The width of one card
-    const gapWidth = 16 // The gap between cards
-    const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth // Total width of 8 cards and 7 gaps
-
-    const containerStyle = {
-        width: '100vw', // Or '100%' if it's based on the parent's width
-        overflowX: 'hidden', // Hide the horizontal scrollbar
-        margin: '0 8px',
-    }
-
     return (
-        <div className="relative overflow-hidden" style={containerStyle}>
-
-           <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 z-30 cursor-pointer bg-black bg-opacity-50 text-white p-2 -translate-y-1/2 hover:bg-opacity-70" // Adjust padding to change size
-            style={{ top: '50%', transform: 'translateY(-50%)' }} // Center button vertically
-            >
-            {"<"}
-            </button>
-
-            <div ref={collectionRef} className={cardContainerStyle}> 
-            {tvSeriesData?.map((tvSeries) => (
-            
-            <TVSeriesCard
-                key={tvSeries.id}
+        <div className="flex flex-wrap">
+          {tvSeriesData.map((tvSeries, index) => (
+            <div key={index} className="w-1/6 px-2 mb-4">
+              <TVSeriesCard
                 tvSeriesID={tvSeries.id}
                 thumbnail={tvSeries.thumbnail}
                 title={tvSeries.title}
@@ -58,33 +18,11 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 episode_count={tvSeries.episode_count}
                 trailerLink={tvSeries.trailer}
                 fullTVSeries={tvSeries}
-            />
-        ))}
+              />
             </div>
-
-        <button
-        onClick={() => scroll('right')}
-        className="absolute left-0 top-1/2 z-30 cursor-pointer bg-black bg-opacity-50 text-white p-2 -translate-y-1/2 hover:bg-opacity-70"
-            style={{
-                top: '50%',
-                transform: 'translateY(-50%) translateX(-100%)', // This adjusts for the size of the button itself
-                left: `${totalWidthOfVisibleArea}px`, // Position it at the end of the visible area
-            }}
-        >
-            {">"}
-        </button>
-
-            <style>
-                {`
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-                `}
-            </style>
-
+          ))}
         </div>
-        
-)
+      )
 }
 
 export default TVSeriesCollection
@@ -118,3 +56,44 @@ export default TVSeriesCollection
     // Exists outside of both movie / tv collection and cards
     // Self explanatory, for user actions.
     // Buttons for admin also? 
+
+
+
+
+
+        //https://react.dev/reference/react/useRef
+
+        // const collectionRef  = useRef(null)
+    
+        // const cardContainerStyle = `relative flex flex-nowrap overflow-hidden gap-4 ${marginLeft === 0 ? "justify-start mt-4 pr-[calc(198px+16px)]" : "justify-start mt-4 ml-8 pr-[calc(198px+16px)] gap-4"}`;
+    
+        // // // Function to scroll the carousel 
+        // const scroll = (direction) => {
+        //     // Assume each card has a fixed width, here it's an example value in pixels
+        //     const scrollDistance = 600; 
+    
+        //     if (collectionRef.current) {
+        //         const currentScroll = collectionRef.current.scrollLeft;
+        //         const newScroll = direction === 'left' ? currentScroll - scrollDistance : currentScroll + scrollDistance;
+        //         collectionRef.current.scrollLeft = newScroll;
+        //     }
+        // }
+    
+        // // Calculate the total width of 8 cards, including the gap between them
+        // const cardWidth = 195 // The width of one card
+        // const gapWidth = 16 // The gap between cards
+        // const totalWidthOfVisibleArea = (cardWidth + gapWidth) * 8 - gapWidth // Total width of 8 cards and 7 gaps
+    
+        // const containerStyle = {
+        //     width: '100vw', // Or '100%' if it's based on the parent's width
+        //     overflowX: 'hidden', // Hide the horizontal scrollbar
+        //     margin: '0 8px',
+        // }
+    
+        // const totalCarouselWidth = tvSeriesData.length * (cardWidth + gapWidth) - gapWidth; // Adjust based on actual card and gap measurements
+    
+    
+        // // To do:
+    
+        // // Figure out why the cards are still being cutoff, it's likely due to the container width/ card with.
+        // // It's like caused by this mess of mathematics above,

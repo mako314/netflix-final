@@ -194,12 +194,89 @@ class TelevisionSeries(db.Model, SerializerMixin):
 
     # Relationships
     favorites = db.relationship('Favorite', back_populates='tv_series', cascade="all, delete")
-
+    show_season = db.relationship('TvSeason', back_populates='tv_series', cascade="all, delete")
     # Serialization Rules
     serialize_rules = ('-favorites.tv_series',)
 
 
     # Properties
+
+class TvSeason(db.Model, SerializerMixin):
+    __tablename__ = 'tv_seasons'
+
+    id = db.Column(db.Integer, primary_key = True)
+    season_number = db.Column(db.String)
+    series_name = db.Column(db.String)
+
+    director = db.Column(db.String)
+    writer = db.Column(db.String)
+    year_of_release = db.Column(db.String)
+    thumbnail = db.Column(db.String)
+    motion_picture_rating = db.Column(db.String)
+    episode_count = db.Column(db.String)
+    average_episode_time = db.Column(db.String)
+    is_airing = db.Column(db.String)
+    # either a summary or a description
+    summary = db.Column(db.String)
+
+    # Number 0-10
+    rating = db.Column(db.Integer)
+    popularity = db.Column(db.Integer)
+
+    # of clicks to help gauge interest / popularity
+    num_of_clicks = db.Column(db.Integer, default=0)
+    # Major stars of the film
+    stars = db.Column(db.String)
+    # Lighting ,etc credits
+    all_cast_and_crew = db.Column(db.String)
+
+    tv_series_id = db.Column(db.Integer, db.ForeignKey('tv_series.id'))
+
+
+    # Relationships
+    tv_series = db.relationship('TelevisionSeries', back_populates='show_season', cascade="all, delete")
+    episode = db.relationship('TvEpisode', back_populates='show_season', cascade="all, delete")
+
+    # Serialization Rules
+    serialize_rules = ('-tv_series.show_season',"episode.show_season")
+
+class TvEpisode(db.Model, SerializerMixin):
+    __tablename__ = 'episodes'
+
+    id = db.Column(db.Integer, primary_key = True)
+    episode_number = db.Column(db.String)
+    episode_name = db.Column(db.String)
+
+    director = db.Column(db.String)
+    writer = db.Column(db.String)
+    year_of_release = db.Column(db.String)
+    thumbnail = db.Column(db.String)
+    motion_picture_rating = db.Column(db.String)
+    episode_time = db.Column(db.String)
+
+    # either a summary or a description
+    summary = db.Column(db.String)
+
+    # Number 0-10
+    rating = db.Column(db.Integer)
+    popularity = db.Column(db.Integer)
+
+    # of clicks to help gauge interest / popularity
+    num_of_clicks = db.Column(db.Integer, default=0)
+    # Major stars of the film
+    stars = db.Column(db.String)
+    # Lighting ,etc credits
+    all_cast_and_crew = db.Column(db.String)
+    video_path = db.Column(db.String)
+
+    season_id = db.Column(db.Integer, db.ForeignKey('tv_seasons.id'))
+
+    # Relationships
+    show_season = db.relationship('TvSeason', back_populates='episode', cascade="all, delete")
+
+    # Serialization Rules
+    serialize_rules = ('-show_season.episode',)
+
 
 class Favorite(db.Model, SerializerMixin):
     __tablename__ = 'favorites'
