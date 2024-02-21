@@ -18,12 +18,14 @@ console.log("filtered movie data", filteredMovieData)
 console.log("All movies: ", moviesData)
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
-      <div className="flex flex-wrap -mx-2"> {/* Adjusted for consistent padding */}
+<div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
+<h2 className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mb-4 inline-block mx-auto">
+{genre.toUpperCase()}
+</h2>
+      <div className="flex flex-wrap -mx-2"> {/* Adjusted for spacing */}
         {filteredMovieData.map((movie, index) => (
-          <div key={index} className="w-1/6 px-2 mb-4">
+          <div key={index}>
             <MovieCard
-              key={movie.id}
               movieId={movie.id}
               thumbnail={movie.thumbnail}
               title={movie.title}
