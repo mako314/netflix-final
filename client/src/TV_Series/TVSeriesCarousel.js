@@ -1,9 +1,12 @@
 import React, {useRef} from "react";
 import TVSeriesCollection from "./TVSeriesCollection";
+import HomePage from "../HomePage/HomePage";
 
 
-function TVSeriesCarousel({ tvSeriesData }) {
+function TVSeriesCarousel({ tvSeriesData, homePage }) {
+
     const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
+    console.log("HOME PAGE", homePage)
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
             {genres.map((genre) => {
@@ -14,6 +17,16 @@ function TVSeriesCarousel({ tvSeriesData }) {
                 if (filteredTvSeries.length === 0) {
                     return null // Skip rendering if no TV series match the genre
                 }
+
+                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice#remove_all_elements_starting_from_index_2
+                // const smallerFilterForHomePage = filteredTvSeries.splice(5)
+
+                // https://stackoverflow.com/questions/26568536/remove-all-items-after-an-index
+
+                if(homePage = true){
+                filteredTvSeries.length = 8
+                }
+                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 
                 return (
                     <div key={genre} className="mb-8">

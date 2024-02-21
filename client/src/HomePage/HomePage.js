@@ -95,7 +95,7 @@ function HomePage({moviesData, tvSeriesData}){
 
                 <div className="mt-12">
                     <span className="block text-2xl font-semibold text-gray-800 mb-4 ml-4 ">TV Series</span>
-                    <TVSeriesCarousel tvSeriesData={tvSeriesData}/>
+                    <TVSeriesCarousel tvSeriesData={tvSeriesData} homePage={true}/>
                 </div>
                 </div>
 
