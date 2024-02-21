@@ -9,9 +9,9 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
 
     const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
 
-    // const handleTvGenreNav = (movieGenre) => {
-    //     navigate(`/tv/series/genre/${movieGenre}`, { state: { tvSeriesData } })
-    // }
+    const handleTvGenreNav = (movieGenre) => {
+        navigate(`/tv/series/genre/${movieGenre}`, { state: { tvSeriesData } })
+    }
 
     console.log("HOME PAGE", homePage)
     return (
@@ -39,7 +39,7 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
 
                 return (
                     <div key={genre} className="mb-8">
-                    <h2 className="bg-gray-800 text-gray-200 py-2 rounded text-sm font-semibold uppercase mb-4 text-center w-screen">
+                    <h2 className="bg-gray-800 text-gray-200 py-2 rounded text-sm font-semibold uppercase mb-4 text-center w-screen cursor-pointer" onClick={() => handleTvGenreNav(genre)}>
                         {genre.toUpperCase()}
                     </h2>
                         <div className="flex flex-wrap gap-4 overflow-x-auto">

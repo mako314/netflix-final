@@ -18,6 +18,7 @@ import Navbar from './NavbarAndFooter/Navbar';
 import TVSeriesCollection from './TV_Series/TVSeriesCollection';
 import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
 import TVSeriesCarousel from './TV_Series/TVSeriesCarousel';
+import TvSeriesByGenre from './TV_Series/TvSeriesByGenre';
 
 import {ApiProvider} from './Api';
 
@@ -175,6 +176,8 @@ function App() {
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
         <Route path='/login' element={<Login />} />
         <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
+        <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />
+
       </Routes>
 
     </div>
