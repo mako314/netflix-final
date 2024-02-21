@@ -1,8 +1,18 @@
 import React, {useRef} from "react";
 import MovieCollection from "./MovieCollection";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 function AllMoviesWithGenre({ moviesData }) {
+
     const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
+
+    const navigate = useNavigate()
+
+    const handleMovieGenreNav = (movieGenre) => {
+        navigate(`/movie/genre/${movieGenre}`, { state: { moviesData } })
+    }
+
+
     console.log("Movies data viewing from homepage", moviesData)
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
@@ -17,7 +27,7 @@ function AllMoviesWithGenre({ moviesData }) {
 
                 return (
                     <div key={genre} className="mb-8">
-                        <h2 className="bg-gray-800 text-gray-200 py-2 rounded text-sm font-semibold uppercase mb-4 text-center w-full">
+                        <h2 className="bg-gray-800 text-gray-200 py-2 rounded text-sm font-semibold uppercase mb-4 text-center w-screen cursor-pointer" onClick={() => handleMovieGenreNav(genre)}>
                             {genre.toUpperCase()}
                         </h2>
                         <div className="flex flex-nowrap gap-4 overflow-x-auto">
