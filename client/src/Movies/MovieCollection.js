@@ -6,7 +6,7 @@ function MovieCollection({ filteredMovieData, handleDeleteAsync }) {
   return (
     <div className="flex flex-wrap">
     {filteredMovieData?.map((movie, index) => (
-      <div key={index} className="w-1/6 px-2 mb-4">
+      <div key={index} className="w-1/4 px-2 mb-4">
           <MovieCard
           key={movie.id}
           movieId={movie.id}

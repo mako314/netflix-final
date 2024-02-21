@@ -16,12 +16,11 @@ function TVSeriesCarousel({ tvSeriesData }) {
                 }
 
                 return (
-                <div key={genre} className="mb-8 flex">
-                <div>
-                <h2 className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mb-4 w-screen">
-            {genre.toUpperCase()}
-        </h2>
-                        <div className="flex flex-nowrap gap-4 overflow-x-auto">
+                    <div key={genre} className="mb-8">
+                    <h2 className="bg-gray-800 text-gray-200 py-2 rounded text-sm font-semibold uppercase mb-4 text-center w-full">
+                        {genre.toUpperCase()}
+                    </h2>
+                        <div className="flex flex-wrap gap-4 overflow-x-auto">
                             {filteredTvSeries.map(tvSeries => (
                                 <TVSeriesCollection
                                     key={tvSeries.id}
@@ -29,7 +28,6 @@ function TVSeriesCarousel({ tvSeriesData }) {
                                 />
                             ))}
                         </div>
-                    </div>
                     </div>
 
                 )
