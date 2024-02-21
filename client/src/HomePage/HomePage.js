@@ -9,82 +9,41 @@ import TVSeriesCarousel from "../TV_Series/TVSeriesCarousel";
 
 function HomePage({moviesData, tvSeriesData}){
 
-
-    // let comedyMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
-    // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Drama</span>
-    // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Action</span>
-    // <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase">Music</span>
-    // let dramaMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("drama")))
-    // let actionMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("action")))
-    // let musicalMoviesFiltered  = moviesData.filter((item => item.genres.toLowerCase().includes("music")))
-    // let musicMoviesFiltered = moviesData.filter((item => item.genres.toLowerCase().includes("comedy")))
-    // console.log(moviesData)
-
-
-
-    // console.log("The Filtered Comedy Movies:", comedyMoviesFiltered)
-
-    // Clean this up a smidge or 3, This is a rough draft, should be done by Sunday
-
-    // Sunday was a sick day, going to do this all monday morning :_)
-
-    
-
-    const genres = ['comedy', 'drama', 'action', 'music']
-
-
-
-
-
     return(
         <>
         <div className="flex-grow ml-4">
         
-            <div className="mx-auto px-4 sm:mt-24 sm:px-6 md:mt-32 lg:px-8 xl:flex xl:items-center xl:justify-between
-                max-w-7xl"
-                style={{ backgroundImage: "url(https://wallpapers.com/images/hd/all-superhero-of-avengers-8umq9c3bffyuqmpb.jpg)",
-                         backgroundPosition: "top",
-                         backgroundSize: "contain"
-                        }}
-                >
-            {/* need a better height adjustment */}
-            <div className="lg:text-left lg:flex-grow">
-                <p className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl xl:text-7xl">Best TV
-                    shows and Movies right on your fingertips</p>
-                <p className="mt-3 text-base text-white sm:text-lg md:mt-5 md:text-xl md:max-w-3xl max-w-md">Join us to
-                    access thousands of amazing titles wherever you go. You can stream from your phone, tablet, or smart TV. No
-                    commercials. No annual contracts.</p>
-                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start xl:mt-10">
-                <div className="rounded-md shadow">
+        <div class="bg-white pb-6 sm:pb-8 lg:pb-12 mt-8">
 
+        <section class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <div class="mb-8 flex flex-wrap justify-between md:mb-16">
+            <div class="mb-6 flex w-full flex-col justify-center sm:mb-12 lg:mb-0 lg:w-1/3 lg:pb-24 lg:pt-48">
+                <h1 class="mb-4 text-4xl font-bold text-black sm:text-5xl md:mb-8 md:text-6xl">Introducing <br />Next Level Streaming</h1>
+
+                <p class="max-w-md leading-relaxed text-gray-500 xl:text-lg">Stream your favourite TV Shows, Movies, Live Sports and much more at your
+                comfort. Join the streaming revolution.</p>
+            </div>
+
+            <div class="mb-12 flex w-full md:mb-16 lg:w-2/3">
+                <div class="relative left-12 top-12 z-10 -ml-12 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:left-16 md:top-16 lg:ml-0">
+                <img src="https://images.unsplash.com/photo-1542340916-951bb72c8f74?auto=format&q=75&fit=crop&w=550&h=550" loading="lazy" alt="Photo by Kaung Htet" class="h-full w-full object-cover object-center" />
                 </div>
-                
+
+                <div class="overflow-hidden rounded-lg bg-gray-100 shadow-lg">
+                <img src="https://images.unsplash.com/photo-1586295166487-b265f7e83a7f?auto=format&q=75&fit=crop&w=550&h=550" loading="lazy" alt="Photo by Manny Moreno" class="h-full w-full object-cover object-center" />
                 </div>
-                
             </div>
-            <button fontFamily="Arial" type="submit" className="flex border border-transparent hover:bg-indigo-500 w-full
-                        items-center justify-center px-8 py-3 text-base font-medium text-white bg-indigo-600 rounded-md md:py-4
-                        md:text-lg md:px-10 xl:text-xl xl:px-12">Sign up</button>
-
             </div>
 
-            <div className="bg-white items-center justify-center text-gray-800 flex flex-col mt-8"> 
-            <div className="relative flex py-5 items-center">
-                <div className="flex-grow ">🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️</div>
-                <span className="flex-shrink mx-4 text-gray-400">The Latest</span>
-                <div className="flex-grow ">🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️</div>
-            </div>
-
-            </div>
+        </section>
+        </div>
 
         <div className="bg-white text-gray-800 flex flex-col min-h-screen">
 
 
 
-            <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center font-bold mb-8 px-4">Introducing Next Level
-                Streaming</p>
-            <p className="text-lg mb-10 px-4 text-center">Stream your favourite TV Shows, Movies, Live Sports and much more at your
-                comfort. Join the streaming revolution.</p>
+            <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center font-bold mb-8 px-4">Your Favorite Movies and Shows</p>
+            <p className="text-lg mb-10 px-4 text-center" > Immerse yourself in an endless selection of cinematic hits and binge-worthy series, all available to stream at your leisure. Become a part of our streaming community today.</p>
         
 
                 <div className="mb-6 px-4 rounded-lg">
