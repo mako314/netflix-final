@@ -27,7 +27,7 @@ function AllMoviesWithGenre({ moviesData }) {
 
                 return (
                     <div key={genre} className="mb-8">
-                        <h2 className="bg-gray-800 text-gray-200 py-2 rounded text-sm font-semibold uppercase mb-4 text-center w-screen cursor-pointer" onClick={() => handleMovieGenreNav(genre)}>
+                        <h2 className="bg-gray-800 text-gray-200 py-2 rounded text-sm font-semibold uppercase mb-4 text-center w-3/4 cursor-pointer" onClick={() => handleMovieGenreNav(genre)}>
                             {genre.toUpperCase()}
                         </h2>
                         <div className="flex flex-nowrap gap-4 overflow-x-auto">
