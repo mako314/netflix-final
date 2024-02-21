@@ -11,7 +11,7 @@ function HomePage({moviesData, tvSeriesData}){
 
     return(
         <>
-        <div className="flex-grow ml-4">
+        <div className="flex-grow ml-2">
         
         <div class="bg-white pb-6 sm:pb-8 lg:pb-12 mt-8">
 
@@ -26,11 +26,11 @@ function HomePage({moviesData, tvSeriesData}){
 
             <div class="mb-12 flex w-full md:mb-16 lg:w-2/3">
                 <div class="relative left-12 top-12 z-10 -ml-12 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:left-16 md:top-16 lg:ml-0">
-                <img src="https://images.unsplash.com/photo-1542340916-951bb72c8f74?auto=format&q=75&fit=crop&w=550&h=550" loading="lazy" alt="Photo by Kaung Htet" class="h-full w-full object-cover object-center" />
+                <img src="https://focus.independent.ie/thumbor/Ehp7A3O8_lvaIUiUQzHY4UEBO7k=/0x7:1500x834/550x550/prod-mh-ireland/1bd3aa2e-c10a-11ed-9ba1-0210609a3fe2.JPG" loading="lazy" alt="Photo by Kaung Htet" class="h-full w-full object-cover object-center" />
                 </div>
 
                 <div class="overflow-hidden rounded-lg bg-gray-100 shadow-lg">
-                <img src="https://images.unsplash.com/photo-1586295166487-b265f7e83a7f?auto=format&q=75&fit=crop&w=550&h=550" loading="lazy" alt="Photo by Manny Moreno" class="h-full w-full object-cover object-center" />
+                <img src="https://www.shoppersvoice.ca/wp-content/uploads/sites/3/2023/12/Movies_hero.jpg" loading="lazy" alt="Photo by Manny Moreno" class="h-full w-full object-cover object-center" />
                 </div>
             </div>
             </div>
