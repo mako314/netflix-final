@@ -89,31 +89,10 @@ function HomePage({moviesData, tvSeriesData}){
 
             <div className="mb-6 px-4 rounded-lg">
 
-            <div className="">
-                    {genres.map(genre => {
-                    const filteredMovies = moviesData.filter(movie => movie.genres.toLowerCase().includes(genre));
-                    return (
-                        filteredMovies.length > 0 && (
-                        <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
-                        <AllMoviesWithGenre moviesData={filteredMovies}/>
-                        </div>)
-                    )
-                    })}
-            </div>
+            <AllMoviesWithGenre moviesData={moviesData}/>
 
-            <div className="">
-                    {genres.map(genre => {
-                    const filteredTvSeries = tvSeriesData.filter(tvSeries => tvSeries.genres.toLowerCase().includes(genre));
-                    return (
-                        filteredTvSeries.length > 0 && (
-                        <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
-                        <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
-                        <TVSeriesCarousel tvSeriesData={filteredTvSeries}/>
-                        </div>)
-                    )
-                    })}
-            </div>
+            
+            <TVSeriesCarousel tvSeriesData={tvSeriesData}/>
 
             
             </div>
@@ -144,3 +123,29 @@ export default HomePage;
 
 
 </div> */}
+
+// {/* <div className="">
+// {genres.map(genre => {
+// const filteredMovies = moviesData.filter(movie => movie.genres.toLowerCase().includes(genre));
+// return (
+//     filteredMovies.length > 0 && (
+//     <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
+//     <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
+//     <AllMoviesWithGenre moviesData={filteredMovies}/>
+//     </div>)
+// )
+// })}
+// </div> */}
+
+// {/* <div className="">
+// {genres.map(genre => {
+// const filteredTvSeries = tvSeriesData.filter(tvSeries => tvSeries.genres.toLowerCase().includes(genre));
+// return (
+//     filteredTvSeries.length > 0 && (
+//     <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
+//     <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
+//     <TVSeriesCarousel tvSeriesData={filteredTvSeries}/>
+//     </div>)
+// )
+// })}
+// </div> */}
