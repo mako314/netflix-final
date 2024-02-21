@@ -23,7 +23,7 @@ function MovieDisplay({moviesData}){
     }
 
     const handleMovieGenreNav = (movieGenre) => {
-        navigate(`/movie/${movieGenre}`)
+        navigate(`/movie/${movieGenre}`, { state: { moviesData } })
     }
 
     // <p className="mt-4 text-indigo-500 font-semibold">{fullMovie.genres}</p>

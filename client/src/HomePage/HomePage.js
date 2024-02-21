@@ -2,7 +2,10 @@ import React from "react";
 
 //----Movie Imports---
 import MovieCollection from "../Movies/MovieCollection";
+import AllMoviesWithGenre from "../Movies/AllMoviesWithGenre";
+
 import TVSeriesCollection from "../TV_Series/TVSeriesCollection";
+import TVSeriesCarousel from "../TV_Series/TVSeriesCarousel";
 
 function HomePage({moviesData, tvSeriesData}){
 
@@ -66,10 +69,10 @@ function HomePage({moviesData, tvSeriesData}){
             </div>
 
             <div className="bg-white items-center justify-center text-gray-800 flex flex-col mt-8"> 
-            <div class="relative flex py-5 items-center">
-                <div class="flex-grow ">🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️</div>
-                <span class="flex-shrink mx-4 text-gray-400">The Latest</span>
-                <div class="flex-grow ">🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️</div>
+            <div className="relative flex py-5 items-center">
+                <div className="flex-grow ">🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️</div>
+                <span className="flex-shrink mx-4 text-gray-400">The Latest</span>
+                <div className="flex-grow ">🎞️🎞️🎞️🎞️🎞️🎞️🎞️🎞️</div>
             </div>
 
             </div>
@@ -93,7 +96,7 @@ function HomePage({moviesData, tvSeriesData}){
                         filteredMovies.length > 0 && (
                         <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
-                        <MovieCollection moviesData={filteredMovies} marginLeft={0}/>
+                        <AllMoviesWithGenre moviesData={filteredMovies}/>
                         </div>)
                     )
                     })}
@@ -106,7 +109,7 @@ function HomePage({moviesData, tvSeriesData}){
                         filteredTvSeries.length > 0 && (
                         <div key={genre} className="mt-4 mb-4"> {/* Key is necessary here because we're mapping over an array */}
                         <span className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mt-4 mb-4">{genre.toUpperCase()}</span>
-                        <TVSeriesCollection tvSeriesData={filteredTvSeries} marginLeft={0}/>
+                        <TVSeriesCarousel tvSeriesData={filteredTvSeries}/>
                         </div>)
                     )
                     })}

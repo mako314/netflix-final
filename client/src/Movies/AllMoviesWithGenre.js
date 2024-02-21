@@ -3,6 +3,7 @@ import MovieCollection from "./MovieCollection";
 
 function AllMoviesWithGenre({ moviesData }) {
     const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
+    console.log("Movies data viewing from homepage", moviesData)
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
             {genres.map((genre) => {

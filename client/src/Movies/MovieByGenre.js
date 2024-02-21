@@ -2,13 +2,15 @@ import React from "react";
 import MovieCard from "./MovieCard";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
-function MovieByGenre({moviesData}) {
+function MovieByGenre() {
   // Adjusting the padding and margin to give more space
-  // const { genre } = useParams()
+  const location = useLocation()
+  const { genre } = useParams()
+  const { moviesData } = location.state || {}
 
-//   const filteredTvSeries = tvSeriesData.filter(tvSeries => 
-//     tvSeries.genres.toLowerCase().includes(genre)
-// )
+  const filteredMovieData = moviesData.filter(movie => 
+    movie.genres.toLowerCase().includes(genre)
+)
 
   return (
     <div className="flex flex-wrap">
