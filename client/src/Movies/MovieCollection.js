@@ -1,11 +1,11 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieCollection({ filteredMovieData, handleDeleteAsync, marginLeft }) {
+function MovieCollection({ filteredMovieData, handleDeleteAsync }) {
   // Adjusting the padding and margin to give more space
   return (
     <div className="flex flex-wrap">
-    {filteredMovieData.map((movie, index) => (
+    {filteredMovieData?.map((movie, index) => (
       <div key={index} className="w-1/6 px-2 mb-4">
           <MovieCard
           key={movie.id}

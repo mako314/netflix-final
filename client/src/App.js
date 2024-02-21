@@ -34,7 +34,7 @@ function App() {
 
   const apiUrl = process.env.REACT_APP_API_URL
 
-  console.log("THE API URL", apiUrl)
+  // console.log("THE API URL", apiUrl)
 
   useEffect(() => {
   // let ignore = false
@@ -135,9 +135,9 @@ function App() {
   }, [])
 
   console.log("THE MOVIE DATA STATE:", moviesData)
-  console.log("THE USER DATA STATE:", usersData)
-  console.log("THE FAVORITE DATA STATE:", favoritesData)
-  console.log("THE TV SERIES DATA STATE:", tvSeriesData)
+  // console.log("THE USER DATA STATE:", usersData)
+  // console.log("THE FAVORITE DATA STATE:", favoritesData)
+  // console.log("THE TV SERIES DATA STATE:", tvSeriesData)
 
   const handleDeleteAsync = (movieID) => {
     const movieToBeDeleted = moviesData.filter(item => item.id !== movieID)
@@ -174,7 +174,7 @@ function App() {
         <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/movie/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
+        <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
       </Routes>
 
     </div>
