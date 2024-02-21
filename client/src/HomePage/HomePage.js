@@ -87,16 +87,17 @@ function HomePage({moviesData, tvSeriesData}){
                 comfort. Join the streaming revolution.</p>
         
 
-            <div className="mb-6 px-4 rounded-lg">
+                <div className="mb-6 px-4 rounded-lg">
+                <div className="mb-8">
+                    <span className="block text-2xl font-semibold text-gray-800 mb-4 ml-4 ">Movies</span>
+                    <AllMoviesWithGenre moviesData={moviesData}/>
+                </div>
 
-            <AllMoviesWithGenre moviesData={moviesData}/>
-
-            
-            <TVSeriesCarousel tvSeriesData={tvSeriesData}/>
-
-            
-            </div>
-
+                <div className="mt-12">
+                    <span className="block text-2xl font-semibold text-gray-800 mb-4 ml-4 ">TV Series</span>
+                    <TVSeriesCarousel tvSeriesData={tvSeriesData}/>
+                </div>
+                </div>
 
             {/* <div>
             <button fontFamily="Arial" type="submit" className="hover:bg-indigo-500 bg-indigo-600 rounded-lg shadow-lg text-white
