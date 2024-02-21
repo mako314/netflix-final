@@ -23,7 +23,7 @@ function MovieDisplay({moviesData}){
     }
 
     const handleMovieGenreNav = (movieGenre) => {
-        navigate(`/movie/${movieGenre}`, { state: { moviesData } })
+        navigate(`/movie/genre/${movieGenre}`, { state: { moviesData } })
     }
 
     // <p className="mt-4 text-indigo-500 font-semibold">{fullMovie.genres}</p>
@@ -80,7 +80,7 @@ function MovieDisplay({moviesData}){
                     <p>Stars: {fullMovie.stars}</p>
                     <div className="flex flex-wrap">
                     {splitGenres?.map((genre, index) => (
-                        <p key={index} className="text-indigo-500 font-semibold mr-2" onClick={() => handleMovieGenreNav(genre)}>
+                        <p key={index} className="text-indigo-500 font-semibold mr-2 cursor-pointer" onClick={() => handleMovieGenreNav(genre)}>
                         {genre},
                         </p>
                     ))}

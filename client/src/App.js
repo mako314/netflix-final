@@ -174,7 +174,7 @@ function App() {
         <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
         <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/movie/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
+        <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
       </Routes>
 
     </div>

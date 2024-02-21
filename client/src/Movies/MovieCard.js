@@ -43,9 +43,6 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
     navigate(`/movie/${movieId}`, { state: { fullMovie } })
   }
 
-  // Define a base width for the card, adjust this as needed
-  const baseWidth = "w-1/4"; // Starting at 1/4 of the width of the flex container
-  const hoverWidth = "w-1/3"; // Expanding to 1/3 of the width of the flex container on hover
 
   return (
 

@@ -8,28 +8,35 @@ function MovieByGenre() {
   const { genre } = useParams()
   const { moviesData } = location.state || {}
 
+  const lowerCaseGenre = genre.toLocaleLowerCase()
+
   const filteredMovieData = moviesData.filter(movie => 
-    movie.genres.toLowerCase().includes(genre)
-)
+    movie.genres.toLowerCase().includes(lowerCaseGenre)
+  )
+
+console.log("filtered movie data", filteredMovieData)
+console.log("All movies: ", moviesData)
 
   return (
-    <div className="flex flex-wrap">
-    {moviesData.map((movie, index) => (
-      <div key={index} className="w-1/6 px-2 mb-4">
-          <MovieCard
-          key={movie.id}
-          movieId={movie.id}
-          thumbnail={movie.thumbnail}
-          title={movie.title}
-          director={movie.director}
-          year_of_release={movie.year_of_release}
-          run_time={movie.run_time}
-          trailerLink={movie.trailer}
-          fullMovie={movie}
-        />
+    <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
+      <div className="flex flex-wrap -mx-2"> {/* Adjusted for consistent padding */}
+        {filteredMovieData.map((movie, index) => (
+          <div key={index} className="w-1/6 px-2 mb-4">
+            <MovieCard
+              key={movie.id}
+              movieId={movie.id}
+              thumbnail={movie.thumbnail}
+              title={movie.title}
+              director={movie.director}
+              year_of_release={movie.year_of_release}
+              run_time={movie.run_time}
+              trailerLink={movie.trailer}
+              fullMovie={movie}
+            />
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
+    </div>
   )
 }
 
