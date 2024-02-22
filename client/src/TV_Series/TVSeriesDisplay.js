@@ -11,17 +11,20 @@ function TVSeriesDisplay(){
       showTitle:"Show",
       all_season_test: {},
     })
-
+    
+    // Passing state with useLocation from react router dom,
     const location = useLocation()
+
+    // Retrieving state we sent over in navigation.
     const { fullTVSeries } = location.state || {}
 
-    console.log("Full selected TV Series Data:",fullTVSeries )
+    // console.log("Full selected TV Series Data:",fullTVSeries )
 
     // Once a user pauses / clicks item added to watch history. After pausing and navigating away from a page, a users watch time is then logged, so when they come back to the episode it starts at that time.
 
     // continue where I left off, restart, etc
 
-    console.log("The video episode URL, looking for AWS:", episodeInformation.videoLocation)
+    // console.log("The video episode URL, looking for AWS:", episodeInformation.videoLocation)
 
 
 
@@ -51,6 +54,7 @@ function TVSeriesDisplay(){
           </div>
 
           <div className="aspect-w-16 aspect-h-9">
+            {/* Video created with default html element, keep it universal. 😎 */}
             <video controls key={episodeInformation.videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} className="w-full h-auto">
               <source src={episodeInformation.videoLocation} type="video/mp4" />
             </video>
