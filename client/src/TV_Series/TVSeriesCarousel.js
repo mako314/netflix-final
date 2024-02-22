@@ -60,9 +60,8 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
         return alphabetSort ? textA.localeCompare(textB) : textB.localeCompare(textA);
     })
 
-    
 
-
+    // https://www.tutorialspoint.com/how-to-create-a-dropdown-list-using-javascript
 
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">

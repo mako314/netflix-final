@@ -27,7 +27,36 @@ function TVSeriesDisplay(){
     // console.log("The video episode URL, looking for AWS:", episodeInformation.videoLocation)
 
 
+    // Used for finding the timestamp a user paused at
+    // https://stackoverflow.com/questions/61625602/how-can-i-adapt-this-js-code-to-my-reactjs-app-so-that-i-can-customize-my-video
+    // https://github.com/video-react/video-react/blob/master/src/components/Video.js#L572
+    // https://stackoverflow.com/questions/76471687/how-can-i-make-a-video-play-at-the-timestamp-is-was-previously-paused-at
+    // https://stackoverflow.com/questions/29908050/react-js-video-element-set-current-play-time-from-react-props
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/timeupdate_event - < this is like every second
+    // best link along with the github one above:
+    // https://stackoverflow.com/questions/61625602/how-can-i-adapt-this-js-code-to-my-reactjs-app-so-that-i-can-customize-my-video
+    const handleTimeUpdated = (e) => {
+      // do something on time update
+      console.log(e.timeStamp)
+    }
 
+    // onPause={this.handlePause}
+
+    // https://reactrouter.com/en/main/hooks/use-before-unload
+    // https://stackoverflow.com/questions/62792342/in-react-router-v6-how-to-check-form-is-dirty-before-leaving-page-route
+    // https://github.com/remix-run/react-router/blob/v3/docs/Glossary.md#leavehook
+    // https://github.com/remix-run/react-router/blob/v3/docs/Glossary.md#routerstate
+
+
+    // Jump back to the specific time:
+    // https://stackoverflow.com/questions/62739769/jump-to-specific-time-in-videojs-using-react-hooks
+    // https://stackoverflow.com/questions/47643091/html5-video-start-video-at-certain-time-and-play-for-x-amount-of-time
+
+
+    // Current duration if needed: 
+    // I could see this being needed with math to calculcate the time you are in the video, but hopefully can just start at time stamp
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/duration
+    
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
       <div className="flex flex-grow" 
@@ -55,7 +84,7 @@ function TVSeriesDisplay(){
 
           <div className="aspect-w-16 aspect-h-9">
             {/* Video created with default html element, keep it universal. 😎 */}
-            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} className="w-full h-auto">
+            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} onPause={handleTimeUpdated} className="w-full h-auto">
               <source src={episodeInformation.videoLocation} type="video/mp4" />
             </video>
           </div>

@@ -55,7 +55,7 @@ function AllMoviesWithGenre({ moviesData }) {
         return alphabetSort ? textA.localeCompare(textB) : textB.localeCompare(textA);
     })
 
-
+    // https://www.tutorialspoint.com/how-to-create-a-dropdown-list-using-javascript            
 
     console.log("Movies sorted", sortedMovies)
     return (

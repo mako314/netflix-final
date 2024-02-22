@@ -158,6 +158,14 @@ function App() {
 
   // }
 
+  // https://github.com/remix-run/react-router/blob/v3/docs/guides/RouteConfiguration.md#enter-and-leave-hooks
+  // https://github.com/remix-run/react-router/blob/v3/docs/Glossary.md#leavehook
+  // https://stackoverflow.com/questions/32841757/detecting-user-leaving-page-with-react-router
+
+  const onLeaveTest = () => {
+    console.log("Testing leaving this display page")
+  }
+
   return (
     // UseContext gets called here
     <ApiProvider> 
@@ -173,7 +181,7 @@ function App() {
         <Route path='/movies' element={<AllMoviesWithGenre moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
-        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
+        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} onLeave={ onLeaveTest }/>
         <Route path='/login' element={<Login />} />
         <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
         <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />
