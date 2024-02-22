@@ -47,6 +47,27 @@ const UserDataTable = ({usersData, deleteUser}) => {
 }
 
 const AddUserForm = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const getCookie = (name) => {
+    let cookieValue = null;
+
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim()
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+                break
+            }
+        }
+    }
+
+    return cookieValue
+  }
+
   const addUser = (event) => {
     event.preventDefault();
 
@@ -57,6 +78,27 @@ const AddUserForm = () => {
     for (let [key, value] of formData.entries()) {
         userData[key] = value;
     }
+
+    fetch(`${apiUrl}users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": getCookie("csrf_access_token"),
+      },
+      credentials: "include",
+      body: JSON.stringify(userData),
+    }).then((response) => {
+      if (response.ok) {
+        console.log(`A new user has successfully been added`)
+      }
+      else {
+        response.json().then((errorData) => {
+          console.error('Error Response:', errorData)
+        })
+      }
+    }).catch((error) => {
+      console.error('Fetch Error:', error)
+    })
 
     console.log(userData);
   }
@@ -286,7 +328,7 @@ function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
             activeIndex === index ? "block" : "hidden"
           }`}
         >
-          {index == 0 &&
+          {index === 0 &&
             <div>
               <AccordionItem 
                 contents={<UserDataTable usersData={usersData} deleteUser={deleteUser}/>}
@@ -301,7 +343,7 @@ function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
             </div>
           }
 
-          {index == 1 &&
+          {index === 1 &&
             <tbody>
             <tr>
                 <th>ID</th>
@@ -329,7 +371,7 @@ function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
             </tbody>
           }
 
-          {index == 2 &&
+          {index === 2 &&
             <tbody>
               <tr>
                   <th>ID</th>

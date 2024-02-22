@@ -128,7 +128,19 @@ class Users(Resource):
 
         # return make_response(users, 200)
 
-    def post(self): 
+    @jwt_required()
+    def post(self):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
         data = request.get_json()
 
         try:
@@ -136,17 +148,17 @@ class Users(Resource):
                 first_name = data['first_name'],
                 last_name = data['last_name'],
                 email = data['email'],
-                phone = data[''],
+                phone = data['phone'],
                 _password_hash = data['password'],
-                date_of_birth = data['data_of_birth'],
-                profile_image = ['profile_image'],
-                movie_preferences = ['movie_preferences'],
-                country = ['country'],
-                state = ['state'],
-                city = ['city'],
-                address_line_1 = ['address_line_1'],
-                address_line_2 = ['address_line_2'],
-                postal_code = ['postal_code'],
+                date_of_birth = data['date_of_birth'],
+                profile_image = data['profile_image'],
+                movie_preferences = "",
+                country = data['country'],
+                state = data['state'],
+                city = data['city'],
+                address_line_1 = data['address_line_1'],
+                address_line_2 = data['address_line_2'],
+                postal_code = data['postal_code'],
             )
 
             db.session.add(new_user)
