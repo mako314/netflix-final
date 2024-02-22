@@ -4,6 +4,8 @@ import TVSeriesCarousel from "./TVSeriesCarousel";
 
 function TVSeriesCollection ({tvSeriesData, marginLeft}){
 
+  // This component simply maps over the data and creates cards.
+
     return (
         <div className="flex flex-wrap">
           {tvSeriesData.map((tvSeries, index) => (

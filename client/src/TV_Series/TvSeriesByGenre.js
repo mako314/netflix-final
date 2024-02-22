@@ -4,19 +4,29 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 function TvSeriesByGenre() {
   // Adjusting the padding and margin to give more space
+
+  // Passing state with useLocation from react router dom,
   const location = useLocation()
+
+  // Use params attached at end of URL to identify the genre, just a string we'll use for the .includes
   const { genre } = useParams()
+
+  // Retrieving state we sent over in navigation.
   const { tvSeriesData } = location.state || {}
 
+  // Lowercase the genre, making it easier to compare
   const lowerCaseGenre = genre.toLocaleLowerCase()
 
+  // Filter the tv data by the tv series genre (also lowercased) that matches the genre above 
   const filteredTvData = tvSeriesData.filter(tvSeries => 
     tvSeries.genres.toLowerCase().includes(lowerCaseGenre)
   )
 
-console.log("filtered movie data", filteredTvData)
-console.log("All movies: ", tvSeriesData)
+  // Console logs to double check
+  // console.log("filtered movie data", filteredTvData)
+  // console.log("All movies: ", tvSeriesData)
 
+  // We use same styling here as tvSeriesCarousel + collection.
   return (
 <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
 <h2 className="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm font-semibold uppercase mb-4 inline-block mx-auto">
