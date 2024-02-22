@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import MovieCollection from "./MovieCollection";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
