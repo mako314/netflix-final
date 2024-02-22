@@ -25,12 +25,13 @@ function AllMoviesWithGenre({ moviesData }) {
     // https://stackoverflow.com/questions/10123953/how-to-sort-an-object-array-by-date-property
     // userSortOption, checks whether newest is selected, only other option here is oldest, and sorts by that
 
+    // Allows users to sort by either newest or oldest films, 
     let userSortOption = dateSort === 'newest' ?
     ((a, b) => new Date(b.release_date) - new Date(a.release_date)) : // Newest first
     ((a, b) => new Date(a.release_date) - new Date(b.release_date)) // Oldest first
 
     // console.log(typeof(userSortOption))
-
+    // Create new variable to hold the data when sorting
     const sortedMovies = moviesData.sort(userSortOption)
 
 
