@@ -5,6 +5,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 
 function TVSeriesCarousel({ tvSeriesData, homePage }) {
+    // State to hold filter condtions, can likely become one state ? Wonder the pros / cons
     const [dateSort, setDateSort] = useState('newest')
     const [alphabetSort, setAlphabetSort] = useState(true)
 
@@ -13,15 +14,17 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
 
     const genres = ['comedy', 'drama', 'action', 'music'] // Just increase the number of genres for whatever we're aiming for
 
+    // Navigate to that specific genre page, i.e., comedies, dramas, etc.
     const handleTvGenreNav = (movieGenre) => {
         navigate(`/tv/series/genre/${movieGenre}`, { state: { tvSeriesData } })
     }
-
+    // Handle capturing the value logged by the users choice when sorting by Newest or Oldest.
     const handleDateSort = (event) => {
         // console.log('Selected value:', event.target.value)
         setDateSort(event.target.value)
     }
 
+    // Handle capturing the value logged by the users choice when sorting A-Z, or Z-A. No need for an else because return pulls you out of the function.
     const handleAlphabetSort = (event) => {
         // console.log('Selected value:', event.target.value)
         if (event.target.value === "true"){
@@ -30,22 +33,29 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
         setAlphabetSort(false)
     }
 
+    // Sort the data by newest / oldest based on their release date. Create new date object, compare.
     let userSortOption = dateSort === 'newest' ?
     ((a, b) => new Date(b.release_date) - new Date(a.release_date)) : // Newest first
     ((a, b) => new Date(a.release_date) - new Date(b.release_date)) // Oldest first
 
     // console.log(typeof(userSortOption))
-
+    // Create new variable to hold the data when sorting
     const sortedSeries = tvSeriesData.sort(userSortOption)
 
     // https://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
     // https://stackoverflow.com/questions/48111425/sort-objects-in-an-array-alphabetically-based-on-one-property
     // https://stackoverflow.com/questions/54298232/sorting-an-array-of-objects-alphabetically
+    // https://stackoverflow.com/questions/12900058/how-can-i-sort-a-javascript-array-of-objects-numerically-and-then-alphabetically
+
+
+    // Handles sorting the tv series by their title alphabetically, taking in a,b is standard syntax. Compare their titles uppercased, however this may be unnecessary as I believe localeCompare handles this already.
+    // https://stackoverflow.com/questions/8900732/sort-objects-in-an-array-alphabetically-on-one-property-of-the-array
+    // Removed upper casing.
 
     const alphabeticalSort = sortedSeries.sort(function (a, b) {
-        var textA = a.title.toUpperCase();
-        var textB = b.title.toUpperCase();
+        var textA = a.title
+        var textB = b.title
       
         return alphabetSort ? textA.localeCompare(textB) : textB.localeCompare(textA);
     })
