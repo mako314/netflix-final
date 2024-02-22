@@ -9,8 +9,8 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
   const apiUrl = useContext(ApiUrlContext)
   const [isHovered, setIsHovered] = useState(false);
 
-  console.log("TRAILER LINK:", trailerLink)
-  console.log("INSIDE OF THE MOVIE CARD:", handleDeleteAsync)
+  // console.log("TRAILER LINK:", trailerLink)
+  // console.log("INSIDE OF THE MOVIE CARD:", handleDeleteAsync)
 
   const handleMovieDelete = () => {
     fetch(`${apiUrl}movies/${movieId}`, {

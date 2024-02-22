@@ -5,7 +5,7 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
 
   const frameStyling = whereRendered === "Movies" ? "absolute top-0 left-0 w-full h-full" : "absolute top-0 w-full h-full"
   // https://developers.google.com/youtube/player_parameters
-  console.log("THE EPISODE COUNT:",)
+  // console.log("THE EPISODE COUNT:",)
 
   // style={{ paddingBottom: '34.25%' }}
   return (
