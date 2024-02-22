@@ -108,7 +108,7 @@ class Movie(db.Model, SerializerMixin):
     title = db.Column(db.String)
     director = db.Column(db.String)
     writer = db.Column(db.String)
-    year_of_release = db.Column(db.String)
+    release_date = db.Column(db.String)
     motion_picture_rating = db.Column(db.String)
     run_time = db.Column(db.String)
     thumbnail = db.Column(db.String)

@@ -16,6 +16,16 @@ function AllMoviesWithGenre({ moviesData }) {
     console.log("Movies data viewing from homepage", moviesData)
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
+
+            {/* <label for="foods">What do you want to eat?</label><br /> */}
+            <select 
+                className="block appearance-none w-auto bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-2"
+            >
+                <option value="" disabled>--Please choose an option--</option>
+                <option name="newest_option" value="newest" id="newest">Newest First</option>
+                <option name="oldest_option" value="oldest" id="oldest">Oldest First</option>
+        </select>
+
             {genres.map((genre) => {
                 const filteredMovieSeries = moviesData.filter(tvSeries => 
                     tvSeries.genres.toLowerCase().includes(genre)

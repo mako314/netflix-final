@@ -14,8 +14,8 @@ function MovieByGenre() {
     movie.genres.toLowerCase().includes(lowerCaseGenre)
   )
 
-console.log("filtered movie data", filteredMovieData)
-console.log("All movies: ", moviesData)
+// console.log("filtered movie data", filteredMovieData)
+// console.log("All movies: ", moviesData)
 
   return (
 <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
