@@ -53,7 +53,7 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
     // https://stackoverflow.com/questions/8900732/sort-objects-in-an-array-alphabetically-on-one-property-of-the-array
     // Removed upper casing.
 
-    const alphabeticalSort = sortedSeries.sort(function (a, b) {
+    sortedSeries.sort(function (a, b) {
         var textA = a.title
         var textB = b.title
       
@@ -94,7 +94,7 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
 
 
             {genres.map((genre) => {
-                const filteredTvSeries = alphabeticalSort.filter(tvSeries => 
+                const filteredTvSeries = sortedSeries.filter(tvSeries => 
                     tvSeries.genres.toLowerCase().includes(genre)
                 )
 
