@@ -69,7 +69,7 @@ function MovieDisplay({moviesData}){
     
                 {/* Movie Details */}
                 <div className="p-4 lg:p-8">
-                    <p className="text-gray-900 text-2xl lg:text-4xl font-bold mb-2">{fullMovie.title}, {fullMovie.year_of_release}</p>
+                    <p className="text-gray-900 text-2xl lg:text-4xl font-bold mb-2">{fullMovie.title}, {fullMovie.release_date}</p>
                     <p className="mt-2 text-gray-600">{fullMovie.summary}</p>
                 </div>
     
