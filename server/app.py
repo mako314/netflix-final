@@ -127,7 +127,40 @@ class Users(Resource):
         return response
 
         # return make_response(users, 200)
-    
+
+    def post(self): 
+        data = request.get_json()
+
+        try:
+            new_user = User (
+                first_name = data['first_name'],
+                last_name = data['last_name'],
+                email = data['email'],
+                phone = data[''],
+                _password_hash = data['password'],
+                date_of_birth = data['data_of_birth'],
+                profile_image = ['profile_image'],
+                movie_preferences = ['movie_preferences'],
+                country = ['country'],
+                state = ['state'],
+                city = ['city'],
+                address_line_1 = ['address_line_1'],
+                address_line_2 = ['address_line_2'],
+                postal_code = ['postal_code'],
+            )
+
+            db.session.add(new_user)
+
+            new_user.password_hash = new_user._password_hash
+
+            db.session.commit()
+
+            response = make_response(new_user.to_dict(), 201)
+            return response
+
+        except ValueError:
+            return make_response({"error" : "Validation error, please try again"}, 400)
+                
 api.add_resource(Users, '/users')
 
 class UserByID(Resource):

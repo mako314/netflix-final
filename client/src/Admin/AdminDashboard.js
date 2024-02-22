@@ -1,8 +1,52 @@
 import React, { useContext, useState } from "react";
 import ApiUrlContext from "../Api";
 import { CurrentUserContext } from "../UserLogin/UserContext";
+import AccordionItem from "./AccordionItem";
 
-function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
+const UserDataTable = ({usersData, deleteUser}) => {
+
+  return (
+    <div>
+      <div className="border-gray-300 mb-4 rounded border">       
+        <tbody>
+
+          <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Date of Birth</th>
+          </tr>
+
+          {
+            usersData.map((user) =>
+            <tr key={user.id}>
+
+                <td>{user.id}</td>
+                <td>{user.first_name}</td>
+                <td>{user.last_name}</td>
+                <td>{user.email}</td>
+                <td>{user.date_of_birth}</td>
+                <td>
+
+                    <button className="bg-red-600" type="button" onClick={() => deleteUser(user.id)}>
+                        &#128465;&#65039;
+                    </button>
+
+                </td>
+
+            </tr>
+            )
+          }
+
+        </tbody>
+      </div>
+    </div>
+    
+  )
+}
+
+function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
     const { currentUser } = CurrentUserContext();
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -14,7 +58,7 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
           const cookies = document.cookie.split(';')
           for (let i = 0; i < cookies.length; i++) {
               const cookie = cookies[i].trim()
-              // Does this cookie string begin with the name we want?
+
               if (cookie.substring(0, name.length + 1) === (name + '=')) {
                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
                   break
@@ -62,7 +106,9 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
+              "X-CSRF-TOKEN": getCookie("csrf_access_token"),
             },
+            credentials: "include",
             body: JSON.stringify({
                 id: movieID,
             }),
@@ -90,7 +136,9 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
+              "X-CSRF-TOKEN": getCookie("csrf_access_token"),
             },
+            credentials: "include",
             body: JSON.stringify({
                 id: tvSeriesID,
             }),
@@ -130,54 +178,66 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
 		},
 	];
 
-    return (
-        <div>
-            {accordionData.map((item, index) => (
-				<div
-					className="border-gray-300 mb-4 rounded border"
-					key={index}
-				>
-					<div
-						className="accordion-header bg-gray-100 cursor-pointer px-4 py-2"
-						onClick={() => handleClick(index)}
-					>
-						{item.title}
-					</div>
-					<div
-						className={`accordion-content bg-white px-4 pb-4 pt-2 ${
-							activeIndex === index ? "block" : "hidden"
-						}`}
-					>
-            {index == 0 && 
-             <tbody>
-             <tr>
-                 <th>ID</th>
-                 <th>First Name</th>
-                 <th>Last Name</th>
-                 <th>Email</th>
-                 <th>Date of Birth</th>
-             </tr>
-              {
-                item.content.map((user) =>
-                <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.first_name}</td>
-                    <td>{user.last_name}</td>
-                    <td>{user.email}</td>
-                    <td>{user.date_of_birth}</td>
-                    <td>
-                        <button className="bg-red-600" type="button" onClick={() => deleteUser(user.id)}>
-                            &#128465;&#65039;
-                        </button>
-                    </td>
-                </tr>
-                )
-              }
-              </tbody>
-            }
+  return (
+      <div>
+          {accordionData.map((item, index) => (
+      <div
+        className="border-gray-300 mb-4 rounded border"
+        key={index}
+      >
+        <div
+          className="accordion-header bg-gray-100 cursor-pointer px-4 py-2"
+          onClick={() => handleClick(index)}
+        >
+          {item.title}
+        </div>
+        <div
+          className={`accordion-content bg-white px-4 pb-4 pt-2 ${
+            activeIndex === index ? "block" : "hidden"
+          }`}
+        >
+          {index == 0 &&
+            <div>
+              <AccordionItem 
+                contents={<UserDataTable usersData={usersData} deleteUser={deleteUser}/>}
+                title={"All DNN Users"}
+              />
+              <AccordionItem>
 
-            {index == 1 &&
-              <tbody>
+              </>
+            </div>
+          }
+
+          {index == 1 &&
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Thumbnail</th>
+                <th>Popularity</th>
+                <th>Click Count</th>
+            </tr>
+              {
+                  item.content.map((movie) =>
+                  <tr key={movie.id}>
+                      <td>{movie.id}</td>
+                      <td>{movie.title}</td>
+                      <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
+                      <td>{movie.popularity}</td>
+                      <td>{movie.num_of_clicks}</td>
+                      <td>
+                          <button className="bg-red-600" type="button" onClick={() => deleteMovie(movie.id)}>
+                              &#128465;&#65039;
+                          </button>
+                      </td>
+                  </tr>
+                  )
+              }
+            </tbody>
+          }
+
+          {index == 2 &&
+            <tbody>
               <tr>
                   <th>ID</th>
                   <th>Title</th>
@@ -185,130 +245,38 @@ function AdminDashboard( { usersData, tvSeriesData, moviesData } ) {
                   <th>Popularity</th>
                   <th>Click Count</th>
               </tr>
-                {
-                    item.content.map((movie) =>
-                    <tr key={movie.id}>
-                        <td>{movie.id}</td>
-                        <td>{movie.title}</td>
-                        <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
-                        <td>{movie.popularity}</td>
-                        <td>{movie.num_of_clicks}</td>
-                        <td>
-                            <button className="bg-red-600" type="button" onClick={() => deleteMovie(movie.id)}>
-                                &#128465;&#65039;
-                            </button>
-                        </td>
-                    </tr>
-                    )
-                }
-              </tbody>
-            }
-
-            {index == 2 &&
-              <tbody>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Thumbnail</th>
-                    <th>Popularity</th>
-                    <th>Click Count</th>
+              {
+                item.content.map((tvSeries) =>
+                <tr key={tvSeries.id}>
+                    <td>{tvSeries.id}</td>
+                    <td>{tvSeries.title}</td>
+                    <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
+                    <td>{tvSeries.popularity}</td>
+                    <td>{tvSeries.num_of_clicks}</td>
+                    <td>
+                        <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
+                            &#128465;&#65039;
+                        </button>
+                    </td>
                 </tr>
-                {
-                  item.content.map((tvSeries) =>
-                  <tr key={tvSeries.id}>
-                      <td>{tvSeries.id}</td>
-                      <td>{tvSeries.title}</td>
-                      <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
-                      <td>{tvSeries.popularity}</td>
-                      <td>{tvSeries.num_of_clicks}</td>
-                      <td>
-                          <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
-                              &#128465;&#65039;
-                          </button>
-                      </td>
-                  </tr>
-                  )
-                }
-              </tbody>
-            }
-
-					</div>
-				</div>
-			))}
-
-            <p>Hi {currentUser.first_name}</p>
-            <div>
-                <p>Need to add a way to retrieve all users... maybe delete them</p>
-                <p>Need to add a way to edit existing movies and tv_series</p>
-                <p>Need to add a way to add new tv series and movies</p>
-            </div>
-
-            <div className="m-6">
-             
-              <p>User Div</p>
-          </div>
-
-            <div className="m-6">
-                <p>Movie Div</p>
-
-                <tbody>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Thumbnail</th>
-                            <th>Popularity</th>
-                            <th>Click Count</th>
-                        </tr>
-                    {
-                        moviesData.map((movie) =>
-                        <tr key={movie.id}>
-                            <td>{movie.id}</td>
-                            <td>{movie.title}</td>
-                            <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
-                            <td>{movie.popularity}</td>
-                            <td>{movie.num_of_clicks}</td>
-                            <td>
-                                <button className="bg-red-600" type="button" onClick={() => deleteMovie(movie.id)}>
-                                    &#128465;&#65039;
-                                </button>
-                            </td>
-                        </tr>
-                        )
-                    }
-                </tbody>
-            </div>
-
-            <div className="m-6">
-                <p>TV Series Div</p>
-                <tbody>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Thumbnail</th>
-                            <th>Popularity</th>
-                            <th>Click Count</th>
-                        </tr>
-                    {
-                        tvSeriesData.map((tvSeries) =>
-                        <tr key={tvSeries.id}>
-                            <td>{tvSeries.id}</td>
-                            <td>{tvSeries.title}</td>
-                            <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
-                            <td>{tvSeries.popularity}</td>
-                            <td>{tvSeries.num_of_clicks}</td>
-                            <td>
-                                <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
-                                    &#128465;&#65039;
-                                </button>
-                            </td>
-                        </tr>
-                        )
-                    }
-                </tbody>
-            </div>
+                )
+              }
+            </tbody>
+          }
 
         </div>
-    )
+      </div>
+    ))}
+
+          <p>Hi {currentUser.first_name}</p>
+          <div>
+              <p>Need to add a way to retrieve all users... maybe delete them</p>
+              <p>Need to add a way to edit existing movies and tv_series</p>
+              <p>Need to add a way to add new tv series and movies</p>
+          </div>
+
+      </div>
+  )
 }
 
 export default AdminDashboard;
