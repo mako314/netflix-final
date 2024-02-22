@@ -187,7 +187,6 @@ if __name__ == '__main__':
             all_cast_and_crew="[Complete list of cast and crew]",
             genres="Comedy, Drama, Music, Romance",
         ),
-
         Movie(
             title="Parasite",
             director="Bong Joon-ho",
@@ -204,7 +203,9 @@ if __name__ == '__main__':
             stars="Kang-ho Song, Sun-kyun Lee, Yeo-jeong Jo, Woo-sik Choi, So-dam Park",
             all_cast_and_crew="[Complete list of cast and crew]",
             genres="Comedy, Drama, Thriller",
-        )]
+        )
+        
+        ]
 
         db.session.add_all(movie_list)
         print(movie_list)
