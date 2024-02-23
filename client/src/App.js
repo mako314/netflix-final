@@ -33,6 +33,8 @@ function App() {
   const [favoritesData, setFavoritesData] = useState([])
   const [tvSeriesData, setTVSeriesData] = useState([]);
 
+  const [testingTimeStamp, setTestingTimeStamp] = useState(null)
+
   const apiUrl = process.env.REACT_APP_API_URL
 
   // console.log("THE API URL", apiUrl)
@@ -166,6 +168,8 @@ function App() {
     console.log("Testing leaving this display page")
   }
 
+  console.log("CHECK THIS FOR THE TIMESTAMP TEST", testingTimeStamp)
+
   return (
     // UseContext gets called here
     <ApiProvider> 
@@ -181,7 +185,7 @@ function App() {
         <Route path='/movies' element={<AllMoviesWithGenre moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
-        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} onLeave={ onLeaveTest }/>
+        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} setTestingTimeStamp={setTestingTimeStamp} testingTimeStamp={testingTimeStamp} />} onLeave={ onLeaveTest }/>
         <Route path='/login' element={<Login />} />
         <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
         <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />

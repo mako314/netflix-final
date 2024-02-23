@@ -37,9 +37,10 @@ class User(db.Model, SerializerMixin):
 
     # Relationships
     favorites = db.relationship('Favorite', back_populates='user', cascade="all, delete")
+    watch_history = db.relationship('WatchHistory', back_populates = 'user')
 
     # Serialization Rules
-    serialize_rules = ('-favorites.user', '-_password_hash',)
+    serialize_rules = ('-favorites.user', '-_password_hash','-watch_history.user' )
 
 
     # Properties
@@ -276,6 +277,33 @@ class TvEpisode(db.Model, SerializerMixin):
 
     # Serialization Rules
     serialize_rules = ('-show_season.episode',)
+
+class WatchHistory(db.Model, SerializerMixin):
+    __tablename__ = 'watch_histories'
+
+    id = db.Column(db.Integer, primary_key = True)
+    time_stamp = db.Column(db.String)
+    episode_number = db.Column(db.String)
+    episode_name = db.Column(db.String)
+    season_number = db.Column(db.String)
+    series_name = db.Column(db.String)
+
+    movie_title = db.Column(db.String)
+
+
+    video_duration = db.Column(db.String)
+
+
+    # Foreign Keys
+    movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    tv_series_id = db.Column(db.Integer, db.ForeignKey('tv_series.id'))
+    
+    # Relationship
+    user = db.relationship('User', back_populates = 'watch_history')
+
+    # Serialization Rules
+    serialize_rules=('-user.watch_history',)
 
 
 class Favorite(db.Model, SerializerMixin):

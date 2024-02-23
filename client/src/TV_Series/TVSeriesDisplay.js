@@ -1,8 +1,10 @@
-import React, {useState} from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import React, {useState, useEffect, useRef} from "react";
+import { useParams, useNavigate, useLocation, useBeforeUnload  } from "react-router-dom";
 import Accordion from "./TvSeriesAccordion";
 
-function TVSeriesDisplay(){
+function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
+    const videoDataRef = React.useRef();
+
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
       episodeNumber: 1,
@@ -18,13 +20,27 @@ function TVSeriesDisplay(){
     // Retrieving state we sent over in navigation.
     const { fullTVSeries } = location.state || {}
 
+    let testTime
+
     // console.log("Full selected TV Series Data:",fullTVSeries )
 
     // Once a user pauses / clicks item added to watch history. After pausing and navigating away from a page, a users watch time is then logged, so when they come back to the episode it starts at that time.
-
     // continue where I left off, restart, etc
 
     // console.log("The video episode URL, looking for AWS:", episodeInformation.videoLocation)
+
+
+    // https://stackoverflow.com/questions/75550412/handle-browser-beforeunload-with-react-router-dom-v6-page-navigation
+    // https://stackoverflow.com/questions/72337281/react-router-dom-v6-detect-user-is-leaving-a-page-and-do-something <- maybe just use useEffect?
+    // https://stackoverflow.com/questions/52448909/onbeforeunload-not-working-inside-react-component <- maybe really use useEffect lol
+    // https://stackoverflow.com/questions/75859065/how-to-store-data-in-localstorage-before-user-exits-page-user-react-router <- may be best to make use of both react and router dom
+
+
+    useEffect(() => {
+      return () => {
+        setTestingTimeStamp(testTime)
+      }
+    }, [testTime])
 
 
     // Used for finding the timestamp a user paused at
@@ -38,6 +54,8 @@ function TVSeriesDisplay(){
     const handleTimeUpdated = (e) => {
       // do something on time update
       console.log(e.timeStamp)
+      testTime=e.timeStamp
+      setTestingTimeStamp(e.timeStamp)
     }
 
     // onPause={this.handlePause}
@@ -56,6 +74,17 @@ function TVSeriesDisplay(){
     // Current duration if needed: 
     // I could see this being needed with math to calculcate the time you are in the video, but hopefully can just start at time stamp
     // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/duration
+
+    // Can make it a button, or offer options? 
+    // https://stackoverflow.com/questions/15025378/html5-video-button-that-takes-video-to-specific-time
+    // https://stackoverflow.com/questions/66494433/start-an-html-video-to-a-specified-time
+    // https://web.dev/articles/video-and-source-tags#specify-start-and-end-times
+    // https://stackoverflow.com/questions/26665280/html5-video-element-start-and-end-times
+    // https://stackoverflow.com/questions/5981427/start-html5-video-at-a-particular-position-when-loading
+    
+    //   function jumpToTime(time){
+    //     v.currentTime = time;
+    // }
     
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
