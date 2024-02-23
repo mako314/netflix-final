@@ -1,6 +1,6 @@
 from config import app, db
 
-from models import User, Movie, Favorite, TelevisionSeries, Admin, TvEpisode, TvSeason
+from models import User, Movie, Favorite, TelevisionSeries, Admin, TvEpisode, TvSeason, WatchHistory
 from datetime import datetime
 
 if __name__ == '__main__':
@@ -1101,6 +1101,44 @@ if __name__ == '__main__':
         ]
 
         db.session.add_all(arthur_season_1_episodes)
+        db.session.commit()
+#-------------------------------Watch History Seeding-------------------------------
+
+        print("Generating Watch History...")
+        watch_histories = [
+            WatchHistory(
+                episode_number="1",
+                episode_name="Arthur's Eyes",
+                season_number="1",
+                series_name="Arthur",
+                video_duration = '',
+                tv_series_id = 15,
+                video_duration = 115030.59999999404,
+                time_stamp = 1585.752419,
+            ),
+            WatchHistory(
+                episode_number="2",
+                episode_name="Francine's Bad Hair Day",
+                season_number="1",
+                series_name="Arthur",
+                video_duration = '',
+                tv_series_id = 15,
+                video_duration = 142148.69999998808,
+                time_stamp = 1587.45542,
+            ),
+            WatchHistory(
+                episode_number="3",
+                episode_name="Arthur and the Real Mr. Ratburn",
+                season_number="1",
+                series_name="Arthur",
+                video_duration = '',
+                tv_series_id = 15,
+                video_duration = 1481.381381,
+                time_stamp = 155697.19999998808, 
+            ),
+        ]
+
+        db.session.add_all(watch_histories)
         db.session.commit()
 
         print("!!FINISHED SEEDING!!")

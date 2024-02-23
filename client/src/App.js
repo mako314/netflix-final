@@ -137,7 +137,7 @@ function App() {
     })
   }, [])
 
-  console.log("THE MOVIE DATA STATE:", moviesData)
+  // console.log("THE MOVIE DATA STATE:", moviesData)
   // console.log("THE USER DATA STATE:", usersData)
   // console.log("THE FAVORITE DATA STATE:", favoritesData)
   // console.log("THE TV SERIES DATA STATE:", tvSeriesData)
@@ -168,7 +168,7 @@ function App() {
     console.log("Testing leaving this display page")
   }
 
-  console.log("CHECK THIS FOR THE TIMESTAMP TEST", testingTimeStamp)
+  // console.log("CHECK THIS FOR THE TIMESTAMP TEST", testingTimeStamp)
 
   return (
     // UseContext gets called here

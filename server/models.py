@@ -282,7 +282,7 @@ class WatchHistory(db.Model, SerializerMixin):
     __tablename__ = 'watch_histories'
 
     id = db.Column(db.Integer, primary_key = True)
-    time_stamp = db.Column(db.String)
+    
     episode_number = db.Column(db.String)
     episode_name = db.Column(db.String)
     season_number = db.Column(db.String)
@@ -291,7 +291,8 @@ class WatchHistory(db.Model, SerializerMixin):
     movie_title = db.Column(db.String)
 
 
-    video_duration = db.Column(db.String)
+    video_duration = db.Column(db.Integer)
+    time_stamp = db.Column(db.Integer)
 
 
     # Foreign Keys

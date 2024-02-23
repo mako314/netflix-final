@@ -3,7 +3,8 @@ import { useParams, useNavigate, useLocation, useBeforeUnload  } from "react-rou
 import Accordion from "./TvSeriesAccordion";
 
 function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
-    const videoDataRef = React.useRef();
+    const videoEl = useRef(null);
+
 
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
@@ -45,20 +46,38 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     // Used for finding the timestamp a user paused at
     // https://stackoverflow.com/questions/61625602/how-can-i-adapt-this-js-code-to-my-reactjs-app-so-that-i-can-customize-my-video
-    // https://github.com/video-react/video-react/blob/master/src/components/Video.js#L572
+    // https://github.com/video-react/video-react/blob/master/src/components/Video.js#L572 <- use onpause
     // https://stackoverflow.com/questions/76471687/how-can-i-make-a-video-play-at-the-timestamp-is-was-previously-paused-at
     // https://stackoverflow.com/questions/29908050/react-js-video-element-set-current-play-time-from-react-props
     // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/timeupdate_event - < this is like every second
     // best link along with the github one above:
     // https://stackoverflow.com/questions/61625602/how-can-i-adapt-this-js-code-to-my-reactjs-app-so-that-i-can-customize-my-video
+
     const handleTimeUpdated = (e) => {
       // do something on time update
-      console.log(e.timeStamp)
+      console.log(e)
       testTime=e.timeStamp
       setTestingTimeStamp(e.timeStamp)
+      console.log(typeof(e.timeStamp))
     }
 
+    // Possibly grab duration of video with this
+    // https://www.w3schools.com/tags/av_event_loadedmetadata.asp
     // onPause={this.handlePause}
+
+
+    // https://stackoverflow.com/questions/71612224/how-can-i-get-video-duration-from-raw-video-file-in-react
+    const handleLoadedMetadata = (e) => {
+      const video = videoEl.current;
+      if (!video) return;
+      e.target.volume = 0.2
+      console.log(`The video is ${video.duration} seconds long.`);
+      console.log(typeof(video.duration))
+    };
+
+    console.log("THE TIME STAMP", testingTimeStamp)
+
+ 
 
     // https://reactrouter.com/en/main/hooks/use-before-unload
     // https://stackoverflow.com/questions/62792342/in-react-router-v6-how-to-check-form-is-dirty-before-leaving-page-route
@@ -81,7 +100,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     // https://web.dev/articles/video-and-source-tags#specify-start-and-end-times
     // https://stackoverflow.com/questions/26665280/html5-video-element-start-and-end-times
     // https://stackoverflow.com/questions/5981427/start-html5-video-at-a-particular-position-when-loading
-    
+
     //   function jumpToTime(time){
     //     v.currentTime = time;
     // }
@@ -113,7 +132,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
           <div className="aspect-w-16 aspect-h-9">
             {/* Video created with default html element, keep it universal. 😎 */}
-            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={(e) => e.target.volume = 0.2} onPause={handleTimeUpdated} className="w-full h-auto">
+            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={handleLoadedMetadata} onPause={handleTimeUpdated} ref={videoEl} className="w-full h-auto">
               <source src={episodeInformation.videoLocation} type="video/mp4" />
             </video>
           </div>
