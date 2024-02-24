@@ -8,7 +8,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     const apiUrl = useContext(ApiUrlContext)
     const videoEl = useRef(null);
 
-    const [errorData, setErrorData] = useState()
+    const [watchHistory, setWatchHistory] = useState()
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
       episodeNumber: 1,
@@ -145,7 +145,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         if (response.ok) {
           const data = await response.json()
           console.log("Watch History Retrieval succesful:", data)
-          // handleCheckoutNavigation(data.client_secret)
+          setWatchHistory(data)
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
@@ -196,7 +196,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           <div className="px-4 py-3 bg-gray-800 rounded-lg overflow-hidden shadow-xl">
             <div className="flex items-center justify-center gap-2">
               <p className="text-lg md:text-xl font-semibold text-white text-shadow">
-                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.seasonName}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
+                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.seasonNumber}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
               </p>
             </div>
           </div>
@@ -244,7 +244,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} handleTvWatchListFind={handleTvWatchListFind}/>
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation}/>
     </div>
     </div>
     )

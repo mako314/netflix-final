@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { createPortal } from 'react-dom';
+import ContinueLeftOff from "../Modals/ContinueLeftOff";
 
 function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation}) {
     // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null);
+  const [showModal, setShowModal] = useState(false)
 
   // Handle accordion changing by checking the index that is selected to the activeIndex, if it's the activeIndex, close that index by setting it to null, otherwise open the next one 
   // activeIndex === index ? "block" : "hidden" this portion in the return code goes about hiding the content otherwise.
@@ -36,6 +39,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation}) {
               left: 0,
               behavior: "smooth",
             })
+            setShowModal(true)
             }}>
               <img src={episode.thumbnail} alt="Episode thumbnail" className="object-cover w-full h-40" />
               <div className="p-4">
@@ -71,6 +75,10 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation}) {
 					</div>
 				</div>
 			))}
+          {showModal && createPortal(
+          <ContinueLeftOff episodeInformation={episodeInformation} onClose={() => setShowModal(false)} />,
+          document.body
+      )}
 		</div>
 	);
 }
