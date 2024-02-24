@@ -14,6 +14,7 @@ if __name__ == '__main__':
         Admin.query.delete()
         TvEpisode.query.delete()
         TvSeason.query.delete()
+        WatchHistory.query.delete()
 
 
 
@@ -1112,8 +1113,8 @@ if __name__ == '__main__':
                 season_number="1",
                 series_name="Arthur",
                 tv_series_id = 15,
-                video_duration = 1587455.42,
-                time_stamp = 658237,
+                video_duration = 1585.752419 ,
+                time_stamp = 1048.054659,
                 user_id = user_list[0].id,
             ),
             WatchHistory(

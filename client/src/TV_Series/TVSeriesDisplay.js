@@ -102,7 +102,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       })
 
       if(watchHistory){
-        video.currentTime = watchHistory.time_stamp / 1000
+        video.currentTime = watchHistory.time_stamp
       }
 
       // handlePostingWatchHistory()
@@ -256,7 +256,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} watchHistory={watchHistory} setWatchHistory={setWatchHistory}/>
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} watchHistory={watchHistory} setWatchHistory={setWatchHistory} video={videoEl.current}/>
     </div>
     </div>
     )

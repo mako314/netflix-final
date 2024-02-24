@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from 'react-dom';
 import ContinueLeftOff from "../Modals/ContinueLeftOff";
 
-function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory}) {
+function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video}) {
   // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null);
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     // Now we use watchHistory's presence to decide on showing the modal
-    if (watchHistory) {
+    if (video && watchHistory) {
+      video.currentTime = watchHistory.time_stamp
       setShowModal(true)
     } else {
       setShowModal(false)
