@@ -482,7 +482,7 @@ class TVSeries(Resource):
         data = request.get_json()
 
         try:
-            new_tv_series = TVSeries(
+            new_tv_series = TelevisionSeries(
                 title = data['title'],
                 director = data['director'],
                 writer = data['writer'],
