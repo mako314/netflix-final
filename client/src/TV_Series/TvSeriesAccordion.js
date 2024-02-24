@@ -27,7 +27,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, set
                 videoLocation: episode.video_path,
                 episodeNumber: episode.episode_number,
                 episodeTitle: episode.episode_name,
-                episodeSeason: episode.show_season.season_number,
+                seasonNumber: episode.show_season.season_number,
                 showTitle: episode.show_season.series_name,
                 all_season_test:season
             })

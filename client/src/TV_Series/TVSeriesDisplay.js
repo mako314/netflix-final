@@ -1,19 +1,23 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
 import { useParams, useNavigate, useLocation, useBeforeUnload  } from "react-router-dom";
 import Accordion from "./TvSeriesAccordion";
+import ApiUrlContext from "../Api";
 
 function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
+
+    const apiUrl = useContext(ApiUrlContext)
     const videoEl = useRef(null);
 
-
+    const [errorData, setErrorData] = useState()
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
       episodeNumber: 1,
       episodeTitle: 'Default Title',
-      episodeSeason: 'Season',
+      // seasonName: 'Season',
+      seasonNumber: 1,
       showTitle:"Show",
       all_season_test: {},
-      duration: temp,
+      videoDuration: 1235,
       timeStamp: testingTimeStamp
     })
     
@@ -46,6 +50,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     }, [testTime])
 
 
+
+
     // Used for finding the timestamp a user paused at
     // https://stackoverflow.com/questions/61625602/how-can-i-adapt-this-js-code-to-my-reactjs-app-so-that-i-can-customize-my-video
     // https://github.com/video-react/video-react/blob/master/src/components/Video.js#L572 <- use onpause
@@ -59,8 +65,14 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // do something on time update
       console.log(e)
       testTime=e.timeStamp
-      setTestingTimeStamp(e.timeStamp)
+      console.log("THE TIME STAMP", testTime)
+      // setTestingTimeStamp(e.timeStamp)
+      setEpisodeInformation({
+        ...episodeInformation,
+        timeStamp: e.timeStamp,
+      })
       console.log(typeof(e.timeStamp))
+      handlePostingWatchHistory()
     }
 
     // Possibly grab duration of video with this
@@ -75,9 +87,14 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       e.target.volume = 0.2
       console.log(`The video is ${video.duration} seconds long.`);
       console.log(typeof(video.duration))
+      setEpisodeInformation({
+        ...episodeInformation,
+        videoDuration: video.duration,
+      })
+      // handlePostingWatchHistory()
     };
 
-    console.log("THE TIME STAMP", testingTimeStamp)
+    
 
  
 
@@ -107,16 +124,40 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     //     v.currentTime = time;
     // }
 
-
-    const handleWatchListAddition = async () => {
+    // /season/${episodeInformation.seasonName}/
+    const handleTvWatchListFind = async () => {
       try {
-        const response = await fetch(`${apiUrl}/user/${1}/watch/list/${episodeInformation.showTitle}/${episodeInformation.episodeSeason}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
+        const response = await fetch(`${apiUrl}user/${1}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: 'include',
+        })
+    
+        if (response.ok) {
+          const data = await response.json()
+          // console.log("Watch History Retrieval succesful:", data)
+          // handleCheckoutNavigation(data.client_secret)
+        } else {
+          console.error('Error Response:', errorData)
+        }
+      } catch (error) {
+        console.error('Fetch Error:', error)
+      }
+    }
+
+    // Going to want to use an onPause... or on play? Or both? When it's paused it should go off, and when it first plays?  to basically create the watch history entry 
+
+    const handlePostingWatchHistory = async () => {
+      try {
+        const response = await fetch(`${apiUrl}user/${1}/watch/list/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           credentials: 'include',
-          body: JSON.stringify(itemsReadyForCheckout),
+          body: JSON.stringify(episodeInformation),
         })
     
         if (response.ok) {
@@ -152,7 +193,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           <div className="px-4 py-3 bg-gray-800 rounded-lg overflow-hidden shadow-xl">
             <div className="flex items-center justify-center gap-2">
               <p className="text-lg md:text-xl font-semibold text-white text-shadow">
-                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.episodeSeason}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
+                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.seasonName}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
               </p>
             </div>
           </div>
