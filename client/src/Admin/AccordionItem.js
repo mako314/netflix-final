@@ -22,7 +22,7 @@ const AccordionItem = ({contents, title}) => {
 
                 <div
                     className={`accordion-content bg-white px-4 pb-4 pt-2 ${
-                        !isHidden ? "block" : "hidden"
+                        isHidden ? "block" : "hidden"
                     }`}
                 >
                     {contents}

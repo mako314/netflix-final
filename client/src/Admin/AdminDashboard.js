@@ -178,6 +178,42 @@ const AddUserForm = () => {
   )
 }
 
+const MovieDataTable = ({moviesData, deleteMovie}) => {
+
+  return (
+    <div>
+     <tbody>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Thumbnail</th>
+        <th>Popularity</th>
+        <th>Click Count</th>
+      </tr>
+        {
+          moviesData.map((movie) =>
+          <tr key={movie.id}>
+              <td>{movie.id}</td>
+              <td>{movie.title}</td>
+              <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
+              <td>{movie.popularity}</td>
+              <td>{movie.num_of_clicks}</td>
+              <td>
+                  <button className="bg-red-600" type="button" onClick={() => deleteMovie(movie.id)}>
+                      &#128465;&#65039;
+                  </button>
+              </td>
+          </tr>
+          )
+        }
+      </tbody>
+    </div>
+    
+  )
+}
+
+
+
 function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
     const { currentUser } = CurrentUserContext();
     const [activeIndex, setActiveIndex] = useState(null);
@@ -338,37 +374,16 @@ function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
                 contents={<AddUserForm />}
                 title={"Add a New User"}
               />
-
-              
             </div>
           }
 
           {index === 1 &&
-            <tbody>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Thumbnail</th>
-                <th>Popularity</th>
-                <th>Click Count</th>
-            </tr>
-              {
-                  item.content.map((movie) =>
-                  <tr key={movie.id}>
-                      <td>{movie.id}</td>
-                      <td>{movie.title}</td>
-                      <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
-                      <td>{movie.popularity}</td>
-                      <td>{movie.num_of_clicks}</td>
-                      <td>
-                          <button className="bg-red-600" type="button" onClick={() => deleteMovie(movie.id)}>
-                              &#128465;&#65039;
-                          </button>
-                      </td>
-                  </tr>
-                  )
-              }
-            </tbody>
+            <div>
+              <AccordionItem 
+                contents={<MovieDataTable moviesData={moviesData} deleteMovie={deleteMovie} />}
+                title={"All DNN Movies"}
+              />
+            </div>
           }
 
           {index === 2 &&
