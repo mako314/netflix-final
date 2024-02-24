@@ -338,6 +338,38 @@ const AddMovieForm = () => {
   )
 }
 
+const TVSeriesDataTable = ({tvSeriesData, deleteTVSeries}) => {
+
+  return (
+    <tbody>
+      <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Thumbnail</th>
+          <th>Popularity</th>
+          <th>Click Count</th>
+      </tr>
+      {
+        tvSeriesData.map((tvSeries) =>
+        <tr key={tvSeries.id}>
+            <td>{tvSeries.id}</td>
+            <td>{tvSeries.title}</td>
+            <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
+            <td>{tvSeries.popularity}</td>
+            <td>{tvSeries.num_of_clicks}</td>
+            <td>
+                <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
+                    &#128465;&#65039;
+                </button>
+            </td>
+        </tr>
+        )
+      }
+    </tbody>
+  )
+}
+
+
 function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
     const { currentUser } = CurrentUserContext();
     const [activeIndex, setActiveIndex] = useState(null);
@@ -515,31 +547,12 @@ function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
           }
 
           {index === 2 &&
-            <tbody>
-              <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Thumbnail</th>
-                  <th>Popularity</th>
-                  <th>Click Count</th>
-              </tr>
-              {
-                item.content.map((tvSeries) =>
-                <tr key={tvSeries.id}>
-                    <td>{tvSeries.id}</td>
-                    <td>{tvSeries.title}</td>
-                    <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
-                    <td>{tvSeries.popularity}</td>
-                    <td>{tvSeries.num_of_clicks}</td>
-                    <td>
-                        <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
-                            &#128465;&#65039;
-                        </button>
-                    </td>
-                </tr>
-                )
-              }
-            </tbody>
+            <div>
+              <AccordionItem 
+                contents={<TVSeriesDataTable tvSeriesData={tvSeriesData} deleteTVSeries={deleteTVSeries} />}
+                title={"All DNN TV Series"}
+              />
+            </div>
           }
 
         </div>
