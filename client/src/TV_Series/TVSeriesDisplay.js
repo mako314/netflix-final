@@ -8,7 +8,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     const apiUrl = useContext(ApiUrlContext)
     const videoEl = useRef(null);
 
-    const [watchHistory, setWatchHistory] = useState()
+    const [watchHistory, setWatchHistory] = useState(null)
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
       episodeNumber: 1,
@@ -149,6 +149,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
+          setWatchHistory(null)
         }
       } catch (error) {
         console.error('Fetch Error:', error)
@@ -160,9 +161,11 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     // Okay, this is how I like it, but we're going to make a patch instead that'll handle changing the watch history time stamp. First post, then if it exists, patch it.
 
     const handlePostingWatchHistory = async () => {
+      const fetchMethod = watchHistory ? "PATCH" : "POST"
+      // const fetchUrl = watchHistory ? : `${apiUrl}user/${1}/watch/list/`
       try {
         const response = await fetch(`${apiUrl}user/${1}/watch/list/`, {
-          method: "POST",
+          method: "watchHistory",
           headers: {
             "Content-Type": "application/json",
           },
@@ -180,6 +183,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         console.error('Fetch Error:', error)
       }
     }
+
+
     
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
@@ -244,7 +249,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation}/>
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} watchHistory={watchHistory} setWatchHistory={setWatchHistory}/>
     </div>
     </div>
     )

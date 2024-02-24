@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from 'react-dom';
 import ContinueLeftOff from "../Modals/ContinueLeftOff";
 
-function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation}) {
-    // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
+function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory}) {
+  // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null);
   const [showModal, setShowModal] = useState(false)
 
@@ -11,7 +11,17 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation}) {
   // activeIndex === index ? "block" : "hidden" this portion in the return code goes about hiding the content otherwise.
     const handleClick = (index) => {
       setActiveIndex(index === activeIndex ? null : index);
-    };
+    }
+
+    useEffect(() => {
+      // Now we use watchHistory's presence to decide on showing the modal
+      if (watchHistory) {
+        setShowModal(true)
+      } else {
+        setShowModal(false)
+      }
+    }, [watchHistory])
+
 
     // console.log("Full selected TV Series Data:",fullTVSeries )
 
@@ -39,7 +49,6 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation}) {
               left: 0,
               behavior: "smooth",
             })
-            setShowModal(true)
             }}>
               <img src={episode.thumbnail} alt="Episode thumbnail" className="object-cover w-full h-40" />
               <div className="p-4">
