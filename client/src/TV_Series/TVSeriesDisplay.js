@@ -156,6 +156,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     // Going to want to use an onPause... or on play? Or both? When it's paused it should go off, and when it first plays?  to basically create the watch history entry 
 
+    // Okay, this is how I like it, but we're going to make a patch instead that'll handle changing the watch history time stamp. First post, then if it exists, patch it.
+
     const handlePostingWatchHistory = async () => {
       try {
         const response = await fetch(`${apiUrl}user/${1}/watch/list/`, {
