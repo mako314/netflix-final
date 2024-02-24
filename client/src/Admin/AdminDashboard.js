@@ -212,7 +212,136 @@ const MovieDataTable = ({moviesData, deleteMovie}) => {
   )
 }
 
+const AddMovieForm = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
 
+  const getCookie = (name) => {
+    let cookieValue = null;
+
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim()
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+                break
+            }
+        }
+    }
+
+    return cookieValue
+  }
+
+  const addMovie = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const movieData = {};
+
+    for (let [key, value] of formData.entries()) {
+        movieData[key] = value;
+    }
+
+    fetch(`${apiUrl}movies`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": getCookie("csrf_access_token"),
+      },
+      credentials: "include",
+      body: JSON.stringify(movieData),
+    }).then((response) => {
+      if (response.ok) {
+        console.log(`A new user has successfully been added`)
+      }
+      else {
+        response.json().then((errorData) => {
+          console.error('Error Response:', errorData)
+        })
+      }
+    }).catch((error) => {
+      console.error('Fetch Error:', error)
+    })
+
+    console.log(movieData);
+  }
+  
+  return (
+    <div>
+      <form onSubmit={addUser}>
+        <div className="flex flex-row">
+          <label htmlFor="firstName" className="mb-2 inline-block text-sm text-gray-800 sm:text-base"> First Name </label>
+          <input type="text" name="first_name" className="w-50% rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="lastName" className="mb-2 inline-block text-sm text-gray-800 sm:text-base"> Last Name </label>
+          <input type="text" name="last_name" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="email" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email</label>
+          <input type="email" name="email" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="phone" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Phone Number</label>
+          <input type="phone" name="phone" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="password" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
+          <input type="password" name="password" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="date_of_birth" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Date of Birth</label>
+          <input type="date_of_birth" name="date_of_birth" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="profile_image" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Profile Image</label>
+          <input type="profile_image" name="profile_image" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="country" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Country</label>
+          <input type="country" name="country" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="state" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">State</label>
+          <input type="state" name="state" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+        
+        <div className="flex flex-row">
+          <label htmlFor="city" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">City</label>
+          <input type="city" name="city" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="address_line_1" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Address Line 1</label>
+          <input type="address_line_1" name="address_line_1" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="address_line_2" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Address Line 2</label>
+          <input type="address_line_2" name="address_line_2" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="postal_code" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Postal Code</label>
+          <input type="postal_code" name="postal_code" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <button type="submit" className="inline-block rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none">Add User</button>
+
+      </form>
+    </div>
+  )
+}
 
 function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
     const { currentUser } = CurrentUserContext();
