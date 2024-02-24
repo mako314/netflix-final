@@ -465,6 +465,49 @@ class TVSeries(Resource):
             }, 404)
 
         return response
+
+    @jwt_required()
+    def post(self):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
+        data = request.get_json()
+
+        try:
+            new_tv_series = TVSeries(
+                title = data['title'],
+                director = data['director'],
+                writer = data['writer'],
+                year_of_release = data['year_of_release'],
+                motion_picture_rating = data['motion_picture_rating'],
+                thumbnail = data['thumbnail'],
+                seasons = data['seasons'],
+                episode_count = data['episode_count'],
+                is_airing = data['is_airing'],
+                summary = data['summary'],
+                trailer = data['trailer'],
+                stars = data['stars'],
+                all_cast_and_crew = data['all_cast_and_crew'],
+                genres = data['genres'],
+            )
+
+            db.session.add(new_tv_series)
+
+            db.session.commit()
+
+            response = make_response(new_tv_series.to_dict(), 201)
+            return response
+
+        except ValueError:
+            return make_response({"error" : "Validation error, please try again"}, 400)
     
 api.add_resource(TVSeries, '/tv-series')
 
