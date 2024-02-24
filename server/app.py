@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from models import User, Movie, Favorite, TelevisionSeries, Admin
+from models import User, Movie, Favorite, TelevisionSeries, Admin, WatchHistory, TvSeason
 
 from flask import Flask, request, make_response, jsonify, session
 from config import db, app, api
@@ -483,6 +483,83 @@ class TVSeriesByPopularity(Resource):
         return response
     
 api.add_resource(TVSeriesByPopularity, '/tv-series/popular')
+
+class OneTvShowOrMovieContinueWatching(Resource):
+    def get(self, user_id, show_title, episodeSeason, episode_title):
+        
+        user = User.query.filter(User.id == user_id).first()
+
+        print(user.first_name)
+
+        tv_series = TelevisionSeries.query.filter(TelevisionSeries.title == show_title).first()
+
+        # movie = Movie.query.filter(Movie.title == movie_title)
+        
+        tv_season = TvSeason.query.filter_by(series_name = tv_series.title, season_number= episodeSeason ).first()
+
+        tv_episode = TelevisionSeries.query.filter(TelevisionSeries.episode_name == episode_title).first()
+
+
+        watch_history_entry = WatchHistory.query.filter_by()
+
+        # if tv_series_list_by_popularity:
+        #     response = make_response(tv_series_list_by_popularity, 200)
+
+        # else:
+        #     response = make_response({
+        #         'error': 'TV Series not found'
+        #     }, 404)
+        
+        # return response
+        return 
+api.add_resource(OneTvShowOrMovieContinueWatching, '/user/<int:user_id>/watch/list/<string:show_title>/<string:episodeSeason>/<string:episode_title>')
+
+# Handles creating a new entry into a users watch history, allowing hopefully to be taken back to that timestamp
+class TvOrMoviePostToWatchHistory(Resource):
+    def post(self, user_id):
+        
+        data = request.get_json()
+        user = User.query.filter(User.id == user_id).first()
+
+        print(user.first_name)
+
+        episode_name = data.get('episode_name', None)
+        movie_title = data.get('movie_title', None)
+
+        if episode_name: 
+            new_watch_history_item = WatchHistory(
+            episode_number = data['episode_number'],
+            episode_name = data['episode_name'],
+            season_number = data['season_number'],
+            series_name = data['series_name'],
+            video_duration = data['video_duration'],
+            time_stamp = data['time_stamp'],
+            )
+
+            db.session.add(new_watch_history_item)
+        
+        if movie_title:
+            new_watch_history_item = WatchHistory(
+            movie_title = data['movie_title'],
+            video_duration = data['video_duration'],
+            time_stamp = data['time_stamp'],
+            )
+
+            db.session.add(new_watch_history_item)
+
+        db.session.commit()
+
+        if new_watch_history_item:
+            response = make_response(new_watch_history_item, 200)
+
+        else:
+            response = make_response({
+                'error': 'TV Series or Movie not found'
+            }, 404)
+        
+        return response
+    
+api.add_resource(TvOrMoviePostToWatchHistory, '/user/<int:user_id>/watch/list/')
 
 class Favorites(Resource):
     def get(self):

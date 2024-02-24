@@ -10,7 +10,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, set
       setActiveIndex(index === activeIndex ? null : index);
     };
 
-    console.log("Full selected TV Series Data:",fullTVSeries )
+    // console.log("Full selected TV Series Data:",fullTVSeries )
 
     // Flatmap over the full tv series, to flatten the array and have the season information available. We'll then make this an array of objects, wit hthe title being the series name (Ex. Breaking bad), and then season # (ex. 2). Afterwards, we do what we had prior and map over the season episode to make the actual episode cards. Which when clicked set the episode information (this could likely incorporate set video location and just be one state to make things easier)
     const accordionData = fullTVSeries?.show_season?.flatMap((season) => ({
