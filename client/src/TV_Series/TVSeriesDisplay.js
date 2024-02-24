@@ -13,6 +13,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       episodeSeason: 'Season',
       showTitle:"Show",
       all_season_test: {},
+      duration: temp,
+      timeStamp: testingTimeStamp
     })
     
     // Passing state with useLocation from react router dom,
@@ -104,6 +106,31 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     //   function jumpToTime(time){
     //     v.currentTime = time;
     // }
+
+
+    const handleWatchListAddition = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/user/${1}/watch/list/${episodeInformation.showTitle}/${episodeInformation.episodeSeason}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: 'include',
+          body: JSON.stringify(itemsReadyForCheckout),
+        })
+    
+        if (response.ok) {
+          const data = await response.json()
+          // console.log("Checkout Successful:", data)
+          // handleCheckoutNavigation(data.client_secret)
+          // navigate(`/checkout`)
+        } else {
+          console.error('Error Response:', errorData)
+        }
+      } catch (error) {
+        console.error('Fetch Error:', error)
+      }
+    }
     
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
