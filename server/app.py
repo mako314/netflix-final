@@ -484,23 +484,49 @@ class TVSeriesByPopularity(Resource):
     
 api.add_resource(TVSeriesByPopularity, '/tv-series/popular')
 
-class OneTvShowOrMovieContinueWatching(Resource):
-    def get(self, user_id, show_title, episodeSeason, episode_title):
+class OneTvShowContinueWatching(Resource):
+    def get(self, user_id, show_title, episode_title, episode_number):
         
         user = User.query.filter(User.id == user_id).first()
 
         print(user.first_name)
+        print(episode_title)
+        print(show_title)
+        print(episode_number)
 
-        tv_series = TelevisionSeries.query.filter(TelevisionSeries.title == show_title).first()
 
-        # movie = Movie.query.filter(Movie.title == movie_title)
+        # tv_series = TelevisionSeries.query.filter(TelevisionSeries.title == show_title).first()
+
+        # # movie = Movie.query.filter(Movie.title == movie_title)
         
-        tv_season = TvSeason.query.filter_by(series_name = tv_series.title, season_number= episodeSeason ).first()
+        # tv_season = TvSeason.query.filter_by(series_name = tv_series.title, season_number= season_name ).first()
 
-        tv_episode = TelevisionSeries.query.filter(TelevisionSeries.episode_name == episode_title).first()
+        # tv_episode = TelevisionSeries.query.filter(TelevisionSeries.episode_name == episode_title).first()
 
+        watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title).first()
 
-        watch_history_entry = WatchHistory.query.filter_by()
+        if watch_history_entry:
+            response = make_response(watch_history_entry.to_dict(), 200)
+
+        else:
+            response = make_response({
+                'error': 'TV Series not found'
+            }, 404)
+        
+        return response
+    
+api.add_resource(OneTvShowContinueWatching, '/user/<int:user_id>/watch/list/show/<string:show_title>/<string:episode_title>/<int:episode_number>')
+
+class OneMovieContinueWatching(Resource):
+    def get(self, user_id, movie_title):
+        
+        user = User.query.filter(User.id == user_id).first()
+
+        print(user.first_name)
+        movie = Movie.query.filter(Movie.title == movie_title)
+        
+        if movie:
+            watch_history_entry = WatchHistory.query.filter_by()
 
         # if tv_series_list_by_popularity:
         #     response = make_response(tv_series_list_by_popularity, 200)
@@ -512,7 +538,8 @@ class OneTvShowOrMovieContinueWatching(Resource):
         
         # return response
         return 
-api.add_resource(OneTvShowOrMovieContinueWatching, '/user/<int:user_id>/watch/list/<string:show_title>/<string:episodeSeason>/<string:episode_title>')
+api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/<string:movie_title>/')
+
 
 # Handles creating a new entry into a users watch history, allowing hopefully to be taken back to that timestamp
 class TvOrMoviePostToWatchHistory(Resource):
@@ -521,22 +548,28 @@ class TvOrMoviePostToWatchHistory(Resource):
         data = request.get_json()
         user = User.query.filter(User.id == user_id).first()
 
+        if not user:
+        # Immediately return an error response if the user is not found
+            return make_response({'error': 'User not found'}, 404)
+
         print(user.first_name)
 
-        episode_name = data.get('episode_name', None)
+        episode_name = data.get('episodeTitle', None)
         movie_title = data.get('movie_title', None)
+
+        # Initialize new_watch_history_item to None
+        new_watch_history_item = None
 
         if episode_name: 
             new_watch_history_item = WatchHistory(
-            episode_number = data['episode_number'],
-            episode_name = data['episode_name'],
-            season_number = data['season_number'],
-            series_name = data['series_name'],
-            video_duration = data['video_duration'],
-            time_stamp = data['time_stamp'],
+            episode_number = data['episodeNumber'],
+            episode_name = data['episodeTitle'],
+            season_number = data['seasonNumber'],
+            series_name = data['showTitle'],
+            video_duration = data['videoDuration'],
+            time_stamp = data['timeStamp'],
+            user_id = user.id
             )
-
-            db.session.add(new_watch_history_item)
         
         if movie_title:
             new_watch_history_item = WatchHistory(
@@ -545,12 +578,10 @@ class TvOrMoviePostToWatchHistory(Resource):
             time_stamp = data['time_stamp'],
             )
 
-            db.session.add(new_watch_history_item)
-
-        db.session.commit()
-
         if new_watch_history_item:
-            response = make_response(new_watch_history_item, 200)
+            db.session.add(new_watch_history_item)
+            db.session.commit()
+            response = make_response(new_watch_history_item.to_dict(), 200)
 
         else:
             response = make_response({

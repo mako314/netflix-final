@@ -1,18 +1,24 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
 import { useParams, useNavigate, useLocation, useBeforeUnload  } from "react-router-dom";
 import Accordion from "./TvSeriesAccordion";
+import ApiUrlContext from "../Api";
 
 function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
+
+    const apiUrl = useContext(ApiUrlContext)
     const videoEl = useRef(null);
 
-
+    const [errorData, setErrorData] = useState()
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
       episodeNumber: 1,
       episodeTitle: 'Default Title',
-      episodeSeason: 'Season',
+      // seasonName: 'Season',
+      seasonNumber: 1,
       showTitle:"Show",
       all_season_test: {},
+      videoDuration: 1235,
+      timeStamp: testingTimeStamp
     })
     
     // Passing state with useLocation from react router dom,
@@ -37,11 +43,20 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     // https://stackoverflow.com/questions/75859065/how-to-store-data-in-localstorage-before-user-exits-page-user-react-router <- may be best to make use of both react and router dom
 
 
+    // useEffect(() => {
+    //   return () => {
+    //     setTestingTimeStamp(testTime)
+    //   }
+    // }, [testTime])
+
     useEffect(() => {
-      return () => {
-        setTestingTimeStamp(testTime)
+      // Ensure all required information is present before making the fetch call
+      if (episodeInformation.videoLocation && episodeInformation.showTitle && episodeInformation.episodeTitle && episodeInformation.episodeNumber) {
+        handleTvWatchListFind()
       }
-    }, [testTime])
+    }, [episodeInformation])
+
+
 
 
     // Used for finding the timestamp a user paused at
@@ -57,8 +72,14 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // do something on time update
       console.log(e)
       testTime=e.timeStamp
-      setTestingTimeStamp(e.timeStamp)
+      console.log("THE TIME STAMP", testTime)
+      // setTestingTimeStamp(e.timeStamp)
+      setEpisodeInformation({
+        ...episodeInformation,
+        timeStamp: e.timeStamp,
+      })
       console.log(typeof(e.timeStamp))
+      handlePostingWatchHistory()
     }
 
     // Possibly grab duration of video with this
@@ -73,9 +94,14 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       e.target.volume = 0.2
       console.log(`The video is ${video.duration} seconds long.`);
       console.log(typeof(video.duration))
+      setEpisodeInformation({
+        ...episodeInformation,
+        videoDuration: video.duration,
+      })
+      // handlePostingWatchHistory()
     };
 
-    console.log("THE TIME STAMP", testingTimeStamp)
+    
 
  
 
@@ -104,6 +130,55 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     //   function jumpToTime(time){
     //     v.currentTime = time;
     // }
+
+    // /season/${episodeInformation.seasonName}/
+    const handleTvWatchListFind = async () => {
+      try {
+        const response = await fetch(`${apiUrl}user/${1}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: 'include',
+        })
+    
+        if (response.ok) {
+          const data = await response.json()
+          console.log("Watch History Retrieval succesful:", data)
+          // handleCheckoutNavigation(data.client_secret)
+        } else {
+          console.error('Error Response:', errorData)
+        }
+      } catch (error) {
+        console.error('Fetch Error:', error)
+      }
+    }
+
+    // Going to want to use an onPause... or on play? Or both? When it's paused it should go off, and when it first plays?  to basically create the watch history entry 
+
+    const handlePostingWatchHistory = async () => {
+      try {
+        const response = await fetch(`${apiUrl}user/${1}/watch/list/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: 'include',
+          body: JSON.stringify(episodeInformation),
+        })
+    
+        if (response.ok) {
+          const data = await response.json()
+          // console.log("Checkout Successful:", data)
+          // handleCheckoutNavigation(data.client_secret)
+          // navigate(`/checkout`)
+        } else {
+          console.error('Error Response:', errorData)
+        }
+      } catch (error) {
+        console.error('Fetch Error:', error)
+      }
+    }
     
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
@@ -125,7 +200,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           <div className="px-4 py-3 bg-gray-800 rounded-lg overflow-hidden shadow-xl">
             <div className="flex items-center justify-center gap-2">
               <p className="text-lg md:text-xl font-semibold text-white text-shadow">
-                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.episodeSeason}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
+                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.seasonName}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
               </p>
             </div>
           </div>
@@ -173,7 +248,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation}/>
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} handleTvWatchListFind={handleTvWatchListFind}/>
     </div>
     </div>
     )
