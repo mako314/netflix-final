@@ -1112,8 +1112,8 @@ if __name__ == '__main__':
                 season_number="1",
                 series_name="Arthur",
                 tv_series_id = 15,
-                video_duration = 115030.59999999404,
-                time_stamp = 1585.752419,
+                video_duration = 1587455.42,
+                time_stamp = 658237,
                 user_id = user_list[0].id,
             ),
             WatchHistory(

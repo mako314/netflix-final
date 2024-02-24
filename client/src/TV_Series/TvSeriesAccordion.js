@@ -7,21 +7,21 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 	const [activeIndex, setActiveIndex] = useState(null);
   const [showModal, setShowModal] = useState(false)
 
+  useEffect(() => {
+    // Now we use watchHistory's presence to decide on showing the modal
+    if (watchHistory) {
+      setShowModal(true)
+    } else {
+      setShowModal(false)
+    }
+  }, [watchHistory])
+
+
   // Handle accordion changing by checking the index that is selected to the activeIndex, if it's the activeIndex, close that index by setting it to null, otherwise open the next one 
   // activeIndex === index ? "block" : "hidden" this portion in the return code goes about hiding the content otherwise.
     const handleClick = (index) => {
       setActiveIndex(index === activeIndex ? null : index);
     }
-
-    useEffect(() => {
-      // Now we use watchHistory's presence to decide on showing the modal
-      if (watchHistory) {
-        setShowModal(true)
-      } else {
-        setShowModal(false)
-      }
-    }, [watchHistory])
-
 
     // console.log("Full selected TV Series Data:",fullTVSeries )
 

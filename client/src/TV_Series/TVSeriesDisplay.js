@@ -21,6 +21,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       timeStamp: testingTimeStamp
     })
     
+    console.log("THE WATCH HISTORY:", watchHistory)
     // Passing state with useLocation from react router dom,
     const location = useLocation()
 
@@ -70,23 +71,24 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     const handleTimeUpdated = (e) => {
       // do something on time update
+      const video = videoEl.current;
       console.log(e)
-      testTime=e.timeStamp
+      testTime=e.target.currentTime
       console.log("THE TIME STAMP", testTime)
-      // setTestingTimeStamp(e.timeStamp)
+      // setTestingTimeStamp(e.target.currentTime)
       setEpisodeInformation({
         ...episodeInformation,
-        timeStamp: e.timeStamp,
+        currentTime: e.target.currentTime,
       })
-      console.log(typeof(e.timeStamp))
-      handlePostingWatchHistory()
+      console.log("THE TIME STAMP:", e.target.currentTime)
+      console.log(typeof(e.target.currentTime))
+      // handlePostingWatchHistory()
+      
     }
 
     // Possibly grab duration of video with this
     // https://www.w3schools.com/tags/av_event_loadedmetadata.asp
     // onPause={this.handlePause}
-
-
     // https://stackoverflow.com/questions/71612224/how-can-i-get-video-duration-from-raw-video-file-in-react
     const handleLoadedMetadata = (e) => {
       const video = videoEl.current;
@@ -98,6 +100,11 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         ...episodeInformation,
         videoDuration: video.duration,
       })
+
+      if(watchHistory){
+        video.currentTime = watchHistory.time_stamp / 1000
+      }
+
       // handlePostingWatchHistory()
     };
 
