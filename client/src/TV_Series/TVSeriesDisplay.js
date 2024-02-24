@@ -43,11 +43,18 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     // https://stackoverflow.com/questions/75859065/how-to-store-data-in-localstorage-before-user-exits-page-user-react-router <- may be best to make use of both react and router dom
 
 
+    // useEffect(() => {
+    //   return () => {
+    //     setTestingTimeStamp(testTime)
+    //   }
+    // }, [testTime])
+
     useEffect(() => {
-      return () => {
-        setTestingTimeStamp(testTime)
+      // Ensure all required information is present before making the fetch call
+      if (episodeInformation.videoLocation && episodeInformation.showTitle && episodeInformation.episodeTitle && episodeInformation.episodeNumber) {
+        handleTvWatchListFind()
       }
-    }, [testTime])
+    }, [episodeInformation])
 
 
 
@@ -137,7 +144,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     
         if (response.ok) {
           const data = await response.json()
-          // console.log("Watch History Retrieval succesful:", data)
+          console.log("Watch History Retrieval succesful:", data)
           // handleCheckoutNavigation(data.client_secret)
         } else {
           console.error('Error Response:', errorData)
@@ -241,7 +248,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation}/>
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} handleTvWatchListFind={handleTvWatchListFind}/>
     </div>
     </div>
     )

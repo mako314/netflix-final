@@ -485,11 +485,15 @@ class TVSeriesByPopularity(Resource):
 api.add_resource(TVSeriesByPopularity, '/tv-series/popular')
 
 class OneTvShowContinueWatching(Resource):
-    def get(self, user_id, show_title, season_name, episode_title, episode_number):
+    def get(self, user_id, show_title, episode_title, episode_number):
         
         user = User.query.filter(User.id == user_id).first()
 
         print(user.first_name)
+        print(episode_title)
+        print(show_title)
+        print(episode_number)
+
 
         # tv_series = TelevisionSeries.query.filter(TelevisionSeries.title == show_title).first()
 
@@ -499,10 +503,10 @@ class OneTvShowContinueWatching(Resource):
 
         # tv_episode = TelevisionSeries.query.filter(TelevisionSeries.episode_name == episode_title).first()
 
-        watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title)
+        watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title).first()
 
         if watch_history_entry:
-            response = make_response(watch_history_entry, 200)
+            response = make_response(watch_history_entry.to_dict(), 200)
 
         else:
             response = make_response({
