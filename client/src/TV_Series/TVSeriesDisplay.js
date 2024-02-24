@@ -147,6 +147,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           console.log("Watch History Retrieval succesful:", data)
           // handleCheckoutNavigation(data.client_secret)
         } else {
+          const errorData = await response.json()
           console.error('Error Response:', errorData)
         }
       } catch (error) {
@@ -168,13 +169,11 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           credentials: 'include',
           body: JSON.stringify(episodeInformation),
         })
-    
         if (response.ok) {
           const data = await response.json()
-          // console.log("Checkout Successful:", data)
-          // handleCheckoutNavigation(data.client_secret)
-          // navigate(`/checkout`)
+          console.log("Post was good:", data)
         } else {
+          const errorData = await response.json()
           console.error('Error Response:', errorData)
         }
       } catch (error) {
@@ -185,11 +184,6 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
       <div className="flex flex-grow" 
-      // style={{ 
-      //   backgroundImage: "url(https://wallpapercave.com/wp/wp2581370.jpg)",
-      //   backgroundPosition: "top",
-      //   backgroundSize: "cover"
-      // }}
       >
       <div className="flex flex-col items-center w-full">
       <div className="p-5 w-full max-w-4xl mx-auto">

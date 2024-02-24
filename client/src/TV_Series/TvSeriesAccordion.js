@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, handleTvWatchListFind}) {
+function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation}) {
     // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null);
 
@@ -36,7 +36,6 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, han
               left: 0,
               behavior: "smooth",
             })
-            // handleTvWatchListFind()
             }}>
               <img src={episode.thumbnail} alt="Episode thumbnail" className="object-cover w-full h-40" />
               <div className="p-4">
