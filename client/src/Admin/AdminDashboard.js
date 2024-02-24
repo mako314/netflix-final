@@ -123,7 +123,7 @@ const AddUserForm = () => {
 
         <div className="flex flex-row">
           <label htmlFor="phone" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Phone Number</label>
-          <input type="phone" name="phone" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="phone" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
@@ -133,42 +133,42 @@ const AddUserForm = () => {
 
         <div className="flex flex-row">
           <label htmlFor="date_of_birth" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Date of Birth</label>
-          <input type="date_of_birth" name="date_of_birth" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="date_of_birth" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
           <label htmlFor="profile_image" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Profile Image</label>
-          <input type="profile_image" name="profile_image" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="profile_image" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
           <label htmlFor="country" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Country</label>
-          <input type="country" name="country" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="country" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
           <label htmlFor="state" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">State</label>
-          <input type="state" name="state" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="state" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
         
         <div className="flex flex-row">
           <label htmlFor="city" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">City</label>
-          <input type="city" name="city" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="city" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
           <label htmlFor="address_line_1" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Address Line 1</label>
-          <input type="address_line_1" name="address_line_1" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="address_line_1" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
           <label htmlFor="address_line_2" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Address Line 2</label>
-          <input type="address_line_2" name="address_line_2" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="address_line_2" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
           <label htmlFor="postal_code" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Postal Code</label>
-          <input type="postal_code" name="postal_code" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <input type="text" name="postal_code" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <button type="submit" className="inline-block rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none">Add User</button>
@@ -254,7 +254,7 @@ const AddMovieForm = () => {
       body: JSON.stringify(movieData),
     }).then((response) => {
       if (response.ok) {
-        console.log(`A new user has successfully been added`)
+        console.log(`A new movie has successfully been added`)
       }
       else {
         response.json().then((errorData) => {
@@ -272,68 +272,63 @@ const AddMovieForm = () => {
     <div>
       <form onSubmit={addMovie}>
         <div className="flex flex-row">
-          <label htmlFor="firstName" className="mb-2 inline-block text-sm text-gray-800 sm:text-base"> First Name </label>
-          <input type="text" name="first_name" className="w-50% rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <label htmlFor="title" className="mb-2 inline-block text-sm text-gray-800 sm:text-base"> Title </label>
+          <input type="text" name="title" className="w-50% rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
-          <label htmlFor="lastName" className="mb-2 inline-block text-sm text-gray-800 sm:text-base"> Last Name </label>
-          <input type="text" name="last_name" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <label htmlFor="director" className="mb-2 inline-block text-sm text-gray-800 sm:text-base"> Director </label>
+          <input type="text" name="director" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
-          <label htmlFor="email" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email</label>
-          <input type="email" name="email" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-        </div>
-
-        <div className="flex flex-row">
-          <label htmlFor="phone" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Phone Number</label>
-          <input type="phone" name="phone" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-        </div>
-
-        <div className="flex flex-row">
-          <label htmlFor="password" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
-          <input type="password" name="password" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-        </div>
-
-        <div className="flex flex-row">
-          <label htmlFor="date_of_birth" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Date of Birth</label>
-          <input type="date_of_birth" name="date_of_birth" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-        </div>
-
-        <div className="flex flex-row">
-          <label htmlFor="profile_image" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Profile Image</label>
-          <input type="profile_image" name="profile_image" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-        </div>
-
-        <div className="flex flex-row">
-          <label htmlFor="country" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Country</label>
-          <input type="country" name="country" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-        </div>
-
-        <div className="flex flex-row">
-          <label htmlFor="state" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">State</label>
-          <input type="state" name="state" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <label htmlFor="writer" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Writer</label>
+          <input type="text" name="writer" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
         
         <div className="flex flex-row">
-          <label htmlFor="city" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">City</label>
-          <input type="city" name="city" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <label htmlFor="year_of_release" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Year of Release</label>
+          <input type="text" name="year_of_release" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
-          <label htmlFor="address_line_1" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Address Line 1</label>
-          <input type="address_line_1" name="address_line_1" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <label htmlFor="motion_picture_rating" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Motion Picture Rating</label>
+          <input type="text" name="motion_picture_rating" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
-          <label htmlFor="address_line_2" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Address Line 2</label>
-          <input type="address_line_2" name="address_line_2" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <label htmlFor=" run_time" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Run Time</label>
+          <input type="text" name="run_time" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <div className="flex flex-row">
-          <label htmlFor="postal_code" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Postal Code</label>
-          <input type="postal_code" name="postal_code" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+          <label htmlFor="thumbnail" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Thumbnail</label>
+          <input type="text" name="thumbnail" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="summary" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Summary</label>
+          <input type="text" name="summary" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="trailer" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Trailer</label>
+          <input type="text" name="trailer" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+        
+        <div className="flex flex-row">
+          <label htmlFor="stars" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Stars</label>
+          <input type="text" name="stars" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="all_cast_and_crew" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">All Cast and Crew</label>
+          <input type="text" name="all_cast_and_crew" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <div className="flex flex-row">
+          <label htmlFor="genres" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Genres</label>
+          <input type="text" name="genres" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         </div>
 
         <button type="submit" className="inline-block rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none">Add User</button>
@@ -511,6 +506,10 @@ function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
               <AccordionItem 
                 contents={<MovieDataTable moviesData={moviesData} deleteMovie={deleteMovie} />}
                 title={"All DNN Movies"}
+              />
+              <AccordionItem 
+                contents={<AddMovieForm />}
+                title={"Add a New Movie"}
               />
             </div>
           }
