@@ -6,17 +6,14 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
   // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null)
   const [showModal, setShowModal] = useState(false)
-  const [continueWatching, setContinueWatching] = useState()
+  const [continueWatching, setContinueWatching] = useState(false)
 
   useEffect(() => {
-    // Now we use watchHistory's presence to decide on showing the modal
-    if ( watchHistory) {
-      // video && video.currentTime = watchHistory.time_stamp
+    // Only show the modal if there's a watchHistory and the user hasn't made a decision yet
+    if (watchHistory && !continueWatching) {
       setShowModal(true)
-    } else {
-      setShowModal(false)
     }
-  }, [watchHistory])
+  }, [watchHistory, continueWatching])
 
 
   // Handle accordion changing by checking the index that is selected to the activeIndex, if it's the activeIndex, close that index by setting it to null, otherwise open the next one 
@@ -25,10 +22,14 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
     setActiveIndex(index === activeIndex ? null : index);
   }
 
+  // On a users decision to continue where they left off, modal false to remove it. set continue watching to true, removing the showModal True in the useEffect from having the modal reappear. 
+  // From there, if the video exists, and watch history exists set the video time to the timestamp.
   const onContinue = () => {
     setShowModal(false)
     setContinueWatching(true)
-    video.currentTime = watchHistory.time_stamp
+    if (video && watchHistory) {
+      video.currentTime = watchHistory.time_stamp;
+    }
   }
 
     // console.log("Full selected TV Series Data:",fullTVSeries )
@@ -85,6 +86,8 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 						className={`accordion-content bg-white px-4 pb-4 pt-2 ${
 							activeIndex === index ? "block" : "hidden"
 						}`}
+            // Reset continue watching to false whenever you click on a new card. This is 1/2 to satisfying the condition of the useEffect, other being the existence of a watch history.
+            onClick={() => setContinueWatching(false)}
 					>
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full lg:w-3/4 mx-auto">
 						{item.content}
@@ -94,11 +97,10 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 			))}
           {showModal && createPortal(
           <ContinueLeftOff 
-          episodeInformation={episodeInformation} onContinue={onContinue} 
-          onClose={() => {
-          setShowModal(false)
-          setContinueWatching(true)
-          }} />,
+          episodeInformation={episodeInformation} 
+          onContinue={onContinue} 
+          // Onclose prop function that just sets modal to false.
+          onClose={() => setShowModal(false)} />,
           document.body
       )}
 		</div>
