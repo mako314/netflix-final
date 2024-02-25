@@ -49,7 +49,7 @@ function HomePage({moviesData, tvSeriesData}){
                 <div className="mb-6 px-4 rounded-lg">
                 <div className="mb-8">
                     <span className="block text-2xl font-semibold text-gray-800 mb-4 ml-4 ">Movies</span>
-                    <AllMoviesWithGenre moviesData={moviesData}/>
+                    <AllMoviesWithGenre moviesData={moviesData} homePage={true}/>
                 </div>
 
                 <div className="mt-12">

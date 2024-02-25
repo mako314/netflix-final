@@ -66,7 +66,8 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
             {/* <label for="foods">What do you want to eat?</label><br /> */}
-            <div className="flex flex-row"> 
+        
+        {!homePage && <div className="flex flex-row"> 
         <select 
                 className="block appearance-none w-auto bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-2"
                 value={dateSort}
@@ -87,7 +88,7 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
                 <option name="oldest_option" value="false" id="alphabetFalse">Z-A</option>
         </select>
 
-        </div>
+        </div>}
 
         
 

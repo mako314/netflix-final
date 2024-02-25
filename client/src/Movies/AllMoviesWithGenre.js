@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import MovieCollection from "./MovieCollection";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
-function AllMoviesWithGenre({ moviesData }) {
+function AllMoviesWithGenre({ moviesData, homePage}) {
     // State to hold filter condtions, can likely become one state ? Wonder the pros / cons
     const [dateSort, setDateSort] = useState('newest')
     const [alphabetSort, setAlphabetSort] = useState(true)
@@ -61,7 +61,7 @@ function AllMoviesWithGenre({ moviesData }) {
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
 
-        <div className="flex flex-row"> 
+        {!homePage && <div className="flex flex-row"> 
                     {/* <label for="foods">What do you want to eat?</label><br /> */}
                     <select 
                         className="block appearance-none w-auto bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-2"
@@ -84,6 +84,7 @@ function AllMoviesWithGenre({ moviesData }) {
                 </select>
 
         </div>
+        }
 
             {genres.map((genre) => {
                 const filteredMovieSeries = sortedMovies.filter(tvSeries => 

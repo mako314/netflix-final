@@ -8,7 +8,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     const apiUrl = useContext(ApiUrlContext)
     const videoEl = useRef(null);
 
-    const [errorData, setErrorData] = useState()
+    const [watchHistory, setWatchHistory] = useState(null)
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
       episodeNumber: 1,
@@ -21,6 +21,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       timeStamp: testingTimeStamp
     })
     
+    console.log("THE WATCH HISTORY:", watchHistory)
     // Passing state with useLocation from react router dom,
     const location = useLocation()
 
@@ -70,23 +71,24 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     const handleTimeUpdated = (e) => {
       // do something on time update
+      const video = videoEl.current;
       console.log(e)
-      testTime=e.timeStamp
+      testTime=e.target.currentTime
       console.log("THE TIME STAMP", testTime)
-      // setTestingTimeStamp(e.timeStamp)
+      // setTestingTimeStamp(e.target.currentTime)
       setEpisodeInformation({
         ...episodeInformation,
-        timeStamp: e.timeStamp,
+        currentTime: e.target.currentTime,
       })
-      console.log(typeof(e.timeStamp))
-      handlePostingWatchHistory()
+      console.log("THE TIME STAMP:", e.target.currentTime)
+      console.log(typeof(e.target.currentTime))
+      // handlePostingWatchHistory()
+      
     }
 
     // Possibly grab duration of video with this
     // https://www.w3schools.com/tags/av_event_loadedmetadata.asp
     // onPause={this.handlePause}
-
-
     // https://stackoverflow.com/questions/71612224/how-can-i-get-video-duration-from-raw-video-file-in-react
     const handleLoadedMetadata = (e) => {
       const video = videoEl.current;
@@ -98,6 +100,11 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         ...episodeInformation,
         videoDuration: video.duration,
       })
+
+      if(watchHistory){
+        video.currentTime = watchHistory.time_stamp
+      }
+
       // handlePostingWatchHistory()
     };
 
@@ -145,9 +152,11 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         if (response.ok) {
           const data = await response.json()
           console.log("Watch History Retrieval succesful:", data)
-          // handleCheckoutNavigation(data.client_secret)
+          setWatchHistory(data)
         } else {
+          const errorData = await response.json()
           console.error('Error Response:', errorData)
+          setWatchHistory(null)
         }
       } catch (error) {
         console.error('Fetch Error:', error)
@@ -156,38 +165,37 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     // Going to want to use an onPause... or on play? Or both? When it's paused it should go off, and when it first plays?  to basically create the watch history entry 
 
+    // Okay, this is how I like it, but we're going to make a patch instead that'll handle changing the watch history time stamp. First post, then if it exists, patch it.
+
     const handlePostingWatchHistory = async () => {
+      const fetchMethod = watchHistory ? "PATCH" : "POST"
+      // const fetchUrl = watchHistory ? : `${apiUrl}user/${1}/watch/list/`
       try {
         const response = await fetch(`${apiUrl}user/${1}/watch/list/`, {
-          method: "POST",
+          method: "watchHistory",
           headers: {
             "Content-Type": "application/json",
           },
           credentials: 'include',
           body: JSON.stringify(episodeInformation),
         })
-    
         if (response.ok) {
           const data = await response.json()
-          // console.log("Checkout Successful:", data)
-          // handleCheckoutNavigation(data.client_secret)
-          // navigate(`/checkout`)
+          console.log("Post was good:", data)
         } else {
+          const errorData = await response.json()
           console.error('Error Response:', errorData)
         }
       } catch (error) {
         console.error('Fetch Error:', error)
       }
     }
+
+
     
     return(
       // Do flex grow before doing flex-column so it grows and takes up most of the space
       <div className="flex flex-grow" 
-      // style={{ 
-      //   backgroundImage: "url(https://wallpapercave.com/wp/wp2581370.jpg)",
-      //   backgroundPosition: "top",
-      //   backgroundSize: "cover"
-      // }}
       >
       <div className="flex flex-col items-center w-full">
       <div className="p-5 w-full max-w-4xl mx-auto">
@@ -200,7 +208,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           <div className="px-4 py-3 bg-gray-800 rounded-lg overflow-hidden shadow-xl">
             <div className="flex items-center justify-center gap-2">
               <p className="text-lg md:text-xl font-semibold text-white text-shadow">
-                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.seasonName}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
+                You're watching: {episodeInformation.showTitle} - Season {episodeInformation.seasonNumber}, Episode {episodeInformation.episodeNumber}: "{episodeInformation.episodeTitle}"
               </p>
             </div>
           </div>
@@ -248,7 +256,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} handleTvWatchListFind={handleTvWatchListFind}/>
+        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} watchHistory={watchHistory} setWatchHistory={setWatchHistory} video={videoEl.current}/>
     </div>
     </div>
     )

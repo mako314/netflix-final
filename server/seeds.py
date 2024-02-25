@@ -14,6 +14,7 @@ if __name__ == '__main__':
         Admin.query.delete()
         TvEpisode.query.delete()
         TvSeason.query.delete()
+        WatchHistory.query.delete()
 
 
 
@@ -1111,30 +1112,30 @@ if __name__ == '__main__':
                 episode_name="Arthur's Eyes",
                 season_number="1",
                 series_name="Arthur",
-                video_duration = '',
                 tv_series_id = 15,
-                video_duration = 115030.59999999404,
-                time_stamp = 1585.752419,
+                video_duration = 1585.752419 ,
+                time_stamp = 1048.054659,
+                user_id = user_list[0].id,
             ),
             WatchHistory(
                 episode_number="2",
                 episode_name="Francine's Bad Hair Day",
                 season_number="1",
                 series_name="Arthur",
-                video_duration = '',
                 tv_series_id = 15,
                 video_duration = 142148.69999998808,
                 time_stamp = 1587.45542,
+                user_id = user_list[0].id,
             ),
             WatchHistory(
                 episode_number="3",
                 episode_name="Arthur and the Real Mr. Ratburn",
                 season_number="1",
                 series_name="Arthur",
-                video_duration = '',
                 tv_series_id = 15,
                 video_duration = 1481.381381,
                 time_stamp = 155697.19999998808, 
+                user_id = user_list[0].id,
             ),
         ]
 
