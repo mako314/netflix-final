@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ContinueLeftOff({ onClose }) {
+export default function ContinueLeftOff({ onClose, onContinue }) {
     return (
 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center px-4 z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full mx-auto">
@@ -15,7 +15,7 @@ export default function ContinueLeftOff({ onClose }) {
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            // onClick={onContinue}
+            onClick={onContinue}
           >
             Yes, continue
           </button>

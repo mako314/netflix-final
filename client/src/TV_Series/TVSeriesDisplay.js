@@ -71,10 +71,9 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     const handleTimeUpdated = (e) => {
       // do something on time update
-      const video = videoEl.current;
+      // Previously was using time stamp, but time stamp is a time an action occurred, not the current time in the video :cry:
+      // const video = videoEl.current;
       console.log(e)
-      testTime=e.target.currentTime
-      console.log("THE TIME STAMP", testTime)
       // setTestingTimeStamp(e.target.currentTime)
       setEpisodeInformation({
         ...episodeInformation,
@@ -101,9 +100,9 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         videoDuration: video.duration,
       })
 
-      if(watchHistory){
-        video.currentTime = watchHistory.time_stamp
-      }
+      // if(watchHistory){
+      //   video.currentTime = watchHistory.time_stamp
+      // }
 
       // handlePostingWatchHistory()
     };

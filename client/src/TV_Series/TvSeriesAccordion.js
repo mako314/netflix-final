@@ -4,13 +4,14 @@ import ContinueLeftOff from "../Modals/ContinueLeftOff";
 
 function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video}) {
   // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
-	const [activeIndex, setActiveIndex] = useState(null);
+	const [activeIndex, setActiveIndex] = useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [continueWatching, setContinueWatching] = useState()
 
   useEffect(() => {
     // Now we use watchHistory's presence to decide on showing the modal
-    if (video && watchHistory) {
-      video.currentTime = watchHistory.time_stamp
+    if ( watchHistory) {
+      // video && video.currentTime = watchHistory.time_stamp
       setShowModal(true)
     } else {
       setShowModal(false)
@@ -20,9 +21,15 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 
   // Handle accordion changing by checking the index that is selected to the activeIndex, if it's the activeIndex, close that index by setting it to null, otherwise open the next one 
   // activeIndex === index ? "block" : "hidden" this portion in the return code goes about hiding the content otherwise.
-    const handleClick = (index) => {
-      setActiveIndex(index === activeIndex ? null : index);
-    }
+  const handleClick = (index) => {
+    setActiveIndex(index === activeIndex ? null : index);
+  }
+
+  const onContinue = () => {
+    setShowModal(false)
+    setContinueWatching(true)
+    video.currentTime = watchHistory.time_stamp
+  }
 
     // console.log("Full selected TV Series Data:",fullTVSeries )
 
@@ -86,7 +93,12 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 				</div>
 			))}
           {showModal && createPortal(
-          <ContinueLeftOff episodeInformation={episodeInformation} onClose={() => setShowModal(false)} />,
+          <ContinueLeftOff 
+          episodeInformation={episodeInformation} onContinue={onContinue} 
+          onClose={() => {
+          setShowModal(false)
+          setContinueWatching(true)
+          }} />,
           document.body
       )}
 		</div>
