@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from 'react-dom';
 import ContinueLeftOff from "../Modals/ContinueLeftOff";
 
-function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video, continueWatching, setContinueWatching}) {
+function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video, continueWatching, setContinueWatching, setWatchHistory}) {
   // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null)
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     // Only show the modal if there's a watchHistory and the user hasn't made a decision yet
-    if (watchHistory !== null && !continueWatching) {
+    // This modal has been the biggest pain to fix I could never have imagined. There will be slight edits due to seeing what is needed and what is not.
+    // Still learning, so it's alright.
+    // We test first, whether watch history is not null, we also need to make sure there's a time stamp.
+    // Continue watching can also not be true, if it is, then a user has already decided to continue watching from when they left off.
+    // I think the true pivotal point here was matching the CURRENT episode information (the title) to the FETCHED watch history episode name.
+    if (watchHistory !== null && !continueWatching && watchHistory.time_stamp !== null && episodeInformation.episodeTitle === watchHistory.episode_name) {
       setShowModal(true)
     }
   }, [watchHistory, continueWatching])
@@ -19,8 +24,20 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
   // activeIndex === index ? "block" : "hidden" this portion in the return code goes about hiding the content otherwise.
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
+    setContinueWatching(true)
+    setWatchHistory(null); // Reset watchHistory on new video selection
   }
 
+
+  // Jump back to the specific time:
+  // https://stackoverflow.com/questions/62739769/jump-to-specific-time-in-videojs-using-react-hooks
+  // https://stackoverflow.com/questions/47643091/html5-video-start-video-at-certain-time-and-play-for-x-amount-of-time
+  // Can make it a button, or offer options? 
+  // https://stackoverflow.com/questions/15025378/html5-video-button-that-takes-video-to-specific-time
+  // https://stackoverflow.com/questions/66494433/start-an-html-video-to-a-specified-time
+  // https://web.dev/articles/video-and-source-tags#specify-start-and-end-times
+  // https://stackoverflow.com/questions/26665280/html5-video-element-start-and-end-times
+  // https://stackoverflow.com/questions/5981427/start-html5-video-at-a-particular-position-when-loading
   // On a users decision to continue where they left off, modal false to remove it. set continue watching to true, removing the showModal True in the useEffect from having the modal reappear. 
   // From there, if the video exists, and watch history exists set the video time to the timestamp.
   const onContinue = () => {
@@ -50,7 +67,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
                 episodeTitle: episode.episode_name,
                 seasonNumber: episode.show_season.season_number,
                 showTitle: episode.show_season.series_name,
-                all_season_test:season
+                // all_season_test:season
             })
             window.scrollTo({
               top: 0,
