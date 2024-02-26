@@ -598,8 +598,11 @@ class TvPatchWatchHistory(Resource):
         if watch_history_entry:
             try:
                 data = request.get_json()
+                print("THE DATA:", data)
                 for key in data:
                     if key == 'timeStamp' and data['timeStamp']:
+                        print("THE PREVIOUS TIME STAMP:", watch_history_entry.time_stamp )
+                        print("THE NEW TIME STAMP:", data['timeStamp'])
                         watch_history_entry.time_stamp = data['timeStamp']
                     else:
                         setattr(watch_history_entry, key, data[key])

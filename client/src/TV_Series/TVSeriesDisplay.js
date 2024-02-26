@@ -8,6 +8,10 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     const apiUrl = useContext(ApiUrlContext)
     const videoEl = useRef(null);
 
+    // State
+    // True / False, for a continuation into watching.
+    // watchHistory captures the data from the fetch
+    // Episode information is current episode information that gets recorded on click of a video card
     const [continueWatching, setContinueWatching] = useState(false)
     const [watchHistory, setWatchHistory] = useState(null)
     const [episodeInformation, setEpisodeInformation] = useState({
@@ -19,38 +23,26 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       showTitle:"Show",
       all_season_test: {},
       videoDuration: 1235,
-      timeStamp: testingTimeStamp
+      timeStamp: null
     })
     
-    console.log("THE WATCH HISTORY:", watchHistory)
     // Passing state with useLocation from react router dom,
     const location = useLocation()
-
     // Retrieving state we sent over in navigation.
     const { fullTVSeries } = location.state || {}
 
     // let testTime
 
-    // console.log("Full selected TV Series Data:",fullTVSeries )
 
     // Once a user pauses / clicks item added to watch history. After pausing and navigating away from a page, a users watch time is then logged, so when they come back to the episode it starts at that time.
     // continue where I left off, restart, etc
-
-    // console.log("The video episode URL, looking for AWS:", episodeInformation.videoLocation)
-
 
     // https://stackoverflow.com/questions/75550412/handle-browser-beforeunload-with-react-router-dom-v6-page-navigation
     // https://stackoverflow.com/questions/72337281/react-router-dom-v6-detect-user-is-leaving-a-page-and-do-something <- maybe just use useEffect?
     // https://stackoverflow.com/questions/52448909/onbeforeunload-not-working-inside-react-component <- maybe really use useEffect lol
     // https://stackoverflow.com/questions/75859065/how-to-store-data-in-localstorage-before-user-exits-page-user-react-router <- may be best to make use of both react and router dom
 
-
-    // useEffect(() => {
-    //   return () => {
-    //     setTestingTimeStamp(testTime)
-    //   }
-    // }, [testTime])
-
+    // UseEffect waiting for all episode information to fetch the watch history entry
     useEffect(() => {
       // Ensure all required information is present before making the fetch call
       if (episodeInformation.videoLocation && episodeInformation.showTitle && episodeInformation.episodeTitle && episodeInformation.episodeNumber) {
@@ -70,6 +62,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     // best link along with the github one above:
     // https://stackoverflow.com/questions/61625602/how-can-i-adapt-this-js-code-to-my-reactjs-app-so-that-i-can-customize-my-video
 
+    // On a videos pause, one captures the current time of the video and sets it to the timestamp
     const handleTimeUpdated = (e) => {
       // do something on time update
       // Previously was using time stamp, but time stamp is a time an action occurred, not the current time in the video :cry:
@@ -78,17 +71,21 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // setTestingTimeStamp(e.target.currentTime)
       setEpisodeInformation({
         ...episodeInformation,
-        currentTime: e.target.currentTime,
+        timeStamp: e.target.currentTime,
       })
       // console.log("THE TIME STAMP:", e.target.currentTime)
       // console.log(typeof(e.target.currentTime))
-      handlePostingWatchHistory()
+      // Set continue watching to true, not sure if this is needed as it was giving me errors in TvSeriesAccordions setting of the modal,
+      setContinueWatching(true)
+      // Handle posting, OR patching the watch history,
+      handleNewOrExistingWatchHistory()
     }
 
     // Possibly grab duration of video with this
     // https://www.w3schools.com/tags/av_event_loadedmetadata.asp
     // onPause={this.handlePause}
     // https://stackoverflow.com/questions/71612224/how-can-i-get-video-duration-from-raw-video-file-in-react
+    // Use useRef to capture the video duration,
     const handleLoadedMetadata = (e) => {
       const video = videoEl.current;
       if (!video) return;
@@ -99,46 +96,26 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         ...episodeInformation,
         videoDuration: video.duration,
       })
-
-      // if(watchHistory){
-      //   video.currentTime = watchHistory.time_stamp
-      // }
-
-      // handlePostingWatchHistory()
     };
 
     
-
- 
-
     // https://reactrouter.com/en/main/hooks/use-before-unload
     // https://stackoverflow.com/questions/62792342/in-react-router-v6-how-to-check-form-is-dirty-before-leaving-page-route
     // https://github.com/remix-run/react-router/blob/v3/docs/Glossary.md#leavehook
     // https://github.com/remix-run/react-router/blob/v3/docs/Glossary.md#routerstate
 
 
-    // Jump back to the specific time:
-    // https://stackoverflow.com/questions/62739769/jump-to-specific-time-in-videojs-using-react-hooks
-    // https://stackoverflow.com/questions/47643091/html5-video-start-video-at-certain-time-and-play-for-x-amount-of-time
-
 
     // Current duration if needed: 
     // I could see this being needed with math to calculcate the time you are in the video, but hopefully can just start at time stamp
     // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/duration
 
-    // Can make it a button, or offer options? 
-    // https://stackoverflow.com/questions/15025378/html5-video-button-that-takes-video-to-specific-time
-    // https://stackoverflow.com/questions/66494433/start-an-html-video-to-a-specified-time
-    // https://web.dev/articles/video-and-source-tags#specify-start-and-end-times
-    // https://stackoverflow.com/questions/26665280/html5-video-element-start-and-end-times
-    // https://stackoverflow.com/questions/5981427/start-html5-video-at-a-particular-position-when-loading
-
-    //   function jumpToTime(time){
-    //     v.currentTime = time;
-    // }
-
-    // /season/${episodeInformation.seasonName}/
+    // This function handles finding a watch history entry if it exists. 
+    // PLEASE REPLACE THE HARD CODED {1} WITH THE CURRENT USERS ID
     const handleTvWatchListFind = async () => {
+      // if (watchHistory){
+      //   return console.log()
+      // }
       try {
         const response = await fetch(`${apiUrl}user/${1}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
           method: "GET",
@@ -152,12 +129,16 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           const data = await response.json()
           console.log("Watch History Retrieval succesful:", data)
           setWatchHistory(data)
-          // setContinueWatching(true)
 
+          // This continue watching may not be needed, will test
+          setContinueWatching(false)
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
+          // if Watch history doesn't exist, we set it to null
           setWatchHistory(null)
+          // This continue watching may not be needed, will test
+          // setContinueWatching(true)
         }
       } catch (error) {
         console.error('Fetch Error:', error)
@@ -165,12 +146,14 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     }
 
     // Going to want to use an onPause... or on play? Or both? When it's paused it should go off, and when it first plays?  to basically create the watch history entry 
-
     // Okay, this is how I like it, but we're going to make a patch instead that'll handle changing the watch history time stamp. First post, then if it exists, patch it.
-
     // Don't forget to include currentUsers id in {1}
 
-    const handlePostingWatchHistory = async () => {
+    // This function handles creating a new watch history item or patching an existing one. First it looks for the existence of watchHistory to handle the method, 
+    // then the same existence determines the fetchUrl too.
+    // From there, either patch or make a new watch history item.
+
+    const handleNewOrExistingWatchHistory = async () => {
       const fetchMethod = watchHistory ? "PATCH" : "POST"
       const fetchUrl = watchHistory ? `${apiUrl}watch/list/entry/${watchHistory.id}`: `${apiUrl}user/${1}/watch/list/`
       try {
@@ -185,7 +168,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         if (response.ok) {
           const data = await response.json()
           if (watchHistory){
-            console.log("Patch was good:", data)
+            return console.log("Patch was good:", data)
           }
             console.log("Post was good:", data)
 
