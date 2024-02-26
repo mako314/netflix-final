@@ -489,10 +489,10 @@ class OneTvShowContinueWatching(Resource):
         
         user = User.query.filter(User.id == user_id).first()
 
-        print(user.first_name)
-        print(episode_title)
-        print(show_title)
-        print(episode_number)
+        # print(user.first_name)
+        # print(episode_title)
+        # print(show_title)
+        # print(episode_number)
 
 
         # tv_series = TelevisionSeries.query.filter(TelevisionSeries.title == show_title).first()
@@ -591,6 +591,36 @@ class TvOrMoviePostToWatchHistory(Resource):
         return response
     
 api.add_resource(TvOrMoviePostToWatchHistory, '/user/<int:user_id>/watch/list/')
+
+class TvPatchWatchHistory(Resource):
+    def patch(self, tv_watch_history_id):
+        watch_history_entry = WatchHistory.query.filter(WatchHistory.id == tv_watch_history_id).first()
+        if watch_history_entry:
+            try:
+                data = request.get_json()
+                for key in data:
+                    if key == 'timeStamp' and data['timeStamp']:
+                        watch_history_entry.time_stamp = data['timeStamp']
+                    else:
+                        setattr(watch_history_entry, key, data[key])
+                db.session.commit()
+
+                response = make_response(watch_history_entry.to_dict(), 202)
+                return response
+            except ValueError as ve:
+                # Log the error message and the data causing the error
+                print(f"ValueError occurred: {ve}")
+                print(f"Data received: {data}")
+                return make_response({"error": ["Validation errors, check your input and try again", str(ve)]}, 400)
+
+        else:
+            response = make_response({
+            "error": "Watch History Entry not found"
+            }, 404)
+            return response
+
+api.add_resource(TvPatchWatchHistory, '/watch/list/entry/<int:tv_watch_history_id>')
+
 
 class Favorites(Resource):
     def get(self):
