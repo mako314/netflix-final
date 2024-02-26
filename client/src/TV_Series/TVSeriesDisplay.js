@@ -8,6 +8,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     const apiUrl = useContext(ApiUrlContext)
     const videoEl = useRef(null);
 
+    const [continueWatching, setContinueWatching] = useState(false)
     const [watchHistory, setWatchHistory] = useState(null)
     const [episodeInformation, setEpisodeInformation] = useState({
       videoLocation: null,
@@ -28,7 +29,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
     // Retrieving state we sent over in navigation.
     const { fullTVSeries } = location.state || {}
 
-    let testTime
+    // let testTime
 
     // console.log("Full selected TV Series Data:",fullTVSeries )
 
@@ -73,16 +74,15 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // do something on time update
       // Previously was using time stamp, but time stamp is a time an action occurred, not the current time in the video :cry:
       // const video = videoEl.current;
-      console.log(e)
+      // console.log(e)
       // setTestingTimeStamp(e.target.currentTime)
       setEpisodeInformation({
         ...episodeInformation,
         currentTime: e.target.currentTime,
       })
-      console.log("THE TIME STAMP:", e.target.currentTime)
-      console.log(typeof(e.target.currentTime))
-      // handlePostingWatchHistory()
-      
+      // console.log("THE TIME STAMP:", e.target.currentTime)
+      // console.log(typeof(e.target.currentTime))
+      handlePostingWatchHistory()
     }
 
     // Possibly grab duration of video with this
@@ -93,8 +93,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       const video = videoEl.current;
       if (!video) return;
       e.target.volume = 0.2
-      console.log(`The video is ${video.duration} seconds long.`);
-      console.log(typeof(video.duration))
+      // console.log(`The video is ${video.duration} seconds long.`);
+      // console.log(typeof(video.duration))
       setEpisodeInformation({
         ...episodeInformation,
         videoDuration: video.duration,
@@ -152,6 +152,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           const data = await response.json()
           console.log("Watch History Retrieval succesful:", data)
           setWatchHistory(data)
+          // setContinueWatching(true)
+
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
@@ -166,12 +168,14 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     // Okay, this is how I like it, but we're going to make a patch instead that'll handle changing the watch history time stamp. First post, then if it exists, patch it.
 
+    // Don't forget to include currentUsers id in {1}
+
     const handlePostingWatchHistory = async () => {
       const fetchMethod = watchHistory ? "PATCH" : "POST"
-      // const fetchUrl = watchHistory ? : `${apiUrl}user/${1}/watch/list/`
+      const fetchUrl = watchHistory ? `${apiUrl}watch/list/entry/${watchHistory.id}`: `${apiUrl}user/${1}/watch/list/`
       try {
-        const response = await fetch(`${apiUrl}user/${1}/watch/list/`, {
-          method: "watchHistory",
+        const response = await fetch(fetchUrl, {
+          method: fetchMethod,
           headers: {
             "Content-Type": "application/json",
           },
@@ -180,7 +184,12 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         })
         if (response.ok) {
           const data = await response.json()
-          console.log("Post was good:", data)
+          if (watchHistory){
+            console.log("Patch was good:", data)
+          }
+            console.log("Post was good:", data)
+
+          
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
@@ -255,7 +264,15 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} fullTVSeries={fullTVSeries} setEpisodeInformation={setEpisodeInformation} watchHistory={watchHistory} setWatchHistory={setWatchHistory} video={videoEl.current}/>
+        <Accordion  episodeInformation={episodeInformation} 
+        fullTVSeries={fullTVSeries} 
+        setEpisodeInformation={setEpisodeInformation} 
+        watchHistory={watchHistory} 
+        setWatchHistory={setWatchHistory} 
+        video={videoEl.current} 
+        setContinueWatching={setContinueWatching}
+        continueWatching={continueWatching}
+        />
     </div>
     </div>
     )

@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from 'react-dom';
 import ContinueLeftOff from "../Modals/ContinueLeftOff";
 
-function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video}) {
+function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video, continueWatching, setContinueWatching}) {
   // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null)
   const [showModal, setShowModal] = useState(false)
-  const [continueWatching, setContinueWatching] = useState(false)
 
   useEffect(() => {
     // Only show the modal if there's a watchHistory and the user hasn't made a decision yet
-    if (watchHistory && !continueWatching) {
+    if (watchHistory !== null && !continueWatching) {
       setShowModal(true)
     }
   }, [watchHistory, continueWatching])
@@ -87,7 +86,9 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 							activeIndex === index ? "block" : "hidden"
 						}`}
             // Reset continue watching to false whenever you click on a new card. This is 1/2 to satisfying the condition of the useEffect, other being the existence of a watch history.
-            onClick={() => setContinueWatching(false)}
+            onClick={() => {
+              console.log("CONTINUE WATCHING SHOULD BE FALSE")
+              setContinueWatching(false)}}
 					>
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full lg:w-3/4 mx-auto">
 						{item.content}
