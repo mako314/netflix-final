@@ -25,6 +25,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       videoDuration: 1235,
       timeStamp: null
     })
+    const [isInitialLoad, setIsInitialLoad] = useState(true) // New state to track initial load
+    const [isFetchingWatchHistory, setIsFetchingWatchHistory] = useState(false) 
     
     // Passing state with useLocation from react router dom,
     const location = useLocation()
@@ -76,7 +78,12 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // console.log("THE TIME STAMP:", e.target.currentTime)
       // console.log(typeof(e.target.currentTime))
       // Set continue watching to true, not sure if this is needed as it was giving me errors in TvSeriesAccordions setting of the modal,
-      setContinueWatching(true)
+      if (isInitialLoad) {
+        setIsInitialLoad(false) // Mark initial load as complete after first interaction
+      } else {
+        // Prevent setting continueWatching to true on every pause after initial load
+        setContinueWatching(false)
+      }
       // Handle posting, OR patching the watch history,
       handleNewOrExistingWatchHistory()
     }
@@ -116,6 +123,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // if (watchHistory){
       //   return console.log()
       // }
+      setIsFetchingWatchHistory(true)
       try {
         const response = await fetch(`${apiUrl}user/${1}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
           method: "GET",
@@ -132,11 +140,16 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
           // This continue watching may not be needed, will test
           setContinueWatching(false)
+          // Set initial loaded and fetch watch history to true after finding the watch history
+          setIsFetchingWatchHistory(true)
+          setIsInitialLoad(true)
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
           // if Watch history doesn't exist, we set it to null
           setWatchHistory(null)
+          // MUST SET FETCHING WATCH HISTORY TO FALSE TO NOT SHOW MODAL IF WATCH HISTORY DOESN'T EXIST
+          setIsFetchingWatchHistory(false)
           // This continue watching may not be needed, will test
           // setContinueWatching(true)
         }
@@ -168,14 +181,18 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         if (response.ok) {
           const data = await response.json()
           if (watchHistory){
+            // Set continue watching to true, fetchwatchhistory is already true so it's fine
+            setContinueWatching(true)
             return console.log("Patch was good:", data)
           }
+            setContinueWatching(true)
             console.log("Post was good:", data)
 
           
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
+          
         }
       } catch (error) {
         console.error('Fetch Error:', error)
@@ -206,7 +223,11 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
           <div className="aspect-w-16 aspect-h-9">
             {/* Video created with default html element, keep it universal. 😎 */}
-            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={handleLoadedMetadata} onPause={handleTimeUpdated} ref={videoEl} className="w-full h-auto">
+            <video controls key={episodeInformation.videoLocation} 
+            onLoadedMetadata={handleLoadedMetadata} 
+            onPause={handleTimeUpdated} 
+            ref={videoEl} 
+            className="w-full h-auto">
               <source src={episodeInformation.videoLocation} type="video/mp4" />
             </video>
           </div>
@@ -247,7 +268,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} 
+        <Accordion  
+        episodeInformation={episodeInformation} 
         fullTVSeries={fullTVSeries} 
         setEpisodeInformation={setEpisodeInformation} 
         watchHistory={watchHistory} 
@@ -255,6 +277,9 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         video={videoEl.current} 
         setContinueWatching={setContinueWatching}
         continueWatching={continueWatching}
+        isInitialLoad={isInitialLoad}
+        setIsInitialLoad={setIsInitialLoad}
+        isFetchingWatchHistory={isFetchingWatchHistory}
         />
     </div>
     </div>

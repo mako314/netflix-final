@@ -1124,7 +1124,7 @@ if __name__ == '__main__':
                 series_name="Arthur",
                 tv_series_id = 15,
                 video_duration = 142148.69999998808,
-                time_stamp = 1587.45542,
+                time_stamp = 1048.054659,
                 user_id = user_list[0].id,
             ),
             WatchHistory(
@@ -1134,7 +1134,7 @@ if __name__ == '__main__':
                 series_name="Arthur",
                 tv_series_id = 15,
                 video_duration = 1481.381381,
-                time_stamp = 155697.19999998808, 
+                time_stamp = 1048.054659, 
                 user_id = user_list[0].id,
             ),
         ]

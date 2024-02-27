@@ -503,7 +503,7 @@ class OneTvShowContinueWatching(Resource):
 
         # tv_episode = TelevisionSeries.query.filter(TelevisionSeries.episode_name == episode_title).first()
 
-        watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title).first()
+        watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title, user_id = user_id).first()
 
         if watch_history_entry:
             response = make_response(watch_history_entry.to_dict(), 200)
@@ -521,24 +521,23 @@ class OneMovieContinueWatching(Resource):
     def get(self, user_id, movie_title):
         
         user = User.query.filter(User.id == user_id).first()
+        print(movie_title)
 
-        print(user.first_name)
-        movie = Movie.query.filter(Movie.title == movie_title)
+        watch_history_entry = WatchHistory.query.filter_by(movie_title = movie_title, user_id = user_id).first()
+
+        # print(watch_history_entry.movie_title)
+
+        if watch_history_entry:
+            response = make_response(watch_history_entry.to_dict(), 200)
+
+        else:
+            response = make_response({
+                'error': 'Movie not found'
+            }, 404)
         
-        if movie:
-            watch_history_entry = WatchHistory.query.filter_by()
-
-        # if tv_series_list_by_popularity:
-        #     response = make_response(tv_series_list_by_popularity, 200)
-
-        # else:
-        #     response = make_response({
-        #         'error': 'TV Series not found'
-        #     }, 404)
-        
-        # return response
-        return 
-api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/<string:movie_title>/')
+        return response
+    
+api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/movie/<string:movie_title>')
 
 
 # Handles creating a new entry into a users watch history, allowing hopefully to be taken back to that timestamp
@@ -574,9 +573,10 @@ class TvOrMoviePostToWatchHistory(Resource):
         if movie_title:
             new_watch_history_item = WatchHistory(
             movie_title = data['movie_title'],
-            video_duration = data['video_duration'],
-            time_stamp = data['time_stamp'],
-            )
+            video_duration = data['videoDuration'],
+            time_stamp = data['timeStamp'],
+            user_id = user.id
+        )
 
         if new_watch_history_item:
             db.session.add(new_watch_history_item)
@@ -623,6 +623,7 @@ class TvPatchWatchHistory(Resource):
             return response
 
 api.add_resource(TvPatchWatchHistory, '/watch/list/entry/<int:tv_watch_history_id>')
+
 
 
 class Favorites(Resource):
