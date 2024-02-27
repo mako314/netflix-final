@@ -140,13 +140,15 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
           // This continue watching may not be needed, will test
           setContinueWatching(false)
-          setIsFetchingWatchHistory(false)
+          // Set initial loaded and fetch watch history to true after finding the watch history
+          setIsFetchingWatchHistory(true)
           setIsInitialLoad(true)
         } else {
           const errorData = await response.json()
           console.error('Error Response:', errorData)
           // if Watch history doesn't exist, we set it to null
           setWatchHistory(null)
+          // MUST SET FETCHING WATCH HISTORY TO FALSE TO NOT SHOW MODAL IF WATCH HISTORY DOESN'T EXIST
           setIsFetchingWatchHistory(false)
           // This continue watching may not be needed, will test
           // setContinueWatching(true)
@@ -179,6 +181,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         if (response.ok) {
           const data = await response.json()
           if (watchHistory){
+            // Set continue watching to true, fetchwatchhistory is already true so it's fine
             setContinueWatching(true)
             return console.log("Patch was good:", data)
           }

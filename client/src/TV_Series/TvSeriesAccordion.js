@@ -7,9 +7,16 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 	const [activeIndex, setActiveIndex] = useState(null)
   const [showModal, setShowModal] = useState(false)
 
-  console.log("CONTINUE WATCHING:", continueWatching)
-  console.log("INITIAL LOADING:", isInitialLoad)
-  console.log(" isFetchingWatchHistory:", isFetchingWatchHistory)
+  
+  // console.log(" isFetchingWatchHistory:", isFetchingWatchHistory)
+  // console.log("watchHistory !== null", watchHistory !== null)
+  // console.log("CONTINUE WATCHING:", continueWatching)
+  // console.log(" watchHistory.time_stamp !== null",  watchHistory?.time_stamp !== null)
+  // console.log("episodeInformation.episodeTitle === watchHistory.episode_name", episodeInformation.episodeTitle === watchHistory?.episode_name)
+  // console.log("INITIAL LOADING:", isInitialLoad)
+  
+
+
 
   useEffect(() => {
     // Only show the modal if there's a watchHistory and the user hasn't made a decision yet
@@ -18,6 +25,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
     // We test first, whether watch history is not null, we also need to make sure there's a time stamp.
     // Continue watching can also not be true, if it is, then a user has already decided to continue watching from when they left off.
     // I think the true pivotal point here was matching the CURRENT episode information (the title) to the FETCHED watch history episode name.
+    // 2/27 Needed to make isFetchingWastHistory test for true, not false. If it's been fetched, then allow the modal to be shown
     if (isFetchingWatchHistory && watchHistory !== null && !continueWatching && watchHistory.time_stamp !== null && episodeInformation.episodeTitle === watchHistory.episode_name && isInitialLoad) {
       setShowModal(true)
     }
