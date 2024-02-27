@@ -503,7 +503,7 @@ class OneTvShowContinueWatching(Resource):
 
         # tv_episode = TelevisionSeries.query.filter(TelevisionSeries.episode_name == episode_title).first()
 
-        watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title).first()
+        watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title, user_id = user_id).first()
 
         if watch_history_entry:
             response = make_response(watch_history_entry.to_dict(), 200)
@@ -522,22 +522,17 @@ class OneMovieContinueWatching(Resource):
         
         user = User.query.filter(User.id == user_id).first()
 
-        print(user.first_name)
-        movie = Movie.query.filter(Movie.title == movie_title)
+        watch_history_entry = WatchHistory.query.filter_by(movie_title = movie_title,  user_id = user_id).first()
         
-        if movie:
-            watch_history_entry = WatchHistory.query.filter_by()
+        if watch_history_entry:
+            response = make_response(watch_history_entry.to_dict(), 200)
 
-        # if tv_series_list_by_popularity:
-        #     response = make_response(tv_series_list_by_popularity, 200)
-
-        # else:
-        #     response = make_response({
-        #         'error': 'TV Series not found'
-        #     }, 404)
+        else:
+            response = make_response({
+                'error': 'TV Series not found'
+            }, 404)
         
-        # return response
-        return 
+        return response
 api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/<string:movie_title>/')
 
 

@@ -223,7 +223,11 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
           <div className="aspect-w-16 aspect-h-9">
             {/* Video created with default html element, keep it universal. 😎 */}
-            <video controls key={episodeInformation.videoLocation} onLoadedMetadata={handleLoadedMetadata} onPause={handleTimeUpdated} ref={videoEl} className="w-full h-auto">
+            <video controls key={episodeInformation.videoLocation} 
+            onLoadedMetadata={handleLoadedMetadata} 
+            onPause={handleTimeUpdated} 
+            ref={videoEl} 
+            className="w-full h-auto">
               <source src={episodeInformation.videoLocation} type="video/mp4" />
             </video>
           </div>
