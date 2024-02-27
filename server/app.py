@@ -521,19 +521,23 @@ class OneMovieContinueWatching(Resource):
     def get(self, user_id, movie_title):
         
         user = User.query.filter(User.id == user_id).first()
+        print(movie_title)
 
-        watch_history_entry = WatchHistory.query.filter_by(movie_title = movie_title,  user_id = user_id).first()
+        watch_history_entry = WatchHistory.query.filter_by(movie_title = movie_title, user_id = user_id).first()
+
+        # print(watch_history_entry.movie_title)
 
         if watch_history_entry:
             response = make_response(watch_history_entry.to_dict(), 200)
 
         else:
             response = make_response({
-                'error': 'TV Series not found'
+                'error': 'Movie not found'
             }, 404)
         
         return response
-api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/movie<string:movie_title>/')
+    
+api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/movie/<string:movie_title>')
 
 
 # Handles creating a new entry into a users watch history, allowing hopefully to be taken back to that timestamp
@@ -571,7 +575,8 @@ class TvOrMoviePostToWatchHistory(Resource):
             movie_title = data['movie_title'],
             video_duration = data['videoDuration'],
             time_stamp = data['timeStamp'],
-            )
+            user_id = user.id
+        )
 
         if new_watch_history_item:
             db.session.add(new_watch_history_item)

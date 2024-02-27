@@ -1,7 +1,8 @@
-import React, {useState, useRef, useContext} from "react";
+import React, {useState, useRef, useContext, useEffect} from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { createPortal } from 'react-dom';
 import MovieTrailerModal from "../Modals/MovieTrailerModal";
+import ContinueLeftOff from "../Modals/ContinueLeftOff";
 import ApiUrlContext from "../Api";
 
 
@@ -29,14 +30,49 @@ function MovieDisplay({moviesData}){
         movie_title: fullMovie.title,
         videoDuration: 1235,
         timeStamp: null
-      })
+    })
 
+    // console.log(" isFetchingWatchHistory:", isFetchingWatchHistory)
+    // console.log("INITIAL LOADING:", isInitialLoad)
+
+    useEffect(() => {
+        // Only show the modal if there's a watchHistory and the user hasn't made a decision yet
+        // This modal has been the biggest pain to fix I could never have imagined. There will be slight edits due to seeing what is needed and what is not.
+        // Still learning, so it's alright.
+        // We test first, whether watch history is not null, we also need to make sure there's a time stamp.
+        // Continue watching can also not be true, if it is, then a user has already decided to continue watching from when they left off.
+        // I think the true pivotal point here was matching the CURRENT episode information (the title) to the FETCHED watch history episode name.
+        // 2/27 Needed to make isFetchingWastHistory test for true, not false. If it's been fetched, then allow the modal to be shown
+        if (isFetchingWatchHistory && watchHistory !== null && !continueWatching && watchHistory.time_stamp !== null && movieInformation.movie_title === watchHistory.movie_title && isInitialLoad) {
+          setShowModal(true)
+        }
+      }, [watchHistory, continueWatching, isInitialLoad, isFetchingWatchHistory])
+
+    useEffect(() => {
+    // Ensure all required information is present before making the fetch call
+    if (movieInformation.movie_title) {
+        handleTvWatchListFind()
+    }
+    }, [movieInformation])
+
+
+    useEffect(() => {
+        const handleNewOrExistingWatchHistory = async () => {
+            // your existing logic here
+        };
+    
+        // Only attempt to update the watch history if the timeStamp has been updated
+        if (movieInformation.timeStamp !== null) {
+            handleNewOrExistingWatchHistory();
+        }
+    }, [movieInformation.timeStamp]);
 
 
     // const fullMovie = moviesData[movieIndexValue]
 
-    console.log("IN MOVIE DISPLAY:", fullMovie)
+    // console.log("IN MOVIE DISPLAY:", fullMovie)
     console.log("THE MOVIE INFORMATION TO BE SENT TO THE FETCH:", movieInformation)
+    // console.log("THE WATCH HISTORY:", watchHistory)
 
     const toggleVideo = () => {
         setShowVideo(!showVideo)
@@ -59,9 +95,10 @@ function MovieDisplay({moviesData}){
         // const video = videoEl.current;
         // console.log(e)
         // setTestingTimeStamp(e.target.currentTime)
+        const currentMovieTime = e.target.currentTime
         setMovieInformation({
           ...movieInformation,
-          timeStamp: e.target.currentTime,
+          timeStamp: currentMovieTime,
         })
         // console.log("THE TIME STAMP:", e.target.currentTime)
         // console.log(typeof(e.target.currentTime))
@@ -73,7 +110,7 @@ function MovieDisplay({moviesData}){
           setContinueWatching(false)
         }
         // Handle posting, OR patching the watch history,
-        handleNewOrExistingWatchHistory()
+        handleNewOrExistingWatchHistory(currentMovieTime)
       }
     
       const handleLoadedMetadata = (e) => {
@@ -110,7 +147,7 @@ function MovieDisplay({moviesData}){
             // This continue watching may not be needed, will test
             setContinueWatching(false)
             // Set initial loaded and fetch watch history to true after finding the watch history
-            setIsFetchingWatchHistory(true)
+            setIsFetchingWatchHistory(false)
             setIsInitialLoad(true)
           } else {
             const errorData = await response.json()
@@ -127,9 +164,15 @@ function MovieDisplay({moviesData}){
         }
       }
 
-      const handleNewOrExistingWatchHistory = async () => {
+
+      const handleNewOrExistingWatchHistory = async (currentMovieTime) => {
         const fetchMethod = watchHistory ? "PATCH" : "POST"
         const fetchUrl = watchHistory ? `${apiUrl}watch/list/entry/${watchHistory.id}`: `${apiUrl}user/${1}/watch/list/`
+        const movieInfoToUpdate = {
+            ...movieInformation,
+            timeStamp: currentMovieTime, // Use the passed timestamp
+          };
+
         try {
           const response = await fetch(fetchUrl, {
             method: fetchMethod,
@@ -137,13 +180,15 @@ function MovieDisplay({moviesData}){
               "Content-Type": "application/json",
             },
             credentials: 'include',
-            body: JSON.stringify(movieInformation),
+            body: JSON.stringify(movieInfoToUpdate),
           })
           if (response.ok) {
             const data = await response.json()
             if (watchHistory){
               // Set continue watching to true, fetchwatchhistory is already true so it's fine
               setContinueWatching(true)
+              setIsFetchingWatchHistory(false)
+              setWatchHistory(data)
               return console.log("Patch was good:", data)
             }
               setContinueWatching(true)
@@ -159,7 +204,17 @@ function MovieDisplay({moviesData}){
           console.error('Fetch Error:', error)
         }
       }
+
       
+      const onContinue = () => {
+        setShowModal(false)
+        setContinueWatching(true)
+        if (videoEl.current && watchHistory) {
+            videoEl.current.currentTime = watchHistory.time_stamp;
+        }
+      }
+
+
 
 
     return (
@@ -179,6 +234,15 @@ function MovieDisplay({moviesData}){
                             <source src="https://d3th70t1rge79u.cloudfront.net/arthur/001-ArthurEyes.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
+
+                        {showModal && createPortal(
+                            <ContinueLeftOff 
+                            movieInformation={movieInformation} 
+                            onContinue={onContinue} 
+                            // Onclose prop function that just sets modal to false.
+                            onClose={() => setShowModal(false)} />,
+                            document.body
+                        )}
                     </div>
                 ) : (
                     <div className="flex justify-center"> 
@@ -229,6 +293,7 @@ function MovieDisplay({moviesData}){
                     </div>
                 )}
             </div>
+
         </div>
     )
 }
