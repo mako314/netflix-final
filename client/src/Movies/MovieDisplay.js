@@ -12,6 +12,8 @@ function MovieDisplay({moviesData}){
     // const { id } = useParams()
     // const movieIndexValue = id - 1
     const navigate = useNavigate()
+    const location = useLocation()
+    const { fullMovie } = location.state || {}
 
 
     const [showModal, setShowModal] = useState(false)
@@ -24,17 +26,17 @@ function MovieDisplay({moviesData}){
 
     const [movieInformation, setMovieInformation] = useState({
         videoLocation: null,
-        movie_title: 'Default Title',
+        movie_title: fullMovie.title,
         videoDuration: 1235,
         timeStamp: null
       })
 
-    const location = useLocation()
-    const { fullMovie } = location.state || {}
+
 
     // const fullMovie = moviesData[movieIndexValue]
 
     console.log("IN MOVIE DISPLAY:", fullMovie)
+    console.log("THE MOVIE INFORMATION TO BE SENT TO THE FETCH:", movieInformation)
 
     const toggleVideo = () => {
         setShowVideo(!showVideo)
@@ -48,7 +50,7 @@ function MovieDisplay({moviesData}){
 
     // https://blog.stackademic.com/power-of-the-split-function-in-react-js-cc10ced421bc
     const splitGenres = fullMovie?.genres.split(', ')
-    console.log(splitGenres)
+    // console.log(splitGenres)
 
 
     const handleTimeUpdated = (e) => {
@@ -92,7 +94,7 @@ function MovieDisplay({moviesData}){
         // }
         setIsFetchingWatchHistory(true)
         try {
-          const response = await fetch(`${apiUrl}user/${1}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
+          const response = await fetch(`${apiUrl}user/${1}/watch/list/movie/${movieInformation.movie_title}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -135,7 +137,7 @@ function MovieDisplay({moviesData}){
               "Content-Type": "application/json",
             },
             credentials: 'include',
-            body: JSON.stringify(episodeInformation),
+            body: JSON.stringify(movieInformation),
           })
           if (response.ok) {
             const data = await response.json()

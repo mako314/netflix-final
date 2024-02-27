@@ -523,7 +523,7 @@ class OneMovieContinueWatching(Resource):
         user = User.query.filter(User.id == user_id).first()
 
         watch_history_entry = WatchHistory.query.filter_by(movie_title = movie_title,  user_id = user_id).first()
-        
+
         if watch_history_entry:
             response = make_response(watch_history_entry.to_dict(), 200)
 
@@ -533,7 +533,7 @@ class OneMovieContinueWatching(Resource):
             }, 404)
         
         return response
-api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/<string:movie_title>/')
+api.add_resource(OneMovieContinueWatching, '/user/<int:user_id>/watch/list/movie<string:movie_title>/')
 
 
 # Handles creating a new entry into a users watch history, allowing hopefully to be taken back to that timestamp
@@ -569,8 +569,8 @@ class TvOrMoviePostToWatchHistory(Resource):
         if movie_title:
             new_watch_history_item = WatchHistory(
             movie_title = data['movie_title'],
-            video_duration = data['video_duration'],
-            time_stamp = data['time_stamp'],
+            video_duration = data['videoDuration'],
+            time_stamp = data['timeStamp'],
             )
 
         if new_watch_history_item:
@@ -618,6 +618,7 @@ class TvPatchWatchHistory(Resource):
             return response
 
 api.add_resource(TvPatchWatchHistory, '/watch/list/entry/<int:tv_watch_history_id>')
+
 
 
 class Favorites(Resource):
