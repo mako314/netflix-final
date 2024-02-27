@@ -18,7 +18,7 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
     // We test first, whether watch history is not null, we also need to make sure there's a time stamp.
     // Continue watching can also not be true, if it is, then a user has already decided to continue watching from when they left off.
     // I think the true pivotal point here was matching the CURRENT episode information (the title) to the FETCHED watch history episode name.
-    if (!isFetchingWatchHistory && watchHistory !== null && !continueWatching && watchHistory.time_stamp !== null && episodeInformation.episodeTitle === watchHistory.episode_name && isInitialLoad) {
+    if (isFetchingWatchHistory && watchHistory !== null && !continueWatching && watchHistory.time_stamp !== null && episodeInformation.episodeTitle === watchHistory.episode_name && isInitialLoad) {
       setShowModal(true)
     }
   }, [watchHistory, continueWatching, isInitialLoad, isFetchingWatchHistory])

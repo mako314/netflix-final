@@ -261,7 +261,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     </div>
         {/* mappedTvSeasons={mappedTvSeasons} */}
-        <Accordion  episodeInformation={episodeInformation} 
+        <Accordion  
+        episodeInformation={episodeInformation} 
         fullTVSeries={fullTVSeries} 
         setEpisodeInformation={setEpisodeInformation} 
         watchHistory={watchHistory} 
