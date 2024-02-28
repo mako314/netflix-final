@@ -16,6 +16,8 @@ const UserDataTable = ({usersData, deleteUser}) => {
               <th>Last Name</th>
               <th>Email</th>
               <th>Date of Birth</th>
+              <th>Edit</th>
+              <th>Delete</th>
           </tr>
 
           {
@@ -28,11 +30,14 @@ const UserDataTable = ({usersData, deleteUser}) => {
                 <td>{user.email}</td>
                 <td>{user.date_of_birth}</td>
                 <td>
-
+                  <button className="bg-green-500" type="button">
+                    &#9999;&#65039;
+                  </button>
+                </td>
+                <td>
                     <button className="bg-red-600" type="button" onClick={() => deleteUser(user.id)}>
                         &#128465;&#65039;
                     </button>
-
                 </td>
 
             </tr>
@@ -189,6 +194,8 @@ const MovieDataTable = ({moviesData, deleteMovie}) => {
         <th>Thumbnail</th>
         <th>Popularity</th>
         <th>Click Count</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
         {
           moviesData.map((movie) =>
@@ -198,6 +205,11 @@ const MovieDataTable = ({moviesData, deleteMovie}) => {
               <td><img className="h-8 w-16" src={movie.thumbnail} /></td>
               <td>{movie.popularity}</td>
               <td>{movie.num_of_clicks}</td>
+              <td>
+                <button className="bg-green-500" type="button" onClick={() => deleteMovie(movie.id)}>
+                  &#9999;&#65039;
+                </button>
+              </td>
               <td>
                   <button className="bg-red-600" type="button" onClick={() => deleteMovie(movie.id)}>
                       &#128465;&#65039;
@@ -348,6 +360,8 @@ const TVSeriesDataTable = ({tvSeriesData, deleteTVSeries}) => {
           <th>Thumbnail</th>
           <th>Popularity</th>
           <th>Click Count</th>
+          <th>Edit</th>
+          <th>Delete</th>
       </tr>
       {
         tvSeriesData.map((tvSeries) =>
@@ -357,6 +371,11 @@ const TVSeriesDataTable = ({tvSeriesData, deleteTVSeries}) => {
             <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
             <td>{tvSeries.popularity}</td>
             <td>{tvSeries.num_of_clicks}</td>
+            <td>
+              <button className="bg-green-500" type="button">
+                &#9999;&#65039;
+              </button>
+            </td>
             <td>
                 <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
                     &#128465;&#65039;
