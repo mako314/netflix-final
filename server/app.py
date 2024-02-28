@@ -215,7 +215,42 @@ class UserByID(Resource):
             }, 404)
         
         return response
+    
+    @jwt_required()
+    def patch(self, id):
+        identity = get_jwt_identity()
 
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+        
+        user = User.query.filter(User.id == id).first()
+
+        if user: 
+            try:
+                data = request.get_json()
+
+                for key in data:
+                    if data.get(key) != '':
+                        if key == 'password' and data['password']:
+                            user.password_hash = data['password']
+
+                    else:
+                        data[key] = user.key
+                        setattr(user, key, data[key])
+                
+                db.session.commit()
+
+                response = make_response({"Success" : user.to_dict()}, 202)
+                return response
+            
+            except ValueError:
+                return make_response({"error" : "Validation error, please try again"}, 400)
 
 api.add_resource(UserByID, '/users/<int:id>')
 
