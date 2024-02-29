@@ -5,6 +5,54 @@ import AccordionItem from "./AccordionItem";
 
 const UserDataTable = ({usersData, deleteUser}) => {
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  function patchUser(userID) {
+    console.log(usersData);
+
+    const getCookie = (name) => {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';')
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim()
+
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+                  break
+              }
+          }
+      }
+      return cookieValue
+    }
+
+    fetch(`${apiUrl}users/${userID}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": getCookie("csrf_access_token"),
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            id: userID,
+        }),
+      }).then((response) => {
+        if (response.ok) {
+          console.log(`User of id of ${userID} has been successfully updated`)
+          /*response.json().then((data) => {
+            setTVSeriesData(data)
+          }) */
+        }
+        else {
+          response.json().then((errorData) => {
+            console.error('Error Response:', errorData)
+          })
+        }
+      }).catch((error) => {
+        console.error('Fetch Error:', error)
+    })
+}
+
   return (
     <div>
       <div className="border-gray-300 mb-4 rounded border">       
@@ -30,7 +78,7 @@ const UserDataTable = ({usersData, deleteUser}) => {
                 <td>{user.email}</td>
                 <td>{user.date_of_birth}</td>
                 <td>
-                  <button className="bg-green-500" type="button">
+                  <button className="bg-green-500" type="button" onClick={() => patchUser(user.id)}>
                     &#9999;&#65039;
                   </button>
                 </td>
@@ -544,7 +592,7 @@ function AdminDashboard({ usersData, tvSeriesData, moviesData }) {
           }
       }
       return cookieValue
-  }
+    }
     
 
     function deleteUser(userID) {
