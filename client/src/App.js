@@ -8,7 +8,8 @@ import HomePage from './HomePage/HomePage';
 // ----- Movie Imports -----
 import MovieCollection from './Movies/MovieCollection';
 import MovieDisplay from './Movies/MovieDisplay';
-
+import AllMoviesWithGenre from './Movies/AllMoviesWithGenre';
+import MovieByGenre from './Movies/MovieByGenre';
 
 // ----- Nabar / Footer Imports -----
 import Navbar from './NavbarAndFooter/Navbar';
@@ -16,6 +17,8 @@ import Navbar from './NavbarAndFooter/Navbar';
 // ----- TVSeries Imports -----
 import TVSeriesCollection from './TV_Series/TVSeriesCollection';
 import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
+import TVSeriesCarousel from './TV_Series/TVSeriesCarousel';
+import TvSeriesByGenre from './TV_Series/TvSeriesByGenre';
 
 import { ApiProvider } from './Api';
 import { CurrentUserProvider } from './UserLogin/UserContext';
@@ -35,9 +38,11 @@ function App() {
   const [favoritesData, setFavoritesData] = useState([])
   const [tvSeriesData, setTVSeriesData] = useState([]);
 
+  const [testingTimeStamp, setTestingTimeStamp] = useState(null)
+
   const apiUrl = process.env.REACT_APP_API_URL
 
-  console.log("THE API URL", apiUrl)
+  // console.log("THE API URL", apiUrl)
 
   useEffect(() => {
   // let ignore = false
@@ -137,10 +142,10 @@ function App() {
     })
   }, [])
 
-  console.log("THE MOVIE DATA STATE:", moviesData)
-  console.log("THE USER DATA STATE:", usersData)
-  console.log("THE FAVORITE DATA STATE:", favoritesData)
-  console.log("THE TV SERIES DATA STATE:", tvSeriesData)
+  // console.log("THE MOVIE DATA STATE:", moviesData)
+  // console.log("THE USER DATA STATE:", usersData)
+  // console.log("THE FAVORITE DATA STATE:", favoritesData)
+  // console.log("THE TV SERIES DATA STATE:", tvSeriesData)
 
   const handleDeleteAsync = (movieID) => {
     const movieToBeDeleted = moviesData.filter(item => item.id !== movieID)
@@ -160,27 +165,47 @@ function App() {
 
   // }
 
+  // https://github.com/remix-run/react-router/blob/v3/docs/guides/RouteConfiguration.md#enter-and-leave-hooks
+  // https://github.com/remix-run/react-router/blob/v3/docs/Glossary.md#leavehook
+  // https://stackoverflow.com/questions/32841757/detecting-user-leaving-page-with-react-router
+
+  const onLeaveTest = () => {
+    console.log("Testing leaving this display page")
+  }
+
+  // console.log("CHECK THIS FOR THE TIMESTAMP TEST", testingTimeStamp)
+
+  
+  // Next things to do:
+  // Search function similar to the one slalom quest had, where we deconstruct the prop and use it as the search parameters.
+  // Search function will take a user to a search page, filtering over the data both shows and movies and display it on the page.
+
+  // Not sure what else is left to be done, the idea of a streaming site is a simple concept that doesn't need too much. We won't be accepting payments or anything,
+
   return (
+    // UseContext gets called here
+    <ApiProvider> 
+    <div className="flex">
+      <Navbar />
+    
 
-    <CurrentUserProvider>
-        <div className="flex">
-        <Navbar />
-      
-        {/* <MovieCollection moviesData={moviesData} />
-        <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
+      {/* <MovieCollection moviesData={moviesData} />
+      <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
 
-        <Routes>
-        <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
-          <Route path='/movies' element={<MovieCollection moviesData={moviesData}/>} />
-          <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
-          <Route path='/tv-series' element={<TVSeriesCollection tvSeriesData={tvSeriesData} />} />
-          <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/admin' element={<AdminDashboard usersData={usersData} moviesData={moviesData} tvSeriesData={tvSeriesData} />} />
-        </Routes>
+      <Routes>
+      <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
+        <Route path='/movies' element={<AllMoviesWithGenre moviesData={moviesData}/>} />
+        <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
+        <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
+        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} setTestingTimeStamp={setTestingTimeStamp} testingTimeStamp={testingTimeStamp} />} onLeave={ onLeaveTest }/>
+        <Route path='/login' element={<Login />} />
+        <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
+        <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />
 
-      </div>
-    </CurrentUserProvider>
+      </Routes>
+
+    </div>
+    </ApiProvider>
 
   )
 }

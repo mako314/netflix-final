@@ -1,18 +1,16 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { useNavigate} from 'react-router-dom';
+import YoutubeEmbed from "../YouTubeEmbedds/YouTubeEmbedd";
 import ApiUrlContext from "../Api";
 
-function MovieCard({thumbnail, title, director, year_of_release, run_time, movieId, fullMovie, handleDeleteAsync}) {
+function MovieCard({thumbnail, title, director, year_of_release, run_time, movieId, trailerLink, fullMovie, handleDeleteAsync}) {
   
   const navigate = useNavigate()
   const apiUrl = useContext(ApiUrlContext)
+  const [isHovered, setIsHovered] = useState(false);
 
-
-  console.log("INSIDE OF THE MOVIE CARD:", handleDeleteAsync)
-  // const handleMovieNav = () => {
-  //   navigate(`/movie/${movieId}`)
-  // }
-
+  // console.log("TRAILER LINK:", trailerLink)
+  // console.log("INSIDE OF THE MOVIE CARD:", handleDeleteAsync)
 
   const handleMovieDelete = () => {
     fetch(`${apiUrl}movies/${movieId}`, {
@@ -41,47 +39,73 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
   })
   }
 
-  const handleMovieNav = (e) => {
+  const handleMovieNav = () => {
     navigate(`/movie/${movieId}`, { state: { fullMovie } })
   }
 
+
   return (
-    <div className="">
 
-   <button class="hidden group-hover:block">Child</button>
-    {/*<!-- Component: Basic image card --> */}
-    {/* MT TOP BOTTOM */}
+    <div
+    onMouseEnter={() => setIsHovered(true)}
+    onMouseLeave={() => setIsHovered(false)}
+    className={`bg-gray-200 w-full transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto mx-2`}
+    style={{ width: isHovered ? '300px': '150px' }} // Updated width calculation
+    onClick={handleMovieNav}
+    >
 
-    {/* w-2/3 hover:w-full */}
-  <div 
-  className="overflow-hidden rounded text-slate-500 mt-4 ml-4 cursor-pointer hover:h-180"
-  onClick={handleMovieNav}
-  >
-        {/*  <!--  Image --> */}
-      <figure>
+    {isHovered ? (
+      <div className="relative"> 
+          <YoutubeEmbed 
+          key={`${title}-${year_of_release}-S${run_time}`}
+          embedId={trailerLink} 
+          whereRendered={"TVSeries"}
+          title={title}
+          director={director} 
+          year_of_release={year_of_release} 
+          run_time={run_time}
+          />
+          </div>
+    ) : (
+      <>
         <img
-          src={thumbnail}
-          alt="card image"
-          className="h-48 w-full object-contain group-hover:hidden" 
-        />
-      </figure>
-      {/*  <!-- Body--> */}
-      <div className="p-6 group-hover:hidden">
-        <header className="">
-          <h3 className="text-xl font-medium text-black">
-            {title}
-          </h3>
-          <p className="text-sm text-black">By {director}, {year_of_release}, {run_time}</p>
-        </header>
-
-      </div>
-    </div>
-
-    
-
-    {/*<!-- End Basic image card --> */}
+            src={thumbnail}
+            alt={`Thumbnail of ${title}`}
+            className="h-auto w-full overflow-hidden mx-auto"/>
+      </>
+    )}
     </div>
   )
 }
 
 export default MovieCard;
+
+
+
+
+
+{/* <div 
+onMouseEnter={() => setIsHovered(true)}
+onMouseLeave={() => setIsHovered(false)}
+className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg ${isHovered ? hoverWidth : baseWidth}`}
+onClick={handleMovieNav}
+>
+{isHovered ? <YoutubeEmbed embedId={trailerLink} whereRendered={"Movies"}/> :
+<> 
+<figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
+  <img
+    src={thumbnail}
+    alt="card image"
+    className="w-full h-full object-contain group-hover:opacity-90"
+  />
+</figure>
+<div className="p-4">
+  <h3 className="text-xl font-medium text-black truncate">
+    {title}
+  </h3>
+  <p className="text-sm text-black">
+    By {director}, {year_of_release}, {run_time}
+  </p>
+</div>
+</>}
+</div> */}

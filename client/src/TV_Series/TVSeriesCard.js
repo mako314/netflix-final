@@ -1,47 +1,48 @@
-import React from "react"
+import React, {useContext, useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import YoutubeEmbed from "../YouTubeEmbedds/YouTubeEmbedd";
 
 
-function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, seasons, episode_count, fullTVSeries}) {
-  
+function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, seasons, episode_count, fullTVSeries, trailerLink}) {
+    const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate()
     
     const handleTVSeriesNav = (e) => {
       navigate(`/tv-series/${tvSeriesID}`, { state: { fullTVSeries } })
     }
-  
+
     return (
-      <>
-        {/*<!-- Component: Basic image card --> */}
-        {/* MT TOP BOTTOM */}
-    
-        <div 
-        className="overflow-hidden rounded bg-gray-400 text-slate-500 shadow-xl shadow-slate-200 mt-4 ml-4"
-        onClick={handleTVSeriesNav}
+      <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className={`bg-gray-200 w-full transition-transform transform-gpu duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg mb-4 flex-shrink-0 ${isHovered ? 'scale-105' : 'scale-100'} h-auto mx-2`}
+            style={{ width: isHovered ? '300px': '150px' }} // Updated width calculation
+            onClick={handleTVSeriesNav}
         >
-            {/*  <!--  Image --> */}
-            <figure>
-            <img
-                src={thumbnail}
-                alt={title}
-                className="h-48 w-full object-contain" 
-            />
-            </figure>
-            {/*  <!-- Body--> */}
-            <div className="p-6">
-            <header className="">
-                <h3 className="text-xl font-medium text-black">
-                    {title}
-                </h3>
-                <p className="text-sm text-black">By {director}, {year_of_release}</p>
-                <p className="text-sm text-black">Number of seasons: {seasons}, Number of episodes: {episode_count}</p>
-            </header>
-            </div>
-        </div>
-    
-        {/*<!-- End Basic image card --> */}
-      </>
-    )
+        
+          {isHovered ? (
+              <div className="relative"> 
+                  <YoutubeEmbed 
+                  key={`${title}-${year_of_release}-S${seasons}`}
+                  embedId={trailerLink} 
+                  whereRendered={"TVSeries"}
+                  title={title}
+                  director={director} 
+                  year_of_release={year_of_release} 
+                  seasons={seasons} 
+                  episode_count={episode_count}
+                  />
+                  </div>
+          ) : (
+              <>
+                <img
+                    src={thumbnail}
+                    alt={`Thumbnail of ${title}`}
+                    className="h-auto w-full overflow-hidden mx-auto"/>
+              </>
+          )}
+      </div>
+  )
   }
   
   export default TVSeriesCard;

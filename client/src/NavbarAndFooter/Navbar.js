@@ -9,27 +9,30 @@ function Navbar(){
 
     const navigate = useNavigate();
 
+    // A tags cause refresh
+
     return(
-        <nav className="w-56 min-h-screen bg-gray-900 text-white flex flex-col">
-        <div className="w-56 h-full flex flex-col">
+        <nav className="w-28 min-h-screen bg-gray-900 text-white flex flex-col">
+        <div className="w-28 h-full flex flex-col">
             <a href="/" className="text-center py-3 text-red-800 text-lg font-bold">Definitely Not Netflix</a>
 
             <ul className="mt-2">
                 <li className="px-5 py-3 hover:bg-red-800">
                     <Link to={'/movies'} className="flex items-center">
-                        Movie with Link
+                        Movies
                         {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
                     </Link>
                 </li>
                 <li className="px-5 py-3 hover:bg-red-800">
-                    <a href="/tv-series" className="flex items-center">
-                        Television Series
+                <Link to={'/tv-series'} className="flex items-center">
+                        TV
                         {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
-                    </a>
+                </Link>
+                    
                 </li>
                 <li className="px-5 py-3 hover:bg-red-800">
                     <a href="#" className="flex items-center">
-                        Menu 3
+                        Sign In
                         {/* <img src="https://placehold.co/20" className="inline-block ml-2"/> */}
                     </a>
                 </li>
