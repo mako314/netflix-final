@@ -170,6 +170,13 @@ function App() {
 
   // console.log("CHECK THIS FOR THE TIMESTAMP TEST", testingTimeStamp)
 
+  
+  // Next things to do:
+  // Search function similar to the one slalom quest had, where we deconstruct the prop and use it as the search parameters.
+  // Search function will take a user to a search page, filtering over the data both shows and movies and display it on the page.
+
+  // Not sure what else is left to be done, the idea of a streaming site is a simple concept that doesn't need too much. We won't be accepting payments or anything,
+
   return (
     // UseContext gets called here
     <ApiProvider> 
