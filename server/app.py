@@ -487,22 +487,6 @@ api.add_resource(TVSeriesByPopularity, '/tv-series/popular')
 class OneTvShowContinueWatching(Resource):
     def get(self, user_id, show_title, episode_title, episode_number):
         
-        user = User.query.filter(User.id == user_id).first()
-
-        # print(user.first_name)
-        # print(episode_title)
-        # print(show_title)
-        # print(episode_number)
-
-
-        # tv_series = TelevisionSeries.query.filter(TelevisionSeries.title == show_title).first()
-
-        # # movie = Movie.query.filter(Movie.title == movie_title)
-        
-        # tv_season = TvSeason.query.filter_by(series_name = tv_series.title, season_number= season_name ).first()
-
-        # tv_episode = TelevisionSeries.query.filter(TelevisionSeries.episode_name == episode_title).first()
-
         watch_history_entry = WatchHistory.query.filter_by(episode_name = episode_title, episode_number = episode_number, series_name = show_title, user_id = user_id).first()
 
         if watch_history_entry:
@@ -519,9 +503,6 @@ api.add_resource(OneTvShowContinueWatching, '/user/<int:user_id>/watch/list/show
 
 class OneMovieContinueWatching(Resource):
     def get(self, user_id, movie_title):
-        
-        user = User.query.filter(User.id == user_id).first()
-        print(movie_title)
 
         watch_history_entry = WatchHistory.query.filter_by(movie_title = movie_title, user_id = user_id).first()
 
