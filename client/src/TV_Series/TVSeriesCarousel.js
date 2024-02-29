@@ -37,11 +37,6 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
     }
 
     // Sort the data by newest / oldest based on their release date. Create new date object, compare.
-    // let userSortOption = dateSort === 'newest' ?
-    // ((a, b) => new Date(b.release_date) - new Date(a.release_date)) : // Newest first
-    // ((a, b) => new Date(a.release_date) - new Date(b.release_date)) // Oldest first
-
-    // console.log(typeof(userSortOption))
     // Create new variable to hold the data when sorting
     const dateSortedData = [...tvSeriesData].sort(function(a,b){
         if(dateSort === 'newest'){
@@ -52,12 +47,6 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
         return
     }
     })
-
-    // const sortedSeries = tvSeriesData.sort(userSortOption)
-
-    // console.log(tvSeriesData.sort(userSortOption))
-
-    console.log("the date sort option:", dateSort)
 
     // https://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
