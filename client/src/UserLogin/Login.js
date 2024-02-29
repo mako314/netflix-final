@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react";
+import { CurrentUserContext } from './UserContext';
 
 function Login(){
 
-    const [currentUser, setCurrentUser] = useState([]);
+    const { currentUser, setCurrentUser, currentUserRole, setCurrentUserRole } = CurrentUserContext(); 
     const [userFavorites, setUserFavorites] = useState([]);
+
     const [loginError, setLoginError] = useState({
         error: false,
         message: ""
@@ -33,6 +35,7 @@ function Login(){
                         console.log("A user has logged in successfully");
                         
                         setCurrentUser(data.user);
+                        setCurrentUserRole(data.role);
                         setUserFavorites(data.user.favorites);
 
                         setLoginError({
@@ -46,6 +49,7 @@ function Login(){
                         console.log("An admin has logged in successfully");
 
                         setCurrentUser(data.admin);
+                        setCurrentUserRole(data.role);
                         setUserFavorites(data.admin.favorites);
 
                         setLoginError({
@@ -111,9 +115,11 @@ function Login(){
                     <>
                         <h1>
                             {`Welcome ${currentUser.first_name} ${currentUser.last_name}!`}
+                            {` Role: ${currentUserRole}`}
                         </h1>
                     </>
                 }
+             
                 {
                     userFavorites.movie &&
                     <>

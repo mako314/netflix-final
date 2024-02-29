@@ -127,9 +127,132 @@ class Users(Resource):
         return response
 
         # return make_response(users, 200)
-    
+
+    @jwt_required()
+    def post(self):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
+        data = request.get_json()
+
+        try:
+            new_user = User (
+                first_name = data['first_name'],
+                last_name = data['last_name'],
+                email = data['email'],
+                phone = data['phone'],
+                _password_hash = data['password'],
+                date_of_birth = data['date_of_birth'],
+                profile_image = data['profile_image'],
+                movie_preferences = "",
+                country = data['country'],
+                state = data['state'],
+                city = data['city'],
+                address_line_1 = data['address_line_1'],
+                address_line_2 = data['address_line_2'],
+                postal_code = data['postal_code'],
+            )
+
+            db.session.add(new_user)
+
+            new_user.password_hash = new_user._password_hash
+
+            db.session.commit()
+
+            response = make_response(new_user.to_dict(), 201)
+            return response
+
+        except ValueError:
+            return make_response({"error" : "Validation error, please try again"}, 400)
+                
 api.add_resource(Users, '/users')
 
+class UserByID(Resource):
+    def get(self, id):
+        user = User.query.filter(User.id == id).first()
+
+        if user:
+            response = make_response(user.to_dict(), 200)
+        else:
+            response = make_response({
+                "error": "User not found"
+            }, 404)
+
+        return response
+    
+    @jwt_required()
+    def delete(self, id):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
+        user = User.query.filter(User.id == id).first()
+
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            response = make_response({
+                "message": f"User with id of: {id} was successfully deleted"
+            }, 204)
+        else:
+            response = make_response({
+                "error": f"User with id of: {id} was not found"
+            }, 404)
+        
+        return response
+    
+    @jwt_required()
+    def patch(self, id):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+        
+        user = User.query.filter(User.id == id).first()
+
+        if user: 
+            try:
+                data = request.get_json()
+
+                for key in data:
+                    if data.get(key) != '':
+                        if key == 'password' and data['password']:
+                            user.password_hash = data['password']
+
+                    else:
+                        data[key] = user.key
+                        setattr(user, key, data[key])
+                
+                db.session.commit()
+
+                response = make_response({"Success" : user.to_dict()}, 202)
+                return response
+            
+            except ValueError:
+                return make_response({"error" : "Validation error, please try again"}, 400)
+
+api.add_resource(UserByID, '/users/<int:id>')
 
 class Movies(Resource):
     def get(self):
@@ -143,6 +266,47 @@ class Movies(Resource):
         # return response
 
         return make_response(movies, 200)
+    
+    @jwt_required()
+    def post(self):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
+        data = request.get_json()
+
+        try:
+            new_movie = Movie(
+                title = data['title'],
+                director = data['director'],
+                writer = data['writer'],
+                year_of_release = data['year_of_release'],
+                motion_picture_rating = data['motion_picture_rating'],
+                run_time = data['run_time'],
+                thumbnail = data['thumbnail'],
+                summary = data['summary'],
+                trailer = data['trailer'],
+                stars = data['stars'],
+                all_cast_and_crew = data['all_cast_and_crew'],
+                genres = data['genres'],
+            )
+
+            db.session.add(new_movie)
+
+            db.session.commit()
+
+            response = make_response(new_movie.to_dict(), 201)
+            return response
+
+        except ValueError:
+            return make_response({"error" : "Validation error, please try again"}, 400)
     
 api.add_resource(Movies, '/movies')
 
@@ -159,7 +323,19 @@ class MovieById(Resource):
         
         return response
 
+    @jwt_required()
     def delete(self, id):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
         movie = Movie.query.filter(Movie.id == id).first()
 
         if movie: 
@@ -324,6 +500,49 @@ class TVSeries(Resource):
             }, 404)
 
         return response
+
+    @jwt_required()
+    def post(self):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+
+        data = request.get_json()
+
+        try:
+            new_tv_series = TelevisionSeries(
+                title = data['title'],
+                director = data['director'],
+                writer = data['writer'],
+                year_of_release = data['year_of_release'],
+                motion_picture_rating = data['motion_picture_rating'],
+                thumbnail = data['thumbnail'],
+                seasons = data['seasons'],
+                episode_count = data['episode_count'],
+                is_airing = data['is_airing'],
+                summary = data['summary'],
+                trailer = data['trailer'],
+                stars = data['stars'],
+                all_cast_and_crew = data['all_cast_and_crew'],
+                genres = data['genres'],
+            )
+
+            db.session.add(new_tv_series)
+
+            db.session.commit()
+
+            response = make_response(new_tv_series.to_dict(), 201)
+            return response
+
+        except ValueError:
+            return make_response({"error" : "Validation error, please try again"}, 400)
     
 api.add_resource(TVSeries, '/tv-series')
 
@@ -340,7 +559,19 @@ class TVSeriesById(Resource):
         
         return response
 
+    @jwt_required()
     def delete(self, id):
+        identity = get_jwt_identity()
+
+        identity_role = identity['role']
+
+        if identity_role != 'admin':
+            response = make_response({
+                "message": "Permission denied"
+            }, 403)
+
+            return response
+        
         tv_series = TelevisionSeries.query.filter(TelevisionSeries.id == id).first()
 
         if tv_series:
