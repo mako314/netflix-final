@@ -1,6 +1,6 @@
 import './App.css';
-import { useState, useEffect } from 'react';
-import {Route, Routes } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 // ----- HomePage Imports -----
 import HomePage from './HomePage/HomePage';
@@ -20,10 +20,15 @@ import TVSeriesDisplay from './TV_Series/TVSeriesDisplay';
 import TVSeriesCarousel from './TV_Series/TVSeriesCarousel';
 import TvSeriesByGenre from './TV_Series/TvSeriesByGenre';
 
-import {ApiProvider} from './Api';
+import { ApiProvider } from './Api';
+import { CurrentUserProvider } from './UserLogin/UserContext';
+
+// ----- Login Page Imports -----
 
 import Login from './UserLogin/Login'
 
+// ----- Admin Imports -----
+import AdminDashboard from './Admin/AdminDashboard';
 
 // useNavigate
 function App() {
