@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from 'react-dom';
 import ContinueLeftOff from "../Modals/ContinueLeftOff";
 
-function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video, continueWatching, setContinueWatching, setWatchHistory, isInitialLoad, setIsInitialLoad, isFetchingWatchHistory}) {
+function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, watchHistory, video, continueWatching, setContinueWatching, setWatchHistory, isInitialLoad, setIsInitialLoad}) {
   // https://coderomeos.org/create-a-reusable-accordion-component-in-react-tailwind
 	const [activeIndex, setActiveIndex] = useState(null)
   const [showModal, setShowModal] = useState(false)
 
   
-  // console.log(" isFetchingWatchHistory:", isFetchingWatchHistory)
-  // console.log("watchHistory !== null", watchHistory !== null)
-  // console.log("CONTINUE WATCHING:", continueWatching)
-  // console.log(" watchHistory.time_stamp !== null",  watchHistory?.time_stamp !== null)
-  // console.log("episodeInformation.episodeTitle === watchHistory.episode_name", episodeInformation.episodeTitle === watchHistory?.episode_name)
-  // console.log("INITIAL LOADING:", isInitialLoad)
+  console.log("watchHistory !== null", watchHistory !== null)
+  console.log("CONTINUE WATCHING:", continueWatching)
+  console.log(" watchHistory.time_stamp !== null",  watchHistory?.time_stamp !== null)
+  console.log("episodeInformation.episodeTitle === watchHistory.episode_name", episodeInformation.episodeTitle === watchHistory?.episode_name)
+  console.log("INITIAL LOADING:", isInitialLoad)
+
   
 
 
@@ -26,10 +26,11 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
     // Continue watching can also not be true, if it is, then a user has already decided to continue watching from when they left off.
     // I think the true pivotal point here was matching the CURRENT episode information (the title) to the FETCHED watch history episode name.
     // 2/27 Needed to make isFetchingWastHistory test for true, not false. If it's been fetched, then allow the modal to be shown
-    if (isFetchingWatchHistory && watchHistory !== null && !continueWatching && watchHistory.time_stamp !== null && episodeInformation.episodeTitle === watchHistory.episode_name && isInitialLoad) {
+
+    if (watchHistory !== null && !continueWatching && watchHistory.time_stamp !== null && episodeInformation.episodeTitle === watchHistory.episode_name && isInitialLoad) {
       setShowModal(true)
     }
-  }, [watchHistory, continueWatching, isInitialLoad, isFetchingWatchHistory])
+  }, [watchHistory, continueWatching, isInitialLoad])
 
 
   // Handle accordion changing by checking the index that is selected to the activeIndex, if it's the activeIndex, close that index by setting it to null, otherwise open the next one 
@@ -123,7 +124,9 @@ function Accordion({episodeInformation, fullTVSeries, setEpisodeInformation, wat
 						}`}
             // Reset continue watching to false whenever you click on a new card. This is 1/2 to satisfying the condition of the useEffect, other being the existence of a watch history.
             onClick={() => {
-              setContinueWatching(false)}}
+              setContinueWatching(false)}
+            
+            }
 					>
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full lg:w-3/4 mx-auto">
 						{item.content}

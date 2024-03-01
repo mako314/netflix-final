@@ -25,8 +25,8 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       videoDuration: 1235,
       timeStamp: null
     })
-    const [isInitialLoad, setIsInitialLoad] = useState(true) // New state to track initial load
-    const [isFetchingWatchHistory, setIsFetchingWatchHistory] = useState(false) 
+    const [isInitialLoad, setIsInitialLoad] = useState(false) // New state to track initial load
+    // const [isFetchingWatchHistory, setIsFetchingWatchHistory] = useState(false) 
     
     // Passing state with useLocation from react router dom,
     const location = useLocation()
@@ -123,7 +123,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // if (watchHistory){
       //   return console.log()
       // }
-      setIsFetchingWatchHistory(true)
+      // setIsFetchingWatchHistory(true)
       try {
         const response = await fetch(`${apiUrl}user/${1}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
           method: "GET",
@@ -139,9 +139,10 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           setWatchHistory(data)
 
           // This continue watching may not be needed, will test
-          setContinueWatching(false)
+          // This isn't needed as it's being set when you click on a new card.
+          // setContinueWatching(false)
           // Set initial loaded and fetch watch history to true after finding the watch history
-          setIsFetchingWatchHistory(true)
+          // setIsFetchingWatchHistory(false)
           setIsInitialLoad(true)
         } else {
           const errorData = await response.json()
@@ -149,7 +150,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
           // if Watch history doesn't exist, we set it to null
           setWatchHistory(null)
           // MUST SET FETCHING WATCH HISTORY TO FALSE TO NOT SHOW MODAL IF WATCH HISTORY DOESN'T EXIST
-          setIsFetchingWatchHistory(false)
+          // setIsFetchingWatchHistory(false)
           // This continue watching may not be needed, will test
           // setContinueWatching(true)
         }
@@ -238,7 +239,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         fullTVSeries &&
         <div className="flex flex-col items-start p-10 w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
         {/* Title at the top */}
-        <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}, {fullTVSeries.year_of_release} </h2>
+        <h2 className="text-xl font-bold text-black mb-4"> {fullTVSeries.title}, {fullTVSeries.release_date} </h2>
         
         {/* Image Placeholder Centered */}
         <div className="self-center w-full">
@@ -279,7 +280,6 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
         continueWatching={continueWatching}
         isInitialLoad={isInitialLoad}
         setIsInitialLoad={setIsInitialLoad}
-        isFetchingWatchHistory={isFetchingWatchHistory}
         />
     </div>
     </div>

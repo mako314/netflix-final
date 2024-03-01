@@ -17,6 +17,7 @@ function AllMoviesWithGenre({ moviesData, homePage}) {
 
     const handleDateSort = (event) => {
         // console.log('Selected value:', event.target.value)
+        setAlphabetSort(null)
         setDateSort(event.target.value)
     }
 
@@ -24,8 +25,10 @@ function AllMoviesWithGenre({ moviesData, homePage}) {
     const handleAlphabetSort = (event) => {
         // console.log('Selected value:', event.target.value)
         if (event.target.value === "true"){
+            setDateSort(null)
             return setAlphabetSort(true)
         }
+        setDateSort(null)
         setAlphabetSort(false)
     }
 
@@ -36,19 +39,30 @@ function AllMoviesWithGenre({ moviesData, homePage}) {
     // userSortOption, checks whether newest is selected, only other option here is oldest, and sorts by that
 
     // Allows users to sort by either newest or oldest films, 
-    let userSortOption = dateSort === 'newest' ?
-    ((a, b) => new Date(b.release_date) - new Date(a.release_date)) : // Newest first
-    ((a, b) => new Date(a.release_date) - new Date(b.release_date)) // Oldest first
-
     // console.log(typeof(userSortOption))
     // Create new variable to hold the data when sorting
-    const sortedMovies = moviesData.sort(userSortOption)
+    const dateSortedData = [...moviesData].sort(function(a,b){
+        if(dateSort === 'newest'){
+        return new Date(a.release_date) - new Date(b.release_date)
+    } else if (dateSort === 'oldest'){
+        return new Date(b.release_date) - new Date(a.release_date)
+    } else{
+        return
+    }
+    })
 
     // Handles sorting the tv series by their title alphabetically, taking in a,b is standard syntax. Compare their titles uppercased, however this may be unnecessary as I believe localeCompare handles this already.
     // https://stackoverflow.com/questions/8900732/sort-objects-in-an-array-alphabetically-on-one-property-of-the-array
     // Removed upper casing.
 
-    sortedMovies.sort(function (a, b) {
+    // sortedMovies.sort(function (a, b) {
+    //     var textA = a.title
+    //     var textB = b.title
+      
+    //     return alphabetSort ? textA.localeCompare(textB) : textB.localeCompare(textA);
+    // })
+
+    const alphabetSortedData = [...moviesData].sort(function (a, b) {
         var textA = a.title
         var textB = b.title
       
@@ -57,7 +71,6 @@ function AllMoviesWithGenre({ moviesData, homePage}) {
 
     // https://www.tutorialspoint.com/how-to-create-a-dropdown-list-using-javascript            
 
-    console.log("Movies sorted", sortedMovies)
     return (
         <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
 
@@ -87,7 +100,8 @@ function AllMoviesWithGenre({ moviesData, homePage}) {
         }
 
             {genres.map((genre) => {
-                const filteredMovieSeries = sortedMovies.filter(tvSeries => 
+                const dataToBeShown = alphabetSort !== null ? alphabetSortedData : dateSortedData                
+                const filteredMovieSeries = dataToBeShown.filter(tvSeries => 
                     tvSeries.genres.toLowerCase().includes(genre)
                 )
 

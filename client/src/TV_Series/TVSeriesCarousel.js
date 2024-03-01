@@ -21,6 +21,7 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
     // Handle capturing the value logged by the users choice when sorting by Newest or Oldest.
     const handleDateSort = (event) => {
         // console.log('Selected value:', event.target.value)
+        setAlphabetSort(null)
         setDateSort(event.target.value)
     }
 
@@ -28,19 +29,24 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
     const handleAlphabetSort = (event) => {
         // console.log('Selected value:', event.target.value)
         if (event.target.value === "true"){
+            setDateSort(null)
             return setAlphabetSort(true)
         }
+        setDateSort(null)
         setAlphabetSort(false)
     }
 
     // Sort the data by newest / oldest based on their release date. Create new date object, compare.
-    let userSortOption = dateSort === 'newest' ?
-    ((a, b) => new Date(b.release_date) - new Date(a.release_date)) : // Newest first
-    ((a, b) => new Date(a.release_date) - new Date(b.release_date)) // Oldest first
-
-    // console.log(typeof(userSortOption))
     // Create new variable to hold the data when sorting
-    const sortedSeries = tvSeriesData.sort(userSortOption)
+    const dateSortedData = [...tvSeriesData].sort(function(a,b){
+        if(dateSort === 'newest'){
+        return new Date(a.release_date) - new Date(b.release_date)
+    } else if (dateSort === 'oldest'){
+        return new Date(b.release_date) - new Date(a.release_date)
+    } else{
+        return
+    }
+    })
 
     // https://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
@@ -53,7 +59,7 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
     // https://stackoverflow.com/questions/8900732/sort-objects-in-an-array-alphabetically-on-one-property-of-the-array
     // Removed upper casing.
 
-    sortedSeries.sort(function (a, b) {
+    const alphabetSortedData = [...tvSeriesData].sort(function (a, b) {
         var textA = a.title
         var textB = b.title
       
@@ -94,7 +100,8 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
 
 
             {genres.map((genre) => {
-                const filteredTvSeries = sortedSeries.filter(tvSeries => 
+                const dataToBeShown = alphabetSort !== null ? alphabetSortedData : dateSortedData
+                const filteredTvSeries = dataToBeShown.filter(tvSeries => 
                     tvSeries.genres.toLowerCase().includes(genre)
                 )
 
