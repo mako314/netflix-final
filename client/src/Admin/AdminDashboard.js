@@ -537,38 +537,40 @@ const AddMovieForm = () => {
 const TVSeriesDataTable = ({tvSeriesData, deleteTVSeries}) => {
 
   return (
-    <tbody>
-      <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Thumbnail</th>
-          <th>Popularity</th>
-          <th>Click Count</th>
-          <th>Edit</th>
-          <th>Delete</th>
-      </tr>
-      {
-        tvSeriesData.map((tvSeries) =>
-        <tr key={tvSeries.id}>
-            <td>{tvSeries.id}</td>
-            <td>{tvSeries.title}</td>
-            <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
-            <td>{tvSeries.popularity}</td>
-            <td>{tvSeries.num_of_clicks}</td>
-            <td>
-              <button className="bg-green-500" type="button">
-                &#9999;&#65039;
-              </button>
-            </td>
-            <td>
-                <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
-                    &#128465;&#65039;
-                </button>
-            </td>
+    <>
+      <tbody>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Thumbnail</th>
+            <th>Popularity</th>
+            <th>Click Count</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
-        )
-      }
-    </tbody>
+        {
+          tvSeriesData.map((tvSeries) =>
+          <tr key={tvSeries.id}>
+              <td>{tvSeries.id}</td>
+              <td>{tvSeries.title}</td>
+              <td><img className="h-8 w-16" src={tvSeries.thumbnail} /></td>
+              <td>{tvSeries.popularity}</td>
+              <td>{tvSeries.num_of_clicks}</td>
+              <td>
+                <button className="bg-green-500" type="button">
+                  &#9999;&#65039;
+                </button>
+              </td>
+              <td>
+                  <button className="bg-red-600" type="button" onClick={() => deleteTVSeries(tvSeries.id)}>
+                      &#128465;&#65039;
+                  </button>
+              </td>
+          </tr>
+          )
+        }
+      </tbody>
+    </>
   )
 }
 

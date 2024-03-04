@@ -184,27 +184,32 @@ function App() {
 
   return (
     // UseContext gets called here
-    <ApiProvider> 
-    <div className="flex">
-      <Navbar />
-    
+    <ApiProvider>
+      <CurrentUserProvider>
 
-      {/* <MovieCollection moviesData={moviesData} />
-      <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
+        <div className="flex">
+          <Navbar />
+        
 
-      <Routes>
-      <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
-        <Route path='/movies' element={<AllMoviesWithGenre moviesData={moviesData}/>} />
-        <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
-        <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
-        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} setTestingTimeStamp={setTestingTimeStamp} testingTimeStamp={testingTimeStamp} />} onLeave={ onLeaveTest }/>
-        <Route path='/login' element={<Login />} />
-        <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
-        <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />
+          {/* <MovieCollection moviesData={moviesData} />
+          <TVSeriesCollection tvSeriesData={tvSeriesData} /> */}
 
-      </Routes>
+          <Routes>
+          <Route path='/' element={<HomePage moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
+            <Route path='/movies' element={<AllMoviesWithGenre moviesData={moviesData}/>} />
+            <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
+            <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
+            <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} setTestingTimeStamp={setTestingTimeStamp} testingTimeStamp={testingTimeStamp} />} onLeave={ onLeaveTest }/>
+            <Route path='/login' element={<Login />} />
+            <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
+            <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />
+            <Route path='/admin' element={<AdminDashboard usersData={usersData} moviesData={moviesData} tvSeriesData={tvSeriesData}/>} />
 
-    </div>
+          </Routes>
+
+        </div>
+
+      </CurrentUserProvider>
     </ApiProvider>
 
   )
