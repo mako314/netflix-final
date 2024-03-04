@@ -13,7 +13,7 @@ function Navbar({setSearchTerm, searchTerm}){
     const handleSubmit = (e) => {
         e.preventDefault();
         // Perform the search operation here or navigate to the search results page
-        navigate(`/search?query=${searchTerm}`); // Example of navigation with search term
+        navigate(`/search/query/${searchTerm}`); // Example of navigation with search term
     }
 
     // A tags cause refresh

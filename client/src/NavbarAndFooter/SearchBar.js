@@ -5,7 +5,7 @@ function SearchBar({handleChange, searchTerm}){
 
 
     return(
-<div className="flex justify-center p-4">
+        <div className="flex justify-center p-3">
             <input
                 type="text"
                 placeholder="Search"

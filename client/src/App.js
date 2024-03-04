@@ -205,7 +205,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
         <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />
-        <Route path='/search?query=:searchTerm}' element={<SearchResults/>}/>
+        <Route path='/search/query/:searchTerm' element={<SearchResults moviesData={moviesData} tvSeriesData={tvSeriesData}/>}/>
 
       </Routes>
 
