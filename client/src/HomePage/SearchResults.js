@@ -23,10 +23,12 @@ function SearchResults({tvSeriesData, moviesData}){
         )
 
     return(
-        <div className="mt-4">
-            <div className="flex flex-wrap">
-          {filteredTvSeriesData.map((tvSeries, index) => (
-            <div key={index} className="w-1/6 px-2 mb-4">
+    <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
+    {filteredTvSeriesData.length > 0 && <span className="block text-2xl font-semibold text-gray-800 mb-4 ml-4 ">Shows</span>}
+
+    <div className="flex flex-wrap -mx-2"> {/* Adjusted for spacing */}
+        {filteredTvSeriesData.map((tvSeries, index) => (
+          <div key={index}>
               <TVSeriesCard
                 tvSeriesID={tvSeries.id}
                 thumbnail={tvSeries.thumbnail}
@@ -38,27 +40,28 @@ function SearchResults({tvSeriesData, moviesData}){
                 trailerLink={tvSeries.trailer}
                 fullTVSeries={tvSeries}
               />
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap">
-    {filteredMovieData?.map((movie, index) => (
-      <div key={index} className="w-1/4 px-2 mb-4">
-          <MovieCard
-          key={movie.id}
-          movieId={movie.id}
-          thumbnail={movie.thumbnail}
-          title={movie.title}
-          director={movie.director}
-          year_of_release={movie.year_of_release}
-          run_time={movie.run_time}
-          trailerLink={movie.trailer}
-          fullMovie={movie}
-        />
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
+
+      {filteredMovieData.length > 0 && <span className="block text-2xl font-semibold text-gray-800 mb-4 ml-4 ">Movies</span>}
+
+        <div className="flex flex-wrap -mx-2"> {/* Adjusted for spacing */}
+        {filteredMovieData.map((movie, index) => (
+          <div key={index}>
+            <MovieCard
+              movieId={movie.id}
+              thumbnail={movie.thumbnail}
+              title={movie.title}
+              director={movie.director}
+              year_of_release={movie.year_of_release}
+              run_time={movie.run_time}
+              trailerLink={movie.trailer}
+              fullMovie={movie}
+            />
+          </div>
+        ))}
+      </div>
 
         </div>
     )
