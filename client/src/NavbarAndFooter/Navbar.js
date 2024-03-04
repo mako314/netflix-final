@@ -1,15 +1,23 @@
 import React from "react";
 import { Link, useNavigate} from 'react-router-dom';
 import { CurrentUserContext } from '../UserLogin/UserContext'
+import SearchBar from "./SearchBar";
 
 
-function Navbar(){
+function Navbar({setSearchTerm, searchTerm}){
 
-    const { currentUser, currentUserRole } = CurrentUserContext(); 
+    // const { currentUser, currentUserRole } = CurrentUserContext(); 
 
     const navigate = useNavigate();
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Perform the search operation here or navigate to the search results page
+        navigate(`/search/query/${searchTerm}`); // Example of navigation with search term
+    }
+
     // A tags cause refresh
+    console.log("The search term:", searchTerm)
 
     return(
         <nav className="w-28 min-h-screen bg-gray-900 text-white flex flex-col">
@@ -37,13 +45,18 @@ function Navbar(){
                     </a>
                 </li>
 
-                { currentUserRole === 'admin' &&
+                {/* { currentUserRole === 'admin' &&
                     <li className="px-5 py-3 hover:bg-red-800">
                         <Link to={'/admin'} className="flex items-center">
                             Admin Dashboard
                         </Link>
                     </li>
-                }
+                } */}
+
+                <form onSubmit={handleSubmit}>
+                    <SearchBar handleChange={(e) => setSearchTerm(e.target.value)} searchTerm={searchTerm}/>
+                </form>
+                
             </ul>
         </div>
     </nav>

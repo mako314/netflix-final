@@ -30,15 +30,18 @@ import Login from './UserLogin/Login'
 // ----- Admin Imports -----
 import AdminDashboard from './Admin/AdminDashboard';
 
+// ----- Search Result Imports -----
+import SearchResults from './HomePage/SearchResults';
+
 // useNavigate
 function App() {
 
   const [moviesData, setMoviesData] = useState([])
   const [usersData, setUsersData] = useState([])
   const [favoritesData, setFavoritesData] = useState([])
-  const [tvSeriesData, setTVSeriesData] = useState([]);
+  const [tvSeriesData, setTVSeriesData] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const [testingTimeStamp, setTestingTimeStamp] = useState(null)
 
   const apiUrl = process.env.REACT_APP_API_URL
 
@@ -130,6 +133,7 @@ function App() {
       if (response.ok) {
         response.json().then((data) => {
           setTVSeriesData(data)
+          console.log("TV SERIES DATA:", tvSeriesData)
         })
       }
       else {
@@ -186,7 +190,7 @@ function App() {
     // UseContext gets called here
     <ApiProvider> 
     <div className="flex">
-      <Navbar />
+      <Navbar setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
     
 
       {/* <MovieCollection moviesData={moviesData} />
@@ -197,10 +201,11 @@ function App() {
         <Route path='/movies' element={<AllMoviesWithGenre moviesData={moviesData}/>} />
         <Route path='/movie/:id' element={<MovieDisplay moviesData={moviesData}/>} />
         <Route path='/tv-series' element={<TVSeriesCarousel tvSeriesData={tvSeriesData} />} />
-        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} setTestingTimeStamp={setTestingTimeStamp} testingTimeStamp={testingTimeStamp} />} onLeave={ onLeaveTest }/>
+        <Route path='/tv-series/:id' element={<TVSeriesDisplay tvSeriesData={tvSeriesData} />} onLeave={ onLeaveTest }/>
         <Route path='/login' element={<Login />} />
         <Route path='/movie/genre/:genre' element={<MovieByGenre moviesData={moviesData}/>} />
         <Route path='/tv/series/genre/:genre' element={<TvSeriesByGenre tvSeriesData={tvSeriesData}/>} />
+        <Route path='/search/query/:searchTerm' element={<SearchResults moviesData={moviesData} tvSeriesData={tvSeriesData}/>}/>
 
       </Routes>
 
