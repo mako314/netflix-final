@@ -25,7 +25,9 @@ function SearchResults({tvSeriesData, moviesData}){
     return(
     <div className="max-w-full mx-auto overflow-hidden mt-4 ml-4">
     {filteredTvSeriesData.length > 0 && <span className="block text-2xl font-semibold text-gray-800 mb-4 ml-4 ">Shows</span>}
-
+    
+    <p> You searched for {searchTerm} </p>
+    <p> Results : </p>
     <div className="flex flex-wrap -mx-2"> {/* Adjusted for spacing */}
         {filteredTvSeriesData.map((tvSeries, index) => (
           <div key={index}>
