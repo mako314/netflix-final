@@ -35,6 +35,10 @@ import SearchResults from './HomePage/SearchResults';
 
 // useNavigate
 function App() {
+  // https://tanstack.com/query/latest/docs/framework/react/overview
+  // https://refine.dev/blog/react-query-guide/
+  // Going to implement this for querying / cacheing our data. 
+
 
   const [moviesData, setMoviesData] = useState([])
   const [usersData, setUsersData] = useState([])
