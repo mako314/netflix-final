@@ -25,6 +25,8 @@ def upgrade():
                existing_type=sa.VARCHAR(),
                type_=sa.Integer(),
                existing_nullable=True)
+    
+    op.alter_column('watch_histories', 'time_stamp', type_=sa.Integer, existing_type=sa.VARCHAR(), existing_nullable=True)
 
     # ### end Alembic commands ###
 
