@@ -125,7 +125,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
       // }
       // setIsFetchingWatchHistory(true)
       try {
-        const response = await fetch(`${apiUrl}user/${1}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
+        const response = await fetch(`${apiUrl}user/${21}/watch/list/show/${episodeInformation.showTitle}/${episodeInformation.episodeTitle}/${episodeInformation.episodeNumber}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -169,7 +169,7 @@ function TVSeriesDisplay({setTestingTimeStamp, testingTimeStamp}){
 
     const handleNewOrExistingWatchHistory = async () => {
       const fetchMethod = watchHistory ? "PATCH" : "POST"
-      const fetchUrl = watchHistory ? `${apiUrl}watch/list/entry/${watchHistory.id}`: `${apiUrl}user/${1}/watch/list/`
+      const fetchUrl = watchHistory ? `${apiUrl}watch/list/entry/${watchHistory.id}`: `${apiUrl}user/${21}/watch/list/`
       try {
         const response = await fetch(fetchUrl, {
           method: fetchMethod,
