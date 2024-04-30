@@ -24,9 +24,8 @@ def upgrade():
         batch_op.alter_column('time_stamp',
                existing_type=sa.VARCHAR(),
                type_=sa.Integer(),
-               existing_nullable=True)
-    
-    op.alter_column('watch_histories', 'time_stamp', type_=sa.Integer, existing_type=sa.VARCHAR(), existing_nullable=True)
+               existing_nullable=True,
+               postgresql_using='time_stamp::integer')
 
     # ### end Alembic commands ###
 
