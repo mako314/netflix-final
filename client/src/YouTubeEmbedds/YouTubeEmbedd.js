@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release, seasons, episode_count }) => {
+const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release, seasons, episode_count, movieCard }) => {
 
   const frameStyling = whereRendered === "Movies" ? "absolute top-0 left-0 w-full h-full" : "absolute top-0 w-full h-full"
   // https://developers.google.com/youtube/player_parameters
@@ -25,7 +25,8 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
         <h3 className="text-xl font-medium truncate text-center mt-2">{title}</h3>
        <div className="mb-2">
          <p className="text-sm font-semibold text-center">Directed by {director}</p>
-         <p className="text-sm text-center">{year_of_release}, Seasons: {seasons}, Episodes: {episode_count}</p>
+
+         {movieCard && <p className="text-sm text-center">{year_of_release}, Seasons: {seasons}, Episodes: {episode_count}</p>}
        </div>
        
      </div>

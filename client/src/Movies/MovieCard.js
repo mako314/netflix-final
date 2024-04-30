@@ -64,6 +64,7 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
           director={director} 
           year_of_release={year_of_release} 
           run_time={run_time}
+          movieCard={true}
           />
           </div>
     ) : (
@@ -79,33 +80,3 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
 }
 
 export default MovieCard;
-
-
-
-
-
-{/* <div 
-onMouseEnter={() => setIsHovered(true)}
-onMouseLeave={() => setIsHovered(false)}
-className={`transition-all duration-300 ease-in-out shadow-md hover:shadow-lg cursor-pointer rounded-lg ${isHovered ? hoverWidth : baseWidth}`}
-onClick={handleMovieNav}
->
-{isHovered ? <YoutubeEmbed embedId={trailerLink} whereRendered={"Movies"}/> :
-<> 
-<figure className="w-full h-48 md:h-64 overflow-hidden transition-all duration-300 ease-in-out">
-  <img
-    src={thumbnail}
-    alt="card image"
-    className="w-full h-full object-contain group-hover:opacity-90"
-  />
-</figure>
-<div className="p-4">
-  <h3 className="text-xl font-medium text-black truncate">
-    {title}
-  </h3>
-  <p className="text-sm text-black">
-    By {director}, {year_of_release}, {run_time}
-  </p>
-</div>
-</>}
-</div> */}
