@@ -97,6 +97,8 @@ if __name__ == '__main__':
         ),
         ]
 
+        print("THE USER ID TO USE SILLY:", user_list[0].id)
+
         db.session.add_all(user_list)
 
         for user in user_list:
