@@ -1,13 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release, seasons, episode_count, movieCard }) => {
+const YoutubeEmbed = ({ embedId, whereRendered, title, director, release_date, seasons, episode_count, movieCard }) => {
 
-  const frameStyling = whereRendered === "Movies" ? "absolute top-0 left-0 w-full h-full" : "absolute top-0 w-full h-full"
-  // https://developers.google.com/youtube/player_parameters
-  // console.log("THE EPISODE COUNT:",)
+  console.log(director)
 
-  // style={{ paddingBottom: '34.25%' }}
   return (
     <div className="flex flex-col">
       <div className="relative" style={{ paddingBottom: '40.25%' }}>
@@ -19,14 +16,28 @@ const YoutubeEmbed = ({ embedId, whereRendered, title, director, year_of_release
           allowFullScreen
           title="Embedded youtube"
         />
-      </div>
+</div>
+      {whereRendered === "Movies" && (
+       <div className="bg-gray-200 text-black w-full h-full">
+
+        <h3 className="text-xl font-medium truncate text-center mt-2">{title}</h3>
+       <div className="mb-2">
+         <p className="text-sm font-semibold text-center">Directed by {director}, released in {release_date}.</p>
+       </div>
+       
+     </div>
+      )}
+
       {whereRendered === "TVSeries" && (
        <div className="bg-gray-200 text-black w-full h-full">
         <h3 className="text-xl font-medium truncate text-center mt-2">{title}</h3>
        <div className="mb-2">
          <p className="text-sm font-semibold text-center">Directed by {director}</p>
 
-         {movieCard && <p className="text-sm text-center">{year_of_release}, Seasons: {seasons}, Episodes: {episode_count}</p>}
+         {/* Conditional rendering for TV series */}
+         {whereRendered === "TVSeries" && (
+           <p className="text-sm text-center">Year of Release: {release_date}, Seasons: {seasons}, Episode Count: {episode_count}</p>
+         )}
        </div>
        
      </div>

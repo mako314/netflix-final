@@ -15,7 +15,7 @@ function TVSeriesCollection ({tvSeriesData, marginLeft}){
                 thumbnail={tvSeries.thumbnail}
                 title={tvSeries.title}
                 director={tvSeries.director}
-                year_of_release={tvSeries.year_of_release}
+                release_date={tvSeries.release_date}
                 seasons={tvSeries.seasons}
                 episode_count={tvSeries.episode_count}
                 trailerLink={tvSeries.trailer}

@@ -13,7 +13,7 @@ function MovieCollection({ filteredMovieData, handleDeleteAsync }) {
           thumbnail={movie.thumbnail}
           title={movie.title}
           director={movie.director}
-          year_of_release={movie.year_of_release}
+          release_date={movie.release_date}
           run_time={movie.run_time}
           trailerLink={movie.trailer}
           fullMovie={movie}
