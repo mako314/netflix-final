@@ -7,14 +7,24 @@ if __name__ == '__main__':
     with app.app_context():
         
         print("Clearing db...")
+        # Favorite.query.delete()
+        # User.query.delete()
+        # Movie.query.delete()
+        # TelevisionSeries.query.delete()
+        # Admin.query.delete()
+        # TvEpisode.query.delete()
+        # TvSeason.query.delete()
+        # WatchHistory.query.delete()
+
+        WatchHistory.query.delete()
         Favorite.query.delete()
-        User.query.delete()
-        Movie.query.delete()
-        TelevisionSeries.query.delete()
-        Admin.query.delete()
         TvEpisode.query.delete()
         TvSeason.query.delete()
-        WatchHistory.query.delete()
+        TelevisionSeries.query.delete()
+        Movie.query.delete()
+        User.query.delete()
+        Admin.query.delete()
+
 
 
 
