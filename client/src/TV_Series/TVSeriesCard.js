@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import YoutubeEmbed from "../YouTubeEmbedds/YouTubeEmbedd";
 
 
-function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, seasons, episode_count, fullTVSeries, trailerLink}) {
+function TVSeriesCard({tvSeriesID, thumbnail, title, director, release_date, seasons, episode_count, fullTVSeries, trailerLink}) {
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate()
     
@@ -23,12 +23,12 @@ function TVSeriesCard({tvSeriesID, thumbnail, title, director, year_of_release, 
           {isHovered ? (
               <div className="relative"> 
                   <YoutubeEmbed 
-                  key={`${title}-${year_of_release}-S${seasons}`}
+                  key={`${title}-${release_date}-S${seasons}`}
                   embedId={trailerLink} 
                   whereRendered={"TVSeries"}
                   title={title}
                   director={director} 
-                  year_of_release={year_of_release} 
+                  release_date={release_date} 
                   seasons={seasons} 
                   episode_count={episode_count}
                   />

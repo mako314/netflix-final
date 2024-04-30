@@ -3,7 +3,7 @@ import { useNavigate} from 'react-router-dom';
 import YoutubeEmbed from "../YouTubeEmbedds/YouTubeEmbedd";
 import ApiUrlContext from "../Api";
 
-function MovieCard({thumbnail, title, director, year_of_release, run_time, movieId, trailerLink, fullMovie, handleDeleteAsync}) {
+function MovieCard({thumbnail, title, director, release_date, run_time, movieId, trailerLink, fullMovie, handleDeleteAsync}) {
   
   const navigate = useNavigate()
   const apiUrl = useContext(ApiUrlContext)
@@ -57,14 +57,13 @@ function MovieCard({thumbnail, title, director, year_of_release, run_time, movie
     {isHovered ? (
       <div className="relative"> 
           <YoutubeEmbed 
-          key={`${title}-${year_of_release}-S${run_time}`}
+          key={`${title}-${release_date}-S${run_time}`}
           embedId={trailerLink} 
-          whereRendered={"TVSeries"}
+          whereRendered={"Movies"}
           title={title}
           director={director} 
-          year_of_release={year_of_release} 
+          release_date={release_date} 
           run_time={run_time}
-          movieCard={true}
           />
           </div>
     ) : (

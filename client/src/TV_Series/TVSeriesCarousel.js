@@ -110,6 +110,7 @@ function TVSeriesCarousel({ tvSeriesData, homePage }) {
                 }
 
                 console.log("FILTERED TV SERIES LENGTH", filteredTvSeries.length)
+                console.log("FILTERED TV SERIES:", filteredTvSeries)
 
                 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice#remove_all_elements_starting_from_index_2
                 // const smallerFilterForHomePage = filteredTvSeries.splice(5)
