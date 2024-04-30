@@ -497,7 +497,7 @@ if __name__ == '__main__':
                 is_airing="False",
                 summary="Based on the books by Marc Brown, 'Arthur' follows the life and adventures of 8-year-old Arthur Read, an aardvark, his family, and friends as they navigate through the challenges of childhood and learn valuable lessons about friendship, empathy, and community.",
                 rating=7.3,
-                popularity="High among children and families",
+                popularity=70,
                 num_of_clicks=0,
                 stars="Michael Yarmush, Melissa Altro, Arthur Holden, Daniel Brochu, Jodie Resther",
                 all_cast_and_crew="https://www.imdb.com/title/tt0169414/fullcredits",
