@@ -730,7 +730,7 @@ class OneTvShowContinueWatching(Resource):
         
         return response
     
-api.add_resource(OneTvShowContinueWatching, '/user/<int:user_id>/watch/list/show/<string:show_title>/<string:episode_title>/<int:episode_number>')
+api.add_resource(OneTvShowContinueWatching, '/user/<int:user_id>/watch/list/show/<string:show_title>/<string:episode_title>/<string:episode_number>')
 
 class OneMovieContinueWatching(Resource):
     def get(self, user_id, movie_title):
